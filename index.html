@@ -444,7 +444,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-12-08 11:05:38" itemprop="dateModified" datetime="2018-12-08T11:05:38+08:00">2018-12-08</time>
+                <time title="修改时间：2018-12-08 11:12:27" itemprop="dateModified" datetime="2018-12-08T11:12:27+08:00">2018-12-08</time>
               
             
           </span>
@@ -497,27 +497,22 @@
       
         
           
-            <p>#HTTP快速学习</p>
-<p>####知识点1  无状态和持久化连接</p>
-<blockquote>
+            <h1 id="HTTP快速学习"><a href="#HTTP快速学习" class="headerlink" title="HTTP快速学习"></a>HTTP快速学习</h1><h4 id="知识点1-无状态和持久化连接"><a href="#知识点1-无状态和持久化连接" class="headerlink" title="知识点1  无状态和持久化连接"></a>知识点1  无状态和持久化连接</h4><blockquote>
 <ul>
 <li>HTTP是无状态连接:不保留上一次传输的内容，即不对上一次的请求和响应做持久化处理</li>
 <li>HTTP1.1之后连接默认是持久化连接：即任意一端没有明确表明断开就一直保持TCP的连接状态</li>
 </ul>
 <p>* 持久化连接是指TCP的持久化连接，无状态连接是指请求和响应不做持久化处理</p>
 </blockquote>
-<p>####知识点2 报文和实体</p>
-<blockquote>
+<h4 id="知识点2-报文和实体"><a href="#知识点2-报文和实体" class="headerlink" title="知识点2 报文和实体"></a>知识点2 报文和实体</h4><blockquote>
 <p>报文和实体，报文在传输时会被切割，切割之后的部分为一个实体，合在一起是报文</p>
 </blockquote>
-<p>####知识点3 HTTP报文首部</p>
-<blockquote>
+<h4 id="知识点3-HTTP报文首部"><a href="#知识点3-HTTP报文首部" class="headerlink" title="知识点3 HTTP报文首部"></a>知识点3 HTTP报文首部</h4><blockquote>
 <ul>
 <li>报文首部包含请求行或响应行 包含请求方法+http版本或者响应状态码+http版本，之后是各种首部字段，包括方法，地址等等。</li>
 </ul>
 </blockquote>
-<p>####知识点4 HTTP状态码</p>
-<blockquote>
+<h4 id="知识点4-HTTP状态码"><a href="#知识点4-HTTP状态码" class="headerlink" title="知识点4 HTTP状态码"></a>知识点4 HTTP状态码</h4><blockquote>
 <h6 id="2XX-表示请求被正确处理"><a href="#2XX-表示请求被正确处理" class="headerlink" title="2XX 表示请求被正确处理"></a>2XX 表示请求被正确处理</h6><blockquote>
 <ul>
 <li>200: OK</li>
@@ -549,369 +544,19 @@
 </ul>
 </blockquote>
 </blockquote>
-<p>####知识点5 代理，网关，隧道</p>
-<blockquote>
+<h3 id="知识点5-代理，网关，隧道"><a href="#知识点5-代理，网关，隧道" class="headerlink" title="#知识点5 代理，网关，隧道"></a>#知识点5 代理，网关，隧道</h3><blockquote>
 <ul>
 <li>代理分为缓存代理（静态资源）和 非缓存代理</li>
 <li>网关可以转换http协议，例如访问数据库或者信用卡系统</li>
 <li>隧道的目的是建立一条安全的连接</li>
 </ul>
 </blockquote>
-<p>####知识点6 HTTPs</p>
-<blockquote>
+<h4 id="知识点6-HTTPs"><a href="#知识点6-HTTPs" class="headerlink" title="知识点6 HTTPs"></a>知识点6 HTTPs</h4><blockquote>
 <p>安全的的http连接，信息加密（SSL或TSL），用户身份验证（SSL证书），确保报文完整<br>SSL采用公钥私钥加密，采用证书确认公钥安全</p>
 </blockquote>
-<p>####知识点7 Websocket</p>
-<blockquote>
+<h4 id="知识点7-Websocket"><a href="#知识点7-Websocket" class="headerlink" title="知识点7 Websocket"></a>知识点7 Websocket</h4><blockquote>
 <p>这是一种基于http协议的协议，旨在提高传输速度和质量，在http请求中发送协议转换请求切换协议为websocket，客户端请求连接后若服务器建立连接则之后将一直保留连接状态，报文首部也将压缩，服务器和客户端之间可随意传输信息，包括推送。</p>
 </blockquote>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    <div>
-        
-    </div>
-    
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/30/Test-Page/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Want Young">
-      <meta itemprop="description" content="Change World, Change Life">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Young">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/11/30/Test-Page/" class="post-title-link" itemprop="http://yoursite.com/index.html">Test Page</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-11-30 16:55:53 / 修改时间：17:05:24" itemprop="dateCreated datePublished" datetime="2018-11-30T16:55:53+08:00">2018-11-30</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/life/" itemprop="url" rel="index"><span itemprop="name">life</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>#这是一篇测试文档</p>
-<p>##二级标题<br>如你所见，这是一篇测试博客的文章，感谢您的阅读。</p>
-<blockquote>
-<p>区块测试</p>
-</blockquote>
-<pre><code>代码测试
-print(&quot;hello world!&quot;)
-</code></pre><p>列表测试</p>
-<ul>
-<li>1</li>
-<li>2</li>
-<li>3</li>
-</ul>
-<p>有序列表测试</p>
-<ol>
-<li>a</li>
-<li>b</li>
-<li>c</li>
-</ol>
-<p>滚动测试</p>
-<p>1</p>
-<p>2</p>
-<p>3</p>
-<p><img src="/images/yangtuo.jpg" alt=""></p>
-<p>5</p>
-<p>6</p>
-<p>7</p>
-<p>8</p>
-<p>9</p>
-<p>10</p>
-<p>11</p>
-<p>12</p>
-<p>13</p>
-<p>14</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    <div>
-        
-    </div>
-    
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/29/hello-world/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Want Young">
-      <meta itemprop="description" content="Change World, Change Life">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Young">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/11/29/hello-world/" class="post-title-link" itemprop="http://yoursite.com/index.html">Hello World</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-11-29 21:18:27" itemprop="dateCreated datePublished" datetime="2018-11-29T21:18:27+08:00">2018-11-29</time>
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
 
           
         
@@ -1000,7 +645,7 @@ print(&quot;hello world!&quot;)
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-count">1</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -1015,9 +660,7 @@ print(&quot;hello world!&quot;)
                     
                       
                     
-                      
-                    
-                    <span class="site-state-item-count">2</span>
+                    <span class="site-state-item-count">1</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -1032,9 +675,7 @@ print(&quot;hello world!&quot;)
                     
                       
                     
-                      
-                    
-                    <span class="site-state-item-count">2</span>
+                    <span class="site-state-item-count">1</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
