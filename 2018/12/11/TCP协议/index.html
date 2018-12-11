@@ -127,29 +127,25 @@
 
 
 
-  <meta name="description" content="网络概述知识点1  应用层:  通常是用户级进程控制，只关心应用程序细节，不关心通信细节 传输层:  TCP(传输控制协议)提供可靠的端到端传输(超时重传，确认分组..)， UDP(用户数据报协议)提供简单的端到端传输，一般由操作系统内核进程控制。 网络层(网络互联层):  IP协议(网际协议)，负责路由发现，提供不可靠的点到点通信。 数据链路层(网络接口层): 负责物理接口细节，包括硬件驱动，电">
+  <meta name="description" content="TCP：传输控制协议TCP：面向连接的、可靠的字节流服务  TCP只能建立在两方通信中，广播和多播不能使用TCP。  应用数据会被TCP分割成最适合发送的数据块，发送每个数据段之后都会启动一个定时器，如果不能及时收到确认，TCP将超时重传这个数据段。  TCP收到数据段后，将进行首部和数据的校验和，如果发生错误，接收端将丢弃报文段并不发送确认，否则将推迟几分之一秒，然后发送确认。  TCP收到数据">
 <meta name="keywords" content="网络">
 <meta property="og:type" content="article">
-<meta property="og:title" content="TCP&#x2F;IP 协议学习">
-<meta property="og:url" content="http://yoursite.com/2018/12/08/TCP-IP-协议学习/index.html">
+<meta property="og:title" content="TCP协议">
+<meta property="og:url" content="http://yoursite.com/2018/12/11/TCP协议/index.html">
 <meta property="og:site_name" content="Young">
-<meta property="og:description" content="网络概述知识点1  应用层:  通常是用户级进程控制，只关心应用程序细节，不关心通信细节 传输层:  TCP(传输控制协议)提供可靠的端到端传输(超时重传，确认分组..)， UDP(用户数据报协议)提供简单的端到端传输，一般由操作系统内核进程控制。 网络层(网络互联层):  IP协议(网际协议)，负责路由发现，提供不可靠的点到点通信。 数据链路层(网络接口层): 负责物理接口细节，包括硬件驱动，电">
+<meta property="og:description" content="TCP：传输控制协议TCP：面向连接的、可靠的字节流服务  TCP只能建立在两方通信中，广播和多播不能使用TCP。  应用数据会被TCP分割成最适合发送的数据块，发送每个数据段之后都会启动一个定时器，如果不能及时收到确认，TCP将超时重传这个数据段。  TCP收到数据段后，将进行首部和数据的校验和，如果发生错误，接收端将丢弃报文段并不发送确认，否则将推迟几分之一秒，然后发送确认。  TCP收到数据">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://yoursite.com/images/ip_type.gif">
-<meta property="og:image" content="http://yoursite.com/images/ip_special.png">
-<meta property="og:image" content="http://yoursite.com/images/ip_private.png">
-<meta property="og:updated_time" content="2018-12-08T10:52:45.847Z">
+<meta property="og:updated_time" content="2018-12-11T13:38:41.726Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="TCP&#x2F;IP 协议学习">
-<meta name="twitter:description" content="网络概述知识点1  应用层:  通常是用户级进程控制，只关心应用程序细节，不关心通信细节 传输层:  TCP(传输控制协议)提供可靠的端到端传输(超时重传，确认分组..)， UDP(用户数据报协议)提供简单的端到端传输，一般由操作系统内核进程控制。 网络层(网络互联层):  IP协议(网际协议)，负责路由发现，提供不可靠的点到点通信。 数据链路层(网络接口层): 负责物理接口细节，包括硬件驱动，电">
-<meta name="twitter:image" content="http://yoursite.com/images/ip_type.gif">
+<meta name="twitter:title" content="TCP协议">
+<meta name="twitter:description" content="TCP：传输控制协议TCP：面向连接的、可靠的字节流服务  TCP只能建立在两方通信中，广播和多播不能使用TCP。  应用数据会被TCP分割成最适合发送的数据块，发送每个数据段之后都会启动一个定时器，如果不能及时收到确认，TCP将超时重传这个数据段。  TCP收到数据段后，将进行首部和数据的校验和，如果发生错误，接收端将丢弃报文段并不发送确认，否则将推迟几分之一秒，然后发送确认。  TCP收到数据">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/12/08/TCP-IP-协议学习/">
+  <link rel="canonical" href="http://yoursite.com/2018/12/11/TCP协议/">
 
 
 
@@ -159,7 +155,7 @@
   };
 </script>
 
-  <title>TCP/IP 协议学习 | Young</title>
+  <title>TCP协议 | Young</title>
   
 
 
@@ -386,7 +382,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/08/TCP-IP-协议学习/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/11/TCP协议/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Want Young">
@@ -403,7 +399,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">TCP/IP 协议学习
+          <h1 class="post-title" itemprop="name headline">TCP协议
               
             
           </h1>
@@ -428,7 +424,7 @@
                 
               
 
-              <time title="创建时间：2018-12-08 11:17:28 / 修改时间：18:52:45" itemprop="dateCreated datePublished" datetime="2018-12-08T11:17:28+08:00">2018-12-08</time>
+              <time title="创建时间：2018-12-11 21:10:43 / 修改时间：21:38:41" itemprop="dateCreated datePublished" datetime="2018-12-11T21:10:43+08:00">2018-12-11</time>
             
 
             
@@ -484,28 +480,23 @@
       
 
       
-        <h1 id="网络概述"><a href="#网络概述" class="headerlink" title="网络概述"></a>网络概述</h1><h4 id="知识点1"><a href="#知识点1" class="headerlink" title="知识点1"></a>知识点1</h4><blockquote>
+        <h1 id="TCP：传输控制协议"><a href="#TCP：传输控制协议" class="headerlink" title="TCP：传输控制协议"></a>TCP：传输控制协议</h1><h4 id="TCP：面向连接的、可靠的字节流服务"><a href="#TCP：面向连接的、可靠的字节流服务" class="headerlink" title="TCP：面向连接的、可靠的字节流服务"></a>TCP：面向连接的、可靠的字节流服务</h4><blockquote>
 <ul>
-<li>应用层:  通常是用户级进程控制，只关心应用程序细节，不关心通信细节</li>
-<li>传输层:  TCP(传输控制协议)提供可靠的端到端传输(超时重传，确认分组..)， UDP(用户数据报协议)提供简单的端到端传输，一般由操作系统内核进程控制。</li>
-<li>网络层(网络互联层):  IP协议(网际协议)，负责路由发现，提供不可靠的点到点通信。</li>
-<li>数据链路层(网络接口层): 负责物理接口细节，包括硬件驱动，电缆要求。</li>
+<li><p>TCP只能建立在两方通信中，广播和多播不能使用TCP。</p>
+</li>
+<li><p>应用数据会被TCP分割成最适合发送的数据块，发送每个数据段之后都会启动一个定时器，如果不能及时收到确认，TCP将超时重传这个数据段。</p>
+</li>
+<li><p>TCP收到数据段后，将进行首部和数据的校验和，如果发生错误，接收端将丢弃报文段并不发送确认，否则将推迟几分之一秒，然后发送确认。</p>
+</li>
+<li><p>TCP收到数据段后会根据序号重新排序，并丢弃重复数据段。</p>
+</li>
+<li><p>TCP通过每一端声明的窗口大小（<strong>滑动窗口</strong>）来确定发送速度，以此达到<strong>流量控制</strong>的目的。</p>
+</li>
+<li>TCP提供全双工服务。每个方向的传输必须保持序号正确。</li>
+<li>TCP对传输的字节流不做解释，即不知道传输的是二进制数据还是其他类型的数据，类似于Unix内核对文件的处理，对字节流的解释由双方的应用层解释。</li>
 </ul>
 </blockquote>
-<h4 id="知识点2-IP地址"><a href="#知识点2-IP地址" class="headerlink" title="知识点2 IP地址"></a>知识点2 IP地址</h4><blockquote>
-<ul>
-<li>32bits表示ipv4，共分5类网络地址：<br><img src="/images/ip_type.gif" alt=""></li>
-<li>特殊用途IP:<br><img src="/images/ip_special.png" alt=""></li>
-<li>私有IP(局域网):<br><img src="/images/ip_private.png" alt=""></li>
-</ul>
-</blockquote>
-<h4 id="知识点3-IP数据报和以太网帧的首部"><a href="#知识点3-IP数据报和以太网帧的首部" class="headerlink" title="知识点3 IP数据报和以太网帧的首部"></a>知识点3 IP数据报和以太网帧的首部</h4><blockquote>
-<ul>
-<li>应用层发送数据要经过封装，其中IP数据报和以太网帧的首部要填写协议标识表明上层协议的类型。例如IP数据报首部存入8 bit数值的协议域，1标识ICMP，2标识IGMP， 6标识TCP，17标识UDP。</li>
-<li>而接收以太网帧之后要经过分用过程去掉各层的首部，同时识别上层的协议，TCP和UDP识别端口号转发给应用程序。</li>
-</ul>
-</blockquote>
-
+<h4 id="TCP连接的建立与终止"><a href="#TCP连接的建立与终止" class="headerlink" title="TCP连接的建立与终止"></a>TCP连接的建立与终止</h4>
       
     </div>
 
@@ -552,8 +543,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/12/06/HTTP相关知识点/" rel="next" title="HTTP相关知识点">
-                <i class="fa fa-chevron-left"></i> HTTP相关知识点
+              <a href="/2018/12/11/IP协议、ARP、ICMP、UDP/" rel="next" title="IP协议、ARP、ICMP、UDP">
+                <i class="fa fa-chevron-left"></i> IP协议、ARP、ICMP、UDP
               </a>
             
           </div>
@@ -561,10 +552,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/12/11/IP协议、ARP、ICMP、UDP/" rel="prev" title="IP协议、ARP、ICMP、UDP">
-                IP协议、ARP、ICMP、UDP <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -705,7 +692,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#网络概述"><span class="nav-number">1.</span> <span class="nav-text">网络概述</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#知识点1"><span class="nav-number">1.0.0.1.</span> <span class="nav-text">知识点1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#知识点2-IP地址"><span class="nav-number">1.0.0.2.</span> <span class="nav-text">知识点2 IP地址</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#知识点3-IP数据报和以太网帧的首部"><span class="nav-number">1.0.0.3.</span> <span class="nav-text">知识点3 IP数据报和以太网帧的首部</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#TCP：传输控制协议"><span class="nav-number">1.</span> <span class="nav-text">TCP：传输控制协议</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#TCP：面向连接的、可靠的字节流服务"><span class="nav-number">1.0.0.1.</span> <span class="nav-text">TCP：面向连接的、可靠的字节流服务</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TCP连接的建立与终止"><span class="nav-number">1.0.0.2.</span> <span class="nav-text">TCP连接的建立与终止</span></a></li></ol></li></ol></div>
             
 
           </div>
