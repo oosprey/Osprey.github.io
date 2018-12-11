@@ -127,25 +127,25 @@
 
 
 
-  <meta name="description" content="HTTP快速学习知识点1  无状态和持久化连接  HTTP是无状态连接:不保留上一次传输的内容，即不对上一次的请求和响应做持久化处理 HTTP1.1之后连接默认是持久化连接：即任意一端没有明确表明断开就一直保持TCP的连接状态  * 持久化连接是指TCP的持久化连接，无状态连接是指请求和响应不做持久化处理  知识点2 报文和实体 报文和实体，报文在传输时会被切割，切割之后的部分为一个实体，合在一起">
+  <meta name="description" content="IP协议、ARP协议、ICMP协议以及Ping程序不可靠 IP协议是尽力而为的协议，可靠性由上层协议保证  无连接 IP协议不会维持连接，发送数据报可以是无序的  IP协议首部 总长度字段16 bit限制IP数据报最大长度为65535字节。但实际上数据报都会被分片。TTL生存周期： 一般为32或64， 是指经过多少跳之后数据报将会被丢弃，并向源主机发送ICMP通知。  ARP 以广播方式请求目的I">
 <meta name="keywords" content="网络">
 <meta property="og:type" content="article">
-<meta property="og:title" content="HTTP相关知识点">
-<meta property="og:url" content="http://yoursite.com/2018/12/06/HTTP相关知识点/index.html">
+<meta property="og:title" content="IP协议、ARP、ICMP、UDP">
+<meta property="og:url" content="http://yoursite.com/2018/12/11/IP协议、ARP、ICMP、UDP/index.html">
 <meta property="og:site_name" content="Young">
-<meta property="og:description" content="HTTP快速学习知识点1  无状态和持久化连接  HTTP是无状态连接:不保留上一次传输的内容，即不对上一次的请求和响应做持久化处理 HTTP1.1之后连接默认是持久化连接：即任意一端没有明确表明断开就一直保持TCP的连接状态  * 持久化连接是指TCP的持久化连接，无状态连接是指请求和响应不做持久化处理  知识点2 报文和实体 报文和实体，报文在传输时会被切割，切割之后的部分为一个实体，合在一起">
+<meta property="og:description" content="IP协议、ARP协议、ICMP协议以及Ping程序不可靠 IP协议是尽力而为的协议，可靠性由上层协议保证  无连接 IP协议不会维持连接，发送数据报可以是无序的  IP协议首部 总长度字段16 bit限制IP数据报最大长度为65535字节。但实际上数据报都会被分片。TTL生存周期： 一般为32或64， 是指经过多少跳之后数据报将会被丢弃，并向源主机发送ICMP通知。  ARP 以广播方式请求目的I">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-12-08T03:12:27.293Z">
+<meta property="og:updated_time" content="2018-12-11T13:08:42.777Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="HTTP相关知识点">
-<meta name="twitter:description" content="HTTP快速学习知识点1  无状态和持久化连接  HTTP是无状态连接:不保留上一次传输的内容，即不对上一次的请求和响应做持久化处理 HTTP1.1之后连接默认是持久化连接：即任意一端没有明确表明断开就一直保持TCP的连接状态  * 持久化连接是指TCP的持久化连接，无状态连接是指请求和响应不做持久化处理  知识点2 报文和实体 报文和实体，报文在传输时会被切割，切割之后的部分为一个实体，合在一起">
+<meta name="twitter:title" content="IP协议、ARP、ICMP、UDP">
+<meta name="twitter:description" content="IP协议、ARP协议、ICMP协议以及Ping程序不可靠 IP协议是尽力而为的协议，可靠性由上层协议保证  无连接 IP协议不会维持连接，发送数据报可以是无序的  IP协议首部 总长度字段16 bit限制IP数据报最大长度为65535字节。但实际上数据报都会被分片。TTL生存周期： 一般为32或64， 是指经过多少跳之后数据报将会被丢弃，并向源主机发送ICMP通知。  ARP 以广播方式请求目的I">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/12/06/HTTP相关知识点/">
+  <link rel="canonical" href="http://yoursite.com/2018/12/11/IP协议、ARP、ICMP、UDP/">
 
 
 
@@ -155,7 +155,7 @@
   };
 </script>
 
-  <title>HTTP相关知识点 | Young</title>
+  <title>IP协议、ARP、ICMP、UDP | Young</title>
   
 
 
@@ -382,7 +382,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/06/HTTP相关知识点/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/11/IP协议、ARP、ICMP、UDP/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Want Young">
@@ -399,7 +399,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">HTTP相关知识点
+          <h1 class="post-title" itemprop="name headline">IP协议、ARP、ICMP、UDP
               
             
           </h1>
@@ -424,24 +424,12 @@
                 
               
 
-              <time title="创建时间：2018-12-06 15:52:24" itemprop="dateCreated datePublished" datetime="2018-12-06T15:52:24+08:00">2018-12-06</time>
+              <time title="创建时间：2018-12-11 19:52:44 / 修改时间：21:08:42" itemprop="dateCreated datePublished" datetime="2018-12-11T19:52:44+08:00">2018-12-11</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-12-08 11:12:27" itemprop="dateModified" datetime="2018-12-08T11:12:27+08:00">2018-12-08</time>
               
             
           </span>
@@ -458,7 +446,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/HTTP/" itemprop="url" rel="index"><span itemprop="name">HTTP</span></a></span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/TCP-IP/" itemprop="url" rel="index"><span itemprop="name">TCP/IP</span></a></span>
 
                 
                 
@@ -492,65 +480,42 @@
       
 
       
-        <h1 id="HTTP快速学习"><a href="#HTTP快速学习" class="headerlink" title="HTTP快速学习"></a>HTTP快速学习</h1><h4 id="知识点1-无状态和持久化连接"><a href="#知识点1-无状态和持久化连接" class="headerlink" title="知识点1  无状态和持久化连接"></a>知识点1  无状态和持久化连接</h4><blockquote>
+        <h1 id="IP协议、ARP协议、ICMP协议以及Ping程序"><a href="#IP协议、ARP协议、ICMP协议以及Ping程序" class="headerlink" title="IP协议、ARP协议、ICMP协议以及Ping程序"></a>IP协议、ARP协议、ICMP协议以及Ping程序</h1><h4 id="不可靠"><a href="#不可靠" class="headerlink" title="不可靠"></a>不可靠</h4><blockquote>
+<p>IP协议是尽力而为的协议，可靠性由上层协议保证</p>
+</blockquote>
+<h4 id="无连接"><a href="#无连接" class="headerlink" title="无连接"></a>无连接</h4><blockquote>
+<p>IP协议不会维持连接，发送数据报可以是无序的</p>
+</blockquote>
+<h4 id="IP协议首部"><a href="#IP协议首部" class="headerlink" title="IP协议首部"></a>IP协议首部</h4><blockquote>
+<p>总长度字段16 bit限制IP数据报最大长度为65535字节。但实际上数据报都会被分片。<br>TTL生存周期： 一般为32或64， 是指经过多少跳之后数据报将会被丢弃，并向源主机发送ICMP通知。</p>
+</blockquote>
+<h4 id="ARP"><a href="#ARP" class="headerlink" title="ARP"></a>ARP</h4><blockquote>
+<p>以广播方式请求目的IP的物理地址。</p>
+</blockquote>
+<h4 id="ICMP"><a href="#ICMP" class="headerlink" title="ICMP"></a>ICMP</h4><blockquote>
+<p>Internet控制报文协议，一般被IP协议或更高层使用，被封装在IP数据报内部。</p>
+</blockquote>
+<h4 id="Ping"><a href="#Ping" class="headerlink" title="Ping"></a>Ping</h4><blockquote>
+<p>用来测试网络中主机是否可达。该程序发送ICMP回显请求报文给目的主机，并等待返回ICMP回显应答。</p>
 <ul>
-<li>HTTP是无状态连接:不保留上一次传输的内容，即不对上一次的请求和响应做持久化处理</li>
-<li>HTTP1.1之后连接默认是持久化连接：即任意一端没有明确表明断开就一直保持TCP的连接状态</li>
+<li>注意：  Ping程序不是一个用户级进程，它是由内核完成的。</li>
 </ul>
-<p>* 持久化连接是指TCP的持久化连接，无状态连接是指请求和响应不做持久化处理</p>
+<p>Ping程序会在ICMP报文中写入发送时间，当接收到回显报文时计算时间差来表示往返时间。<br>一般第一个往返时间值会比其他的大，这是由于目标IP没有在告诉ARP缓存中。</p>
 </blockquote>
-<h4 id="知识点2-报文和实体"><a href="#知识点2-报文和实体" class="headerlink" title="知识点2 报文和实体"></a>知识点2 报文和实体</h4><blockquote>
-<p>报文和实体，报文在传输时会被切割，切割之后的部分为一个实体，合在一起是报文</p>
-</blockquote>
-<h4 id="知识点3-HTTP报文首部"><a href="#知识点3-HTTP报文首部" class="headerlink" title="知识点3 HTTP报文首部"></a>知识点3 HTTP报文首部</h4><blockquote>
+<h4 id="MTU"><a href="#MTU" class="headerlink" title="MTU"></a>MTU</h4><blockquote>
+<p>MTU: 链路层最大传输单元。它是指由于网络特性以及环境限制，每个网络都有自己的MTU限制。当IP层传下来的数据报大小超过这个限制，那么IP层就要进行分片。</p>
+<p>路径MTU: 当不同网络之间通信时，由于MTU的不同，在传输时数据报的分片情况也不同。</p>
 <ul>
-<li>报文首部包含请求行或响应行 包含请求方法+http版本或者响应状态码+http版本，之后是各种首部字段，包括方法，地址等等。</li>
+<li>路由选路不对称: A到B的路由和B到A的路由不同。</li>
 </ul>
+<p>由于路由可能是不对称的，所以发送和接受的分片情况也不一定相同，在发送前路径MTU会通过发现机制确定。</p>
 </blockquote>
-<h4 id="知识点4-HTTP状态码"><a href="#知识点4-HTTP状态码" class="headerlink" title="知识点4 HTTP状态码"></a>知识点4 HTTP状态码</h4><blockquote>
-<h6 id="2XX-表示请求被正确处理"><a href="#2XX-表示请求被正确处理" class="headerlink" title="2XX 表示请求被正确处理"></a>2XX 表示请求被正确处理</h6><blockquote>
-<ul>
-<li>200: OK</li>
-<li>204: 无资源返回</li>
-<li>206: 返回一部分资源</li>
-</ul>
+<h4 id="UDP协议"><a href="#UDP协议" class="headerlink" title="UDP协议"></a>UDP协议</h4><blockquote>
+<p>UDP首部包含源端口号和目的端口号，UDP端口号和TCP端口号是相互独立的。</p>
+<p>UDP首部包含覆盖首部和数据的校验字段，而IP首部校验字段只覆盖IP首部。UDP校验字段是可选的，TCP是必需的。</p>
 </blockquote>
-<h6 id="3XX-表示重定向"><a href="#3XX-表示重定向" class="headerlink" title="3XX 表示重定向"></a>3XX 表示重定向</h6><blockquote>
-<ul>
-<li>301: 资源永久性重定向</li>
-<li>302: 资源临时性重定向</li>
-<li>303: 请以get方法临时重定向</li>
-<li>304: 资源没有改变，可以继续使用缓存</li>
-<li>307: 临时重定向，基本和302相同</li>
-</ul>
-</blockquote>
-<h6 id="4XX-客户端错误"><a href="#4XX-客户端错误" class="headerlink" title="4XX 客户端错误"></a>4XX 客户端错误</h6><blockquote>
-<ul>
-<li>400: 请求存在错误，服务器无法理解</li>
-<li>401: 需要身份认证，或认证失败</li>
-<li>403: 服务器拒绝访问，可能是无权限</li>
-<li>404: 服务器找不到该资源</li>
-</ul>
-</blockquote>
-<h6 id="5XX-服务器错误"><a href="#5XX-服务器错误" class="headerlink" title="5XX 服务器错误"></a>5XX 服务器错误</h6><blockquote>
-<ul>
-<li>500: 服务器执行请求时发生错误</li>
-<li>503: 服务器超负荷或停机维护，稍后访问</li>
-</ul>
-</blockquote>
-</blockquote>
-<h3 id="知识点5-代理，网关，隧道"><a href="#知识点5-代理，网关，隧道" class="headerlink" title="#知识点5 代理，网关，隧道"></a>#知识点5 代理，网关，隧道</h3><blockquote>
-<ul>
-<li>代理分为缓存代理（静态资源）和 非缓存代理</li>
-<li>网关可以转换http协议，例如访问数据库或者信用卡系统</li>
-<li>隧道的目的是建立一条安全的连接</li>
-</ul>
-</blockquote>
-<h4 id="知识点6-HTTPs"><a href="#知识点6-HTTPs" class="headerlink" title="知识点6 HTTPs"></a>知识点6 HTTPs</h4><blockquote>
-<p>安全的的http连接，信息加密（SSL或TSL），用户身份验证（SSL证书），确保报文完整<br>SSL采用公钥私钥加密，采用证书确认公钥安全</p>
-</blockquote>
-<h4 id="知识点7-Websocket"><a href="#知识点7-Websocket" class="headerlink" title="知识点7 Websocket"></a>知识点7 Websocket</h4><blockquote>
-<p>这是一种基于http协议的协议，旨在提高传输速度和质量，在http请求中发送协议转换请求切换协议为websocket，客户端请求连接后若服务器建立连接则之后将一直保留连接状态，报文首部也将压缩，服务器和客户端之间可随意传输信息，包括推送。</p>
+<h4 id="DNS系统"><a href="#DNS系统" class="headerlink" title="DNS系统"></a>DNS系统</h4><blockquote>
+<p>DNS查询大多数情况下使用UDP， 当数据报长度过大时使用TCP传输。响应端口号：53</p>
 </blockquote>
 
       
@@ -599,15 +564,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2018/12/08/TCP-IP-协议学习/" rel="next" title="TCP/IP 协议学习">
+                <i class="fa fa-chevron-left"></i> TCP/IP 协议学习
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/12/08/TCP-IP-协议学习/" rel="prev" title="TCP/IP 协议学习">
-                TCP/IP 协议学习 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -748,7 +713,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#HTTP快速学习"><span class="nav-number">1.</span> <span class="nav-text">HTTP快速学习</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#知识点1-无状态和持久化连接"><span class="nav-number">1.0.0.1.</span> <span class="nav-text">知识点1  无状态和持久化连接</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#知识点2-报文和实体"><span class="nav-number">1.0.0.2.</span> <span class="nav-text">知识点2 报文和实体</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#知识点3-HTTP报文首部"><span class="nav-number">1.0.0.3.</span> <span class="nav-text">知识点3 HTTP报文首部</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#知识点4-HTTP状态码"><span class="nav-number">1.0.0.4.</span> <span class="nav-text">知识点4 HTTP状态码</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#2XX-表示请求被正确处理"><span class="nav-number">1.0.0.4.0.1.</span> <span class="nav-text">2XX 表示请求被正确处理</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#3XX-表示重定向"><span class="nav-number">1.0.0.4.0.2.</span> <span class="nav-text">3XX 表示重定向</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#4XX-客户端错误"><span class="nav-number">1.0.0.4.0.3.</span> <span class="nav-text">4XX 客户端错误</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#5XX-服务器错误"><span class="nav-number">1.0.0.4.0.4.</span> <span class="nav-text">5XX 服务器错误</span></a></li></ol></li></ol></li></ol><li class="nav-item nav-level-3"><a class="nav-link" href="#知识点5-代理，网关，隧道"><span class="nav-number">1.0.1.</span> <span class="nav-text">#知识点5 代理，网关，隧道</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#知识点6-HTTPs"><span class="nav-number">1.0.1.1.</span> <span class="nav-text">知识点6 HTTPs</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#知识点7-Websocket"><span class="nav-number">1.0.1.2.</span> <span class="nav-text">知识点7 Websocket</span></a></li></ol></li></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#IP协议、ARP协议、ICMP协议以及Ping程序"><span class="nav-number">1.</span> <span class="nav-text">IP协议、ARP协议、ICMP协议以及Ping程序</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#不可靠"><span class="nav-number">1.0.0.1.</span> <span class="nav-text">不可靠</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#无连接"><span class="nav-number">1.0.0.2.</span> <span class="nav-text">无连接</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#IP协议首部"><span class="nav-number">1.0.0.3.</span> <span class="nav-text">IP协议首部</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ARP"><span class="nav-number">1.0.0.4.</span> <span class="nav-text">ARP</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ICMP"><span class="nav-number">1.0.0.5.</span> <span class="nav-text">ICMP</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Ping"><span class="nav-number">1.0.0.6.</span> <span class="nav-text">Ping</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#MTU"><span class="nav-number">1.0.0.7.</span> <span class="nav-text">MTU</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#UDP协议"><span class="nav-number">1.0.0.8.</span> <span class="nav-text">UDP协议</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DNS系统"><span class="nav-number">1.0.0.9.</span> <span class="nav-text">DNS系统</span></a></li></ol></li></ol></div>
             
 
           </div>
