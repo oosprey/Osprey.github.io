@@ -135,7 +135,7 @@
 <meta property="og:site_name" content="Young">
 <meta property="og:description" content="TCP：传输控制协议TCP：面向连接的、可靠的字节流服务  TCP只能建立在两方通信中，广播和多播不能使用TCP。  应用数据会被TCP分割成最适合发送的数据块，发送每个数据段之后都会启动一个定时器，如果不能及时收到确认，TCP将超时重传这个数据段。  TCP收到数据段后，将进行首部和数据的校验和，如果发生错误，接收端将丢弃报文段并不发送确认，否则将推迟几分之一秒，然后发送确认。  TCP收到数据">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-12-11T13:38:41.726Z">
+<meta property="og:updated_time" content="2018-12-14T13:56:30.713Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="TCP协议">
 <meta name="twitter:description" content="TCP：传输控制协议TCP：面向连接的、可靠的字节流服务  TCP只能建立在两方通信中，广播和多播不能使用TCP。  应用数据会被TCP分割成最适合发送的数据块，发送每个数据段之后都会启动一个定时器，如果不能及时收到确认，TCP将超时重传这个数据段。  TCP收到数据段后，将进行首部和数据的校验和，如果发生错误，接收端将丢弃报文段并不发送确认，否则将推迟几分之一秒，然后发送确认。  TCP收到数据">
@@ -424,12 +424,24 @@
                 
               
 
-              <time title="创建时间：2018-12-11 21:10:43 / 修改时间：21:38:41" itemprop="dateCreated datePublished" datetime="2018-12-11T21:10:43+08:00">2018-12-11</time>
+              <time title="创建时间：2018-12-11 21:10:43" itemprop="dateCreated datePublished" datetime="2018-12-11T21:10:43+08:00">2018-12-11</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-12-14 21:56:30" itemprop="dateModified" datetime="2018-12-14T21:56:30+08:00">2018-12-14</time>
               
             
           </span>
@@ -480,7 +492,7 @@
       
 
       
-        <h1 id="TCP：传输控制协议"><a href="#TCP：传输控制协议" class="headerlink" title="TCP：传输控制协议"></a>TCP：传输控制协议</h1><h4 id="TCP：面向连接的、可靠的字节流服务"><a href="#TCP：面向连接的、可靠的字节流服务" class="headerlink" title="TCP：面向连接的、可靠的字节流服务"></a>TCP：面向连接的、可靠的字节流服务</h4><blockquote>
+        <h1 id="TCP：传输控制协议"><a href="#TCP：传输控制协议" class="headerlink" title="TCP：传输控制协议"></a>TCP：传输控制协议</h1><h2 id="TCP：面向连接的、可靠的字节流服务"><a href="#TCP：面向连接的、可靠的字节流服务" class="headerlink" title="TCP：面向连接的、可靠的字节流服务"></a>TCP：面向连接的、可靠的字节流服务</h2><blockquote>
 <ul>
 <li><p>TCP只能建立在两方通信中，广播和多播不能使用TCP。</p>
 </li>
@@ -496,7 +508,68 @@
 <li>TCP对传输的字节流不做解释，即不知道传输的是二进制数据还是其他类型的数据，类似于Unix内核对文件的处理，对字节流的解释由双方的应用层解释。</li>
 </ul>
 </blockquote>
-<h4 id="TCP连接的建立与终止"><a href="#TCP连接的建立与终止" class="headerlink" title="TCP连接的建立与终止"></a>TCP连接的建立与终止</h4>
+<h2 id="TCP连接的建立与终止"><a href="#TCP连接的建立与终止" class="headerlink" title="TCP连接的建立与终止"></a>TCP连接的建立与终止</h2><ul>
+<li><h4 id="TCP三次握手连接"><a href="#TCP三次握手连接" class="headerlink" title="TCP三次握手连接"></a>TCP三次握手连接</h4><blockquote>
+<ol>
+<li>TCP连接建立初始，客户端发送SYN报文段，通知服务器端即将建立TCP连接，该TCP报文段仅包含TCP首部，不包含数据。首部包含客户端要建立TCP连接的端口号，当前ISN（初始序号）。32位确认序号为空。</li>
+<li>服务器接收到客户端的连接请求后获得了当前客户端的序号，然后发送包含服务器端初始序号的SYN报文段作为应答，此时首部32位确认序号设置为客户端序号+1表示确认， <strong>注意 ： SYN报文将占用一个序号。</strong></li>
+<li>客户端收到服务器应答后确定了此后发送报文段的序号，然后向服务器发送ack应答，设置32位确认序号为服务器ISN+1，表示自己已收到服务器初始序号，<strong>注意 ：此时的确认报文段ACK不占用序号。</strong></li>
+</ol>
+</blockquote>
+</li>
+</ul>
+<p>三次握手的目的其实就是进行序号的同步，即让客户端知道服务器的序号，让服务器知道客户端的序号，这是因为TCP提供的是可靠的全双工连接，当客户端发送数据时，服务器要发送对应的确认报文，而此确认报文是对哪一个TCP报文的确认就只能靠相应的序号确定了。因此同步是非常有效的，</p>
+<ul>
+<li><h4 id="TCP的四次挥手断开"><a href="#TCP的四次挥手断开" class="headerlink" title="TCP的四次挥手断开"></a>TCP的四次挥手断开</h4>由于TCP的全双工服务，断开连接时每个方向必须单独地进行关闭，当一方主动关闭后（发送FIN后并得到确认ACK）有可能继续接受数据，称这一状态为半关闭状态，而此时接收到FIN的一端执行被动关闭（关闭接收）。通常发送FIN是应用层关闭的结果。<blockquote>
+<ol>
+<li>请求端应用层程序关闭导致TCP向服务器发送FIN报文段，包含当前序号以及确认序号， <strong>注意： FIN报文段将占用一个序号。</strong></li>
+<li>服务器收到客户端的FIN报文段后发送ACK确认此信号，32位确认序号设置为上一个FIN的0序号+1.<strong>此时服务器端并不关闭接受通道而是等待2倍的MSL（报文段最大生存时间），这是防止此时ACK丢失，一旦ACK丢失，发送FIN的发送端就会在一个MSL时间后超时重传FIN，而此时接收端还存在接受能力，会重发ACK，然后继续等待2MSL时间，当2MSL时间过去后还没有收到FIN时（除了FIN之外的其他迟到报文都丢弃，因为可能是此端口上一个连接的迟到报文），服务器端关闭接受通道（注意：这种关闭是一种软关闭，即只能接受ACK确认报文，当此时接收到其他报文时，认为此时的TCP连接为半打开状态，处理方式如下方半打开检测）</strong>。而发送通道仍处于打开阶段， 即此时服务器端仍可以发送数据。</li>
+<li>客户端收到服务器返回的ACK确认报文后关闭发送通道（仍然是一种软关闭，仍可以发送ACK响应报文，但不能发送其他报文）。但仍可接受数据。此时若客户端未收到ACK确认报文（超时），客户端将重传FIN报文。服务器端通常此时会发送一个FIN报文段过来，客户端将发送ACK确认此报文已送达并关闭接收通道。</li>
+<li>服务器收到FIN确认ACK后等待2MSL，然后断开发送通道，否则将超时重传，当发送接收全部关闭（软关闭）时本次TCP连接将全部断开。</li>
+</ol>
+</blockquote>
+</li>
+</ul>
+<p><strong>本地序号的增长不会受到接受到的ACK报文确认序号的影响，即本次发送的报文序号可以和上次接受到的ACK确认序号相同</strong></p>
+<p>* ISN序号的增长一般按照开机后每0.5s增长64000.</p>
+<ul>
+<li><h4 id="MSS最大报文段长度"><a href="#MSS最大报文段长度" class="headerlink" title="MSS最大报文段长度"></a>MSS最大报文段长度</h4><blockquote>
+<p>MSS只能出现在SYN报文段中，表示发送端期望接受的最大报文段长度，接收端不一定要遵守这个长度，所以一般这个值是通过协商确定的。MSS的设置是为了IP数据报尽量小于对方链路层MTU长度，从而避免IP分片。</p>
+</blockquote>
+</li>
+<li><h4 id="2MSL等待"><a href="#2MSL等待" class="headerlink" title="2MSL等待"></a>2MSL等待</h4><p>当TCP执行一个主动关闭后，并发回最后一个ACK，该连接必须在TIME_WAIT状态等待2倍的MSL时间，以防止最后的ACK丢失。在此期间收到的其他迟到报文均丢弃掉。</p>
+</li>
+<li><h4 id="TCP半关闭，半打开"><a href="#TCP半关闭，半打开" class="headerlink" title="TCP半关闭，半打开"></a>TCP半关闭，半打开</h4><blockquote>
+<ul>
+<li>半关闭：一端结束它的发送之后还能接收来自另一端的能力，属于正常状态。</li>
+<li>半打开：一端结束了连接，而另一端不知道，一个常见的例子就是一端突然断电，<strong>一个极端的例子就是发送端发送FIN后，接收端返回的ACK丢失，此时发送端重传FIN恰好也丢失了，而接受端已等待超过2MSL，接收端认为发送端已收到ACK而断开接受通道，此时发送端发送通道仍处于打开状态。</strong></li>
+</ul>
+</blockquote>
+</li>
+<li><h4 id="平静时间"><a href="#平静时间" class="headerlink" title="平静时间"></a>平静时间</h4><blockquote>
+<p>平静时间是指TCP复位后MSL时间内不允许建立任何连接，这是为了防止主机在上一个2MSL等待时间内重启，导致上一个替身报文到达。但实际中由于TCP重启都会超过MSL，所以基本没有遵守这一规定的实现。</p>
+</blockquote>
+</li>
+<li><h4 id="复位报文段-RST"><a href="#复位报文段-RST" class="headerlink" title="复位报文段 RST"></a>复位报文段 RST</h4><blockquote>
+<ul>
+<li>正常关闭：四次挥手发送FIN关闭连接。</li>
+<li>异常关闭：发送端发送RST报文到服务器端，服务器端不返回任何响应直接关闭连接并通知应用层连接被对方复位。RST报文包含一个序号和一个确认序号。</li>
+</ul>
+</blockquote>
+</li>
+<li><h4 id="检测半打开连接"><a href="#检测半打开连接" class="headerlink" title="检测半打开连接"></a>检测半打开连接</h4><p>当处于半打开连接的TCP连接中的关闭端收到打开端发来的报文时，由于它不知道数据报文段中提到的连接，关闭端将回复RST复位应答，然后等待下一次TCP连接。</p>
+</li>
+<li><h4 id="处理同时打开"><a href="#处理同时打开" class="headerlink" title="处理同时打开"></a>处理同时打开</h4><p>>&gt;  TCP两端同时主动打开是可能的，在TCP/IP协议中两端将建立一条通道，而OSI传输层将建立两条通道。</p>
+<blockquote>
+<p>此时建立的连接要经过<strong>四次握手</strong>，第一步同时发送SYN到对方端，第二步当双方同时收到相同端口连接的SYN请求后，再发SYN并放ACK确认连接。<strong>（按照之前的总结，TCP建立连接是为了同步序号，即交换双方的ISN，那么前面已经发过了本地SYN为什么这里要再次发送SYN呢？这是因为连接是双盲的，对于一端来说，并不知道前面发送的SYN有没有被收到（由于同时打开造成确认滞后），本着交换序号的原则，这一步也要发送SYN）。之后没有ACK对第二步的SYN和ACK数据报文段进行确认是因为即便这两个数据段丢失，两边的序号也由于第一步的同步发送SYN而达到同步了，所以此时仍可以建立连接，如果第一步的SYN丢失了导致第二步的SYN也丢失了，那么此时建立的就是普通的TCP连接了。</strong></p>
+</blockquote>
+</li>
+<li><h4 id="处理同时关闭"><a href="#处理同时关闭" class="headerlink" title="处理同时关闭"></a>处理同时关闭</h4><blockquote>
+<p>由于全双工的特性，同时关闭很容易理解，还是四次挥手关闭。</p>
+</blockquote>
+</li>
+</ul>
+
       
     </div>
 
@@ -692,7 +765,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#TCP：传输控制协议"><span class="nav-number">1.</span> <span class="nav-text">TCP：传输控制协议</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#TCP：面向连接的、可靠的字节流服务"><span class="nav-number">1.0.0.1.</span> <span class="nav-text">TCP：面向连接的、可靠的字节流服务</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TCP连接的建立与终止"><span class="nav-number">1.0.0.2.</span> <span class="nav-text">TCP连接的建立与终止</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#TCP：传输控制协议"><span class="nav-number">1.</span> <span class="nav-text">TCP：传输控制协议</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#TCP：面向连接的、可靠的字节流服务"><span class="nav-number">1.1.</span> <span class="nav-text">TCP：面向连接的、可靠的字节流服务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TCP连接的建立与终止"><span class="nav-number">1.2.</span> <span class="nav-text">TCP连接的建立与终止</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#TCP三次握手连接"><span class="nav-number">1.2.0.1.</span> <span class="nav-text">TCP三次握手连接</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TCP的四次挥手断开"><span class="nav-number">1.2.0.2.</span> <span class="nav-text">TCP的四次挥手断开</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#MSS最大报文段长度"><span class="nav-number">1.2.0.3.</span> <span class="nav-text">MSS最大报文段长度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2MSL等待"><span class="nav-number">1.2.0.4.</span> <span class="nav-text">2MSL等待</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TCP半关闭，半打开"><span class="nav-number">1.2.0.5.</span> <span class="nav-text">TCP半关闭，半打开</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#平静时间"><span class="nav-number">1.2.0.6.</span> <span class="nav-text">平静时间</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#复位报文段-RST"><span class="nav-number">1.2.0.7.</span> <span class="nav-text">复位报文段 RST</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#检测半打开连接"><span class="nav-number">1.2.0.8.</span> <span class="nav-text">检测半打开连接</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#处理同时打开"><span class="nav-number">1.2.0.9.</span> <span class="nav-text">处理同时打开</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#处理同时关闭"><span class="nav-number">1.2.0.10.</span> <span class="nav-text">处理同时关闭</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
