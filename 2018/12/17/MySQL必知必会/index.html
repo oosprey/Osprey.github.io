@@ -127,18 +127,18 @@
 
 
 
-  <meta name="description" content="SQL语句查看数据库和表信息&amp;gt; SHOW DATABASES; //查看所有数据库&amp;gt; SHOW CREATE DATABASE; //查看特定数据库创建语句。检索查询所有字段  SELECT * FROM TABLE;  查询不重复行的特定字段  SELECT DISTINCT id FROM TABLE;  LIMIT限制返回数量  SELECT  FROM TABLE LIMIT">
+  <meta name="description" content="SQL语句查看数据库和表信息&amp;gt; SHOW DATABASES; //查看所有数据库&amp;gt; SHOW CREATE DATABASE; //查看特定数据库创建语句。检索查询所有字段  SELECT * FROM TABLE;  查询不重复行的特定字段  SELECT DISTINCT id FROM TABLE;  LIMIT限制返回数量  SELECT * FROM TABLE LIMIT">
 <meta name="keywords" content="数据库">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MySQL必知必会">
 <meta property="og:url" content="http://yoursite.com/2018/12/17/MySQL必知必会/index.html">
 <meta property="og:site_name" content="Young">
-<meta property="og:description" content="SQL语句查看数据库和表信息&amp;gt; SHOW DATABASES; //查看所有数据库&amp;gt; SHOW CREATE DATABASE; //查看特定数据库创建语句。检索查询所有字段  SELECT * FROM TABLE;  查询不重复行的特定字段  SELECT DISTINCT id FROM TABLE;  LIMIT限制返回数量  SELECT  FROM TABLE LIMIT">
+<meta property="og:description" content="SQL语句查看数据库和表信息&amp;gt; SHOW DATABASES; //查看所有数据库&amp;gt; SHOW CREATE DATABASE; //查看特定数据库创建语句。检索查询所有字段  SELECT * FROM TABLE;  查询不重复行的特定字段  SELECT DISTINCT id FROM TABLE;  LIMIT限制返回数量  SELECT * FROM TABLE LIMIT">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-12-17T09:13:15.588Z">
+<meta property="og:updated_time" content="2018-12-17T09:16:07.294Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL必知必会">
-<meta name="twitter:description" content="SQL语句查看数据库和表信息&amp;gt; SHOW DATABASES; //查看所有数据库&amp;gt; SHOW CREATE DATABASE; //查看特定数据库创建语句。检索查询所有字段  SELECT * FROM TABLE;  查询不重复行的特定字段  SELECT DISTINCT id FROM TABLE;  LIMIT限制返回数量  SELECT  FROM TABLE LIMIT">
+<meta name="twitter:description" content="SQL语句查看数据库和表信息&amp;gt; SHOW DATABASES; //查看所有数据库&amp;gt; SHOW CREATE DATABASE; //查看特定数据库创建语句。检索查询所有字段  SELECT * FROM TABLE;  查询不重复行的特定字段  SELECT DISTINCT id FROM TABLE;  LIMIT限制返回数量  SELECT * FROM TABLE LIMIT">
 
 
 
@@ -424,7 +424,7 @@
                 
               
 
-              <time title="创建时间：2018-12-17 12:11:19 / 修改时间：17:13:15" itemprop="dateCreated datePublished" datetime="2018-12-17T12:11:19+08:00">2018-12-17</time>
+              <time title="创建时间：2018-12-17 12:11:19 / 修改时间：17:16:07" itemprop="dateCreated datePublished" datetime="2018-12-17T12:11:19+08:00">2018-12-17</time>
             
 
             
@@ -490,11 +490,11 @@
 </blockquote>
 <p>LIMIT限制返回数量</p>
 <blockquote>
-<p>SELECT <em> FROM TABLE LIMIT 5;<br>SELECT </em> FROM TABLE LIMIT 5,5; //从第5行开始的5行。</p>
+<p>SELECT * FROM TABLE LIMIT 5;<br>SELECT * FROM TABLE LIMIT 5,5; //从第5行开始的5行。</p>
 </blockquote>
 <p>ORDER BY排序</p>
 <blockquote>
-<p>SELECT <em> FROM TABLE ORDER BY COLUMNS;<br>SELECT </em> FROM TABLE ORDER BY COLUMN1, COLUMN2;<br>SELECT * FROM TABLE ORDER BY COLUMN1 DESC, COLUMN2 DESC;</p>
+<p>SELECT * FROM TABLE ORDER BY COLUMNS;<br>SELECT * FROM TABLE ORDER BY COLUMN1, COLUMN2;<br>SELECT * FROM TABLE ORDER BY COLUMN1 DESC, COLUMN2 DESC;</p>
 </blockquote>
 <p>WHERE 条件查询</p>
 <blockquote>
@@ -502,11 +502,11 @@
 </blockquote>
 <p>通配符检索</p>
 <blockquote>
-<p>% :表示任意字符出现任意多次<br>SELECT <em> FROM TABLE WHERE name LIKE ‘wang%’;<br>_ :表示任意字符出现一次<br>SELECT </em> FROM TABLE WHERE name LIKE ‘wan_%’;</p>
+<p>% :表示任意字符出现任意多次<br>SELECT * FROM TABLE WHERE name LIKE ‘wang%’;<br>_ :表示任意字符出现一次<br>SELECT * FROM TABLE WHERE name LIKE ‘wan_%’;</p>
 </blockquote>
 <p>REGEXP 表示使用正则表达式检索 . *</p>
 <blockquote>
-<p>SELECT <em> FROM TABLE WHERE name REGEXP ‘.000’;<br>使用 \\ 进行特殊字符的转义<br>定位符 ^ 字符串开头 $ 字符串结尾<br>. 匹配一个<br>\</em> 匹配0个或多个<br>+ 匹配1个或多个<br>? 匹配0个或1个</p>
+<p>SELECT * FROM TABLE WHERE name REGEXP ‘.000’;<br>使用 \\ 进行特殊字符的转义<br>定位符 ^ 字符串开头 $ 字符串结尾<br>. 匹配一个<br>* 匹配0个或多个<br>+ 匹配1个或多个<br>? 匹配0个或1个</p>
 </blockquote>
 
       
