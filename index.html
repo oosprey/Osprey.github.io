@@ -427,7 +427,7 @@
                 
               
 
-              <time title="创建时间：2018-12-17 21:26:20 / 修改时间：21:41:54" itemprop="dateCreated datePublished" datetime="2018-12-17T21:26:20+08:00">2018-12-17</time>
+              <time title="创建时间：2018-12-17 21:26:20 / 修改时间：21:55:02" itemprop="dateCreated datePublished" datetime="2018-12-17T21:26:20+08:00">2018-12-17</time>
             
 
             
@@ -485,11 +485,9 @@
       
         
           
-            <h1 id="SQL复杂检索"><a href="#SQL复杂检索" class="headerlink" title="SQL复杂检索"></a>SQL复杂检索</h1><h2 id="级联查询（子查询）"><a href="#级联查询（子查询）" class="headerlink" title="级联查询（子查询）"></a>级联查询（子查询）</h2><p>WHERE通常可以包含另一个查询子句，例如：</p>
-<blockquote>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; SELECT * FROM student WHERE id IN (SELECT id FROM users WHERE sex = 'female');</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
-</blockquote>
-
+            <h1 id="SQL复杂检索"><a href="#SQL复杂检索" class="headerlink" title="SQL复杂检索"></a>SQL复杂检索</h1><h2 id="级联查询（子查询）"><a href="#级联查询（子查询）" class="headerlink" title="级联查询（子查询）"></a>级联查询（子查询）</h2><p>WHERE通常可以包含另一个查询子句，例如：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> *</span><br><span class="line"><span class="keyword">FROM</span> student</span><br><span class="line"><span class="keyword">WHERE</span> <span class="keyword">id</span> <span class="keyword">IN</span> (<span class="keyword">SELECT</span> <span class="keyword">id</span> <span class="keyword">FROM</span> <span class="keyword">users</span> <span class="keyword">WHERE</span> sex = <span class="string">'female'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> cust_name, cust_state, (<span class="keyword">SELECT</span> <span class="keyword">count</span>(*) <span class="keyword">FROM</span> orders <span class="keyword">WHERE</span> orders.cust_id = customers.cust_id) <span class="keyword">AS</span> orders</span><br><span class="line"><span class="keyword">FROM</span> customers</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> cust_name;</span><br></pre></td></tr></table></figure></p>
+<p>级联查询并不是最有效的查询。</p>
+<h2 id="联结表（join）"><a href="#联结表（join）" class="headerlink" title="联结表（join）"></a>联结表（join）</h2>
           
         
       
