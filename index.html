@@ -427,7 +427,7 @@
                 
               
 
-              <time title="创建时间：2018-12-17 12:11:19 / 修改时间：17:16:07" itemprop="dateCreated datePublished" datetime="2018-12-17T12:11:19+08:00">2018-12-17</time>
+              <time title="创建时间：2018-12-17 12:11:19 / 修改时间：21:10:33" itemprop="dateCreated datePublished" datetime="2018-12-17T12:11:19+08:00">2018-12-17</time>
             
 
             
@@ -512,6 +512,30 @@
 <p>REGEXP 表示使用正则表达式检索 . *</p>
 <blockquote>
 <p>SELECT * FROM TABLE WHERE name REGEXP ‘.000’;<br>使用 \\ 进行特殊字符的转义<br>定位符 ^ 字符串开头 $ 字符串结尾<br>. 匹配一个<br>* 匹配0个或多个<br>+ 匹配1个或多个<br>? 匹配0个或1个</p>
+</blockquote>
+<h2 id="表操作"><a href="#表操作" class="headerlink" title="表操作"></a>表操作</h2><p>构建计算字段</p>
+<blockquote>
+<p>Concat()函数： 将表中的两个属性联结在一起，通常是字符串连接。<br>SELECT Concat(name, ‘(‘, country, ‘)’) FROM TABLE ORDER BY name;</p>
+</blockquote>
+<p>别名</p>
+<blockquote>
+<p>使用AS关键字来创建别名</p>
+</blockquote>
+<p>去掉串多余的空格</p>
+<blockquote>
+<p>RTrim( ) : 去除串右侧多余空格<br>LTrim( ) : 去除串左侧多余空格<br>Trim( ) : 去除串两侧多余空格</p>
+</blockquote>
+<h2 id="聚集函数"><a href="#聚集函数" class="headerlink" title="聚集函数"></a>聚集函数</h2><p>MySQL 提供五种聚集函数 AVG( )、 COUNT( )、 MIN( )、 MAX( )、 SUM( )</p>
+<blockquote>
+<p>DISTINCT 字段可用于 AVG 和 COUNT 函数</p>
+</blockquote>
+<h2 id="分组-GROUP-BY"><a href="#分组-GROUP-BY" class="headerlink" title="分组 GROUP BY"></a>分组 GROUP BY</h2><p>GROUP BY 必须使用在WHERE之后 ORDER BY 之前</p>
+<h2 id="检索条件语句-WHERE-和-HAVING"><a href="#检索条件语句-WHERE-和-HAVING" class="headerlink" title="检索条件语句 WHERE 和 HAVING"></a>检索条件语句 WHERE 和 HAVING</h2><p>几乎所有的WHERE语句都能用HAVING语句代替，他们所不同的是WHERE过滤行， 而HAVING过滤分组。</p>
+<blockquote>
+<p>HAVING 和 GROUP BY 配合使用， HAVING 出现在 GROUP BY 之后， 而 WHERE 必须出现在 GROUP BY之前。</p>
+</blockquote>
+<h2 id="SELECT子句顺序"><a href="#SELECT子句顺序" class="headerlink" title="SELECT子句顺序"></a>SELECT子句顺序</h2><blockquote>
+<p><img src="/images/SELECT子句顺序.png" alt=""></p>
 </blockquote>
 
           

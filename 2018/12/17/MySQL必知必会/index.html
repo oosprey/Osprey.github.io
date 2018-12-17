@@ -135,10 +135,12 @@
 <meta property="og:site_name" content="Young">
 <meta property="og:description" content="SQL语句查看数据库和表信息&amp;gt; SHOW DATABASES; //查看所有数据库&amp;gt; SHOW CREATE DATABASE; //查看特定数据库创建语句。检索查询所有字段  SELECT * FROM TABLE;  查询不重复行的特定字段  SELECT DISTINCT id FROM TABLE;  LIMIT限制返回数量  SELECT * FROM TABLE LIMIT">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-12-17T09:16:07.294Z">
+<meta property="og:image" content="http://yoursite.com/images/SELECT子句顺序.png">
+<meta property="og:updated_time" content="2018-12-17T13:10:33.824Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL必知必会">
 <meta name="twitter:description" content="SQL语句查看数据库和表信息&amp;gt; SHOW DATABASES; //查看所有数据库&amp;gt; SHOW CREATE DATABASE; //查看特定数据库创建语句。检索查询所有字段  SELECT * FROM TABLE;  查询不重复行的特定字段  SELECT DISTINCT id FROM TABLE;  LIMIT限制返回数量  SELECT * FROM TABLE LIMIT">
+<meta name="twitter:image" content="http://yoursite.com/images/SELECT子句顺序.png">
 
 
 
@@ -424,7 +426,7 @@
                 
               
 
-              <time title="创建时间：2018-12-17 12:11:19 / 修改时间：17:16:07" itemprop="dateCreated datePublished" datetime="2018-12-17T12:11:19+08:00">2018-12-17</time>
+              <time title="创建时间：2018-12-17 12:11:19 / 修改时间：21:10:33" itemprop="dateCreated datePublished" datetime="2018-12-17T12:11:19+08:00">2018-12-17</time>
             
 
             
@@ -507,6 +509,30 @@
 <p>REGEXP 表示使用正则表达式检索 . *</p>
 <blockquote>
 <p>SELECT * FROM TABLE WHERE name REGEXP ‘.000’;<br>使用 \\ 进行特殊字符的转义<br>定位符 ^ 字符串开头 $ 字符串结尾<br>. 匹配一个<br>* 匹配0个或多个<br>+ 匹配1个或多个<br>? 匹配0个或1个</p>
+</blockquote>
+<h2 id="表操作"><a href="#表操作" class="headerlink" title="表操作"></a>表操作</h2><p>构建计算字段</p>
+<blockquote>
+<p>Concat()函数： 将表中的两个属性联结在一起，通常是字符串连接。<br>SELECT Concat(name, ‘(‘, country, ‘)’) FROM TABLE ORDER BY name;</p>
+</blockquote>
+<p>别名</p>
+<blockquote>
+<p>使用AS关键字来创建别名</p>
+</blockquote>
+<p>去掉串多余的空格</p>
+<blockquote>
+<p>RTrim( ) : 去除串右侧多余空格<br>LTrim( ) : 去除串左侧多余空格<br>Trim( ) : 去除串两侧多余空格</p>
+</blockquote>
+<h2 id="聚集函数"><a href="#聚集函数" class="headerlink" title="聚集函数"></a>聚集函数</h2><p>MySQL 提供五种聚集函数 AVG( )、 COUNT( )、 MIN( )、 MAX( )、 SUM( )</p>
+<blockquote>
+<p>DISTINCT 字段可用于 AVG 和 COUNT 函数</p>
+</blockquote>
+<h2 id="分组-GROUP-BY"><a href="#分组-GROUP-BY" class="headerlink" title="分组 GROUP BY"></a>分组 GROUP BY</h2><p>GROUP BY 必须使用在WHERE之后 ORDER BY 之前</p>
+<h2 id="检索条件语句-WHERE-和-HAVING"><a href="#检索条件语句-WHERE-和-HAVING" class="headerlink" title="检索条件语句 WHERE 和 HAVING"></a>检索条件语句 WHERE 和 HAVING</h2><p>几乎所有的WHERE语句都能用HAVING语句代替，他们所不同的是WHERE过滤行， 而HAVING过滤分组。</p>
+<blockquote>
+<p>HAVING 和 GROUP BY 配合使用， HAVING 出现在 GROUP BY 之后， 而 WHERE 必须出现在 GROUP BY之前。</p>
+</blockquote>
+<h2 id="SELECT子句顺序"><a href="#SELECT子句顺序" class="headerlink" title="SELECT子句顺序"></a>SELECT子句顺序</h2><blockquote>
+<p><img src="/images/SELECT子句顺序.png" alt=""></p>
 </blockquote>
 
       
@@ -708,7 +734,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#SQL语句"><span class="nav-number">1.</span> <span class="nav-text">SQL语句</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#查看数据库和表信息"><span class="nav-number">1.1.</span> <span class="nav-text">查看数据库和表信息</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#gt-SHOW-DATABASES-查看所有数据库"><span class="nav-number">1.1.0.1.</span> <span class="nav-text">&gt; SHOW DATABASES; //查看所有数据库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#gt-SHOW-CREATE-DATABASE-查看特定数据库创建语句。"><span class="nav-number">1.1.0.2.</span> <span class="nav-text">&gt; SHOW CREATE DATABASE; //查看特定数据库创建语句。</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#检索"><span class="nav-number">1.2.</span> <span class="nav-text">检索</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#SQL语句"><span class="nav-number">1.</span> <span class="nav-text">SQL语句</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#查看数据库和表信息"><span class="nav-number">1.1.</span> <span class="nav-text">查看数据库和表信息</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#gt-SHOW-DATABASES-查看所有数据库"><span class="nav-number">1.1.0.1.</span> <span class="nav-text">&gt; SHOW DATABASES; //查看所有数据库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#gt-SHOW-CREATE-DATABASE-查看特定数据库创建语句。"><span class="nav-number">1.1.0.2.</span> <span class="nav-text">&gt; SHOW CREATE DATABASE; //查看特定数据库创建语句。</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#检索"><span class="nav-number">1.2.</span> <span class="nav-text">检索</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#表操作"><span class="nav-number">1.3.</span> <span class="nav-text">表操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#聚集函数"><span class="nav-number">1.4.</span> <span class="nav-text">聚集函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分组-GROUP-BY"><span class="nav-number">1.5.</span> <span class="nav-text">分组 GROUP BY</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#检索条件语句-WHERE-和-HAVING"><span class="nav-number">1.6.</span> <span class="nav-text">检索条件语句 WHERE 和 HAVING</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SELECT子句顺序"><span class="nav-number">1.7.</span> <span class="nav-text">SELECT子句顺序</span></a></li></ol></div>
             
 
           </div>
