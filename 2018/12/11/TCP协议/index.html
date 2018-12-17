@@ -135,7 +135,7 @@
 <meta property="og:site_name" content="Young">
 <meta property="og:description" content="TCP：传输控制协议TCP：面向连接的、可靠的字节流服务  TCP只能建立在两方通信中，广播和多播不能使用TCP。  应用数据会被TCP分割成最适合发送的数据块，发送每个数据段之后都会启动一个定时器，如果不能及时收到确认，TCP将超时重传这个数据段。  TCP收到数据段后，将进行首部和数据的校验和，如果发生错误，接收端将丢弃报文段并不发送确认，否则将推迟几分之一秒，然后发送确认。  TCP收到数据">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-12-15T03:05:17.569Z">
+<meta property="og:updated_time" content="2018-12-16T14:06:53.099Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="TCP协议">
 <meta name="twitter:description" content="TCP：传输控制协议TCP：面向连接的、可靠的字节流服务  TCP只能建立在两方通信中，广播和多播不能使用TCP。  应用数据会被TCP分割成最适合发送的数据块，发送每个数据段之后都会启动一个定时器，如果不能及时收到确认，TCP将超时重传这个数据段。  TCP收到数据段后，将进行首部和数据的校验和，如果发生错误，接收端将丢弃报文段并不发送确认，否则将推迟几分之一秒，然后发送确认。  TCP收到数据">
@@ -441,7 +441,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-12-15 11:05:17" itemprop="dateModified" datetime="2018-12-15T11:05:17+08:00">2018-12-15</time>
+                <time title="修改时间：2018-12-16 22:06:53" itemprop="dateModified" datetime="2018-12-16T22:06:53+08:00">2018-12-16</time>
               
             
           </span>
@@ -577,7 +577,7 @@
 <li><h4 id="TCP发送端使用拥塞窗口控制一次发送多少报文段。"><a href="#TCP发送端使用拥塞窗口控制一次发送多少报文段。" class="headerlink" title="TCP发送端使用拥塞窗口控制一次发送多少报文段。"></a>TCP发送端使用拥塞窗口控制一次发送多少报文段。</h4><blockquote>
 <p>通常TCP连接的两端处于不同的子网，连接传输的数据可能要经过多个路由转发以及速率较慢的链路，此时同时发送多个报文段（即使没有超过接收端通告窗口大小）是不合适的，中间路由器可能因缓存溢出而丢弃分组。</p>
 <ul>
-<li>慢启动： TCP连接之后发送端初始化拥塞窗口为一个报文段，当收到一个ACK时拥塞窗口扩大为两倍。直到ACK超时拥塞窗口减半，发送端取拥塞窗口和通告窗口的最小值作为发送上限。</li>
+<li>慢启动： TCP连接之后发送端初始化拥塞窗口为一个报文段，当收到一个ACK时拥塞窗口扩大为两倍。直到ACK超时拥塞窗口重置，发送端取拥塞窗口和通告窗口的最小值作为发送上限。</li>
 </ul>
 </blockquote>
 </li>
@@ -729,7 +729,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">6</span>
+                    <span class="site-state-item-count">7</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -746,7 +746,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">2</span>
+                      
+                    
+                    <span class="site-state-item-count">3</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -761,7 +763,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">1</span>
+                      
+                    
+                    <span class="site-state-item-count">2</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
