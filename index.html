@@ -382,7 +382,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/17/MySQL必知必会2/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/17/MySQL必知必会2——高级检索/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Want Young">
@@ -402,7 +402,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2018/12/17/MySQL必知必会2/" class="post-title-link" itemprop="http://yoursite.com/index.html">MySQL必知必会2</a>
+                <a href="/2018/12/17/MySQL必知必会2——高级检索/" class="post-title-link" itemprop="http://yoursite.com/index.html">MySQL必知必会2</a>
               
             
           </h1>
@@ -427,12 +427,24 @@
                 
               
 
-              <time title="创建时间：2018-12-17 21:26:20 / 修改时间：21:55:02" itemprop="dateCreated datePublished" datetime="2018-12-17T21:26:20+08:00">2018-12-17</time>
+              <time title="创建时间：2018-12-17 21:26:20" itemprop="dateCreated datePublished" datetime="2018-12-17T21:26:20+08:00">2018-12-17</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-12-19 15:48:46" itemprop="dateModified" datetime="2018-12-19T15:48:46+08:00">2018-12-19</time>
               
             
           </span>
@@ -487,7 +499,36 @@
           
             <h1 id="SQL复杂检索"><a href="#SQL复杂检索" class="headerlink" title="SQL复杂检索"></a>SQL复杂检索</h1><h2 id="级联查询（子查询）"><a href="#级联查询（子查询）" class="headerlink" title="级联查询（子查询）"></a>级联查询（子查询）</h2><p>WHERE通常可以包含另一个查询子句，例如：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> *</span><br><span class="line"><span class="keyword">FROM</span> student</span><br><span class="line"><span class="keyword">WHERE</span> <span class="keyword">id</span> <span class="keyword">IN</span> (<span class="keyword">SELECT</span> <span class="keyword">id</span> <span class="keyword">FROM</span> <span class="keyword">users</span> <span class="keyword">WHERE</span> sex = <span class="string">'female'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> cust_name, cust_state, (<span class="keyword">SELECT</span> <span class="keyword">count</span>(*) <span class="keyword">FROM</span> orders <span class="keyword">WHERE</span> orders.cust_id = customers.cust_id) <span class="keyword">AS</span> orders</span><br><span class="line"><span class="keyword">FROM</span> customers</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> cust_name;</span><br></pre></td></tr></table></figure></p>
 <p>级联查询并不是最有效的查询。</p>
-<h2 id="联结表（join）"><a href="#联结表（join）" class="headerlink" title="联结表（join）"></a>联结表（join）</h2>
+<h2 id="联结表（join）"><a href="#联结表（join）" class="headerlink" title="联结表（join）"></a>联结表（join）</h2><p>外键：</p>
+<blockquote>
+<p>外键是指一个表中的列属性包含另一个表的主键</p>
+</blockquote>
+<p>可伸缩性好：</p>
+<blockquote>
+<p>能够适应不断增加的工作量</p>
+</blockquote>
+<p>连接（联结）例子：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">name</span>, price</span><br><span class="line"><span class="keyword">FROM</span> factory, products</span><br><span class="line"><span class="keyword">WHERE</span> factory.id = products.id</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> price</span><br></pre></td></tr></table></figure></p>
+<p>笛卡尔积连接</p>
+<blockquote>
+<p>没有联结条件限制的表连接会将表A中的每一行和表B中的每一行配对，这样的连接称为笛卡尔积</p>
+</blockquote>
+<h4 id="内连接、外连接、左连接、右连接、全连接、自然连接"><a href="#内连接、外连接、左连接、右连接、全连接、自然连接" class="headerlink" title="内连接、外连接、左连接、右连接、全连接、自然连接"></a>内连接、外连接、左连接、右连接、全连接、自然连接</h4><p>内左右全连接的划分是因为下图的叫法：</p>
+<blockquote>
+<p><img src="/images/inner_outer_join.jpg" alt=""></p>
+</blockquote>
+<p>内连接（对应C区域）：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">name</span>, price</span><br><span class="line"><span class="keyword">FROM</span> factory <span class="keyword">INNER</span> <span class="keyword">JOIN</span> products</span><br><span class="line"><span class="keyword">ON</span> factory.id = products.id</span><br><span class="line">// 等价于</span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">name</span>, price</span><br><span class="line"><span class="keyword">FROM</span> factory, products</span><br><span class="line"><span class="keyword">WHERE</span> factory.id = products.id</span><br></pre></td></tr></table></figure></p>
+<p>左连接（A1区域）：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">name</span>, price</span><br><span class="line"><span class="keyword">FROM</span> factory <span class="keyword">LEFT</span> <span class="keyword">JOIN</span> products</span><br><span class="line"><span class="keyword">ON</span> factory.id = products.id</span><br></pre></td></tr></table></figure></p>
+<p>右连接（B1区域）：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">name</span>, price</span><br><span class="line"><span class="keyword">FROM</span> factory <span class="keyword">RIGHT</span> <span class="keyword">JOIN</span> products</span><br><span class="line"><span class="keyword">ON</span> factory.id = products.id</span><br></pre></td></tr></table></figure></p>
+<p>全连接(所有区域) 加表别名:<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">name</span>, price</span><br><span class="line"><span class="keyword">FROM</span> factory <span class="keyword">AS</span> a <span class="keyword">FULL</span> <span class="keyword">JOIN</span> products <span class="keyword">AS</span> b</span><br><span class="line"><span class="keyword">ON</span> a.id = b.id</span><br></pre></td></tr></table></figure></p>
+<p>自然连接基本用不到。</p>
+<h2 id="使用组合查询-UNION"><a href="#使用组合查询-UNION" class="headerlink" title="使用组合查询 UNION"></a>使用组合查询 UNION</h2><p>使用UNION对多个SELECT进行并操作，这和一条SELECT使用多个WHERE是相同的结果，但有时效率不同，语句复杂情况也不一样。</p>
+<blockquote>
+<ul>
+<li>UNION会自动去除重复的行</li>
+<li>使用UNION时只能使用一次ORDER BY在最后一个SELECT中。</li>
+</ul>
+</blockquote>
+
           
         
       
