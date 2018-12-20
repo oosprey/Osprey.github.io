@@ -382,6 +382,206 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/19/MySQL必知必会3——触发器和事务管理/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Want Young">
+      <meta itemprop="description" content="Change World, Change Life">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Young">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2018/12/19/MySQL必知必会3——触发器和事务管理/" class="post-title-link" itemprop="http://yoursite.com/index.html">MySQL必知必会3——触发器和事务管理</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-12-19 15:49:27" itemprop="dateCreated datePublished" datetime="2018-12-19T15:49:27+08:00">2018-12-19</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-12-20 15:04:22" itemprop="dateModified" datetime="2018-12-20T15:04:22+08:00">2018-12-20</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/MySQL/" itemprop="url" rel="index"><span itemprop="name">MySQL</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="触发器"><a href="#触发器" class="headerlink" title="触发器"></a>触发器</h1><p>触发器被用于某个表被更改时自动处理一组sql语句，触发器被用于DELETE， INSERT， UPDTAE语句，其他语句不支持触发器。</p>
+<h2 id="创建"><a href="#创建" class="headerlink" title="创建"></a>创建</h2><p>创建触发器需要给出四条信息：</p>
+<blockquote>
+<ol>
+<li>唯一触发器名</li>
+<li>触发器关联的表</li>
+<li>触发器应该响应的活动（DELETE, INSERT, UPDATE）</li>
+<li>触发器应在何时执行（操作前还是操作后）</li>
+</ol>
+</blockquote>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TRIGGER</span> newproduct <span class="keyword">AFTER</span> <span class="keyword">INSERT</span> <span class="keyword">ON</span> products</span><br><span class="line"><span class="keyword">FOR</span> <span class="keyword">EACH</span> <span class="keyword">ROW</span> <span class="keyword">SELECT</span> <span class="string">'Product added'</span>;</span><br></pre></td></tr></table></figure>
+<p>只有表能创建触发器，视图和临时表都不可以。每张表可以创建6个触发器，INSERT, UPDATE, DELETE (前后)</p>
+<h2 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DROP</span> <span class="keyword">TRIGGER</span> newproduct;</span><br></pre></td></tr></table></figure>
+<h1 id="事务管理"><a href="#事务管理" class="headerlink" title="事务管理"></a>事务管理</h1><p>不是所有的数据库引擎都支持事务管理，INNODB支持而MyISAM就不支持。</p>
+<h2 id="事务的特点"><a href="#事务的特点" class="headerlink" title="事务的特点"></a>事务的特点</h2><ul>
+<li>原子性：要么全做要么不做。</li>
+<li>一致性：事务必须从一个一致性状态转变到另一个一致性状态。</li>
+<li>隔离性： 多个事务之间保持隔离，互相不能影响。</li>
+<li>持久性：事务一旦提交，那么改变就是永久性的。</li>
+</ul>
+<h2 id="开始事务"><a href="#开始事务" class="headerlink" title="开始事务"></a>开始事务</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">START</span> <span class="keyword">TRANSACTION</span></span><br></pre></td></tr></table></figure>
+<h2 id="使用回滚"><a href="#使用回滚" class="headerlink" title="使用回滚"></a>使用回滚</h2><p>使用 ROLLBACK 进行显示的回滚</p>
+<h2 id="使用提交"><a href="#使用提交" class="headerlink" title="使用提交"></a>使用提交</h2><p>使用 COMMIT 进行显示的提交。当然也可以部分提交。</p>
+<h2 id="创建保留点"><a href="#创建保留点" class="headerlink" title="创建保留点"></a>创建保留点</h2><p>尽可能多的创建保留点，以保证能够随意回滚<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SAVEPOINT</span> delete1;</span><br><span class="line"><span class="keyword">ROLLBACK</span> <span class="keyword">TO</span> delete1</span><br></pre></td></tr></table></figure></p>
+<h2 id="手动释放保留点"><a href="#手动释放保留点" class="headerlink" title="手动释放保留点"></a>手动释放保留点</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">RELEASE</span> <span class="keyword">SAVEPOINT</span> delete1;</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    <div>
+        
+    </div>
+    
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/17/MySQL必知必会2——高级检索/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -2087,7 +2287,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-count">9</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
