@@ -382,6 +382,218 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/11/IP协议、ARP、ICMP、UDP/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Want Young">
+      <meta itemprop="description" content="Change World, Change Life">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Young">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2018/12/11/IP协议、ARP、ICMP、UDP/" class="post-title-link" itemprop="http://yoursite.com/page/2/index.html">IP协议、ARP、ICMP、UDP</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-12-11 19:52:44" itemprop="dateCreated datePublished" datetime="2018-12-11T19:52:44+08:00">2018-12-11</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-12-21 15:25:30" itemprop="dateModified" datetime="2018-12-21T15:25:30+08:00">2018-12-21</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/网络/" itemprop="url" rel="index"><span itemprop="name">网络</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="IP协议、ARP协议、ICMP协议以及Ping程序"><a href="#IP协议、ARP协议、ICMP协议以及Ping程序" class="headerlink" title="IP协议、ARP协议、ICMP协议以及Ping程序"></a>IP协议、ARP协议、ICMP协议以及Ping程序</h1><h4 id="不可靠"><a href="#不可靠" class="headerlink" title="不可靠"></a>不可靠</h4><blockquote>
+<p>IP协议是尽力而为的协议，可靠性由上层协议保证</p>
+</blockquote>
+<h4 id="无连接"><a href="#无连接" class="headerlink" title="无连接"></a>无连接</h4><blockquote>
+<p>IP协议不会维持连接，发送数据报可以是无序的</p>
+</blockquote>
+<h4 id="IP协议首部"><a href="#IP协议首部" class="headerlink" title="IP协议首部"></a>IP协议首部</h4><blockquote>
+<p>总长度字段16 bit限制IP数据报最大长度为65535字节。但实际上数据报都会被分片。<br>TTL生存周期： 一般为32或64， 是指经过多少跳之后数据报将会被丢弃，并向源主机发送ICMP通知。<br>TOS服务类型字段： 表明当前IP数据报应以什么样的服务发送，例如最小时延，最大吞吐，最高可靠，最小费用。</p>
+</blockquote>
+<h4 id="ARP"><a href="#ARP" class="headerlink" title="ARP"></a>ARP</h4><blockquote>
+<p>以广播方式请求目的IP的物理地址。</p>
+</blockquote>
+<h4 id="ICMP"><a href="#ICMP" class="headerlink" title="ICMP"></a>ICMP</h4><blockquote>
+<p>Internet控制报文协议，一般被IP协议或更高层使用，被封装在IP数据报内部。</p>
+</blockquote>
+<h4 id="Ping"><a href="#Ping" class="headerlink" title="Ping"></a>Ping</h4><blockquote>
+<p>用来测试网络中主机是否可达。该程序发送ICMP回显请求报文给目的主机，并等待返回ICMP回显应答。</p>
+<ul>
+<li>注意：  Ping程序不是一个用户级进程，它是由内核完成的。</li>
+</ul>
+<p>Ping程序会在ICMP报文中写入发送时间，当接收到回显报文时计算时间差来表示往返时间。<br>一般第一个往返时间值会比其他的大，这是由于目标IP没有在告诉ARP缓存中。</p>
+</blockquote>
+<h4 id="MTU"><a href="#MTU" class="headerlink" title="MTU"></a>MTU</h4><blockquote>
+<p>MTU: 链路层最大传输单元。它是指由于网络特性以及环境限制，每个网络都有自己的MTU限制。当IP层传下来的数据报大小超过这个限制，那么IP层就要进行分片。</p>
+<p>路径MTU: 当不同网络之间通信时，由于MTU的不同，在传输时数据报的分片情况也不同。</p>
+<ul>
+<li>路由选路不对称: A到B的路由和B到A的路由不同。</li>
+</ul>
+<p>由于路由可能是不对称的，所以发送和接受的分片情况也不一定相同，在发送前路径MTU会通过发现机制确定。</p>
+</blockquote>
+<h4 id="UDP协议"><a href="#UDP协议" class="headerlink" title="UDP协议"></a>UDP协议</h4><blockquote>
+<p>UDP首部包含源端口号和目的端口号，UDP端口号和TCP端口号是相互独立的。</p>
+<p>UDP首部包含覆盖首部和数据的校验字段，而IP首部校验字段只覆盖IP首部。UDP校验字段是可选的，TCP是必需的。</p>
+</blockquote>
+<h4 id="DNS系统"><a href="#DNS系统" class="headerlink" title="DNS系统"></a>DNS系统</h4><blockquote>
+<p>DNS查询大多数情况下使用UDP， 当数据报长度过大时使用TCP传输。响应端口号：53</p>
+</blockquote>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    <div>
+        
+    </div>
+    
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/08/TCP-IP-协议学习/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -427,12 +639,24 @@
                 
               
 
-              <time title="创建时间：2018-12-08 11:17:28 / 修改时间：18:52:45" itemprop="dateCreated datePublished" datetime="2018-12-08T11:17:28+08:00">2018-12-08</time>
+              <time title="创建时间：2018-12-08 11:17:28" itemprop="dateCreated datePublished" datetime="2018-12-08T11:17:28+08:00">2018-12-08</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-12-21 15:23:13" itemprop="dateModified" datetime="2018-12-21T15:23:13+08:00">2018-12-21</time>
               
             
           </span>
@@ -449,7 +673,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/TCP-IP/" itemprop="url" rel="index"><span itemprop="name">TCP/IP</span></a></span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/网络/" itemprop="url" rel="index"><span itemprop="name">网络</span></a></span>
 
                 
                 
@@ -628,7 +852,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-12-08 11:12:27" itemprop="dateModified" datetime="2018-12-08T11:12:27+08:00">2018-12-08</time>
+                <time title="修改时间：2018-12-21 15:25:50" itemprop="dateModified" datetime="2018-12-21T15:25:50+08:00">2018-12-21</time>
               
             
           </span>
@@ -645,7 +869,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/HTTP/" itemprop="url" rel="index"><span itemprop="name">HTTP</span></a></span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/网络/" itemprop="url" rel="index"><span itemprop="name">网络</span></a></span>
 
                 
                 
@@ -833,7 +1057,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">12</span>
+                    <span class="site-state-item-count">13</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -852,11 +1076,7 @@
                     
                       
                     
-                      
-                    
-                      
-                    
-                    <span class="site-state-item-count">5</span>
+                    <span class="site-state-item-count">3</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -875,7 +1095,21 @@
                     
                       
                     
-                    <span class="site-state-item-count">3</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">10</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
