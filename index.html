@@ -382,6 +382,199 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/26/Redis数据安全和性能保障/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Want Young">
+      <meta itemprop="description" content="Change World, Change Life">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Young">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2018/12/26/Redis数据安全和性能保障/" class="post-title-link" itemprop="http://yoursite.com/index.html">Redis数据安全和性能保障</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-12-26 14:50:43 / 修改时间：19:23:53" itemprop="dateCreated datePublished" datetime="2018-12-26T14:50:43+08:00">2018-12-26</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/数据库/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Redis的数据安全和性能保障"><a href="#Redis的数据安全和性能保障" class="headerlink" title="Redis的数据安全和性能保障"></a>Redis的数据安全和性能保障</h1><h2 id="Redis持久化选项"><a href="#Redis持久化选项" class="headerlink" title="Redis持久化选项"></a>Redis持久化选项</h2><p>Redis提供两种持久化方式：</p>
+<ol>
+<li>快照：也叫时间点存储（point-in-time）,redis会将存在于某一时间点的所有数据全部写入到硬盘中。</li>
+<li>只追加文件（AOF转储）：将所有的写命令追加到硬盘中的只追加文件中。</li>
+</ol>
+<h4 id="快照转储"><a href="#快照转储" class="headerlink" title="快照转储"></a>快照转储</h4><p>redis客户端会在指定时间或指定规则被满足时自动或手动创建快照。在下一次快照创建完毕之前所有上一次创建快照之后的写操作都不会被记录，对于这部分数据敏感的应用程序影使用AOF只追加文件方式做持久化。</p>
+<h4 id="AOF转储"><a href="#AOF转储" class="headerlink" title="AOF转储"></a>AOF转储</h4><p>根据设置决定同步频率，每秒同步一次AOF文件时的性能和不使用持久化特性时的性能相差无几。这个性能很大程度取决于硬盘的性能。</p>
+<h4 id="解决AOF文件过大的问题"><a href="#解决AOF文件过大的问题" class="headerlink" title="解决AOF文件过大的问题"></a>解决AOF文件过大的问题</h4><p>AOF文件由于不断追加会变得越来越大，这有可能耗尽所有硬盘空间，而且redis重启之后重新执行的操作时间也会变得非常长。所以减小AOF文件的大小很有必要。</p>
+<ul>
+<li>通过发送bgrewriteAOF命令来移除AOF文件中的冗余命令来重写AOF文件： Redis会创建子进程重写AOF文件，这和快照更新的方式一样，也会产生同样的性能问题和内存占用问题。</li>
+</ul>
+<h2 id="Redis复制"><a href="#Redis复制" class="headerlink" title="Redis复制"></a>Redis复制</h2><p>Redis通过创建数据副本来分摊客户端的读请求。<br><img src="/images/redis_copy.png" alt=""></p>
+<h4 id="全量同步"><a href="#全量同步" class="headerlink" title="全量同步"></a>全量同步</h4><p>通常发生在从服务器初始化时，具体步骤如下：</p>
+<ul>
+<li>从服务器连接主服务器，发送SYNC命令；</li>
+<li>主服务器接收到SYNC命名后，开始执行BGSAVE命令生成RDB文件并使用缓冲区记录此后执行的所有写命令；</li>
+<li>主服务器BGSAVE执行完后，向所有从服务器发送快照文件，并在发送期间继续记录被执行的写命令；</li>
+<li>从服务器收到快照文件后丢弃所有旧数据，载入收到的快照；</li>
+<li>主服务器快照发送完毕后开始向从服务器发送缓冲区中的写命令；</li>
+<li>从服务器完成对快照的载入，开始接收命令请求，并执行来自主服务器缓冲区的写命令；</li>
+</ul>
+<h4 id="增量同步"><a href="#增量同步" class="headerlink" title="增量同步"></a>增量同步</h4><p>Redis增量复制是指Slave初始化后开始正常工作时主服务器发生的写操作同步到从服务器的过程。<br>增量复制的过程主要是主服务器每执行一个写命令就会向从服务器发送相同的写命令，从服务器接收并执行收到的写命令。</p>
+<h4 id="Redis主从同步策略"><a href="#Redis主从同步策略" class="headerlink" title="Redis主从同步策略"></a>Redis主从同步策略</h4><p>主从刚刚连接的时候，进行全量同步；全同步结束后，进行增量同步。当然，如果有需要，slave 在任何时候都可以发起全量同步。redis 策略是，无论如何，首先会尝试进行增量同步，如不成功，要求从机进行全量同步。</p>
+<h4 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h4><p>如果多个Slave断线了，需要重启的时候，因为只要Slave启动，就会发送sync请求和主机全量同步，当多个同时出现的时候，可能会导致Master IO剧增宕机。</p>
+<h4 id="验证快照和AOF文件"><a href="#验证快照和AOF文件" class="headerlink" title="验证快照和AOF文件"></a>验证快照和AOF文件</h4><p>Redis可以检查AOF中的错误命令，并去除该命令和之后的所有命令，但遗憾的是Redis并不能修复快照的错误，因为快照是压缩的。</p>
+<h4 id="更换故障主服务器"><a href="#更换故障主服务器" class="headerlink" title="更换故障主服务器"></a>更换故障主服务器</h4><p>A是主服务器，B为A的从服务器，A发生故障时有两种方法：</p>
+<ul>
+<li>向B发送Save命令生成快照，将快照发送给C，设置C为主服务器，B为C的从服务器。</li>
+<li>升级B为主服务器</li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    <div>
+        
+    </div>
+    
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/21/Redis入门/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -2253,285 +2446,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/11/TCP协议/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Want Young">
-      <meta itemprop="description" content="Change World, Change Life">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Young">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/12/11/TCP协议/" class="post-title-link" itemprop="http://yoursite.com/index.html">TCP协议</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-12-11 21:10:43" itemprop="dateCreated datePublished" datetime="2018-12-11T21:10:43+08:00">2018-12-11</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-12-21 15:23:03" itemprop="dateModified" datetime="2018-12-21T15:23:03+08:00">2018-12-21</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/网络/" itemprop="url" rel="index"><span itemprop="name">网络</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="TCP：传输控制协议"><a href="#TCP：传输控制协议" class="headerlink" title="TCP：传输控制协议"></a>TCP：传输控制协议</h1><h2 id="TCP：面向连接的、可靠的字节流服务"><a href="#TCP：面向连接的、可靠的字节流服务" class="headerlink" title="TCP：面向连接的、可靠的字节流服务"></a>TCP：面向连接的、可靠的字节流服务</h2><blockquote>
-<ul>
-<li><p>TCP只能建立在两方通信中，广播和多播不能使用TCP。</p>
-</li>
-<li><p>应用数据会被TCP分割成最适合发送的数据块，发送每个数据段之后都会启动一个定时器，如果不能及时收到确认，TCP将超时重传这个数据段。</p>
-</li>
-<li><p>TCP收到数据段后，将进行首部和数据的校验和，如果发生错误，接收端将丢弃报文段并不发送确认，否则将推迟几分之一秒，然后发送确认。</p>
-</li>
-<li><p>TCP收到数据段后会根据序号重新排序，并丢弃重复数据段。</p>
-</li>
-<li><p>TCP通过每一端声明的窗口大小（<strong>滑动窗口</strong>）来确定发送速度，以此达到<strong>流量控制</strong>的目的。</p>
-</li>
-<li>TCP提供全双工服务。每个方向的传输必须保持序号正确。</li>
-<li>TCP对传输的字节流不做解释，即不知道传输的是二进制数据还是其他类型的数据，类似于Unix内核对文件的处理，对字节流的解释由双方的应用层解释。</li>
-</ul>
-</blockquote>
-<h2 id="TCP连接的建立与终止"><a href="#TCP连接的建立与终止" class="headerlink" title="TCP连接的建立与终止"></a>TCP连接的建立与终止</h2><ul>
-<li><h4 id="TCP三次握手连接"><a href="#TCP三次握手连接" class="headerlink" title="TCP三次握手连接"></a>TCP三次握手连接</h4><blockquote>
-<ol>
-<li>TCP连接建立初始，客户端发送SYN报文段，通知服务器端即将建立TCP连接，该TCP报文段仅包含TCP首部，不包含数据。首部包含客户端要建立TCP连接的端口号，当前ISN（初始序号）。32位确认序号为空。</li>
-<li>服务器接收到客户端的连接请求后获得了当前客户端的序号，然后发送包含服务器端初始序号的SYN报文段作为应答，此时首部32位确认序号设置为客户端序号+1表示确认， <strong>注意 ： SYN报文将占用一个序号。</strong></li>
-<li>客户端收到服务器应答后确定了此后发送报文段的序号，然后向服务器发送ack应答，设置32位确认序号为服务器ISN+1，表示自己已收到服务器初始序号，若此ACK丢失则造成服务器端超时重发SYN+ACK，而此时若客户端发送数据，怎造成半打开状态，触发服务器返回复位RST字段。<strong>注意 ：此时的确认报文段ACK不占用序号。</strong></li>
-</ol>
-</blockquote>
-</li>
-</ul>
-<p>三次握手的目的其实就是进行序号的同步，即让客户端知道服务器的序号，让服务器知道客户端的序号，这是因为TCP提供的是可靠的全双工连接，当客户端发送数据时，服务器要发送对应的确认报文，而此确认报文是对哪一个TCP报文的确认就只能靠相应的序号确定了。因此同步是非常有效的，</p>
-<ul>
-<li><h4 id="TCP的四次挥手断开"><a href="#TCP的四次挥手断开" class="headerlink" title="TCP的四次挥手断开"></a>TCP的四次挥手断开</h4>由于TCP的全双工服务，断开连接时每个方向必须单独地进行关闭，当一方主动关闭后（发送FIN后并得到确认ACK）有可能继续接受数据，称这一状态为半关闭状态，而此时接收到FIN的一端执行被动关闭（关闭接收）。通常发送FIN是应用层关闭的结果。<blockquote>
-<ol>
-<li>请求端应用层程序关闭导致TCP向服务器发送FIN报文段，包含当前序号以及确认序号， <strong>注意： FIN报文段将占用一个序号。</strong></li>
-<li>服务器收到客户端的FIN报文段后发送ACK确认此信号，32位确认序号设置为上一个FIN的0序号+1.<strong>此时服务器端并不关闭接受通道而是等待2倍的MSL（报文段最大生存时间），这是防止此时ACK丢失，一旦ACK丢失，发送FIN的发送端就会在一个MSL时间后超时重传FIN，而此时接收端还存在接受能力，会重发ACK，然后继续等待2MSL时间，当2MSL时间过去后还没有收到FIN时（除了FIN之外的其他迟到报文都丢弃，因为可能是此端口上一个连接的迟到报文），服务器端关闭接受通道（注意：这种关闭是一种软关闭，即只能接受ACK确认报文，当此时接收到其他报文时，认为此时的TCP连接为半打开状态，处理方式如下方半打开检测）</strong>。而发送通道仍处于打开阶段， 即此时服务器端仍可以发送数据。</li>
-<li>客户端收到服务器返回的ACK确认报文后关闭发送通道（仍然是一种软关闭，仍可以发送ACK响应报文，但不能发送其他报文）。但仍可接受数据。此时若客户端未收到ACK确认报文（超时），客户端将重传FIN报文。服务器端通常此时会发送一个FIN报文段过来，客户端将发送ACK确认此报文已送达并关闭接收通道。</li>
-<li>服务器收到FIN确认ACK后等待2MSL，然后断开发送通道，否则将超时重传，当发送接收全部关闭（软关闭）时本次TCP连接将全部断开。</li>
-</ol>
-</blockquote>
-</li>
-</ul>
-<p><strong>本地序号的增长不会受到接受到的ACK报文确认序号的影响，即本次发送的报文序号可以和上次接受到的ACK确认序号相同</strong></p>
-<p>* ISN序号的增长一般按照开机后每0.5s增长64000.</p>
-<ul>
-<li><h4 id="MSS最大报文段长度"><a href="#MSS最大报文段长度" class="headerlink" title="MSS最大报文段长度"></a>MSS最大报文段长度</h4><blockquote>
-<p>MSS只能出现在SYN报文段中，表示发送端期望接受的最大报文段长度，接收端不一定要遵守这个长度，所以一般这个值是通过协商确定的。MSS的设置是为了IP数据报尽量小于对方链路层MTU长度，从而避免IP分片。</p>
-</blockquote>
-</li>
-<li><h4 id="2MSL等待"><a href="#2MSL等待" class="headerlink" title="2MSL等待"></a>2MSL等待</h4><p>当TCP执行一个主动关闭后，并发回最后一个ACK，该连接必须在TIME_WAIT状态等待2倍的MSL时间，以防止最后的ACK丢失。在此期间收到的其他迟到报文均丢弃掉。</p>
-</li>
-<li><h4 id="TCP半关闭，半打开"><a href="#TCP半关闭，半打开" class="headerlink" title="TCP半关闭，半打开"></a>TCP半关闭，半打开</h4><blockquote>
-<ul>
-<li>半关闭：一端结束它的发送之后还能接收来自另一端的能力，属于正常状态。</li>
-<li>半打开：一端结束了连接，而另一端不知道，一个常见的例子就是一端突然断电，<strong>一个极端的例子就是发送端发送FIN后，接收端返回的ACK丢失，此时发送端重传FIN恰好也丢失了，而接受端已等待超过2MSL，接收端认为发送端已收到ACK而断开接受通道，此时发送端发送通道仍处于打开状态。</strong></li>
-</ul>
-</blockquote>
-</li>
-<li><h4 id="平静时间"><a href="#平静时间" class="headerlink" title="平静时间"></a>平静时间</h4><blockquote>
-<p>平静时间是指TCP复位后MSL时间内不允许建立任何连接，这是为了防止主机在上一个2MSL等待时间内重启，导致上一个替身报文到达。但实际中由于TCP重启都会超过MSL，所以基本没有遵守这一规定的实现。</p>
-</blockquote>
-</li>
-<li><h4 id="复位报文段-RST"><a href="#复位报文段-RST" class="headerlink" title="复位报文段 RST"></a>复位报文段 RST</h4><blockquote>
-<ul>
-<li>正常关闭：四次挥手发送FIN关闭连接。</li>
-<li>异常关闭：发送端发送RST报文到服务器端，服务器端不返回任何响应直接关闭连接并通知应用层连接被对方复位。RST报文包含一个序号和一个确认序号。</li>
-</ul>
-</blockquote>
-</li>
-<li><h4 id="检测半打开连接"><a href="#检测半打开连接" class="headerlink" title="检测半打开连接"></a>检测半打开连接</h4><p>当处于半打开连接的TCP连接中的关闭端收到打开端发来的报文时，由于它不知道数据报文段中提到的连接，关闭端将回复RST复位应答，然后等待下一次TCP连接。</p>
-</li>
-<li><h4 id="处理同时打开"><a href="#处理同时打开" class="headerlink" title="处理同时打开"></a>处理同时打开</h4><p>>&gt;  TCP两端同时主动打开是可能的，在TCP/IP协议中两端将建立一条通道，而OSI传输层将建立两条通道。</p>
-<blockquote>
-<p>此时建立的连接要经过<strong>四次握手</strong>，第一步同时发送SYN到对方端，第二步当双方同时收到相同端口连接的SYN请求后，再发SYN并放ACK确认连接。<strong>（按照之前的总结，TCP建立连接是为了同步序号，即交换双方的ISN，那么前面已经发过了本地SYN为什么这里要再次发送SYN呢？这是因为连接是双盲的，对于一端来说，并不知道前面发送的SYN有没有被收到（由于同时打开造成确认滞后），本着交换序号的原则，这一步也要发送SYN）。之后没有ACK对第二步的SYN和ACK数据报文段进行确认是因为如果丢失一个SYN+ACK那么没有收到ACK的一方处于关闭，收到ACK处于打开，属于半打开状态，没收到的一方超时重传，此时收到数据将触发RST复位，如果同时丢失，那么双方同时超时重传。如果第一步的SYN丢失了导致第二步的SYN也丢失了，那么此时建立的就是普通的TCP连接了。</strong></p>
-</blockquote>
-</li>
-<li><h4 id="处理同时关闭"><a href="#处理同时关闭" class="headerlink" title="处理同时关闭"></a>处理同时关闭</h4><blockquote>
-<p>由于全双工的特性，同时关闭很容易理解，还是四次挥手关闭。</p>
-</blockquote>
-</li>
-</ul>
-<h2 id="TCP流量控制、拥塞控制、慢启动"><a href="#TCP流量控制、拥塞控制、慢启动" class="headerlink" title="TCP流量控制、拥塞控制、慢启动"></a>TCP流量控制、拥塞控制、慢启动</h2><ul>
-<li><h4 id="TCP接收端使用滑动通告窗口控制发送端发送数据快慢"><a href="#TCP接收端使用滑动通告窗口控制发送端发送数据快慢" class="headerlink" title="TCP接收端使用滑动通告窗口控制发送端发送数据快慢"></a>TCP接收端使用滑动通告窗口控制发送端发送数据快慢</h4><blockquote>
-<p>滑动窗口的大小由接收端可用缓冲区大小决定，发送方通过接收方发送的ACK来获得窗口大小。</p>
-</blockquote>
-</li>
-<li><h4 id="TCP发送端使用拥塞窗口控制一次发送多少报文段。"><a href="#TCP发送端使用拥塞窗口控制一次发送多少报文段。" class="headerlink" title="TCP发送端使用拥塞窗口控制一次发送多少报文段。"></a>TCP发送端使用拥塞窗口控制一次发送多少报文段。</h4><blockquote>
-<p>通常TCP连接的两端处于不同的子网，连接传输的数据可能要经过多个路由转发以及速率较慢的链路，此时同时发送多个报文段（即使没有超过接收端通告窗口大小）是不合适的，中间路由器可能因缓存溢出而丢弃分组。</p>
-<ul>
-<li>慢启动： TCP连接之后发送端初始化拥塞窗口为一个报文段，当收到一个ACK时拥塞窗口扩大为两倍。直到ACK超时拥塞窗口重置，发送端取拥塞窗口和通告窗口的最小值作为发送上限。</li>
-</ul>
-</blockquote>
-</li>
-<li><h4 id="TCP拥塞避免算法"><a href="#TCP拥塞避免算法" class="headerlink" title="TCP拥塞避免算法"></a>TCP拥塞避免算法</h4><blockquote>
-<p>慢启动算法是在一个连接上发起数据流的方法，拥塞避免算法是一种处理分组丢失的方法。</p>
-<ul>
-<li>分组丢失有两种指示： 1. 发生超时  2. 收到重复的确认</li>
-<li>拥塞避免和拥塞窗口是发送端使用的流量控制，通告窗口是接收端使用的流量控制，前者是发送端对网络拥塞的估计，后者与接收方可用缓存大小有关。</li>
-</ul>
-<ol>
-<li>初始化拥塞窗口为1个报文段，拥塞避免上限ssthresh为65525字节。</li>
-<li>启动慢启动，拥塞窗口指数增长，直到发生拥塞（超时或收到重复ACK）设置ssthresh为拥塞窗口的一半，拥塞窗口设置为1个报文段。</li>
-<li>此后拥塞窗口的增长方式取决于是否超过拥塞避免上限ssthresh，当小于ssthresh时使用慢启动指数增长，当等于ssthresh时之后变为线性增长，每次加一。</li>
-</ol>
-</blockquote>
-</li>
-</ul>
-<p>拥塞避免算法其实就是在发生拥塞时设定一个慢启动增长上限。</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    <div>
-        
-    </div>
-    
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2579,7 +2493,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">13</span>
+                    <span class="site-state-item-count">14</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
