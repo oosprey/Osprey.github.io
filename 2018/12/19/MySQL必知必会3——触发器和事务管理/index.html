@@ -135,7 +135,7 @@
 <meta property="og:site_name" content="Young">
 <meta property="og:description" content="触发器触发器被用于某个表被更改时自动处理一组sql语句，触发器被用于DELETE， INSERT， UPDTAE语句，其他语句不支持触发器。 创建创建触发器需要给出四条信息：   唯一触发器名 触发器关联的表 触发器应该响应的活动（DELETE, INSERT, UPDATE） 触发器应在何时执行（操作前还是操作后）   12CREATE TRIGGER newproduct AFTER INSE">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-12-21T07:24:11.700Z">
+<meta property="og:updated_time" content="2018-12-21T07:43:05.384Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL必知必会3——触发器和事务管理">
 <meta name="twitter:description" content="触发器触发器被用于某个表被更改时自动处理一组sql语句，触发器被用于DELETE， INSERT， UPDTAE语句，其他语句不支持触发器。 创建创建触发器需要给出四条信息：   唯一触发器名 触发器关联的表 触发器应该响应的活动（DELETE, INSERT, UPDATE） 触发器应在何时执行（操作前还是操作后）   12CREATE TRIGGER newproduct AFTER INSE">
@@ -441,7 +441,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-12-21 15:24:11" itemprop="dateModified" datetime="2018-12-21T15:24:11+08:00">2018-12-21</time>
+                <time title="修改时间：2018-12-21 15:43:05" itemprop="dateModified" datetime="2018-12-21T15:43:05+08:00">2018-12-21</time>
               
             
           </span>
@@ -506,7 +506,7 @@
 <p>只有表能创建触发器，视图和临时表都不可以。每张表可以创建6个触发器，INSERT, UPDATE, DELETE (前后)</p>
 <h2 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DROP</span> <span class="keyword">TRIGGER</span> newproduct;</span><br></pre></td></tr></table></figure>
 <h1 id="事务管理"><a href="#事务管理" class="headerlink" title="事务管理"></a>事务管理</h1><p>不是所有的数据库引擎都支持事务管理，INNODB支持而MyISAM就不支持。</p>
-<h2 id="事务的特点"><a href="#事务的特点" class="headerlink" title="事务的特点"></a>事务的特点</h2><ul>
+<h2 id="事务的特点（ACID特性）"><a href="#事务的特点（ACID特性）" class="headerlink" title="事务的特点（ACID特性）"></a>事务的特点（ACID特性）</h2><ul>
 <li>原子性：要么全做要么不做。</li>
 <li>一致性：事务必须从一个一致性状态转变到另一个一致性状态。</li>
 <li>隔离性： 多个事务之间保持隔离，互相不能影响。</li>
@@ -737,7 +737,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#触发器"><span class="nav-number">1.</span> <span class="nav-text">触发器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#创建"><span class="nav-number">1.1.</span> <span class="nav-text">创建</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#删除"><span class="nav-number">1.2.</span> <span class="nav-text">删除</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#事务管理"><span class="nav-number">2.</span> <span class="nav-text">事务管理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#事务的特点"><span class="nav-number">2.1.</span> <span class="nav-text">事务的特点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开始事务"><span class="nav-number">2.2.</span> <span class="nav-text">开始事务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用回滚"><span class="nav-number">2.3.</span> <span class="nav-text">使用回滚</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用提交"><span class="nav-number">2.4.</span> <span class="nav-text">使用提交</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建保留点"><span class="nav-number">2.5.</span> <span class="nav-text">创建保留点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#手动释放保留点"><span class="nav-number">2.6.</span> <span class="nav-text">手动释放保留点</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#触发器"><span class="nav-number">1.</span> <span class="nav-text">触发器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#创建"><span class="nav-number">1.1.</span> <span class="nav-text">创建</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#删除"><span class="nav-number">1.2.</span> <span class="nav-text">删除</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#事务管理"><span class="nav-number">2.</span> <span class="nav-text">事务管理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#事务的特点（ACID特性）"><span class="nav-number">2.1.</span> <span class="nav-text">事务的特点（ACID特性）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开始事务"><span class="nav-number">2.2.</span> <span class="nav-text">开始事务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用回滚"><span class="nav-number">2.3.</span> <span class="nav-text">使用回滚</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用提交"><span class="nav-number">2.4.</span> <span class="nav-text">使用提交</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建保留点"><span class="nav-number">2.5.</span> <span class="nav-text">创建保留点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#手动释放保留点"><span class="nav-number">2.6.</span> <span class="nav-text">手动释放保留点</span></a></li></ol></li></ol></div>
             
 
           </div>

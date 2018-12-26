@@ -127,18 +127,18 @@
 
 
 
-  <meta name="description" content="Redis简介">
+  <meta name="description" content="Redis简介Redis是一个远程内存数据库，它是一个速度非常快的非关系型数据库。它可以存储键与5种不同类型的值之间的映射，也可以将内存中的键值对持久化到硬盘上，可以使用复制特性来扩展读性能，还可以使用客户端分片来扩展写性能。 Redis和memcached两者性能上相差无几，但功能上存在不同之处：   Redis能自动以两种不同的方式将数据写入硬盘 Redis除了能存储普通的字符串键之外，还可以">
 <meta name="keywords" content="Redis">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Redis入门">
 <meta property="og:url" content="http://yoursite.com/2018/12/21/Redis入门/index.html">
 <meta property="og:site_name" content="Young">
-<meta property="og:description" content="Redis简介">
+<meta property="og:description" content="Redis简介Redis是一个远程内存数据库，它是一个速度非常快的非关系型数据库。它可以存储键与5种不同类型的值之间的映射，也可以将内存中的键值对持久化到硬盘上，可以使用复制特性来扩展读性能，还可以使用客户端分片来扩展写性能。 Redis和memcached两者性能上相差无几，但功能上存在不同之处：   Redis能自动以两种不同的方式将数据写入硬盘 Redis除了能存储普通的字符串键之外，还可以">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-12-21T07:26:14.379Z">
+<meta property="og:updated_time" content="2018-12-26T06:49:16.297Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Redis入门">
-<meta name="twitter:description" content="Redis简介">
+<meta name="twitter:description" content="Redis简介Redis是一个远程内存数据库，它是一个速度非常快的非关系型数据库。它可以存储键与5种不同类型的值之间的映射，也可以将内存中的键值对持久化到硬盘上，可以使用复制特性来扩展读性能，还可以使用客户端分片来扩展写性能。 Redis和memcached两者性能上相差无几，但功能上存在不同之处：   Redis能自动以两种不同的方式将数据写入硬盘 Redis除了能存储普通的字符串键之外，还可以">
 
 
 
@@ -424,12 +424,24 @@
                 
               
 
-              <time title="创建时间：2018-12-21 15:21:43 / 修改时间：15:26:14" itemprop="dateCreated datePublished" datetime="2018-12-21T15:21:43+08:00">2018-12-21</time>
+              <time title="创建时间：2018-12-21 15:21:43" itemprop="dateCreated datePublished" datetime="2018-12-21T15:21:43+08:00">2018-12-21</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-12-26 14:49:16" itemprop="dateModified" datetime="2018-12-26T14:49:16+08:00">2018-12-26</time>
               
             
           </span>
@@ -480,7 +492,97 @@
       
 
       
-        <h1 id="Redis简介"><a href="#Redis简介" class="headerlink" title="Redis简介"></a>Redis简介</h1>
+        <h1 id="Redis简介"><a href="#Redis简介" class="headerlink" title="Redis简介"></a>Redis简介</h1><p>Redis是一个远程内存数据库，它是一个速度非常快的非关系型数据库。它可以存储键与5种不同类型的值之间的映射，也可以将内存中的键值对持久化到硬盘上，可以使用复制特性来扩展读性能，还可以使用客户端分片来扩展写性能。</p>
+<h2 id="Redis和memcached"><a href="#Redis和memcached" class="headerlink" title="Redis和memcached"></a>Redis和memcached</h2><p>两者性能上相差无几，但功能上存在不同之处：</p>
+<blockquote>
+<ol>
+<li>Redis能自动以两种不同的方式将数据写入硬盘</li>
+<li>Redis除了能存储普通的字符串键之外，还可以存储其他四种数据结构，而memcached只能存储普通的字符串键。</li>
+</ol>
+</blockquote>
+<h2 id="Redis既可以被用作主数据库，也可以备用作其他数据库的辅助数据库（二级存储）"><a href="#Redis既可以被用作主数据库，也可以备用作其他数据库的辅助数据库（二级存储）" class="headerlink" title="Redis既可以被用作主数据库，也可以备用作其他数据库的辅助数据库（二级存储）"></a>Redis既可以被用作主数据库，也可以备用作其他数据库的辅助数据库（二级存储）</h2><p>Redis由于把数据存储在内存中，所以随机写的速度非常快，并且避免了写入不必要的临时数据。</p>
+<h2 id="Redis的5种数据结构"><a href="#Redis的5种数据结构" class="headerlink" title="Redis的5种数据结构"></a>Redis的5种数据结构</h2><ol>
+<li>String 字符串：字符串、整数或者浮点数 get set del</li>
+<li>List 链表：每个节点包含一个字符串 rpush lrange lindex lpop</li>
+<li>Set 集合：无序存储，使用散列表保证值单一  sadd sismember smembers srem</li>
+<li>hash 散列表：无序键值对 hset hget hgetall hdel</li>
+<li>zset 有序集合：散列表键值对，值为分值，按照分值排序 zadd zrange zrangebyscore zrem</li>
+</ol>
+<h1 id="Redis-命令"><a href="#Redis-命令" class="headerlink" title="Redis 命令"></a>Redis 命令</h1><h2 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h2><ul>
+<li>incr : 自增1</li>
+<li>dect : 自减1</li>
+<li>incrby : 自增一个数</li>
+<li>decrby : 自减一个数</li>
+<li>incrbyfloat : 自增一个浮点数</li>
+<li>append : 追加到值末尾</li>
+<li>getrange : 获取子串 [start, end]</li>
+<li>setrange : setrange key-name offset value 修改key-name这个键对应的值offset之后的子串为value</li>
+<li>getbit : 获取指定位置的二进制值</li>
+<li>setbit : 设定指定位置的二进制值</li>
+<li>bitcount : bitcount key-name [start , end] 统计二进制位为1的个数</li>
+<li>bitop : bitop operation base-key key-name [key-name2 …] 对多个键值进行按位运算，并将结果保存在base-key对应的值内。</li>
+</ul>
+<p>注意： setbit 和 setrange在写入时若原本字符串长度不够，Redis会使用null进行拓展，直到长度达到要求。</p>
+<p>注意：getrange超出范围的部分视为空串，getbit超出位置视为二进制0。</p>
+<p>区别： 很多键值数据库只允许将字节追加到字符串末尾，而Redis支持位和子串操作，这是非常方便的。</p>
+<h2 id="list链表"><a href="#list链表" class="headerlink" title="list链表"></a>list链表</h2><ul>
+<li>Rpush、Lpush：压入链表</li>
+<li>Rpop、Lpop：弹出链表</li>
+<li>Lindex、Lrange：返回指定元素</li>
+<li>Ltrim：修建链表，只保留指定范围内的节点。</li>
+</ul>
+<h2 id="set集合"><a href="#set集合" class="headerlink" title="set集合"></a>set集合</h2><ul>
+<li>sadd：加入元素</li>
+<li>srem：移除元素</li>
+<li>sismember：检查元素</li>
+<li>smembers：返回所有元素</li>
+<li>scard：返回集合元素数量</li>
+<li>srandmember：随机返回多个或一个元素，count为负数时返回元素可能会重复</li>
+<li>spop：随机弹出一个元素，并返回</li>
+<li>smove：从一个集合中将元素移动到另一个集合，成功返回1，否则返回0.</li>
+</ul>
+<h2 id="redis多集合操作"><a href="#redis多集合操作" class="headerlink" title="redis多集合操作"></a>redis多集合操作</h2><ul>
+<li>sdiff：差集运算</li>
+<li>sdiffstore： 差集运算并将结果存到另一个目标中</li>
+<li>sinter：交集运算</li>
+<li>sunion：并集运算</li>
+<li>sunionstore：并集运算并将结果存储到另一个目标</li>
+</ul>
+<h2 id="hash散列表"><a href="#hash散列表" class="headerlink" title="hash散列表"></a>hash散列表</h2><h4 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h4><ul>
+<li>hmget：获取一个或多个键值</li>
+<li>hmset：添加一个或多个键值</li>
+<li>hdel：删除一个或多个键值对</li>
+<li>hlen：返回键值对数量<h4 id="高级操作"><a href="#高级操作" class="headerlink" title="高级操作"></a>高级操作</h4></li>
+<li>hexists：检查键是否存在</li>
+<li>hkeys：返回所有键</li>
+<li>hvals：返回所有值</li>
+<li>hgetall：返回所有键值对</li>
+<li>hincrby：指定键对应的值自增指定的数</li>
+<li>hincrbyfloat：自增指定浮点数</li>
+</ul>
+<h2 id="zset有序集合"><a href="#zset有序集合" class="headerlink" title="zset有序集合"></a>zset有序集合</h2><ul>
+<li>zadd：添加成员并指定分值</li>
+<li>zrem：移除元素</li>
+<li>zcard：返回集合数量</li>
+<li>zincrby：指定成员分值自增指定数量</li>
+<li>zcount：返回分值在指定区间的元素的数量</li>
+<li>zrank: 返回指定成员的排名</li>
+<li>zscore：返回指定成员的分值</li>
+<li>zrange：返回指定排名区间的成员，withscores选项可选，表示是否返回分值</li>
+</ul>
+<h2 id="其他Redis命令"><a href="#其他Redis命令" class="headerlink" title="其他Redis命令"></a>其他Redis命令</h2><h4 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h4><p>sort：可对list，set，zset排序</p>
+<h1 id="Redis基本事务"><a href="#Redis基本事务" class="headerlink" title="Redis基本事务"></a>Redis基本事务</h1><p>Redis事务命令： watch， multi， exec， unwatch， discard。</p>
+<h2 id="基本事务命令-multi-exec"><a href="#基本事务命令-multi-exec" class="headerlink" title="基本事务命令 multi exec"></a>基本事务命令 multi exec</h2><p>Redis中被multi和exec命令包围的所有命令会被一个接一个执行，在这个过程中不会被客户端其他命令打断。<br>Python客户端使用pipeline流水线操作实现自动添加multi和exec。</p>
+<h4 id="用于处理过期时间的Redis命令"><a href="#用于处理过期时间的Redis命令" class="headerlink" title="用于处理过期时间的Redis命令"></a>用于处理过期时间的Redis命令</h4><ul>
+<li>persist：移除键的过期时间</li>
+<li>ttl： 查看给定键距离过期时间还有多少秒</li>
+<li>expire：让指定键在指定时间后过期</li>
+<li>expireat：让给定键在给定时间点过期</li>
+<li>pttl：查看还有多少毫秒过期</li>
+<li>pexpire：指定毫秒后过期</li>
+<li>pexpireat：指定毫秒级Unix时间戳时间点过期。</li>
+</ul>
+
       
     </div>
 
@@ -696,7 +798,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Redis简介"><span class="nav-number">1.</span> <span class="nav-text">Redis简介</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Redis简介"><span class="nav-number">1.</span> <span class="nav-text">Redis简介</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis和memcached"><span class="nav-number">1.1.</span> <span class="nav-text">Redis和memcached</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis既可以被用作主数据库，也可以备用作其他数据库的辅助数据库（二级存储）"><span class="nav-number">1.2.</span> <span class="nav-text">Redis既可以被用作主数据库，也可以备用作其他数据库的辅助数据库（二级存储）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis的5种数据结构"><span class="nav-number">1.3.</span> <span class="nav-text">Redis的5种数据结构</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Redis-命令"><span class="nav-number">2.</span> <span class="nav-text">Redis 命令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#字符串"><span class="nav-number">2.1.</span> <span class="nav-text">字符串</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#list链表"><span class="nav-number">2.2.</span> <span class="nav-text">list链表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#set集合"><span class="nav-number">2.3.</span> <span class="nav-text">set集合</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#redis多集合操作"><span class="nav-number">2.4.</span> <span class="nav-text">redis多集合操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hash散列表"><span class="nav-number">2.5.</span> <span class="nav-text">hash散列表</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#基本操作"><span class="nav-number">2.5.0.1.</span> <span class="nav-text">基本操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#高级操作"><span class="nav-number">2.5.0.2.</span> <span class="nav-text">高级操作</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#zset有序集合"><span class="nav-number">2.6.</span> <span class="nav-text">zset有序集合</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他Redis命令"><span class="nav-number">2.7.</span> <span class="nav-text">其他Redis命令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#排序"><span class="nav-number">2.7.0.1.</span> <span class="nav-text">排序</span></a></li></ol></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#Redis基本事务"><span class="nav-number">3.</span> <span class="nav-text">Redis基本事务</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本事务命令-multi-exec"><span class="nav-number">3.1.</span> <span class="nav-text">基本事务命令 multi exec</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#用于处理过期时间的Redis命令"><span class="nav-number">3.1.0.1.</span> <span class="nav-text">用于处理过期时间的Redis命令</span></a></li></ol></li></ol></li></div>
             
 
           </div>
