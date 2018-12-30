@@ -382,6 +382,488 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/29/C-C-基础知识复习/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Want Young">
+      <meta itemprop="description" content="Change World, Change Life">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Young">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2018/12/29/C-C-基础知识复习/" class="post-title-link" itemprop="http://yoursite.com/index.html">C/C++基础知识复习</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-12-29 10:53:44" itemprop="dateCreated datePublished" datetime="2018-12-29T10:53:44+08:00">2018-12-29</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-12-30 22:26:06" itemprop="dateModified" datetime="2018-12-30T22:26:06+08:00">2018-12-30</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/语言知识/" itemprop="url" rel="index"><span itemprop="name">语言知识</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="C-C-基础"><a href="#C-C-基础" class="headerlink" title="C/C++基础"></a>C/C++基础</h1><h2 id="编程基础"><a href="#编程基础" class="headerlink" title="编程基础"></a>编程基础</h2><h4 id="变量声明和定义的区别"><a href="#变量声明和定义的区别" class="headerlink" title="变量声明和定义的区别"></a>变量声明和定义的区别</h4><ul>
+<li>变量声明仅仅是告诉编译器变量的类型，位置，名称等，并不分配空间。变量的定义要在定义的地方分配空间</li>
+<li>变量可以多次声明，如extend引入外部变量，但定义只能有一次。</li>
+</ul>
+<h4 id="“零值”的比较"><a href="#“零值”的比较" class="headerlink" title="“零值”的比较"></a>“零值”的比较</h4><ul>
+<li><p>bool类型：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">* int 类型： ```if(flag == 0)</span><br></pre></td></tr></table></figure></p>
+</li>
+<li><p>float类型： <figure class="highlight plain"><figcaption><span>></span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">* 指针类型： ```if(flag == NULL)</span><br></pre></td></tr></table></figure></p>
+</li>
+</ul>
+<h4 id="strlen-和-sizeof-的区别"><a href="#strlen-和-sizeof-的区别" class="headerlink" title="strlen 和 sizeof 的区别"></a>strlen 和 sizeof 的区别</h4><ul>
+<li>strlen是字符串处理的库函数，接受参数为字符指针且以‘\0’结尾的字符串。结果在运行时确定。</li>
+<li>sizeof是运算符，不是函数，可接受任何数据的类型和数据，参数不退化，结果在编译时确定。</li>
+<li>sizeof值在编译时确定，所以不能用来得到动态分配（运行时分配）存储空间的大小。</li>
+</ul>
+<h4 id="同一类的不同对象可以互相赋值吗？"><a href="#同一类的不同对象可以互相赋值吗？" class="headerlink" title="同一类的不同对象可以互相赋值吗？"></a>同一类的不同对象可以互相赋值吗？</h4><ul>
+<li>可以，但是含有指针成员时要注意。</li>
+<li>对比类的对象的赋值时深拷贝和浅拷贝</li>
+</ul>
+<h4 id="成员函数的入口问题"><a href="#成员函数的入口问题" class="headerlink" title="成员函数的入口问题"></a>成员函数的入口问题</h4><ul>
+<li>类的成员函数对于所有对象来说具有统一的入口地址，和静态成员函数不同的是参数列表中<strong>隐含</strong>了一个看不见的this指针参数，每次调用时需要传入一个类对象指针（可以是null，所以声明一个类指针就可以访问成员函数而不用管它是否指向一个存在的对象）。对于作用域式的调用，由于无法传入一个指针而发生调用失败。</li>
+<li>静态成员函数由于没有隐含的this指针参数，所以可以由类本身调用，并且静态成员函数不能访问this指针，因为局部作用域中没有this。</li>
+</ul>
+<h4 id="引用和指针"><a href="#引用和指针" class="headerlink" title="引用和指针"></a>引用和指针</h4><ul>
+<li>引用只是别名，内存中不存在单独实体，编译阶段绑定后不允许更改，只有声明没有定义。指针是具体的变量，占有内存空间，定义后可以更改指向。</li>
+<li>引用在声明时必须初始化为另一变量，而指针声明和定义可以分开。</li>
+<li>不存在指向空值的引用，但存在指向空值的指针。</li>
+</ul>
+<h4 id="结构体内存对齐问题"><a href="#结构体内存对齐问题" class="headerlink" title="结构体内存对齐问题"></a>结构体内存对齐问题</h4><ul>
+<li>结构体内成员按照声明顺序存储，第一个成员的地址和整个结构体地址相同</li>
+<li>若无特殊说明，按照结构体中size最大的成员对齐。</li>
+</ul>
+<h4 id="C-中可执行文件在内存中的存放方式"><a href="#C-中可执行文件在内存中的存放方式" class="headerlink" title="C++中可执行文件在内存中的存放方式"></a>C++中可执行文件在内存中的存放方式</h4><ul>
+<li>分为堆区、栈区、未初始化全局变量区、已初始化全局变量，静态变量，常量数据区、代码区</li>
+</ul>
+<h4 id="static作用是什么？在C和C-中有什么区别？"><a href="#static作用是什么？在C和C-中有什么区别？" class="headerlink" title="static作用是什么？在C和C++中有什么区别？"></a>static作用是什么？在C和C++中有什么区别？</h4><ul>
+<li>static用于修饰局部变量、全局变量、函数。被修饰的变量存储在静态区。静态局部变量生存周期相比普通局部变量变长了，直到程序运行结束而非函数调用结束，且只在第一次被调用时定义。</li>
+<li>静态全局变量相比普通全局变量作用域变为只限于本文件，修饰函数时和全局变量一样，都是为了限定访问域。</li>
+<li>C++中的static还可以修饰类成员，被修饰的类成员不属于任何对象，是所有类实例所共有。</li>
+<li>static的数据记忆性可以满足函数在不同调用期的通信，也可以满足同一个类的多个实例间的通信</li>
+<li>static变量未初始化时，默认为0。</li>
+</ul>
+<h4 id="结构体和类的区别"><a href="#结构体和类的区别" class="headerlink" title="结构体和类的区别"></a>结构体和类的区别</h4><ul>
+<li>结构体的默认限定符是public,类的默认访问控制是private。（就这一个区别！！！）</li>
+<li>C语言中的结构体不能定义函数，只能描述状态，不能描述行为。</li>
+</ul>
+<h4 id="malloc和new的区别"><a href="#malloc和new的区别" class="headerlink" title="malloc和new的区别"></a>malloc和new的区别</h4><ul>
+<li>malloc和free是标准库函数，支持覆盖；new和delete是运算符，支持重载。</li>
+<li>malloc仅仅分配内存空间，free仅仅释放内存空间，并不具备调用构造函数和析构函数的功能，用malloc分配内存给类对象存在风险。new和delete除了分配回收功能之外，还会调用构造函数和析构函数。</li>
+<li>malloc和free返回的是void类型的指针（必须进行类型转换），new和delete返回的是具体类型的指针。</li>
+</ul>
+<h4 id="函数重载、重写和重定义"><a href="#函数重载、重写和重定义" class="headerlink" title="函数重载、重写和重定义"></a>函数重载、重写和重定义</h4><p>重载的要求：</p>
+<ul>
+<li>函数名必须相同</li>
+<li>参数列表必须不同（参数个数，类型，顺序）</li>
+<li>返回值无所谓，可以相同也可以不同</li>
+<li>仅仅返回类型不同不是函数的重载</li>
+</ul>
+<p>函数重载是一种静态多态，多态分为静态多态（编译时绑定）和动态多态（运行时绑定）</p>
+<p>重写：函数名和参数列表和<strong>返回类型</strong>完全相同，C++中的函数重写就是虚函数的多态（动态绑定）。</p>
+<p>重定义：派生类中重定义了基类中相同函数名的非虚函数。此时无论参数列表和返回类型是否相同都将覆盖基类函数。</p>
+<h4 id="宏定义和函数的区别"><a href="#宏定义和函数的区别" class="headerlink" title="宏定义和函数的区别"></a>宏定义和函数的区别</h4><ul>
+<li>宏在编译阶段完成替换，之后被替换的文本参与编译，相当于插入代码，运行时不存在函数调用，执行起来更快速；函数调用需要在运行时跳转到具体调用的函数。</li>
+<li>宏函数属于在结构中插入代码，没有返回值，函数调用有返回值。</li>
+<li>宏函数参数没有类型，不进行类型检查；函数参数具有类型，需要检查类型。</li>
+<li>宏函数不加分号</li>
+</ul>
+<h4 id="宏定义和const的区别"><a href="#宏定义和const的区别" class="headerlink" title="宏定义和const的区别"></a>宏定义和const的区别</h4><ul>
+<li>宏定义在编译阶段之前替换完成，属于文本插入；const发生在编译过程之中。</li>
+<li>宏不检查类型；const会检查类型。</li>
+<li>const需要占有内存空间，宏定义不需要内存分配。</li>
+</ul>
+<h4 id="宏定义和typedef的区别"><a href="#宏定义和typedef的区别" class="headerlink" title="宏定义和typedef的区别"></a>宏定义和typedef的区别</h4><ul>
+<li>宏主要用于定义常量和书写复杂的内容，typedef主要用于定义类型别名</li>
+<li>宏替换在编译之前完成，typedef是编译的一部分</li>
+<li>宏不检查类型，typedef检查类型</li>
+<li>宏不是语句，后面没有分号，typedef语句后面要加分号标识结束</li>
+<li>注意对指针的操作，typedef char <em> p_char 和 #define p_char char</em> 区别巨大。<strong>(p_char a,b时对于typedef来说ab都是指针，而对于宏替换来说只有a是指针，b为字符变量。)</strong></li>
+</ul>
+<h4 id="内联函数（inline）的作用"><a href="#内联函数（inline）的作用" class="headerlink" title="内联函数（inline）的作用"></a>内联函数（inline）的作用</h4><p>内联函数的作用是为了减少系统调用函数的时间开销，在内联函数调用的地方直接将代码嵌入到函数调用点，这个过程发生在编译阶段。所以一般规模较小但调用频繁的函数一般定义或声明为内联函数。</p>
+<h4 id="类中成员函数的定义和声明"><a href="#类中成员函数的定义和声明" class="headerlink" title="类中成员函数的定义和声明"></a>类中成员函数的定义和声明</h4><ul>
+<li>类的成员函数声明和定义可以分开，但声明一定要在定义之前。</li>
+<li>成员函数的定义可以放在类外，加以作用域限定符进行定义。</li>
+<li>类内定义的成员函数默认为内联函数，函数入口在类内。</li>
+<li>类外定义的成员函数可以使用inline关键字显示定义为内联函数，也可以定义为普通成员函数。普通成员函数在调用时发生函数调用，而内联函数不需要。类外定义的内联函数要与类定义在同一文件中，否则无法将代码拷贝嵌入到函数调用点。</li>
+</ul>
+<h4 id="宏和内联函数（inline）的区别"><a href="#宏和内联函数（inline）的区别" class="headerlink" title="宏和内联函数（inline）的区别"></a>宏和内联函数（inline）的区别</h4><ul>
+<li>宏发生在编译前，且不做类型检查，而内联函数在编译时做类型检查，并且有返回值</li>
+<li>内联函数强调函数特性，能重载</li>
+<li>访问类保护成员或私有成员时只能使用内联函数。</li>
+</ul>
+<h4 id="条件编译-ifdef，-else，-endif的作用"><a href="#条件编译-ifdef，-else，-endif的作用" class="headerlink" title="条件编译#ifdef， #else， #endif的作用"></a>条件编译#ifdef， #else， #endif的作用</h4><ul>
+<li>减少被编译语句，从而减小目标程序的大小</li>
+<li>可以通过加#define，并通过#ifdef来判断，将某些具体模块包括进要编译的内容。</li>
+</ul>
+<h4 id="指针常量和常量指针"><a href="#指针常量和常量指针" class="headerlink" title="指针常量和常量指针"></a>指针常量和常量指针</h4><p>区分一下几种变量：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> a;</span><br><span class="line"><span class="keyword">int</span> <span class="keyword">const</span> a;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> *a;</span><br><span class="line"><span class="keyword">int</span> *<span class="keyword">const</span> a;</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>前两种都表示定义整型常量a，a的值不允许改变。</li>
+<li>const int *a 表示定义了一个常量指针a，a是一个指向常量的指针，即*a不允许被赋值。</li>
+<li>int *const a 表示定义了一个指针常量a，a是一个指针的常量，即a的指向不允许改变。</li>
+</ul>
+<h4 id="volatile有什么作用？"><a href="#volatile有什么作用？" class="headerlink" title="volatile有什么作用？"></a>volatile有什么作用？</h4><ul>
+<li>volatile定义的变量值是易变的，每次用到这个变量的值都要重新读取，而不是读寄存器内的备份。</li>
+<li>多线程中被几个任务共享的变量需要定义为volatile。</li>
+</ul>
+<h4 id="什么是常引用"><a href="#什么是常引用" class="headerlink" title="什么是常引用"></a>什么是常引用</h4><ul>
+<li>常引用可以理解为常量指针，形式为const typename &amp; refname = varname。</li>
+<li>常引用下，原变量值不会被别名所修改</li>
+<li>原变量的值可以通过原名修改</li>
+<li>常引用通常用作<strong>只读变量别名</strong>或是<strong>形参传递</strong>（减小内存开销）</li>
+</ul>
+<h4 id="区别以下指针类型"><a href="#区别以下指针类型" class="headerlink" title="区别以下指针类型"></a>区别以下指针类型</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> *p[<span class="number">10</span>];</span><br><span class="line"><span class="keyword">int</span> (*p)[<span class="number">10</span>];</span><br><span class="line"><span class="function"><span class="keyword">int</span> *<span class="title">p</span><span class="params">(<span class="keyword">int</span>)</span></span>;</span><br><span class="line"><span class="keyword">int</span> (*p)(<span class="keyword">int</span>);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>int *p[10] 为指针数组，p一个长度为10的一维指针数组。</li>
+<li>int (*p)[10] 为数组指针，p指向一个长度为10的一维整型数组。</li>
+<li>int *p(int) 表示一个函数p的声明，返回值是整型指针，参数列表为一个int型变量。</li>
+<li>int (*p)(int) 表示指向函数的指针p指向一个返回值类型是int，参数类型是int的函数。</li>
+</ul>
+<h4 id="a和-amp-a有什么区别"><a href="#a和-amp-a有什么区别" class="headerlink" title="a和\&amp;a有什么区别"></a>a和\&amp;a有什么区别</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a[<span class="number">10</span>];</span><br></pre></td></tr></table></figure>
+<ul>
+<li>a是数组名，是数组首元素的地址，+1表示地址值加上一个int类型的大小，*（a+1） = a[1]</li>
+<li>&amp;a是数组的指针，其类型是 int (*)[10] ,其值+1时，系统会认为是数组首地址加上整个数组的偏移（10个int型变量），*(\&amp;a + 1) = *(a+11)</li>
+</ul>
+<h4 id="数组名和指针（指向数组首元素的指针）区别？"><a href="#数组名和指针（指向数组首元素的指针）区别？" class="headerlink" title="数组名和指针（指向数组首元素的指针）区别？"></a>数组名和指针（指向数组首元素的指针）区别？</h4><ul>
+<li>二者均可通过增减偏移量来访问数组中的元素。</li>
+<li>数组名不是真正意义上的指针，可以理解为常指针，所以数组名没有自增、自减等操作。</li>
+<li>当数组名当做形参传递给调用函数后，就失去了原有特性，退化成一般指针，多了自增、自减操作，但sizeof运算符不能再得到原数组的大小了。</li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    <div>
+        
+    </div>
+    
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/26/机器学习-模型评估与选择/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Want Young">
+      <meta itemprop="description" content="Change World, Change Life">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Young">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2018/12/26/机器学习-模型评估与选择/" class="post-title-link" itemprop="http://yoursite.com/index.html">机器学习-模型评估与选择</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-12-26 22:00:01" itemprop="dateCreated datePublished" datetime="2018-12-26T22:00:01+08:00">2018-12-26</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-12-29 10:53:49" itemprop="dateModified" datetime="2018-12-29T10:53:49+08:00">2018-12-29</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/机器学习/" itemprop="url" rel="index"><span itemprop="name">机器学习</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="模型评估与选择"><a href="#模型评估与选择" class="headerlink" title="模型评估与选择"></a>模型评估与选择</h1><h2 id="过拟合和欠拟合"><a href="#过拟合和欠拟合" class="headerlink" title="过拟合和欠拟合"></a>过拟合和欠拟合</h2><p><strong>过拟合</strong>：学习器把训练样本自身的一些特点当做所有潜在样本的都会具有的一般性质，导致泛化性能下降。典型的表现就是训练集样本误差在降低，而测试集样本误差却在升高。</p>
+<p><strong>欠拟合</strong>：学习器对训练样本的一般性质没有学好，典型表现就是训练误差仍然很高。</p>
+<p>有多种因素可以导致过拟合，常见的情况就是学习器的学习能力太强大（模型过于复杂），学习到了很多训练集所包含的不太一般的特性。<br>而欠拟合通常是因为学习能力低下造成的。</p>
+<p>过拟合是无法彻底避免的，我们所能做的就是缓解，或者说减小其风险。</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    <div>
+        
+    </div>
+    
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/26/Redis数据安全和性能保障/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -2067,385 +2549,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/16/HTTP识别、认证、安全/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Want Young">
-      <meta itemprop="description" content="Change World, Change Life">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Young">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/12/16/HTTP识别、认证、安全/" class="post-title-link" itemprop="http://yoursite.com/index.html">HTTP识别、认证、安全</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-12-16 21:12:34" itemprop="dateCreated datePublished" datetime="2018-12-16T21:12:34+08:00">2018-12-16</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-12-21 15:25:43" itemprop="dateModified" datetime="2018-12-21T15:25:43+08:00">2018-12-21</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/网络/" itemprop="url" rel="index"><span itemprop="name">网络</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="HTTP识别、认证、安全"><a href="#HTTP识别、认证、安全" class="headerlink" title="HTTP识别、认证、安全"></a>HTTP识别、认证、安全</h1><h2 id="cookie机制"><a href="#cookie机制" class="headerlink" title="cookie机制"></a>cookie机制</h2><blockquote>
-<p>cookie是服务器识别用户的一种方式，分为会话cookie和持久cookie，区别在于会话cookie是临时的，关闭浏览器会删除cookie。</p>
-</blockquote>
-<blockquote>
-<p>cookie的不可跨域名性： 浏览器在访问一个网站时只会携带该网站的cookie，并且其他网站也不允许修改这个网站的cookie</p>
-</blockquote>
-<blockquote>
-<p>他人获得本机cookie会造成cookie欺骗，所以cookie不太安全。</p>
-</blockquote>
-<h2 id="session机制"><a href="#session机制" class="headerlink" title="session机制"></a>session机制</h2><blockquote>
-<p>session是服务器端保存客户端状态的机制。维持登录状态，更新用户是否活跃，对不活跃的用户删除其session。</p>
-</blockquote>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    <div>
-        
-    </div>
-    
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/16/HTTP连接管理/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Want Young">
-      <meta itemprop="description" content="Change World, Change Life">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Young">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/12/16/HTTP连接管理/" class="post-title-link" itemprop="http://yoursite.com/index.html">HTTP连接管理</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-12-16 19:58:31" itemprop="dateCreated datePublished" datetime="2018-12-16T19:58:31+08:00">2018-12-16</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-12-21 15:25:36" itemprop="dateModified" datetime="2018-12-21T15:25:36+08:00">2018-12-21</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/网络/" itemprop="url" rel="index"><span itemprop="name">网络</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="HTTP连接管理"><a href="#HTTP连接管理" class="headerlink" title="HTTP连接管理"></a>HTTP连接管理</h1><h2 id="HTTP连接"><a href="#HTTP连接" class="headerlink" title="HTTP连接"></a>HTTP连接</h2><blockquote>
-<p>HTTP默认使用TCP 80端口连接。</p>
-</blockquote>
-<h2 id="HTTP事务的时延"><a href="#HTTP事务的时延" class="headerlink" title="HTTP事务的时延"></a>HTTP事务的时延</h2><blockquote>
-<ol>
-<li><strong>TCP延迟确认</strong>造成的时延： 由于TCP发送数据需要接收端返回ACK确认报文，而ACK确认报文往往会很小，TCP延迟确认就会将ACK放到缓冲区，寻找能够捎带这个ACK的同方向数据报文，如果没找到则单独发送这个ACK，而这个过程会造成时延。尤其是HTTP具有双峰特征的请求应答行为更降低了捎带信息的可能。</li>
-<li><strong>Nagle算法： 鼓励TCP发送全尺寸的报文段。</strong> 为了提高网络利用率，Nagle算法会等待足够多的数据加载到缓冲区，将足够的TCP数据绑定到一起发送出去，除非所有发送的分组都被确认了才允许发送非全尺寸的分组。<strong>这会和TCP延迟确认造成冲突，延迟确认想要找到同方向的数据捎带ACK确认报文，而捎带ACK的报文在其他分组的ACK报文没有全部收到或者缓冲区尺寸不够之前不会发送出去。</strong></li>
-<li><strong>2MSL等待</strong>造成时延：TCP关闭一条连接时会进行2MSL等待，在2MSL时间内不允许建立相同ip相同端口的连接，这是为了防止迟到的报文影响新的连接。</li>
-</ol>
-</blockquote>
-<h2 id="HTTP解决时延的办法"><a href="#HTTP解决时延的办法" class="headerlink" title="HTTP解决时延的办法"></a>HTTP解决时延的办法</h2><blockquote>
-<ol>
-<li>并行连接： 串行化的连接可能会很慢，当一个页面中存在多个HTTP事务时需要建立多条连接同时加载资源。</li>
-<li>持久化连接： HTTP1.1之后所有的连接默认都是持久化的，当然服务器并不一定一直保持连接。持久化连接可以消除TCP连接时延和慢启动时延。</li>
-<li>管道化连接： 管道化连接必须保证连接是持久化的。它是指在发送一个事务时不必等待ACK确认即可发送下一个事务分组，这样可以减少网络环回延迟。<br><img src="/images/pipeline_persistent_lining.png" alt=""></li>
-</ol>
-</blockquote>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    <div>
-        
-    </div>
-    
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2493,7 +2596,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">14</span>
+                    <span class="site-state-item-count">16</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2512,7 +2615,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">3</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">5</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -2545,7 +2652,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">10</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">12</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
