@@ -131,11 +131,11 @@
 <meta name="keywords" content="C&#x2F;C++">
 <meta property="og:type" content="article">
 <meta property="og:title" content="C&#x2F;C++基础知识复习">
-<meta property="og:url" content="http://yoursite.com/2018/12/29/C-C-基础知识复习/index.html">
+<meta property="og:url" content="http://yoursite.com/2018/12/29/C、C++基础知识复习/index.html">
 <meta property="og:site_name" content="Young">
 <meta property="og:description" content="C/C++基础编程基础变量声明和定义的区别 变量声明仅仅是告诉编译器变量的类型，位置，名称等，并不分配空间。变量的定义要在定义的地方分配空间 变量可以多次声明，如extend引入外部变量，但定义只能有一次。  “零值”的比较1234bool类型:  if(flag)int 类型:  if(flag == 0)float类型: if(flag &amp;gt;= -0.000001 &amp;amp;&amp;amp; f">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-12-30T14:31:15.640Z">
+<meta property="og:updated_time" content="2018-12-31T10:29:13.075Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C&#x2F;C++基础知识复习">
 <meta name="twitter:description" content="C/C++基础编程基础变量声明和定义的区别 变量声明仅仅是告诉编译器变量的类型，位置，名称等，并不分配空间。变量的定义要在定义的地方分配空间 变量可以多次声明，如extend引入外部变量，但定义只能有一次。  “零值”的比较1234bool类型:  if(flag)int 类型:  if(flag == 0)float类型: if(flag &amp;gt;= -0.000001 &amp;amp;&amp;amp; f">
@@ -145,7 +145,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/12/29/C-C-基础知识复习/">
+  <link rel="canonical" href="http://yoursite.com/2018/12/29/C、C++基础知识复习/">
 
 
 
@@ -382,7 +382,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/29/C-C-基础知识复习/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/29/C、C++基础知识复习/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Want Young">
@@ -441,7 +441,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-12-30 22:31:15" itemprop="dateModified" datetime="2018-12-30T22:31:15+08:00">2018-12-30</time>
+                <time title="修改时间：2018-12-31 18:29:13" itemprop="dateModified" datetime="2018-12-31T18:29:13+08:00">2018-12-31</time>
               
             
           </span>
@@ -506,10 +506,6 @@
 <li>可以，但是含有指针成员时要注意。</li>
 <li>对比类的对象的赋值时深拷贝和浅拷贝</li>
 </ul>
-<h4 id="成员函数的入口问题"><a href="#成员函数的入口问题" class="headerlink" title="成员函数的入口问题"></a>成员函数的入口问题</h4><ul>
-<li>类的成员函数对于所有对象来说具有统一的入口地址，和静态成员函数不同的是参数列表中<strong>隐含</strong>了一个看不见的this指针参数，每次调用时需要传入一个类对象指针（可以是null，所以声明一个类指针就可以访问成员函数而不用管它是否指向一个存在的对象）。对于作用域式的调用，由于无法传入一个指针而发生调用失败。</li>
-<li>静态成员函数由于没有隐含的this指针参数，所以可以由类本身调用，并且静态成员函数不能访问this指针，因为局部作用域中没有this。</li>
-</ul>
 <h4 id="引用和指针"><a href="#引用和指针" class="headerlink" title="引用和指针"></a>引用和指针</h4><ul>
 <li>引用只是别名，内存中不存在单独实体，编译阶段绑定后不允许更改，只有声明没有定义。指针是具体的变量，占有内存空间，定义后可以更改指向。</li>
 <li>引用在声明时必须初始化为另一变量，而指针声明和定义可以分开。</li>
@@ -538,16 +534,6 @@
 <li>malloc仅仅分配内存空间，free仅仅释放内存空间，并不具备调用构造函数和析构函数的功能，用malloc分配内存给类对象存在风险。new和delete除了分配回收功能之外，还会调用构造函数和析构函数。</li>
 <li>malloc和free返回的是void类型的指针（必须进行类型转换），new和delete返回的是具体类型的指针。</li>
 </ul>
-<h4 id="函数重载、重写和重定义"><a href="#函数重载、重写和重定义" class="headerlink" title="函数重载、重写和重定义"></a>函数重载、重写和重定义</h4><p>重载的要求：</p>
-<ul>
-<li>函数名必须相同</li>
-<li>参数列表必须不同（参数个数，类型，顺序）</li>
-<li>返回值无所谓，可以相同也可以不同</li>
-<li>仅仅返回类型不同不是函数的重载</li>
-</ul>
-<p>函数重载是一种静态多态，多态分为静态多态（编译时绑定）和动态多态（运行时绑定）</p>
-<p>重写：函数名和参数列表和<strong>返回类型</strong>完全相同，C++中的函数重写就是虚函数的多态（动态绑定）。</p>
-<p>重定义：派生类中重定义了基类中相同函数名的非虚函数。此时无论参数列表和返回类型是否相同都将覆盖基类函数。</p>
 <h4 id="宏定义和函数的区别"><a href="#宏定义和函数的区别" class="headerlink" title="宏定义和函数的区别"></a>宏定义和函数的区别</h4><ul>
 <li>宏在编译阶段完成替换，之后被替换的文本参与编译，相当于插入代码，运行时不存在函数调用，执行起来更快速；函数调用需要在运行时跳转到具体调用的函数。</li>
 <li>宏函数属于在结构中插入代码，没有返回值，函数调用有返回值。</li>
@@ -596,7 +582,7 @@
 <li>常引用可以理解为常量指针，形式为const typename &amp; refname = varname。</li>
 <li>常引用下，原变量值不会被别名所修改</li>
 <li>原变量的值可以通过原名修改</li>
-<li>常引用通常用作<strong>只读变量别名</strong>或是<strong>形参传递</strong>（减小内存开销）</li>
+<li>常引用通常用作<strong>只读变量别名</strong>或是<strong>形参传递</strong>（减小内存开销）,最常见的就是类的赋值运算符重载时不允许对右值修改。</li>
 </ul>
 <h4 id="区别以下指针类型"><a href="#区别以下指针类型" class="headerlink" title="区别以下指针类型"></a>区别以下指针类型</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> *p[<span class="number">10</span>];</span><br><span class="line"><span class="keyword">int</span> (*p)[<span class="number">10</span>];</span><br><span class="line"><span class="function"><span class="keyword">int</span> *<span class="title">p</span><span class="params">(<span class="keyword">int</span>)</span></span>;</span><br><span class="line"><span class="keyword">int</span> (*p)(<span class="keyword">int</span>);</span><br></pre></td></tr></table></figure>
 <ul>
@@ -615,6 +601,155 @@
 <li>数组名不是真正意义上的指针，可以理解为常指针，所以数组名没有自增、自减等操作。</li>
 <li>当数组名当做形参传递给调用函数后，就失去了原有特性，退化成一般指针，多了自增、自减操作，但sizeof运算符不能再得到原数组的大小了。</li>
 </ul>
+<h4 id="野指针是什么？"><a href="#野指针是什么？" class="headerlink" title="野指针是什么？"></a>野指针是什么？</h4><ul>
+<li>野指针是指指向垃圾内存的指针，也叫空悬指针，不是指向null。</li>
+<li>产生的原因及解决办法<blockquote>
+<ul>
+<li>指针变量没有及时初始化 -&gt; 及时初始化指针，要么置空。</li>
+<li>指针free或delete之后没有及时置空 -&gt; 释放内存后立即置空</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+<h4 id="堆栈的区别"><a href="#堆栈的区别" class="headerlink" title="堆栈的区别"></a>堆栈的区别</h4><ul>
+<li>申请方式不同<blockquote>
+<p>栈由系统自动分配<br>堆由程序员手动分配</p>
+</blockquote>
+</li>
+<li>申请大小限制不同<blockquote>
+<p>栈顶和栈底是预先设置好的，大小固定，可以通过ulimit -a查看，通过ulimit -s修改。<br>堆向高地址扩展，是不连续的内存区域，大小可以灵活调整</p>
+</blockquote>
+</li>
+<li>申请效率不同<blockquote>
+<p>栈由系统自动分配，速度快，不会有碎片<br>堆由程序员分配，速度慢，且会有碎片</p>
+</blockquote>
+</li>
+</ul>
+<h4 id="delete-和-delete-的区别？"><a href="#delete-和-delete-的区别？" class="headerlink" title="delete 和 delete[ ] 的区别？"></a>delete 和 delete[ ] 的区别？</h4><ul>
+<li>delete只会调用一次析构函数</li>
+<li>delete [ ]会调用数组中每个元素的析构函数</li>
+</ul>
+<h4 id="C-11中允许函数的嵌套定义"><a href="#C-11中允许函数的嵌套定义" class="headerlink" title="C++11中允许函数的嵌套定义"></a>C++11中允许函数的嵌套定义</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">func</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">std</span>::function&lt;<span class="keyword">void</span>(<span class="keyword">int</span>)&gt; func_in = [](<span class="keyword">int</span> a)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;a&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    &#125;; <span class="comment">//注意这个分号</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="面向对象基础"><a href="#面向对象基础" class="headerlink" title="面向对象基础"></a>面向对象基础</h2><h4 id="面向对象三大特性"><a href="#面向对象三大特性" class="headerlink" title="面向对象三大特性"></a>面向对象三大特性</h4><ul>
+<li>继承：让某一类型的对象获得另一个类型对象的属性和方法</li>
+<li>封装：将数据和代码捆绑在一起，避免外界的干扰和不确定性访问</li>
+<li>多态：同一事物表现出不同事物的能力，即向不同对象发送同一条消息，不同的对象在接受时会产生不同的行为（重载是静态多态（编译时绑定），虚函数实现动态多态（运行时绑定））。</li>
+</ul>
+<h4 id="public-protected-private的区别"><a href="#public-protected-private的区别" class="headerlink" title="public/protected/private的区别"></a>public/protected/private的区别</h4><ul>
+<li>public的成员在类的内部外部都能访问和修改</li>
+<li>protected的成员只能在类内或者派生类中访问和修改</li>
+<li>private的成员只能在类内访问和修改(不能使用对象访问的说法是错误的，类内的对象是可以访问的)</li>
+</ul>
+<h4 id="对象的存储空间"><a href="#对象的存储空间" class="headerlink" title="对象的存储空间"></a>对象的存储空间</h4><ul>
+<li>非静态成员的数据类型大小之和</li>
+<li>编译器加入的虚表指针</li>
+<li>为了对齐优化加入的panding</li>
+</ul>
+<h4 id="C-空类有哪些成员函数"><a href="#C-空类有哪些成员函数" class="headerlink" title="C++空类有哪些成员函数"></a>C++空类有哪些成员函数</h4><p>空类大小为1字节</p>
+<ul>
+<li>构造函数</li>
+<li>析构函数</li>
+<li>拷贝构造函数</li>
+<li>赋值重载函数</li>
+</ul>
+<h4 id="构造函数能否是虚函数，析构函数呢？"><a href="#构造函数能否是虚函数，析构函数呢？" class="headerlink" title="构造函数能否是虚函数，析构函数呢？"></a>构造函数能否是虚函数，析构函数呢？</h4><ul>
+<li>析构函数：<ul>
+<li>析构函数可以为虚函数，并且一般情况下基类的析构函数要定义为虚函数。</li>
+<li>只有基类的析构函数定义为虚函数时，调用操作符delete销毁指向对象的基类指针时才能准确的调用派生类的析构函数（从该级向上按序调用虚函数），才能准确的销毁数据。</li>
+<li>析构函数可以是纯虚函数，含有纯虚函数的类是抽象类，此时不能被实例化。但派生类中可以根据自身需求重新改写基类中的纯虚函数。</li>
+</ul>
+</li>
+<li>构造函数：<ul>
+<li>构造函数不能定义为虚函数，不仅如此构造函数中还不能调用虚函数。因为那样实际执行的是父类对应的函数，原因是自己还没有构造好（构造顺序先基类后派生类）。</li>
+</ul>
+</li>
+</ul>
+<h4 id="成员函数的入口问题"><a href="#成员函数的入口问题" class="headerlink" title="成员函数的入口问题"></a>成员函数的入口问题</h4><ul>
+<li>类的成员函数对于所有对象来说具有统一的入口地址，和静态成员函数不同的是参数列表中<strong>隐含</strong>了一个看不见的this指针参数，每次调用时需要传入一个类对象指针（可以是null，所以声明一个类指针就可以访问成员函数而不用管它是否指向一个存在的对象）。对于作用域式的调用，由于无法传入一个指针而发生调用失败。</li>
+<li>静态成员函数由于没有隐含的this指针参数，所以可以由类本身调用，并且静态成员函数不能访问this指针，因为局部作用域中没有this。</li>
+</ul>
+<h4 id="函数重载、重写和重定义"><a href="#函数重载、重写和重定义" class="headerlink" title="函数重载、重写和重定义"></a>函数重载、重写和重定义</h4><p>重载的要求：</p>
+<ul>
+<li>函数名必须相同</li>
+<li>参数列表必须不同（参数个数，类型，顺序）</li>
+<li>返回值无所谓，可以相同也可以不同</li>
+<li>仅仅返回类型不同不是函数的重载</li>
+</ul>
+<p>函数重载是一种静态多态，多态分为静态多态（编译时绑定）和动态多态（运行时绑定）</p>
+<p>重写：函数名和参数列表和<strong>返回类型</strong>完全相同，C++中的虚函数重写就是虚函数的多态（动态绑定），普通成员函数重写则根据调用函数的对象类型判断。</p>
+<p>重定义（隐藏）：派生类中重定义了基类中相同函数名的非虚函数。此时无论参数列表和返回类型是否相同都将覆盖基类函数。</p>
+<h4 id="构造函数调用顺序，析构函数？"><a href="#构造函数调用顺序，析构函数？" class="headerlink" title="构造函数调用顺序，析构函数？"></a>构造函数调用顺序，析构函数？</h4><ol>
+<li>基类的构造函数：如果有多个基类，调用顺序为从上到下从左到右。</li>
+<li>成员类对象的构造函数：如果类的变量中包含其他类（类的组合），需要在本类构造函数调用前调用成员类对象的构造函数，调用顺序遵照在类中被声明的顺序。</li>
+<li>派生类的构造函数</li>
+<li>析构函数与之相反</li>
+</ol>
+<h4 id="拷贝构造函数中的深拷贝和浅拷贝区别？"><a href="#拷贝构造函数中的深拷贝和浅拷贝区别？" class="headerlink" title="拷贝构造函数中的深拷贝和浅拷贝区别？"></a>拷贝构造函数中的深拷贝和浅拷贝区别？</h4><ul>
+<li>深拷贝时，当拷贝对象存在动态分配的存储空间时，需要先动态申请一块存储空间，然后逐字节拷贝内容。</li>
+<li>浅拷贝仅仅拷贝指针的值</li>
+<li>当使用浅拷贝时，如果原来的对象调用析构函数释放掉指针所指向的数据，则会产生野指针。因为所指向的内存空间已经被释放了。</li>
+</ul>
+<h4 id="拷贝构造函数和赋值运算符重载的区别？"><a href="#拷贝构造函数和赋值运算符重载的区别？" class="headerlink" title="拷贝构造函数和赋值运算符重载的区别？"></a>拷贝构造函数和赋值运算符重载的区别？</h4><ul>
+<li>拷贝构造函数是函数，赋值运算符是运算符重载</li>
+<li>拷贝构造函数还会生成新的类对象，赋值运算符不能。</li>
+<li>拷贝构造函数是直接构造一个新的类对象，所以在初始化对象前不需要检查源对象和新建对象是否相同；赋值运算符需要上述操作并提供两套不同的复制策略，另外赋值运算符中如果原来的对象有内存分配则需要先把内存释放掉。</li>
+<li>形参传递时调用拷贝构造函数（调用的被赋值对象的拷贝构造函数），但并不是所有出现‘=’的地方都是使用赋值运算符，例如：<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Student s;</span><br><span class="line">Student s1 = s; <span class="comment">//调用拷贝构造函数</span></span><br><span class="line">Student s2;</span><br><span class="line">s2 = s; <span class="comment">//赋值运算符操作</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><strong>注</strong>：类中存在指针变量时要重写析构函数、拷贝构造函数和赋值运算符。</p>
+<h4 id="虚函数和纯虚函数的区别-普通成员函数和虚函数的声明和定义问题？"><a href="#虚函数和纯虚函数的区别-普通成员函数和虚函数的声明和定义问题？" class="headerlink" title="虚函数和纯虚函数的区别, 普通成员函数和虚函数的声明和定义问题？"></a>虚函数和纯虚函数的区别, 普通成员函数和虚函数的声明和定义问题？</h4><ul>
+<li>虚函数： 虚函数的作用是实现了动态绑定，目的是通过基类类型的指针指向不同对象时产生相应不同的行为。派生类继承时隐式继承了虚函数属性，派生类中继承的虚函数属于函数重写，要求函数名，参数列表，返回值完全相同。</li>
+<li>纯虚函数：只相当于声明了一个接口名，含有纯虚函数的类不能被实例化。纯虚函数就是没有定义只有声明的虚函数。</li>
+<li>虚函数可以没有定义只有声明，此时为纯虚函数，不能实例化。能实例化的类必须定义已声明的虚函数，但普通成员函数可以只声明不定义，此时不能调用，否则编译链接时会报错（好像声明了也并没有什么卵用）。</li>
+</ul>
+<h4 id="覆盖（重写-重构）、重载、隐藏的区别？"><a href="#覆盖（重写-重构）、重载、隐藏的区别？" class="headerlink" title="覆盖（重写/重构）、重载、隐藏的区别？"></a>覆盖（重写/重构）、重载、隐藏的区别？</h4><ul>
+<li>覆盖是派生类中重新定义的函数，其函数名、参数列表、返回值类型和父类完全相同。派生类对象调用该函数时会根据对象类型调用相应的函数。<ul>
+<li>虚函数重写：动态绑定，根据绑定对象的类型调用。</li>
+<li>普通成员函数重写：根据调用该函数的对象或指针类型调用。</li>
+</ul>
+</li>
+<li>重载：具有相同函数名，不同参数列表，不关心返回值类型。</li>
+<li>隐藏：当父类函数不是虚函数时，继承过程中重新定义了和父类函数名相同的函数，不关心返回值和参数列表，此时父类同名函数被隐藏，无法调用， 即重载和覆盖之后，原父类函数不能调用。</li>
+</ul>
+<h4 id="在main函数之前执行的代码可能是什么？"><a href="#在main函数之前执行的代码可能是什么？" class="headerlink" title="在main函数之前执行的代码可能是什么？"></a>在main函数之前执行的代码可能是什么？</h4><ul>
+<li>全局对象的构造函数。</li>
+</ul>
+<h4 id="哪几种情况必须用到初始化成员列表？"><a href="#哪几种情况必须用到初始化成员列表？" class="headerlink" title="哪几种情况必须用到初始化成员列表？"></a>哪几种情况必须用到初始化成员列表？</h4><p>编译时就要确定值的情况要用到初始化列表</p>
+<ul>
+<li>const类型成员</li>
+<li>reference类型成员</li>
+<li>调用一个基类的构造函数，而该函数有一组参数</li>
+<li>调用成员对象的构造函数，而该函数有一组参数</li>
+</ul>
+<h4 id="什么是虚指针"><a href="#什么是虚指针" class="headerlink" title="什么是虚指针"></a>什么是虚指针</h4><ul>
+<li>虚指针或虚函数指针是虚函数的实现细节</li>
+<li>虚指针指向虚表结构（vtable）</li>
+</ul>
+<h4 id="重载和函数模板的区别"><a href="#重载和函数模板的区别" class="headerlink" title="重载和函数模板的区别"></a>重载和函数模板的区别</h4><ul>
+<li>重载需要多个函数，多个可能不同的函数体，区分重载函数时只关心参数列表和函数名，不关心函数体。</li>
+<li>模板函数是一个通用函数，函数的类型和形参不直接指定而用虚拟类型代表，只适用于参数个数相同而类型不同的函数。</li>
+</ul>
+<h4 id="this指针是什么？"><a href="#this指针是什么？" class="headerlink" title="this指针是什么？"></a>this指针是什么？</h4><ul>
+<li>this是类的指针，指向对象的首地址</li>
+<li>this只能在成员函数中使用，在全局函数。静态成员函数中都不能使用this。</li>
+<li>this指针只在成员函数中才有定义。不同编译器存储位置不同。</li>
+</ul>
+<h4 id="类模板是什么？"><a href="#类模板是什么？" class="headerlink" title="类模板是什么？"></a>类模板是什么？</h4><ul>
+<li>用于解决多个功能相同，数据类型不同的类需要重复定义的问题。</li>
+<li>类模板是对一批仅数据类型不同的类的抽象。</li>
+</ul>
+<h4 id="构造函数和析构函数的调用时机"><a href="#构造函数和析构函数的调用时机" class="headerlink" title="构造函数和析构函数的调用时机"></a>构造函数和析构函数的调用时机</h4><ul>
+<li>全局对象：构造函数在所有函数调用前执行，在主函数执行完毕时调用析构函数</li>
+<li>局部自动对象：建立对象时调用构造函数，函数结束时调用析构函数</li>
+<li>动态分配的对象：建立对象时调用构造函数，调用释放时调用析构函数</li>
+<li>静态局部变量对象： 建立时调用一次构造函数，主函数结束时调用析构函数</li>
+</ul>
+<h4 id="类静态成员函数对数据区的访问限制"><a href="#类静态成员函数对数据区的访问限制" class="headerlink" title="类静态成员函数对数据区的访问限制"></a>类静态成员函数对数据区的访问限制</h4><ul>
+<li>由于静态成员函数参数列表中没有this指针，也不允许使用this指针，所以从这个角度来讲静态成员函数只能访问静态数据成员无法使用非静态数据成员也无法调用非静态函数。</li>
+<li>如果静态成员函数显示定义了指向对象的指针参数或函数内存在该类对象则可以由参数指针和函数内对象访问非静态成员。</li>
+</ul>
+<h4 id="C-会根据定义的单实参构造函数定义隐式的类类型转换"><a href="#C-会根据定义的单实参构造函数定义隐式的类类型转换" class="headerlink" title="C++会根据定义的单实参构造函数定义隐式的类类型转换"></a>C++会根据定义的单实参构造函数定义隐式的类类型转换</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">int</span> a;</span><br><span class="line">    C()&#123;<span class="built_in">cout</span>&lt;&lt;<span class="string">"this is class C."</span>&lt;&lt;<span class="built_in">endl</span>;&#125;</span><br><span class="line">    C(<span class="keyword">int</span> i):a(i)&#123;&#125;<span class="comment">// 隐式定义从int -&gt; C的类型转换</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    C c;</span><br><span class="line">    c = <span class="number">1</span>;<span class="comment">//隐式转换1为C类型，在调用默认赋值重载</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>通过使用<strong>explicit</strong>声明构造函数能够抑制这种隐式转换。</p>
 
       
     </div>
@@ -839,7 +974,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#C-C-基础"><span class="nav-number">1.</span> <span class="nav-text">C/C++基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#编程基础"><span class="nav-number">1.1.</span> <span class="nav-text">编程基础</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#变量声明和定义的区别"><span class="nav-number">1.1.0.1.</span> <span class="nav-text">变量声明和定义的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#“零值”的比较"><span class="nav-number">1.1.0.2.</span> <span class="nav-text">“零值”的比较</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#strlen-和-sizeof-的区别"><span class="nav-number">1.1.0.3.</span> <span class="nav-text">strlen 和 sizeof 的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#同一类的不同对象可以互相赋值吗？"><span class="nav-number">1.1.0.4.</span> <span class="nav-text">同一类的不同对象可以互相赋值吗？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#成员函数的入口问题"><span class="nav-number">1.1.0.5.</span> <span class="nav-text">成员函数的入口问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#引用和指针"><span class="nav-number">1.1.0.6.</span> <span class="nav-text">引用和指针</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#结构体内存对齐问题"><span class="nav-number">1.1.0.7.</span> <span class="nav-text">结构体内存对齐问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#C-中可执行文件在内存中的存放方式"><span class="nav-number">1.1.0.8.</span> <span class="nav-text">C++中可执行文件在内存中的存放方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#static作用是什么？在C和C-中有什么区别？"><span class="nav-number">1.1.0.9.</span> <span class="nav-text">static作用是什么？在C和C++中有什么区别？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#结构体和类的区别"><span class="nav-number">1.1.0.10.</span> <span class="nav-text">结构体和类的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#malloc和new的区别"><span class="nav-number">1.1.0.11.</span> <span class="nav-text">malloc和new的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#函数重载、重写和重定义"><span class="nav-number">1.1.0.12.</span> <span class="nav-text">函数重载、重写和重定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#宏定义和函数的区别"><span class="nav-number">1.1.0.13.</span> <span class="nav-text">宏定义和函数的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#宏定义和const的区别"><span class="nav-number">1.1.0.14.</span> <span class="nav-text">宏定义和const的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#宏定义和typedef的区别"><span class="nav-number">1.1.0.15.</span> <span class="nav-text">宏定义和typedef的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#内联函数（inline）的作用"><span class="nav-number">1.1.0.16.</span> <span class="nav-text">内联函数（inline）的作用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#类中成员函数的定义和声明"><span class="nav-number">1.1.0.17.</span> <span class="nav-text">类中成员函数的定义和声明</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#宏和内联函数（inline）的区别"><span class="nav-number">1.1.0.18.</span> <span class="nav-text">宏和内联函数（inline）的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#条件编译-ifdef，-else，-endif的作用"><span class="nav-number">1.1.0.19.</span> <span class="nav-text">条件编译#ifdef， #else， #endif的作用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#指针常量和常量指针"><span class="nav-number">1.1.0.20.</span> <span class="nav-text">指针常量和常量指针</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#volatile有什么作用？"><span class="nav-number">1.1.0.21.</span> <span class="nav-text">volatile有什么作用？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#什么是常引用"><span class="nav-number">1.1.0.22.</span> <span class="nav-text">什么是常引用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#区别以下指针类型"><span class="nav-number">1.1.0.23.</span> <span class="nav-text">区别以下指针类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#a和-amp-a有什么区别"><span class="nav-number">1.1.0.24.</span> <span class="nav-text">a和\&amp;a有什么区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数组名和指针（指向数组首元素的指针）区别？"><span class="nav-number">1.1.0.25.</span> <span class="nav-text">数组名和指针（指向数组首元素的指针）区别？</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#C-C-基础"><span class="nav-number">1.</span> <span class="nav-text">C/C++基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#编程基础"><span class="nav-number">1.1.</span> <span class="nav-text">编程基础</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#变量声明和定义的区别"><span class="nav-number">1.1.0.1.</span> <span class="nav-text">变量声明和定义的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#“零值”的比较"><span class="nav-number">1.1.0.2.</span> <span class="nav-text">“零值”的比较</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#strlen-和-sizeof-的区别"><span class="nav-number">1.1.0.3.</span> <span class="nav-text">strlen 和 sizeof 的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#同一类的不同对象可以互相赋值吗？"><span class="nav-number">1.1.0.4.</span> <span class="nav-text">同一类的不同对象可以互相赋值吗？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#引用和指针"><span class="nav-number">1.1.0.5.</span> <span class="nav-text">引用和指针</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#结构体内存对齐问题"><span class="nav-number">1.1.0.6.</span> <span class="nav-text">结构体内存对齐问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#C-中可执行文件在内存中的存放方式"><span class="nav-number">1.1.0.7.</span> <span class="nav-text">C++中可执行文件在内存中的存放方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#static作用是什么？在C和C-中有什么区别？"><span class="nav-number">1.1.0.8.</span> <span class="nav-text">static作用是什么？在C和C++中有什么区别？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#结构体和类的区别"><span class="nav-number">1.1.0.9.</span> <span class="nav-text">结构体和类的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#malloc和new的区别"><span class="nav-number">1.1.0.10.</span> <span class="nav-text">malloc和new的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#宏定义和函数的区别"><span class="nav-number">1.1.0.11.</span> <span class="nav-text">宏定义和函数的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#宏定义和const的区别"><span class="nav-number">1.1.0.12.</span> <span class="nav-text">宏定义和const的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#宏定义和typedef的区别"><span class="nav-number">1.1.0.13.</span> <span class="nav-text">宏定义和typedef的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#内联函数（inline）的作用"><span class="nav-number">1.1.0.14.</span> <span class="nav-text">内联函数（inline）的作用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#类中成员函数的定义和声明"><span class="nav-number">1.1.0.15.</span> <span class="nav-text">类中成员函数的定义和声明</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#宏和内联函数（inline）的区别"><span class="nav-number">1.1.0.16.</span> <span class="nav-text">宏和内联函数（inline）的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#条件编译-ifdef，-else，-endif的作用"><span class="nav-number">1.1.0.17.</span> <span class="nav-text">条件编译#ifdef， #else， #endif的作用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#指针常量和常量指针"><span class="nav-number">1.1.0.18.</span> <span class="nav-text">指针常量和常量指针</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#volatile有什么作用？"><span class="nav-number">1.1.0.19.</span> <span class="nav-text">volatile有什么作用？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#什么是常引用"><span class="nav-number">1.1.0.20.</span> <span class="nav-text">什么是常引用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#区别以下指针类型"><span class="nav-number">1.1.0.21.</span> <span class="nav-text">区别以下指针类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#a和-amp-a有什么区别"><span class="nav-number">1.1.0.22.</span> <span class="nav-text">a和\&amp;a有什么区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数组名和指针（指向数组首元素的指针）区别？"><span class="nav-number">1.1.0.23.</span> <span class="nav-text">数组名和指针（指向数组首元素的指针）区别？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#野指针是什么？"><span class="nav-number">1.1.0.24.</span> <span class="nav-text">野指针是什么？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#堆栈的区别"><span class="nav-number">1.1.0.25.</span> <span class="nav-text">堆栈的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#delete-和-delete-的区别？"><span class="nav-number">1.1.0.26.</span> <span class="nav-text">delete 和 delete[ ] 的区别？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#C-11中允许函数的嵌套定义"><span class="nav-number">1.1.0.27.</span> <span class="nav-text">C++11中允许函数的嵌套定义</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#面向对象基础"><span class="nav-number">1.2.</span> <span class="nav-text">面向对象基础</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#面向对象三大特性"><span class="nav-number">1.2.0.1.</span> <span class="nav-text">面向对象三大特性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#public-protected-private的区别"><span class="nav-number">1.2.0.2.</span> <span class="nav-text">public/protected/private的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#对象的存储空间"><span class="nav-number">1.2.0.3.</span> <span class="nav-text">对象的存储空间</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#C-空类有哪些成员函数"><span class="nav-number">1.2.0.4.</span> <span class="nav-text">C++空类有哪些成员函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#构造函数能否是虚函数，析构函数呢？"><span class="nav-number">1.2.0.5.</span> <span class="nav-text">构造函数能否是虚函数，析构函数呢？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#成员函数的入口问题"><span class="nav-number">1.2.0.6.</span> <span class="nav-text">成员函数的入口问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#函数重载、重写和重定义"><span class="nav-number">1.2.0.7.</span> <span class="nav-text">函数重载、重写和重定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#构造函数调用顺序，析构函数？"><span class="nav-number">1.2.0.8.</span> <span class="nav-text">构造函数调用顺序，析构函数？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#拷贝构造函数中的深拷贝和浅拷贝区别？"><span class="nav-number">1.2.0.9.</span> <span class="nav-text">拷贝构造函数中的深拷贝和浅拷贝区别？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#拷贝构造函数和赋值运算符重载的区别？"><span class="nav-number">1.2.0.10.</span> <span class="nav-text">拷贝构造函数和赋值运算符重载的区别？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#虚函数和纯虚函数的区别-普通成员函数和虚函数的声明和定义问题？"><span class="nav-number">1.2.0.11.</span> <span class="nav-text">虚函数和纯虚函数的区别, 普通成员函数和虚函数的声明和定义问题？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#覆盖（重写-重构）、重载、隐藏的区别？"><span class="nav-number">1.2.0.12.</span> <span class="nav-text">覆盖（重写/重构）、重载、隐藏的区别？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#在main函数之前执行的代码可能是什么？"><span class="nav-number">1.2.0.13.</span> <span class="nav-text">在main函数之前执行的代码可能是什么？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#哪几种情况必须用到初始化成员列表？"><span class="nav-number">1.2.0.14.</span> <span class="nav-text">哪几种情况必须用到初始化成员列表？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#什么是虚指针"><span class="nav-number">1.2.0.15.</span> <span class="nav-text">什么是虚指针</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#重载和函数模板的区别"><span class="nav-number">1.2.0.16.</span> <span class="nav-text">重载和函数模板的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#this指针是什么？"><span class="nav-number">1.2.0.17.</span> <span class="nav-text">this指针是什么？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#类模板是什么？"><span class="nav-number">1.2.0.18.</span> <span class="nav-text">类模板是什么？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#构造函数和析构函数的调用时机"><span class="nav-number">1.2.0.19.</span> <span class="nav-text">构造函数和析构函数的调用时机</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#类静态成员函数对数据区的访问限制"><span class="nav-number">1.2.0.20.</span> <span class="nav-text">类静态成员函数对数据区的访问限制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#C-会根据定义的单实参构造函数定义隐式的类类型转换"><span class="nav-number">1.2.0.21.</span> <span class="nav-text">C++会根据定义的单实参构造函数定义隐式的类类型转换</span></a></li></ol></li></ol></div>
             
 
           </div>
