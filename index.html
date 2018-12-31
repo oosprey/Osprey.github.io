@@ -444,7 +444,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-12-31 20:28:29" itemprop="dateModified" datetime="2018-12-31T20:28:29+08:00">2018-12-31</time>
+                <time title="修改时间：2018-12-31 20:29:15" itemprop="dateModified" datetime="2018-12-31T20:29:15+08:00">2018-12-31</time>
               
             
           </span>
@@ -795,7 +795,8 @@
 <li>多继承：<br><img src="/images/multi_inherit_virtual_child_object_memory.png" alt=""></li>
 <li>菱形继承中存在二义性和数据冗余<br>B,C继承自A，D继承B和C，则D拷贝了两份A对象的数据，当D类对象访问A的数据时存在二义性。此时需要用到虚拟继承。</li>
 </ul>
-<h4 id="虚继承"><a href="#虚继承" class="headerlink" title="虚继承"></a>虚继承</h4><ul>
+<h4 id="虚继承"><a href="#虚继承" class="headerlink" title="虚继承"></a>虚继承</h4><p>新增虚基类指针，指向虚基类表，虚基类表中首项存储虚基类指针的偏移量，接下来依次存储虚基类的偏移量（偏移量是相对于虚基类表指针的存储地址）</p>
+<ul>
 <li>虚拟继承的子类的内存结构，和普通继承完全不同。虚拟继承的子类，有单独的虚函数表， 另外也单独保存一份父类的虚函数表，两部分之间用一个四个字节的0x00000000来作为分界。子类的内存中，首先是自己的虚函数表，然后是子类的数据成员，然后是0x0，之后就是父类的虚函数表，之后是父类的数据成员。<br><img src="/images/single_virtual_inherit_memory.png" alt=""></li>
 <li>虚继承将基类置于内存末尾，但是置于末尾的顺序也有一定的次序。首先Base先放到末尾，然后Base1放到末尾，最后Base2放到末尾。<br><img src="/images/diamond_virtual_inherit_memory.png" alt=""></li>
 </ul>
