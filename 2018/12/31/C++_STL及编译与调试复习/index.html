@@ -1,0 +1,1027 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+  <script>
+  (function(i,s,o,g,r,a,m){i["DaoVoiceObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;a.charset="utf-8";m.parentNode.insertBefore(a,m)})(window,document,"script",('https:' == document.location.protocol ? 'https:' : 'http:') + "//widget.daovoice.io/widget/0f81ff2f.js","daovoice")
+  daovoice('init', {
+      app_id: "7075d67b"
+    });
+  daovoice('update');
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.5.0" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.5.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.5.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.5.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.5.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.5.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="C/C++ 基础STL标准模板库STL模板库内容很多，但根据实际使用只要知道一下几点即可：  怎么用？ 知道各种STL基本的增删改查怎么使用。把精力放在对需求的了解并选择合适的数据结构上，这很重要！   怎么实现的？ 了解怎么实现的是为了了解每种STL数据结构的特性，这样在选择上更加准确，使用上也更加高效。   如何避免错误？ 了解了实现细节之后我们就应该懂得如何避免一些错误，比如迭代器失效的问题">
+<meta name="keywords" content="C&#x2F;C++">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++ STL及编译与调试复习">
+<meta property="og:url" content="http://yoursite.com/2018/12/31/C++_STL及编译与调试复习/index.html">
+<meta property="og:site_name" content="Young">
+<meta property="og:description" content="C/C++ 基础STL标准模板库STL模板库内容很多，但根据实际使用只要知道一下几点即可：  怎么用？ 知道各种STL基本的增删改查怎么使用。把精力放在对需求的了解并选择合适的数据结构上，这很重要！   怎么实现的？ 了解怎么实现的是为了了解每种STL数据结构的特性，这样在选择上更加准确，使用上也更加高效。   如何避免错误？ 了解了实现细节之后我们就应该懂得如何避免一些错误，比如迭代器失效的问题">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-12-31T13:33:09.266Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="C++ STL及编译与调试复习">
+<meta name="twitter:description" content="C/C++ 基础STL标准模板库STL模板库内容很多，但根据实际使用只要知道一下几点即可：  怎么用？ 知道各种STL基本的增删改查怎么使用。把精力放在对需求的了解并选择合适的数据结构上，这很重要！   怎么实现的？ 了解怎么实现的是为了了解每种STL数据结构的特性，这样在选择上更加准确，使用上也更加高效。   如何避免错误？ 了解了实现细节之后我们就应该懂得如何避免一些错误，比如迭代器失效的问题">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/12/31/C++_STL及编译与调试复习/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>C++ STL及编译与调试复习 | Young</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+
+    <div class="bg_content">
+      <canvas id="canvas"></canvas>
+    </div>
+
+
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Young</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">Change World, Change Life</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/31/C++_STL及编译与调试复习/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Want Young">
+      <meta itemprop="description" content="Change World, Change Life">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Young">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">C++ STL及编译与调试复习
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-12-31 20:48:18 / 修改时间：21:33:09" itemprop="dateCreated datePublished" datetime="2018-12-31T20:48:18+08:00">2018-12-31</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/语言知识/" itemprop="url" rel="index"><span itemprop="name">语言知识</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="C-C-基础"><a href="#C-C-基础" class="headerlink" title="C/C++ 基础"></a>C/C++ 基础</h1><h2 id="STL标准模板库"><a href="#STL标准模板库" class="headerlink" title="STL标准模板库"></a>STL标准模板库</h2><p>STL模板库内容很多，但根据实际使用只要知道一下几点即可：</p>
+<ul>
+<li>怎么用？<blockquote>
+<p>知道各种STL基本的增删改查怎么使用。把精力放在对需求的了解并选择合适的数据结构上，这很重要！</p>
+</blockquote>
+</li>
+<li>怎么实现的？<blockquote>
+<p>了解怎么实现的是为了了解每种STL数据结构的特性，这样在选择上更加准确，使用上也更加高效。</p>
+</blockquote>
+</li>
+<li>如何避免错误？<blockquote>
+<p>了解了实现细节之后我们就应该懂得如何避免一些错误，比如迭代器失效的问题。</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="string和vector"><a href="#string和vector" class="headerlink" title="string和vector"></a>string和vector</h3><h4 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">定义：</span><br><span class="line">    <span class="built_in">vector</span>&lt;T&gt; vec;</span><br><span class="line"></span><br><span class="line">插入元素:</span><br><span class="line">    vec.push_back(element);</span><br><span class="line">    vec.insert(iterator, element);</span><br><span class="line"></span><br><span class="line">删除元素:</span><br><span class="line">    vec.pop_back();</span><br><span class="line">    vec.erase(iterator);</span><br><span class="line"></span><br><span class="line">遍历容器:</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">auto</span> it = vec.begin();it != vec.end();++it)&#123;......&#125;</span><br><span class="line"></span><br><span class="line">其他:</span><br><span class="line">    vec.empty(); <span class="comment">//判断是否为空</span></span><br><span class="line">    vec.size(); <span class="comment">//实际元素个数</span></span><br><span class="line">    vec.capacity(); <span class="comment">//容器的容量</span></span><br><span class="line">    vec.begin(); <span class="comment">//获得首迭代器</span></span><br><span class="line">    vec.end(); <span class="comment">//获得尾迭代器</span></span><br><span class="line">    vec.clear(); <span class="comment">//容器清空</span></span><br></pre></td></tr></table></figure>
+<h4 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h4><p>模拟Vector实现</p>
+<ul>
+<li>线性表，数组实现<ul>
+<li>要支持随机访问</li>
+<li>插入删除操作需要大量移动数据</li>
+</ul>
+</li>
+<li>需要连续的物理存储空间</li>
+<li>每当大小不够时，重新分配内存（*2），并复制原内容。</li>
+</ul>
+<h4 id="错误避免"><a href="#错误避免" class="headerlink" title="错误避免"></a>错误避免</h4><p>迭代器失效：</p>
+<ul>
+<li>插入元素<ul>
+<li>尾后插入：size \&lt; capacity时， 首迭代器不失效，尾迭代器失效（未重新分配空间）， size == capacity时， 所有迭代器均失效（需要重新分配空间）。</li>
+<li>中间插入： size \&lt; capacity时，首迭代器不失效，插入元素之后所有迭代器均失效， size == capacity时， 所有迭代器均失效。</li>
+</ul>
+</li>
+<li>删除元素：<ul>
+<li>尾后删除：只有尾迭代器失效。</li>
+<li>中间删除：删除位置之后所有迭代器均失效。</li>
+</ul>
+</li>
+</ul>
+<h3 id="map"><a href="#map" class="headerlink" title="map"></a>map</h3><h4 id="用法："><a href="#用法：" class="headerlink" title="用法："></a>用法：</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">定义：</span><br><span class="line">    <span class="built_in">map</span>&lt;T_key, T_value&gt; mymap;</span><br><span class="line"></span><br><span class="line">插入元素：</span><br><span class="line">    mymap.insert(pair&lt;T_key, T_value&gt;(key, value));  <span class="comment">//同key不插入</span></span><br><span class="line">    mymap.insert(<span class="built_in">map</span>&lt;T_key, T_value&gt;::value_type(key, value)); <span class="comment">//同key不插入</span></span><br><span class="line">    mymap[key] = value; <span class="comment">//同key覆盖</span></span><br><span class="line"></span><br><span class="line">删除元素：</span><br><span class="line">    mymap.erase(key); <span class="comment">//按值删</span></span><br><span class="line">    mymap.erase(iterator); <span class="comment">//按迭代器删</span></span><br><span class="line"></span><br><span class="line">修改元素：</span><br><span class="line">    mymap[key] = new_value;</span><br><span class="line"></span><br><span class="line">遍历容器：</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">auto</span> it = mymap.begin(); it != mymap.end(); ++it)&#123;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt; it-&gt;first &lt;&lt; <span class="string">" =&gt; "</span> &lt;&lt; it-&gt;second &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h4 id="实现-1"><a href="#实现-1" class="headerlink" title="实现"></a>实现</h4><p>RBTree实现</p>
+<ul>
+<li><p>树状结构， RBTree实现。</p>
+<ul>
+<li>插入删除不需要数据复制。</li>
+<li>操作复杂度仅跟树高有关。</li>
+</ul>
+</li>
+<li><p>RBTree本身也是二叉排序树的一种， key值有序，且唯一。</p>
+<ul>
+<li>必须保证key可排序。</li>
+</ul>
+</li>
+</ul>
+<p>基于红黑树实现的map结构（实际上是map, set, multimap，multiset底层均是红黑树），不仅增删数据时不需要移动数据，其所有操作都可以在O(logn)时间范围内完成。另外，基于红黑树的map在通过迭代器遍历时，得到的是key按序排列后的结果，这点特性在很多操作中非常方便。</p>
+<h4 id="RBTree的特性"><a href="#RBTree的特性" class="headerlink" title="RBTree的特性"></a>RBTree的特性</h4><ol>
+<li>它是二叉排序树（继承二叉排序树特点）：<ul>
+<li>若左子树不空，则左子树上所有结点的值均小于或等于它的根结点的值。</li>
+<li>若右子树不空，则右子树上所有结点的值均大于或等于它的根结点的值。</li>
+<li>左、右子树也分别为二叉排序树。</li>
+</ul>
+</li>
+<li>红黑树的要求：<ul>
+<li>树中所有节点非红即黑。</li>
+<li>根节点必为黑节点。</li>
+<li>红节点的子节点必为黑（黑节点子节点可为黑）。</li>
+<li>从根到NULL的任何路径上黑结点数相同。</li>
+</ul>
+</li>
+<li>查找时间一定可以控制在O(logn)。</li>
+<li><p>红黑树节点定义如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">enum</span> Color &#123;</span><br><span class="line">    RED = <span class="number">0</span>,</span><br><span class="line">    BLACK = <span class="number">1</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">RBTreeNode</span> &#123;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">RBTreeNode</span>*<span class="title">left</span>, *<span class="title">right</span>, *<span class="title">parent</span>;</span></span><br><span class="line">    <span class="keyword">int</span> key;</span><br><span class="line">    <span class="keyword">int</span> data;</span><br><span class="line">    Color color;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>所以对红黑树的操作需要满足两点：1.满足二叉排序树的要求；2.满足红黑树自身要求。通常在找到节点通过和根节点比较找到插入位置之后，还需要结合红黑树自身限制条件对子树进行左旋和右旋。</p>
+<p>相比于AVL树，红黑树平衡性要稍微差一些，不过创建红黑树时所需的旋转操作也会少很多。相比于最简单的BST，BST最差情况下查找的时间复杂度会上升至O(n)，而红黑树最坏情况下查找效率依旧是O(logn)。所以说红黑树之所以能够在STL及Linux内核中被广泛应用就是因为其折中了两种方案，既减少了树高，又减少了建树时旋转的次数。</p>
+<p>从红黑树的定义来看，红黑树从根到NULL的每条路径拥有相同的黑节点数（假设为n），所以最短的路径长度为n（全为黑节点情况）。因为红节点不能连续出现，所以路径最长的情况就是插入最多的红色节点，在黑节点数一致的情况下，最可观的情况就是黑红黑红排列……最长路径不会大于2n，这里路径长就是树高。</p>
+<h3 id="unordered-map、unordered-set"><a href="#unordered-map、unordered-set" class="headerlink" title="unordered_map、unordered_set"></a>unordered_map、unordered_set</h3><h4 id="实现-2"><a href="#实现-2" class="headerlink" title="实现"></a>实现</h4><p>内部实现是hash table，增删改查的时间复杂度为O(1)。</p>
+</li>
+</ol>
+<h2 id="编译与调试"><a href="#编译与调试" class="headerlink" title="编译与调试"></a>编译与调试</h2><h3 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h3><h4 id="预处理"><a href="#预处理" class="headerlink" title="预处理"></a>预处理</h4>
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    <div>
+        
+            <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+        
+    </div>
+    
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/C-C/" rel="tag"># C/C++</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/12/29/C、C++基础知识复习/" rel="next" title="C/C++基础知识复习">
+                <i class="fa fa-chevron-left"></i> C/C++基础知识复习
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div id="gitalk-container">
+    </div>
+    
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Want Young</p>
+              <p class="site-description motion-element" itemprop="description">Change World, Change Life</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">17</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">5</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">12</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#C-C-基础"><span class="nav-number">1.</span> <span class="nav-text">C/C++ 基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#STL标准模板库"><span class="nav-number">1.1.</span> <span class="nav-text">STL标准模板库</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#string和vector"><span class="nav-number">1.1.1.</span> <span class="nav-text">string和vector</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#用法"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">用法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实现"><span class="nav-number">1.1.1.2.</span> <span class="nav-text">实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#错误避免"><span class="nav-number">1.1.1.3.</span> <span class="nav-text">错误避免</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#map"><span class="nav-number">1.1.2.</span> <span class="nav-text">map</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#用法："><span class="nav-number">1.1.2.1.</span> <span class="nav-text">用法：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实现-1"><span class="nav-number">1.1.2.2.</span> <span class="nav-text">实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#RBTree的特性"><span class="nav-number">1.1.2.3.</span> <span class="nav-text">RBTree的特性</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#unordered-map、unordered-set"><span class="nav-number">1.1.3.</span> <span class="nav-text">unordered_map、unordered_set</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#实现-2"><span class="nav-number">1.1.3.1.</span> <span class="nav-text">实现</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编译与调试"><span class="nav-number">1.2.</span> <span class="nav-text">编译与调试</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#编译"><span class="nav-number">1.2.1.</span> <span class="nav-text">编译</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#预处理"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">预处理</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Want Young</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_sphere.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.5.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.5.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.5.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.5.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.5.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.js"></script>
+
+  
+  
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.css">
+
+  
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/npm/js-md5@0.7.3/src/md5.min.js"></script>
+
+   <script type="text/javascript">
+        var gitalk = new Gitalk({
+          clientID: '997de8bdb3bee4797c9f',
+          clientSecret: 'b98b0660d5251c1b96f333c09eef0d0e4762a3c2',
+          repo: 'oosprey.github.io',
+          owner: 'oosprey',
+          admin: ['oosprey'],
+          id: md5(location.pathname),
+          distractionFreeMode: 'true'
+        })
+        gitalk.render('gitalk-container')
+       </script>
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
+<!--崩溃欺骗-->
+<script type="text/javascript" src="/js/src/crash_cheat.js"></script>
+<!--动态背景-->
+<script type="text/javascript" src="/js/src/dynamic_bg.js"></script>
