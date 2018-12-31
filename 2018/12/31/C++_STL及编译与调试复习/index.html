@@ -135,7 +135,7 @@
 <meta property="og:site_name" content="Young">
 <meta property="og:description" content="C/C++ 基础STL标准模板库STL模板库内容很多，但根据实际使用只要知道一下几点即可：  怎么用？ 知道各种STL基本的增删改查怎么使用。把精力放在对需求的了解并选择合适的数据结构上，这很重要！   怎么实现的？ 了解怎么实现的是为了了解每种STL数据结构的特性，这样在选择上更加准确，使用上也更加高效。   如何避免错误？ 了解了实现细节之后我们就应该懂得如何避免一些错误，比如迭代器失效的问题">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-12-31T13:33:09.266Z">
+<meta property="og:updated_time" content="2018-12-31T13:35:33.124Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C++ STL及编译与调试复习">
 <meta name="twitter:description" content="C/C++ 基础STL标准模板库STL模板库内容很多，但根据实际使用只要知道一下几点即可：  怎么用？ 知道各种STL基本的增删改查怎么使用。把精力放在对需求的了解并选择合适的数据结构上，这很重要！   怎么实现的？ 了解怎么实现的是为了了解每种STL数据结构的特性，这样在选择上更加准确，使用上也更加高效。   如何避免错误？ 了解了实现细节之后我们就应该懂得如何避免一些错误，比如迭代器失效的问题">
@@ -424,7 +424,7 @@
                 
               
 
-              <time title="创建时间：2018-12-31 20:48:18 / 修改时间：21:33:09" itemprop="dateCreated datePublished" datetime="2018-12-31T20:48:18+08:00">2018-12-31</time>
+              <time title="创建时间：2018-12-31 20:48:18 / 修改时间：21:35:33" itemprop="dateCreated datePublished" datetime="2018-12-31T20:48:18+08:00">2018-12-31</time>
             
 
             
@@ -550,14 +550,13 @@
 </ul>
 </li>
 <li>查找时间一定可以控制在O(logn)。</li>
-<li><p>红黑树节点定义如下：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">enum</span> Color &#123;</span><br><span class="line">    RED = <span class="number">0</span>,</span><br><span class="line">    BLACK = <span class="number">1</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">RBTreeNode</span> &#123;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">RBTreeNode</span>*<span class="title">left</span>, *<span class="title">right</span>, *<span class="title">parent</span>;</span></span><br><span class="line">    <span class="keyword">int</span> key;</span><br><span class="line">    <span class="keyword">int</span> data;</span><br><span class="line">    Color color;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<li>红黑树节点定义如下：<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">enum</span> Color &#123;</span><br><span class="line">    RED = <span class="number">0</span>,</span><br><span class="line">    BLACK = <span class="number">1</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">RBTreeNode</span> &#123;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">RBTreeNode</span>*<span class="title">left</span>, *<span class="title">right</span>, *<span class="title">parent</span>;</span></span><br><span class="line">    <span class="keyword">int</span> key;</span><br><span class="line">    <span class="keyword">int</span> data;</span><br><span class="line">    Color color;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
 <p>所以对红黑树的操作需要满足两点：1.满足二叉排序树的要求；2.满足红黑树自身要求。通常在找到节点通过和根节点比较找到插入位置之后，还需要结合红黑树自身限制条件对子树进行左旋和右旋。</p>
 <p>相比于AVL树，红黑树平衡性要稍微差一些，不过创建红黑树时所需的旋转操作也会少很多。相比于最简单的BST，BST最差情况下查找的时间复杂度会上升至O(n)，而红黑树最坏情况下查找效率依旧是O(logn)。所以说红黑树之所以能够在STL及Linux内核中被广泛应用就是因为其折中了两种方案，既减少了树高，又减少了建树时旋转的次数。</p>
 <p>从红黑树的定义来看，红黑树从根到NULL的每条路径拥有相同的黑节点数（假设为n），所以最短的路径长度为n（全为黑节点情况）。因为红节点不能连续出现，所以路径最长的情况就是插入最多的红色节点，在黑节点数一致的情况下，最可观的情况就是黑红黑红排列……最长路径不会大于2n，这里路径长就是树高。</p>
 <h3 id="unordered-map、unordered-set"><a href="#unordered-map、unordered-set" class="headerlink" title="unordered_map、unordered_set"></a>unordered_map、unordered_set</h3><h4 id="实现-2"><a href="#实现-2" class="headerlink" title="实现"></a>实现</h4><p>内部实现是hash table，增删改查的时间复杂度为O(1)。</p>
-</li>
-</ol>
 <h2 id="编译与调试"><a href="#编译与调试" class="headerlink" title="编译与调试"></a>编译与调试</h2><h3 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h3><h4 id="预处理"><a href="#预处理" class="headerlink" title="预处理"></a>预处理</h4>
       
     </div>
