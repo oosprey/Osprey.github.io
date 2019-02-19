@@ -382,6 +382,271 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/20/操作系统/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Want Young">
+      <meta itemprop="description" content="Change World, Change Life">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Young">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2018/12/20/操作系统/" class="post-title-link" itemprop="http://yoursite.com/page/2/index.html">操作系统</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-12-20 15:28:59 / 修改时间：22:06:09" itemprop="dateCreated datePublished" datetime="2018-12-20T15:28:59+08:00">2018-12-20</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/操作系统/" itemprop="url" rel="index"><span itemprop="name">操作系统</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="虚拟存储器、虚拟内存、交换空间、物理内存"><a href="#虚拟存储器、虚拟内存、交换空间、物理内存" class="headerlink" title="虚拟存储器、虚拟内存、交换空间、物理内存"></a>虚拟存储器、虚拟内存、交换空间、物理内存</h1><p>虚拟存储器是对物理存储器的抽象，允许程序申请大于实际物理存储的内存，提供一致性的地址空间。</p>
+<ul>
+<li>CPU生成虚拟地址，MMU进行地址翻译，发现缺页，物理内存不足，进行页置换。<h2 id="局部性原理"><a href="#局部性原理" class="headerlink" title="局部性原理"></a>局部性原理</h2></li>
+</ul>
+<h4 id="时间局部性"><a href="#时间局部性" class="headerlink" title="时间局部性"></a>时间局部性</h4><blockquote>
+<p>如果一条指令被执行或者某个数据被访问过，那么不久以后该指令可能再次执行该数据可能再次被访问</p>
+</blockquote>
+<h4 id="空间局部性"><a href="#空间局部性" class="headerlink" title="空间局部性"></a>空间局部性</h4><blockquote>
+<p>如果某个存储单元被访问过，那么不久之后他周围的存储单元也会被访问</p>
+</blockquote>
+<h2 id="虚拟内存技术的支持"><a href="#虚拟内存技术的支持" class="headerlink" title="虚拟内存技术的支持"></a>虚拟内存技术的支持</h2><ol>
+<li>一定量的内存和外存</li>
+<li>页表机制</li>
+<li>中断机构</li>
+<li>地址变换机构</li>
+</ol>
+<h2 id="页面置换算法"><a href="#页面置换算法" class="headerlink" title="页面置换算法"></a>页面置换算法</h2><ol>
+<li>FIFO先进先出：优先置换最早进入内存的。</li>
+<li>LRU最近最久未使用算法：置换最近最长时间未访问过的页面。</li>
+</ol>
+<h1 id="进程管理"><a href="#进程管理" class="headerlink" title="进程管理"></a>进程管理</h1><p>进程是为了实现操作系统的并发性和共享性</p>
+<h2 id="相关概念"><a href="#相关概念" class="headerlink" title="相关概念"></a>相关概念</h2><ul>
+<li>操作系统通过进程控制块PCB来控制和管理进程，PCB描述了进程的状态和基本情况</li>
+<li>PCB、程序段、相关数据段一起构成了进程映像（实体），进程映像是静态的，进程是动态的。</li>
+<li>创建和撤销进程实际上就是创建和撤销PCB</li>
+<li>进程是程序的一次执行过程，所以进程是动态的，同时它是系统进行资源分配和调度的一个独立单位。</li>
+</ul>
+<h2 id="进程的状态"><a href="#进程的状态" class="headerlink" title="进程的状态"></a>进程的状态</h2><ul>
+<li>运行</li>
+<li>就绪</li>
+<li>阻塞</li>
+<li>创建</li>
+<li>结束</li>
+<li>挂起</li>
+</ul>
+<h2 id="进程的控制（原语）"><a href="#进程的控制（原语）" class="headerlink" title="进程的控制（原语）"></a>进程的控制（原语）</h2><h4 id="进程创建"><a href="#进程创建" class="headerlink" title="进程创建"></a>进程创建</h4><ul>
+<li>分配PID，申请新的PCB（PCB是有限的），申请失败则创建失败。</li>
+<li>分配相关资源，资源有限，没有空闲资源分配则进程进入阻塞状态等待资源分配</li>
+<li>初始化PCB，包括优先级、各种状态信息等。</li>
+<li>插入到就绪队列，等待调度<h4 id="进程终止"><a href="#进程终止" class="headerlink" title="进程终止"></a>进程终止</h4>正常终止和异常终止</li>
+<li>检查PCB状态，正在执行则立即停止</li>
+<li>终止所有子进程</li>
+<li>回收所有资源，或返还操作系统或返还父进程</li>
+<li>删除PCB<h4 id="进程切换"><a href="#进程切换" class="headerlink" title="进程切换"></a>进程切换</h4></li>
+<li>保存处理机上下文，包括程序计数器和其他寄存器</li>
+<li>更新PCB信息</li>
+<li>将PCB移入相应的队列</li>
+<li>选择另一个PCB，更新其状态</li>
+<li>恢复上下文</li>
+</ul>
+<h2 id="进程间通信"><a href="#进程间通信" class="headerlink" title="进程间通信"></a>进程间通信</h2><ol>
+<li>共享存储：共享内存</li>
+<li>消息传递：通过操作系统的消息传递</li>
+<li>管道通信：共享缓冲区，半双工，同一时刻只能读或者写。</li>
+</ol>
+<h1 id="线程管理"><a href="#线程管理" class="headerlink" title="线程管理"></a>线程管理</h1><p>线程：用户级线程：应用程序管理  内核级线程：内核控制</p>
+<h1 id="处理机调度"><a href="#处理机调度" class="headerlink" title="处理机调度"></a>处理机调度</h1><h2 id="调度层次"><a href="#调度层次" class="headerlink" title="调度层次"></a>调度层次</h2><ol>
+<li>作业调度：从外存中调入即将。</li>
+<li>中级调度：进程挂起，调出内存，存入外存。</li>
+<li>进程调度：低级调度，从就绪队列调出进程。</li>
+</ol>
+<h2 id="进程调度方式"><a href="#进程调度方式" class="headerlink" title="进程调度方式"></a>进程调度方式</h2><ol>
+<li>非抢占式</li>
+<li>抢占式</li>
+</ol>
+<h2 id="调度算法"><a href="#调度算法" class="headerlink" title="调度算法"></a>调度算法</h2><ol>
+<li>FCFS 先来先服务算法（非抢占式）</li>
+<li>SJF 短作业优先（对长作业不利）</li>
+<li>优先级调度（抢占和非抢占）</li>
+<li>高响应比优先调度算法（主要用于作业调度）</li>
+<li>时间片轮转调度算法</li>
+<li>多级反馈队列算法（时间片和优先级算法的综合发展）</li>
+</ol>
+<h1 id="进程同步"><a href="#进程同步" class="headerlink" title="进程同步"></a>进程同步</h1><h2 id="临界资源"><a href="#临界资源" class="headerlink" title="临界资源"></a>临界资源</h2><p>临界资源是指一次只允许一个进程访问的资源，访问临界资源的代码被称作<strong>临界区</strong>。</p>
+<h2 id="信号量解决同步和互斥"><a href="#信号量解决同步和互斥" class="headerlink" title="信号量解决同步和互斥"></a>信号量解决同步和互斥</h2><p>整形信号量和记录型信号量</p>
+<h2 id="经典进程同步问题"><a href="#经典进程同步问题" class="headerlink" title="经典进程同步问题"></a>经典进程同步问题</h2><ol>
+<li>生产者消费者问题</li>
+<li>读者写者问题：有一个写其他就不能读或者写</li>
+<li>哲学家进餐问题：两种解决方案: 1. 信号量：只允许同时四个哲学家进餐。 2. 只允许同时拿起左右两把叉子，否则一个都不拿。</li>
+<li>吸烟者问题</li>
+</ol>
+<h1 id="死锁：多个进程因争抢资源而互相等待无法解开"><a href="#死锁：多个进程因争抢资源而互相等待无法解开" class="headerlink" title="死锁：多个进程因争抢资源而互相等待无法解开"></a>死锁：多个进程因争抢资源而互相等待无法解开</h1><h2 id="死锁的条件"><a href="#死锁的条件" class="headerlink" title="死锁的条件"></a>死锁的条件</h2><ol>
+<li>互斥条件： 进程占有的资源不可剥夺</li>
+<li>请求和保持： 进程占有一个资源，申请另一个资源时被阻塞，而又不释放自己的资源。</li>
+<li>循环等待： 存在进程等待链。</li>
+</ol>
+<h2 id="死锁处理策略"><a href="#死锁处理策略" class="headerlink" title="死锁处理策略"></a>死锁处理策略</h2><ol>
+<li>预防死锁<blockquote>
+<p>破坏死锁产生的条件</p>
+</blockquote>
+</li>
+<li>避免死锁<blockquote>
+<p>安全状态：系统不会发生死锁。预防死锁的方法要求系统在分配资源之前计算分配此资源是否会导致系统进入不安全状态。</p>
+</blockquote>
+</li>
+</ol>
+<blockquote>
+<p><strong>银行家算法</strong>：每次进程申请资源时，系统判断当前已分配给进程的资源加上要申请的资源是否超过该进程最大需求量，超过则不分配，否则判断当前可用资源是否大于申请资源数，大于则分配，否则不予分配。</p>
+<ol start="3">
+<li>死锁检测与解除</li>
+</ol>
+</blockquote>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    <div>
+        
+    </div>
+    
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/20/MySQL性能改善/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -2242,246 +2507,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/06/HTTP相关知识点/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Want Young">
-      <meta itemprop="description" content="Change World, Change Life">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Young">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/12/06/HTTP相关知识点/" class="post-title-link" itemprop="http://yoursite.com/page/2/index.html">HTTP相关知识点</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-12-06 15:52:24" itemprop="dateCreated datePublished" datetime="2018-12-06T15:52:24+08:00">2018-12-06</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-12-21 15:25:50" itemprop="dateModified" datetime="2018-12-21T15:25:50+08:00">2018-12-21</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/网络/" itemprop="url" rel="index"><span itemprop="name">网络</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="HTTP快速学习"><a href="#HTTP快速学习" class="headerlink" title="HTTP快速学习"></a>HTTP快速学习</h1><h4 id="知识点1-无状态和持久化连接"><a href="#知识点1-无状态和持久化连接" class="headerlink" title="知识点1  无状态和持久化连接"></a>知识点1  无状态和持久化连接</h4><blockquote>
-<ul>
-<li>HTTP是无状态连接:不保留上一次传输的内容，即不对上一次的请求和响应做持久化处理</li>
-<li>HTTP1.1之后连接默认是持久化连接：即任意一端没有明确表明断开就一直保持TCP的连接状态</li>
-</ul>
-<p>* 持久化连接是指TCP的持久化连接，无状态连接是指请求和响应不做持久化处理</p>
-</blockquote>
-<h4 id="知识点2-报文和实体"><a href="#知识点2-报文和实体" class="headerlink" title="知识点2 报文和实体"></a>知识点2 报文和实体</h4><blockquote>
-<p>报文和实体，报文在传输时会被切割，切割之后的部分为一个实体，合在一起是报文</p>
-</blockquote>
-<h4 id="知识点3-HTTP报文首部"><a href="#知识点3-HTTP报文首部" class="headerlink" title="知识点3 HTTP报文首部"></a>知识点3 HTTP报文首部</h4><blockquote>
-<ul>
-<li>报文首部包含请求行或响应行 包含请求方法+http版本或者响应状态码+http版本，之后是各种首部字段，包括方法，地址等等。</li>
-</ul>
-</blockquote>
-<h4 id="知识点4-HTTP状态码"><a href="#知识点4-HTTP状态码" class="headerlink" title="知识点4 HTTP状态码"></a>知识点4 HTTP状态码</h4><blockquote>
-<h6 id="2XX-表示请求被正确处理"><a href="#2XX-表示请求被正确处理" class="headerlink" title="2XX 表示请求被正确处理"></a>2XX 表示请求被正确处理</h6><blockquote>
-<ul>
-<li>200: OK</li>
-<li>204: 无资源返回</li>
-<li>206: 返回一部分资源</li>
-</ul>
-</blockquote>
-<h6 id="3XX-表示重定向"><a href="#3XX-表示重定向" class="headerlink" title="3XX 表示重定向"></a>3XX 表示重定向</h6><blockquote>
-<ul>
-<li>301: 资源永久性重定向</li>
-<li>302: 资源临时性重定向</li>
-<li>303: 请以get方法临时重定向</li>
-<li>304: 资源没有改变，可以继续使用缓存</li>
-<li>307: 临时重定向，基本和302相同</li>
-</ul>
-</blockquote>
-<h6 id="4XX-客户端错误"><a href="#4XX-客户端错误" class="headerlink" title="4XX 客户端错误"></a>4XX 客户端错误</h6><blockquote>
-<ul>
-<li>400: 请求存在错误，服务器无法理解</li>
-<li>401: 需要身份认证，或认证失败</li>
-<li>403: 服务器拒绝访问，可能是无权限</li>
-<li>404: 服务器找不到该资源</li>
-</ul>
-</blockquote>
-<h6 id="5XX-服务器错误"><a href="#5XX-服务器错误" class="headerlink" title="5XX 服务器错误"></a>5XX 服务器错误</h6><blockquote>
-<ul>
-<li>500: 服务器执行请求时发生错误</li>
-<li>503: 服务器超负荷或停机维护，稍后访问</li>
-</ul>
-</blockquote>
-</blockquote>
-<h3 id="知识点5-代理，网关，隧道"><a href="#知识点5-代理，网关，隧道" class="headerlink" title="#知识点5 代理，网关，隧道"></a>#知识点5 代理，网关，隧道</h3><blockquote>
-<ul>
-<li>代理分为缓存代理（静态资源）和 非缓存代理</li>
-<li>网关可以转换http协议，例如访问数据库或者信用卡系统</li>
-<li>隧道的目的是建立一条安全的连接</li>
-</ul>
-</blockquote>
-<h4 id="知识点6-HTTPs"><a href="#知识点6-HTTPs" class="headerlink" title="知识点6 HTTPs"></a>知识点6 HTTPs</h4><blockquote>
-<p>安全的的http连接，信息加密（SSL或TSL），用户身份验证（SSL证书），确保报文完整<br>SSL采用公钥私钥加密，采用证书确认公钥安全</p>
-</blockquote>
-<h4 id="知识点7-Websocket"><a href="#知识点7-Websocket" class="headerlink" title="知识点7 Websocket"></a>知识点7 Websocket</h4><blockquote>
-<p>这是一种基于http协议的协议，旨在提高传输速度和质量，在http请求中发送协议转换请求切换协议为websocket，客户端请求连接后若服务器建立连接则之后将一直保留连接状态，报文首部也将压缩，服务器和客户端之间可随意传输信息，包括推送。</p>
-</blockquote>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    <div>
-        
-    </div>
-    
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -2524,7 +2554,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">20</span>
+                    <span class="site-state-item-count">21</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
