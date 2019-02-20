@@ -382,6 +382,202 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/08/TCP-IP-协议学习/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Want Young">
+      <meta itemprop="description" content="Change World, Change Life">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Young">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2018/12/08/TCP-IP-协议学习/" class="post-title-link" itemprop="http://yoursite.com/page/3/index.html">TCP/IP 协议学习</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-12-08 11:17:28" itemprop="dateCreated datePublished" datetime="2018-12-08T11:17:28+08:00">2018-12-08</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-12-21 15:23:13" itemprop="dateModified" datetime="2018-12-21T15:23:13+08:00">2018-12-21</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/网络/" itemprop="url" rel="index"><span itemprop="name">网络</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="网络概述"><a href="#网络概述" class="headerlink" title="网络概述"></a>网络概述</h1><h4 id="知识点1"><a href="#知识点1" class="headerlink" title="知识点1"></a>知识点1</h4><blockquote>
+<ul>
+<li>应用层:  通常是用户级进程控制，只关心应用程序细节，不关心通信细节</li>
+<li>传输层:  TCP(传输控制协议)提供可靠的端到端传输(超时重传，确认分组..)， UDP(用户数据报协议)提供简单的端到端传输，一般由操作系统内核进程控制。</li>
+<li>网络层(网络互联层):  IP协议(网际协议)，负责路由发现，提供不可靠的点到点通信。</li>
+<li>数据链路层(网络接口层): 负责物理接口细节，包括硬件驱动，电缆要求。</li>
+</ul>
+</blockquote>
+<h4 id="知识点2-IP地址"><a href="#知识点2-IP地址" class="headerlink" title="知识点2 IP地址"></a>知识点2 IP地址</h4><blockquote>
+<ul>
+<li>32bits表示ipv4，共分5类网络地址：<br><img src="/images/ip_type.gif" alt=""></li>
+<li>特殊用途IP:<br><img src="/images/ip_special.png" alt=""></li>
+<li>私有IP(局域网):<br><img src="/images/ip_private.png" alt=""></li>
+</ul>
+</blockquote>
+<h4 id="知识点3-IP数据报和以太网帧的首部"><a href="#知识点3-IP数据报和以太网帧的首部" class="headerlink" title="知识点3 IP数据报和以太网帧的首部"></a>知识点3 IP数据报和以太网帧的首部</h4><blockquote>
+<ul>
+<li>应用层发送数据要经过封装，其中IP数据报和以太网帧的首部要填写协议标识表明上层协议的类型。例如IP数据报首部存入8 bit数值的协议域，1标识ICMP，2标识IGMP， 6标识TCP，17标识UDP。</li>
+<li>而接收以太网帧之后要经过分用过程去掉各层的首部，同时识别上层的协议，TCP和UDP识别端口号转发给应用程序。</li>
+</ul>
+</blockquote>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    <div>
+        
+    </div>
+    
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/06/HTTP相关知识点/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -649,7 +845,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">21</span>
+                    <span class="site-state-item-count">22</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -674,7 +870,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">6</span>
+                      
+                    
+                    <span class="site-state-item-count">7</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -713,7 +911,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">13</span>
+                      
+                    
+                    <span class="site-state-item-count">14</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
