@@ -127,25 +127,25 @@
 
 
 
-  <meta name="description" content="网络IO模型什么是同步IO，什么是异步IO 同步IO： 用户进程必须要等待IO操作完成之后才能继续执行。 异步IO： 用户进程无需等待IO操作完成，提交IO请求之后可以继续执行。  阻塞IO、非阻塞IO、多路IO复用、异步IO网络IO请求分为两阶段，分别为（1）数据准备阶段和（2）数据拷贝阶段，用户进程提出IO请求后调用内核进程准备数据，数据准备完毕后内核进程将数据拷贝到用户进程指定位置，到此完成">
-<meta name="keywords" content="网络IO">
+  <meta name="description" content="进程复习进程状态 创建 就绪 运行 阻塞 终止  进程终止过程 标志该进程未结束，等待资源回收 读取进程PCB，检查进程状态 若为运行状态，立即停止运行，并标志结束为真 检查是否有子孙进程，停止所有子孙进程 将资源全部释放给系统或父进程 移除队列  特殊进程僵尸进程是指子进程结束，父进程没有回收子进程的PCB，导致子进程仍存在系统中，该子进程称为僵尸进程 孤儿进程父进程退出，子进程仍在运行，子进程">
+<meta name="keywords" content="进程">
 <meta property="og:type" content="article">
-<meta property="og:title" content="网络IO模型复习">
-<meta property="og:url" content="http://yoursite.com/2019/02/24/网络IO模型复习/index.html">
+<meta property="og:title" content="进程复习">
+<meta property="og:url" content="http://yoursite.com/2019/02/24/进程复习/index.html">
 <meta property="og:site_name" content="Young">
-<meta property="og:description" content="网络IO模型什么是同步IO，什么是异步IO 同步IO： 用户进程必须要等待IO操作完成之后才能继续执行。 异步IO： 用户进程无需等待IO操作完成，提交IO请求之后可以继续执行。  阻塞IO、非阻塞IO、多路IO复用、异步IO网络IO请求分为两阶段，分别为（1）数据准备阶段和（2）数据拷贝阶段，用户进程提出IO请求后调用内核进程准备数据，数据准备完毕后内核进程将数据拷贝到用户进程指定位置，到此完成">
+<meta property="og:description" content="进程复习进程状态 创建 就绪 运行 阻塞 终止  进程终止过程 标志该进程未结束，等待资源回收 读取进程PCB，检查进程状态 若为运行状态，立即停止运行，并标志结束为真 检查是否有子孙进程，停止所有子孙进程 将资源全部释放给系统或父进程 移除队列  特殊进程僵尸进程是指子进程结束，父进程没有回收子进程的PCB，导致子进程仍存在系统中，该子进程称为僵尸进程 孤儿进程父进程退出，子进程仍在运行，子进程">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-02-24T06:45:29.685Z">
+<meta property="og:updated_time" content="2019-02-24T07:49:11.327Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="网络IO模型复习">
-<meta name="twitter:description" content="网络IO模型什么是同步IO，什么是异步IO 同步IO： 用户进程必须要等待IO操作完成之后才能继续执行。 异步IO： 用户进程无需等待IO操作完成，提交IO请求之后可以继续执行。  阻塞IO、非阻塞IO、多路IO复用、异步IO网络IO请求分为两阶段，分别为（1）数据准备阶段和（2）数据拷贝阶段，用户进程提出IO请求后调用内核进程准备数据，数据准备完毕后内核进程将数据拷贝到用户进程指定位置，到此完成">
+<meta name="twitter:title" content="进程复习">
+<meta name="twitter:description" content="进程复习进程状态 创建 就绪 运行 阻塞 终止  进程终止过程 标志该进程未结束，等待资源回收 读取进程PCB，检查进程状态 若为运行状态，立即停止运行，并标志结束为真 检查是否有子孙进程，停止所有子孙进程 将资源全部释放给系统或父进程 移除队列  特殊进程僵尸进程是指子进程结束，父进程没有回收子进程的PCB，导致子进程仍存在系统中，该子进程称为僵尸进程 孤儿进程父进程退出，子进程仍在运行，子进程">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/02/24/网络IO模型复习/">
+  <link rel="canonical" href="http://yoursite.com/2019/02/24/进程复习/">
 
 
 
@@ -155,7 +155,7 @@
   };
 </script>
 
-  <title>网络IO模型复习 | Young</title>
+  <title>进程复习 | Young</title>
   
 
 
@@ -382,7 +382,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/24/网络IO模型复习/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/24/进程复习/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Want Young">
@@ -399,7 +399,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">网络IO模型复习
+          <h1 class="post-title" itemprop="name headline">进程复习
               
             
           </h1>
@@ -424,7 +424,7 @@
                 
               
 
-              <time title="创建时间：2019-02-24 13:54:34 / 修改时间：14:45:29" itemprop="dateCreated datePublished" datetime="2019-02-24T13:54:34+08:00">2019-02-24</time>
+              <time title="创建时间：2019-02-24 14:48:50 / 修改时间：15:49:11" itemprop="dateCreated datePublished" datetime="2019-02-24T14:48:50+08:00">2019-02-24</time>
             
 
             
@@ -446,7 +446,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/网络/" itemprop="url" rel="index"><span itemprop="name">网络</span></a></span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/操作系统/" itemprop="url" rel="index"><span itemprop="name">操作系统</span></a></span>
 
                 
                 
@@ -480,43 +480,77 @@
       
 
       
-        <h1 id="网络IO模型"><a href="#网络IO模型" class="headerlink" title="网络IO模型"></a>网络IO模型</h1><h2 id="什么是同步IO，什么是异步IO"><a href="#什么是同步IO，什么是异步IO" class="headerlink" title="什么是同步IO，什么是异步IO"></a>什么是同步IO，什么是异步IO</h2><ul>
-<li>同步IO： 用户进程必须要等待IO操作完成之后才能继续执行。</li>
-<li>异步IO： 用户进程无需等待IO操作完成，提交IO请求之后可以继续执行。</li>
+        <h1 id="进程复习"><a href="#进程复习" class="headerlink" title="进程复习"></a>进程复习</h1><h2 id="进程状态"><a href="#进程状态" class="headerlink" title="进程状态"></a>进程状态</h2><ol>
+<li>创建</li>
+<li>就绪</li>
+<li>运行</li>
+<li>阻塞</li>
+<li>终止</li>
+</ol>
+<h2 id="进程终止过程"><a href="#进程终止过程" class="headerlink" title="进程终止过程"></a>进程终止过程</h2><ol>
+<li>标志该进程未结束，等待资源回收</li>
+<li>读取进程PCB，检查进程状态</li>
+<li>若为运行状态，立即停止运行，并标志结束为真</li>
+<li>检查是否有子孙进程，停止所有子孙进程</li>
+<li>将资源全部释放给系统或父进程</li>
+<li>移除队列</li>
+</ol>
+<h2 id="特殊进程"><a href="#特殊进程" class="headerlink" title="特殊进程"></a>特殊进程</h2><h3 id="僵尸进程"><a href="#僵尸进程" class="headerlink" title="僵尸进程"></a>僵尸进程</h3><p>是指子进程结束，父进程没有回收子进程的PCB，导致子进程仍存在系统中，该子进程称为僵尸进程</p>
+<h3 id="孤儿进程"><a href="#孤儿进程" class="headerlink" title="孤儿进程"></a>孤儿进程</h3><p>父进程退出，子进程仍在运行，子进程失去管理者，称为孤儿进程。</p>
+<h3 id="守护进程"><a href="#守护进程" class="headerlink" title="守护进程"></a>守护进程</h3><p>由用户终端创建，脱离该控制终端后运行于系统后台，运行周期较长，控制权交由系统管理的用户进程。</p>
+<h4 id="守护进程创建"><a href="#守护进程创建" class="headerlink" title="守护进程创建"></a>守护进程创建</h4><ol>
+<li>创建子进程，父进程手动退出。</li>
+<li>子进程中调用setid创建会话，目的是防止1号进程将该进程当做孤儿进程回收掉。每个进程都有一个进程组ID并被一个会话管理，通常一个会话开始于用户登录，终止于用户退出。setid有三个作用：<ul>
+<li>让进程摆脱原会话控制</li>
+<li>让进程摆脱原进程组控制</li>
+<li>让进程摆脱原控制终端的控制</li>
 </ul>
-<h2 id="阻塞IO、非阻塞IO、多路IO复用、异步IO"><a href="#阻塞IO、非阻塞IO、多路IO复用、异步IO" class="headerlink" title="阻塞IO、非阻塞IO、多路IO复用、异步IO"></a>阻塞IO、非阻塞IO、多路IO复用、异步IO</h2><p>网络IO请求分为两阶段，分别为（1）数据准备阶段和（2）数据拷贝阶段，用户进程提出IO请求后调用内核进程准备数据，数据准备完毕后内核进程将数据拷贝到用户进程指定位置，到此完成IO操作。</p>
-<h3 id="阻塞IO"><a href="#阻塞IO" class="headerlink" title="阻塞IO"></a>阻塞IO</h3><ol>
-<li>数据准备阶段和数据拷贝阶段用户进程都阻塞，直到数据拷贝完成用户进程才能继续进行。</li>
-<li>阻塞发生在内核函数调用。</li>
+</li>
+<li>改变当前目录为根目录</li>
+<li>重设文件权限</li>
+<li>关闭原父进程打开的文件描述符</li>
 </ol>
-<h3 id="非阻塞IO"><a href="#非阻塞IO" class="headerlink" title="非阻塞IO"></a>非阻塞IO</h3><ol>
-<li>数据准备阶段用户进程调用内核函数后内核进程立即返回一个值，通知用户进程数据没有准备好或者发生错误</li>
-<li>用户进程在数据准备阶段需要不停的调用内核函数询问数据是否准备好。</li>
-<li>直到内核进程返回数据已准备完成，可以开始数据拷贝时，用户进程阻塞，内核进程开始数据拷贝。</li>
-<li>拷贝结束，用户进程继续执行。</li>
+<h2 id="进程通信"><a href="#进程通信" class="headerlink" title="进程通信"></a>进程通信</h2><h3 id="管道"><a href="#管道" class="headerlink" title="管道"></a>管道</h3><ol>
+<li>半双工共享内存</li>
+<li>只能用于父子进程或兄弟进程（由于匿名性）</li>
 </ol>
-<h3 id="多路IO复用"><a href="#多路IO复用" class="headerlink" title="多路IO复用"></a>多路IO复用</h3><ol>
-<li>大多数操作系统都是用这一方式。</li>
-<li>阻塞IO中用户进程阻塞在系统内核函数调用，当多个用户进程同时阻塞时会耗费大量系统资源，为了解决这一问题，多路IO复用在数据准备阶段提供select函数管理这些阻塞进程。即多路IO复用在数据准备阶段阻塞与select函数，一个select函数管理多个阻塞进程，并不断轮询，一旦一个用户进程的数据准备完成select即刻唤醒该进程进行数据拷贝。</li>
-<li>select函数管理的用户进程数有默认上限，一般为1024或2048，不同操作系统一般会提供另外的两个函数代替它，poll和epoll函数。</li>
+<h3 id="具名管道"><a href="#具名管道" class="headerlink" title="具名管道"></a>具名管道</h3><p>使用路径名确定的管道，摆脱了匿名限制</p>
+<ol>
+<li>可以使互不相关的两个进程通信</li>
+<li>使用路径访问管道，通信的进程可以像读写文件一样访问管道</li>
+<li>遵循FIFO原则，摆脱半双工限制</li>
 </ol>
-<h3 id="异步IO"><a href="#异步IO" class="headerlink" title="异步IO"></a>异步IO</h3><ol>
-<li>数据准备阶段和数据拷贝阶段均不发生阻塞，内核进程将数据准备好并主动将数据拷贝到用户数据缓冲区后向用户进程发送IO完毕信号，用户进程主动处理数据，在此期间用户进程可以干别的事情而不发生阻塞。</li>
+<h3 id="消息队列"><a href="#消息队列" class="headerlink" title="消息队列"></a>消息队列</h3><p>由系统管理的消息链表</p>
+<ol>
+<li>独立于收发进程存在</li>
+<li>消除了同步的困难</li>
+<li>接收端可以有选择的接受数据</li>
 </ol>
-<h2 id="select函数、poll函数、epoll函数区别"><a href="#select函数、poll函数、epoll函数区别" class="headerlink" title="select函数、poll函数、epoll函数区别"></a>select函数、poll函数、epoll函数区别</h2><h3 id="select函数"><a href="#select函数" class="headerlink" title="select函数"></a>select函数</h3><ol>
-<li>select函数使用整型变量保存当前管理的用户进程数，使用句柄指针指向可读进程集合、可写进程集合以及错误进程集合，使用毫秒级定时器结构体进行轮询计时。</li>
+<h3 id="共享内存"><a href="#共享内存" class="headerlink" title="共享内存"></a>共享内存</h3><ol>
+<li>通信快速，而且效率高</li>
+<li>没有提供同步机制</li>
 </ol>
-<h3 id="poll函数"><a href="#poll函数" class="headerlink" title="poll函数"></a>poll函数</h3><ol>
-<li>使用事件代码代替select可读可写错误指针，能够监听更多种事件，将输入输出事件分开，下次进入时不必重新初始化。</li>
-<li>计时器采用整形变量，计时器精度变低，只能执行秒级计时。</li>
-<li>可监控的数据量远大于select</li>
+<h3 id="信号量"><a href="#信号量" class="headerlink" title="信号量"></a>信号量</h3><p>结合共享内存可以解决同步问题</p>
+<h2 id="进程调度"><a href="#进程调度" class="headerlink" title="进程调度"></a>进程调度</h2><ol>
+<li>FCFS先来先服务</li>
+<li>短作业优先</li>
+<li>优先级调度</li>
+<li>高响应比优先</li>
+<li>时间片轮转</li>
+<li>多级队列调度（多优先级队列+时间片轮转）</li>
 </ol>
-<h3 id="epoll函数"><a href="#epoll函数" class="headerlink" title="epoll函数"></a>epoll函数</h3><ol>
-<li>定时器超时后不必全局扫描管理的进程，epoll函数只对活跃的socket进行操作，每个socket的数据准备好后会调用回调函数使socket变为活跃。</li>
-<li>使用mmap共享内存加速内核和用户空间消息传递</li>
+<h2 id="进程的同步和互斥"><a href="#进程的同步和互斥" class="headerlink" title="进程的同步和互斥"></a>进程的同步和互斥</h2><ul>
+<li>同步：进程之间需要按照一定的次序进行</li>
+<li>互斥：进程不能同时访问临界区</li>
+</ul>
+<h2 id="信号量解决的问题"><a href="#信号量解决的问题" class="headerlink" title="信号量解决的问题"></a>信号量解决的问题</h2><h3 id="生产者消费者问题（全部互斥）"><a href="#生产者消费者问题（全部互斥）" class="headerlink" title="生产者消费者问题（全部互斥）"></a>生产者消费者问题（全部互斥）</h3><h3 id="读者写者问题（允许读读）"><a href="#读者写者问题（允许读读）" class="headerlink" title="读者写者问题（允许读读）"></a>读者写者问题（允许读读）</h3><h3 id="哲学家进餐问题"><a href="#哲学家进餐问题" class="headerlink" title="哲学家进餐问题"></a>哲学家进餐问题</h3><h2 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h2><h3 id="死锁条件"><a href="#死锁条件" class="headerlink" title="死锁条件"></a>死锁条件</h3><ol>
+<li>非抢占</li>
+<li>不可剥夺</li>
+<li>链式等待，循环等待</li>
+<li>互斥条件，资源唯一</li>
 </ol>
-<h2 id="水平触发和边缘触发"><a href="#水平触发和边缘触发" class="headerlink" title="水平触发和边缘触发"></a>水平触发和边缘触发</h2><h3 id="水平触发"><a href="#水平触发" class="headerlink" title="水平触发"></a>水平触发</h3><p>只要缓冲区有数据准备好就传递就绪信号</p>
-<h3 id="边缘触发"><a href="#边缘触发" class="headerlink" title="边缘触发"></a>边缘触发</h3><p>只有新数据到来才会传递就绪信号，没有新数据到来时尽管有旧数据没有被读取也不通知</p>
+<h3 id="死锁预防"><a href="#死锁预防" class="headerlink" title="死锁预防"></a>死锁预防</h3><p>破坏四个条件</p>
+<h3 id="解决死锁的算法（死锁避免）"><a href="#解决死锁的算法（死锁避免）" class="headerlink" title="解决死锁的算法（死锁避免）"></a>解决死锁的算法（死锁避免）</h3><p>银行家算法，判断贷款后是否是安全状态，以此作为发放贷款的准则</p>
 
       
     </div>
@@ -551,7 +585,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/网络IO/" rel="tag"># 网络IO</a>
+            <a href="/tags/进程/" rel="tag"># 进程</a>
           
         </div>
       
@@ -564,8 +598,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/02/23/实习海投升级记录/" rel="next" title="实习海投升级记录">
-                <i class="fa fa-chevron-left"></i> 实习海投升级记录
+              <a href="/2019/02/24/网络IO模型复习/" rel="next" title="网络IO模型复习">
+                <i class="fa fa-chevron-left"></i> 网络IO模型复习
               </a>
             
           </div>
@@ -573,10 +607,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/02/24/进程复习/" rel="prev" title="进程复习">
-                进程复习 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -763,7 +793,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#网络IO模型"><span class="nav-number">1.</span> <span class="nav-text">网络IO模型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是同步IO，什么是异步IO"><span class="nav-number">1.1.</span> <span class="nav-text">什么是同步IO，什么是异步IO</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#阻塞IO、非阻塞IO、多路IO复用、异步IO"><span class="nav-number">1.2.</span> <span class="nav-text">阻塞IO、非阻塞IO、多路IO复用、异步IO</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#阻塞IO"><span class="nav-number">1.2.1.</span> <span class="nav-text">阻塞IO</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#非阻塞IO"><span class="nav-number">1.2.2.</span> <span class="nav-text">非阻塞IO</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多路IO复用"><span class="nav-number">1.2.3.</span> <span class="nav-text">多路IO复用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#异步IO"><span class="nav-number">1.2.4.</span> <span class="nav-text">异步IO</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#select函数、poll函数、epoll函数区别"><span class="nav-number">1.3.</span> <span class="nav-text">select函数、poll函数、epoll函数区别</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#select函数"><span class="nav-number">1.3.1.</span> <span class="nav-text">select函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#poll函数"><span class="nav-number">1.3.2.</span> <span class="nav-text">poll函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#epoll函数"><span class="nav-number">1.3.3.</span> <span class="nav-text">epoll函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#水平触发和边缘触发"><span class="nav-number">1.4.</span> <span class="nav-text">水平触发和边缘触发</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#水平触发"><span class="nav-number">1.4.1.</span> <span class="nav-text">水平触发</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#边缘触发"><span class="nav-number">1.4.2.</span> <span class="nav-text">边缘触发</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#进程复习"><span class="nav-number">1.</span> <span class="nav-text">进程复习</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#进程状态"><span class="nav-number">1.1.</span> <span class="nav-text">进程状态</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程终止过程"><span class="nav-number">1.2.</span> <span class="nav-text">进程终止过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#特殊进程"><span class="nav-number">1.3.</span> <span class="nav-text">特殊进程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#僵尸进程"><span class="nav-number">1.3.1.</span> <span class="nav-text">僵尸进程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#孤儿进程"><span class="nav-number">1.3.2.</span> <span class="nav-text">孤儿进程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#守护进程"><span class="nav-number">1.3.3.</span> <span class="nav-text">守护进程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#守护进程创建"><span class="nav-number">1.3.3.1.</span> <span class="nav-text">守护进程创建</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程通信"><span class="nav-number">1.4.</span> <span class="nav-text">进程通信</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#管道"><span class="nav-number">1.4.1.</span> <span class="nav-text">管道</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#具名管道"><span class="nav-number">1.4.2.</span> <span class="nav-text">具名管道</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#消息队列"><span class="nav-number">1.4.3.</span> <span class="nav-text">消息队列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#共享内存"><span class="nav-number">1.4.4.</span> <span class="nav-text">共享内存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#信号量"><span class="nav-number">1.4.5.</span> <span class="nav-text">信号量</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程调度"><span class="nav-number">1.5.</span> <span class="nav-text">进程调度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程的同步和互斥"><span class="nav-number">1.6.</span> <span class="nav-text">进程的同步和互斥</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#信号量解决的问题"><span class="nav-number">1.7.</span> <span class="nav-text">信号量解决的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#生产者消费者问题（全部互斥）"><span class="nav-number">1.7.1.</span> <span class="nav-text">生产者消费者问题（全部互斥）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#读者写者问题（允许读读）"><span class="nav-number">1.7.2.</span> <span class="nav-text">读者写者问题（允许读读）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#哲学家进餐问题"><span class="nav-number">1.7.3.</span> <span class="nav-text">哲学家进餐问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#死锁"><span class="nav-number">1.8.</span> <span class="nav-text">死锁</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#死锁条件"><span class="nav-number">1.8.1.</span> <span class="nav-text">死锁条件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#死锁预防"><span class="nav-number">1.8.2.</span> <span class="nav-text">死锁预防</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解决死锁的算法（死锁避免）"><span class="nav-number">1.8.3.</span> <span class="nav-text">解决死锁的算法（死锁避免）</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
