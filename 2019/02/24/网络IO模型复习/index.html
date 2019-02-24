@@ -127,28 +127,25 @@
 
 
 
-  <meta name="description" content="MySQL逻辑架构与查询优化复习MySQL逻辑架构    MySQL逻辑架构整体分为三层，最上层为客户端层，并非MySQL所独有，诸如：连接处理、授权认证、安全等功能均在这一层处理。  MySQL大多数核心服务均在中间这一层，包括查询解析、分析、优化、缓存、内置函数(比如：时间、数学、加密等函数)。所有的跨存储引擎的功能也在这一层实现：存储过程、触发器、视图等。  最下层为存储引擎，其负责MySQ">
-<meta name="keywords" content="MySQL检索">
+  <meta name="description" content="网络IO模型什么是同步IO，什么是异步IO 同步IO： 用户进程必须要等待IO操作完成之后才能继续执行。 异步IO： 用户进程无需等待IO操作完成，提交IO请求之后可以继续执行。  阻塞IO、非阻塞IO、多路IO复用、异步IO网络IO请求分为两阶段，分别为（1）数据准备阶段和（2）数据拷贝阶段，用户进程提出IO请求后调用内核进程准备数据，数据准备完毕后内核进程将数据拷贝到用户进程指定位置，到此完成">
+<meta name="keywords" content="网络IO">
 <meta property="og:type" content="article">
-<meta property="og:title" content="MySQL逻辑架构与查询优化复习">
-<meta property="og:url" content="http://yoursite.com/2019/02/21/MySQL逻辑架构和查询优化复习/index.html">
+<meta property="og:title" content="网络IO模型复习">
+<meta property="og:url" content="http://yoursite.com/2019/02/24/网络IO模型复习/index.html">
 <meta property="og:site_name" content="Young">
-<meta property="og:description" content="MySQL逻辑架构与查询优化复习MySQL逻辑架构    MySQL逻辑架构整体分为三层，最上层为客户端层，并非MySQL所独有，诸如：连接处理、授权认证、安全等功能均在这一层处理。  MySQL大多数核心服务均在中间这一层，包括查询解析、分析、优化、缓存、内置函数(比如：时间、数学、加密等函数)。所有的跨存储引擎的功能也在这一层实现：存储过程、触发器、视图等。  最下层为存储引擎，其负责MySQ">
+<meta property="og:description" content="网络IO模型什么是同步IO，什么是异步IO 同步IO： 用户进程必须要等待IO操作完成之后才能继续执行。 异步IO： 用户进程无需等待IO操作完成，提交IO请求之后可以继续执行。  阻塞IO、非阻塞IO、多路IO复用、异步IO网络IO请求分为两阶段，分别为（1）数据准备阶段和（2）数据拷贝阶段，用户进程提出IO请求后调用内核进程准备数据，数据准备完毕后内核进程将数据拷贝到用户进程指定位置，到此完成">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://yoursite.com/images/Mysql逻辑架构.png">
-<meta property="og:image" content="http://yoursite.com/images/MySQL查询过程.png">
-<meta property="og:updated_time" content="2019-02-21T02:46:09.967Z">
+<meta property="og:updated_time" content="2019-02-24T06:45:29.685Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="MySQL逻辑架构与查询优化复习">
-<meta name="twitter:description" content="MySQL逻辑架构与查询优化复习MySQL逻辑架构    MySQL逻辑架构整体分为三层，最上层为客户端层，并非MySQL所独有，诸如：连接处理、授权认证、安全等功能均在这一层处理。  MySQL大多数核心服务均在中间这一层，包括查询解析、分析、优化、缓存、内置函数(比如：时间、数学、加密等函数)。所有的跨存储引擎的功能也在这一层实现：存储过程、触发器、视图等。  最下层为存储引擎，其负责MySQ">
-<meta name="twitter:image" content="http://yoursite.com/images/Mysql逻辑架构.png">
+<meta name="twitter:title" content="网络IO模型复习">
+<meta name="twitter:description" content="网络IO模型什么是同步IO，什么是异步IO 同步IO： 用户进程必须要等待IO操作完成之后才能继续执行。 异步IO： 用户进程无需等待IO操作完成，提交IO请求之后可以继续执行。  阻塞IO、非阻塞IO、多路IO复用、异步IO网络IO请求分为两阶段，分别为（1）数据准备阶段和（2）数据拷贝阶段，用户进程提出IO请求后调用内核进程准备数据，数据准备完毕后内核进程将数据拷贝到用户进程指定位置，到此完成">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/02/21/MySQL逻辑架构和查询优化复习/">
+  <link rel="canonical" href="http://yoursite.com/2019/02/24/网络IO模型复习/">
 
 
 
@@ -158,7 +155,7 @@
   };
 </script>
 
-  <title>MySQL逻辑架构与查询优化复习 | Young</title>
+  <title>网络IO模型复习 | Young</title>
   
 
 
@@ -385,7 +382,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/21/MySQL逻辑架构和查询优化复习/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/24/网络IO模型复习/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Want Young">
@@ -402,7 +399,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">MySQL逻辑架构与查询优化复习
+          <h1 class="post-title" itemprop="name headline">网络IO模型复习
               
             
           </h1>
@@ -427,7 +424,7 @@
                 
               
 
-              <time title="创建时间：2019-02-21 09:44:27 / 修改时间：10:46:09" itemprop="dateCreated datePublished" datetime="2019-02-21T09:44:27+08:00">2019-02-21</time>
+              <time title="创建时间：2019-02-24 13:54:34 / 修改时间：14:45:29" itemprop="dateCreated datePublished" datetime="2019-02-24T13:54:34+08:00">2019-02-24</time>
             
 
             
@@ -449,7 +446,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/数据库/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a></span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/网络/" itemprop="url" rel="index"><span itemprop="name">网络</span></a></span>
 
                 
                 
@@ -483,29 +480,44 @@
       
 
       
-        <h1 id="MySQL逻辑架构与查询优化复习"><a href="#MySQL逻辑架构与查询优化复习" class="headerlink" title="MySQL逻辑架构与查询优化复习"></a>MySQL逻辑架构与查询优化复习</h1><h2 id="MySQL逻辑架构"><a href="#MySQL逻辑架构" class="headerlink" title="MySQL逻辑架构"></a>MySQL逻辑架构</h2><blockquote>
-<p><img src="/images/Mysql逻辑架构.png" alt=""></p>
-</blockquote>
-<ul>
-<li><p>MySQL逻辑架构整体分为三层，最上层为客户端层，并非MySQL所独有，诸如：连接处理、授权认证、安全等功能均在这一层处理。</p>
-</li>
-<li><p>MySQL大多数核心服务均在中间这一层，包括查询解析、分析、优化、缓存、内置函数(比如：时间、数学、加密等函数)。所有的跨存储引擎的功能也在这一层实现：存储过程、触发器、视图等。</p>
-</li>
-<li><p>最下层为存储引擎，其负责MySQL中的数据存储和提取。和Linux下的文件系统类似，每种存储引擎都有其优势和劣势。中间的服务层通过API与存储引擎通信，这些API接口屏蔽了不同存储引擎间的差异。</p>
-</li>
+        <h1 id="网络IO模型"><a href="#网络IO模型" class="headerlink" title="网络IO模型"></a>网络IO模型</h1><h2 id="什么是同步IO，什么是异步IO"><a href="#什么是同步IO，什么是异步IO" class="headerlink" title="什么是同步IO，什么是异步IO"></a>什么是同步IO，什么是异步IO</h2><ul>
+<li>同步IO： 用户进程必须要等待IO操作完成之后才能继续执行。</li>
+<li>异步IO： 用户进程无需等待IO操作完成，提交IO请求之后可以继续执行。</li>
 </ul>
-<h2 id="MySQL查询过程"><a href="#MySQL查询过程" class="headerlink" title="MySQL查询过程"></a>MySQL查询过程</h2><blockquote>
-<p><img src="/images/MySQL查询过程.png" alt=""></p>
-</blockquote>
-<h3 id="客户端-服务端通信协议"><a href="#客户端-服务端通信协议" class="headerlink" title="客户端/服务端通信协议"></a>客户端/服务端通信协议</h3><ul>
-<li><p>MySQL客户端/服务端通信协议是“半双工”的：在任一时刻，要么是服务器向客户端发送数据，要么是客户端向服务器发送数据，这两个动作不能同时发生。一旦一端开始发送消息，另一端要接收完整个消息才能响应它，所以我们无法也无须将一个消息切成小块独立发送，也没有办法进行流量控制。</p>
-</li>
-<li><p>客户端用一个单独的数据包将查询请求发送给服务器，所以当查询语句很长的时候，需要设置max_allowed_packet参数。但是需要注意的是，如果查询实在是太大，服务端会拒绝接收更多数据并抛出异常。</p>
-</li>
-<li><p>与之相反的是，服务器响应给用户的数据通常会很多，由多个数据包组成。但是当服务器响应客户端请求时，客户端必须完整的接收整个返回结果，而不能简单的只取前面几条结果，然后让服务器停止发送。因而在实际开发中，尽量保持查询简单且只返回必需的数据，减小通信间数据 包的大小和数量是一个非常好的习惯，这也是查询中尽量避免使用SELECT *以及加上LIMIT限制的原因之一。</p>
-</li>
-</ul>
-<h3 id="查询缓存"><a href="#查询缓存" class="headerlink" title="查询缓存"></a>查询缓存</h3>
+<h2 id="阻塞IO、非阻塞IO、多路IO复用、异步IO"><a href="#阻塞IO、非阻塞IO、多路IO复用、异步IO" class="headerlink" title="阻塞IO、非阻塞IO、多路IO复用、异步IO"></a>阻塞IO、非阻塞IO、多路IO复用、异步IO</h2><p>网络IO请求分为两阶段，分别为（1）数据准备阶段和（2）数据拷贝阶段，用户进程提出IO请求后调用内核进程准备数据，数据准备完毕后内核进程将数据拷贝到用户进程指定位置，到此完成IO操作。</p>
+<h3 id="阻塞IO"><a href="#阻塞IO" class="headerlink" title="阻塞IO"></a>阻塞IO</h3><ol>
+<li>数据准备阶段和数据拷贝阶段用户进程都阻塞，直到数据拷贝完成用户进程才能继续进行。</li>
+<li>阻塞发生在内核函数调用。</li>
+</ol>
+<h3 id="非阻塞IO"><a href="#非阻塞IO" class="headerlink" title="非阻塞IO"></a>非阻塞IO</h3><ol>
+<li>数据准备阶段用户进程调用内核函数后内核进程立即返回一个值，通知用户进程数据没有准备好或者发生错误</li>
+<li>用户进程在数据准备阶段需要不停的调用内核函数询问数据是否准备好。</li>
+<li>直到内核进程返回数据已准备完成，可以开始数据拷贝时，用户进程阻塞，内核进程开始数据拷贝。</li>
+<li>拷贝结束，用户进程继续执行。</li>
+</ol>
+<h3 id="多路IO复用"><a href="#多路IO复用" class="headerlink" title="多路IO复用"></a>多路IO复用</h3><ol>
+<li>大多数操作系统都是用这一方式。</li>
+<li>阻塞IO中用户进程阻塞在系统内核函数调用，当多个用户进程同时阻塞时会耗费大量系统资源，为了解决这一问题，多路IO复用在数据准备阶段提供select函数管理这些阻塞进程。即多路IO复用在数据准备阶段阻塞与select函数，一个select函数管理多个阻塞进程，并不断轮询，一旦一个用户进程的数据准备完成select即刻唤醒该进程进行数据拷贝。</li>
+<li>select函数管理的用户进程数有默认上限，一般为1024或2048，不同操作系统一般会提供另外的两个函数代替它，poll和epoll函数。</li>
+</ol>
+<h3 id="异步IO"><a href="#异步IO" class="headerlink" title="异步IO"></a>异步IO</h3><ol>
+<li>数据准备阶段和数据拷贝阶段均不发生阻塞，内核进程将数据准备好并主动将数据拷贝到用户数据缓冲区后向用户进程发送IO完毕信号，用户进程主动处理数据，在此期间用户进程可以干别的事情而不发生阻塞。</li>
+</ol>
+<h2 id="select函数、poll函数、epoll函数区别"><a href="#select函数、poll函数、epoll函数区别" class="headerlink" title="select函数、poll函数、epoll函数区别"></a>select函数、poll函数、epoll函数区别</h2><h3 id="select函数"><a href="#select函数" class="headerlink" title="select函数"></a>select函数</h3><ol>
+<li>select函数使用整型变量保存当前管理的用户进程数，使用句柄指针指向可读进程集合、可写进程集合以及错误进程集合，使用毫秒级定时器结构体进行轮询计时。</li>
+</ol>
+<h3 id="poll函数"><a href="#poll函数" class="headerlink" title="poll函数"></a>poll函数</h3><ol>
+<li>使用事件代码代替select可读可写错误指针，能够监听更多种事件，将输入输出事件分开，下次进入时不必重新初始化。</li>
+<li>计时器采用整形变量，计时器精度变低，只能执行秒级计时。</li>
+<li>可监控的数据量远大于select</li>
+</ol>
+<h3 id="epoll函数"><a href="#epoll函数" class="headerlink" title="epoll函数"></a>epoll函数</h3><ol>
+<li>定时器超时后不必全局扫描管理的进程，epoll函数只对活跃的socket进行操作，每个socket的数据准备好后会调用回调函数使socket变为活跃。</li>
+<li>使用mmap共享内存加速内核和用户空间消息传递</li>
+</ol>
+<h2 id="水平触发和边缘触发"><a href="#水平触发和边缘触发" class="headerlink" title="水平触发和边缘触发"></a>水平触发和边缘触发</h2><h3 id="水平触发"><a href="#水平触发" class="headerlink" title="水平触发"></a>水平触发</h3><p>只要缓冲区有数据准备好就传递就绪信号</p>
+<h3 id="边缘触发"><a href="#边缘触发" class="headerlink" title="边缘触发"></a>边缘触发</h3><p>只有新数据到来才会传递就绪信号，没有新数据到来时尽管有旧数据没有被读取也不通知</p>
+
       
     </div>
 
@@ -539,7 +551,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/MySQL检索/" rel="tag"># MySQL检索</a>
+            <a href="/tags/网络IO/" rel="tag"># 网络IO</a>
           
         </div>
       
@@ -552,8 +564,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/02/20/京东2019校招笔试C-开发工程师笔试题总结/" rel="next" title="京东2019校招笔试C++开发工程师笔试题总结">
-                <i class="fa fa-chevron-left"></i> 京东2019校招笔试C++开发工程师笔试题总结
+              <a href="/2019/02/23/实习海投升级记录/" rel="next" title="实习海投升级记录">
+                <i class="fa fa-chevron-left"></i> 实习海投升级记录
               </a>
             
           </div>
@@ -561,10 +573,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/02/21/MySQL语句复习/" rel="prev" title="MySQL语句复习">
-                MySQL语句复习 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -749,7 +757,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#MySQL逻辑架构与查询优化复习"><span class="nav-number">1.</span> <span class="nav-text">MySQL逻辑架构与查询优化复习</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#MySQL逻辑架构"><span class="nav-number">1.1.</span> <span class="nav-text">MySQL逻辑架构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MySQL查询过程"><span class="nav-number">1.2.</span> <span class="nav-text">MySQL查询过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#客户端-服务端通信协议"><span class="nav-number">1.2.1.</span> <span class="nav-text">客户端/服务端通信协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查询缓存"><span class="nav-number">1.2.2.</span> <span class="nav-text">查询缓存</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#网络IO模型"><span class="nav-number">1.</span> <span class="nav-text">网络IO模型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是同步IO，什么是异步IO"><span class="nav-number">1.1.</span> <span class="nav-text">什么是同步IO，什么是异步IO</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#阻塞IO、非阻塞IO、多路IO复用、异步IO"><span class="nav-number">1.2.</span> <span class="nav-text">阻塞IO、非阻塞IO、多路IO复用、异步IO</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#阻塞IO"><span class="nav-number">1.2.1.</span> <span class="nav-text">阻塞IO</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#非阻塞IO"><span class="nav-number">1.2.2.</span> <span class="nav-text">非阻塞IO</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多路IO复用"><span class="nav-number">1.2.3.</span> <span class="nav-text">多路IO复用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#异步IO"><span class="nav-number">1.2.4.</span> <span class="nav-text">异步IO</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#select函数、poll函数、epoll函数区别"><span class="nav-number">1.3.</span> <span class="nav-text">select函数、poll函数、epoll函数区别</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#select函数"><span class="nav-number">1.3.1.</span> <span class="nav-text">select函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#poll函数"><span class="nav-number">1.3.2.</span> <span class="nav-text">poll函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#epoll函数"><span class="nav-number">1.3.3.</span> <span class="nav-text">epoll函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#水平触发和边缘触发"><span class="nav-number">1.4.</span> <span class="nav-text">水平触发和边缘触发</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#水平触发"><span class="nav-number">1.4.1.</span> <span class="nav-text">水平触发</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#边缘触发"><span class="nav-number">1.4.2.</span> <span class="nav-text">边缘触发</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
