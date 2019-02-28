@@ -382,6 +382,431 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/18/TCP-面试复习/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Want Young">
+      <meta itemprop="description" content="Change World, Change Life">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Young">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/02/18/TCP-面试复习/" class="post-title-link" itemprop="http://yoursite.com/page/2/index.html">TCP 面试复习</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-02-18 14:08:24 / 修改时间：17:34:49" itemprop="dateCreated datePublished" datetime="2019-02-18T14:08:24+08:00">2019-02-18</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/网络/" itemprop="url" rel="index"><span itemprop="name">网络</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="TCP-面试知识点复习"><a href="#TCP-面试知识点复习" class="headerlink" title="TCP 面试知识点复习"></a>TCP 面试知识点复习</h1><h2 id="TCP基本知识点"><a href="#TCP基本知识点" class="headerlink" title="TCP基本知识点"></a>TCP基本知识点</h2><h3 id="TCP提供面向连接的、可靠的端到端全双工字节流服务"><a href="#TCP提供面向连接的、可靠的端到端全双工字节流服务" class="headerlink" title="TCP提供面向连接的、可靠的端到端全双工字节流服务"></a>TCP提供面向连接的、可靠的端到端全双工字节流服务</h3><blockquote>
+<ul>
+<li>面向连接：发送和接收数据前要建立连接</li>
+<li>可靠性保证：超时重传、快速重传、数据校验（丢弃错误数据段并不发送确认信号）、 接收端对收到的数据段按照序号排序，丢弃重复数据段。</li>
+<li>端到端: 意味着不能广播和多播</li>
+<li>字节流：TCP不解释传输的数据类型，对字节流的解释由双方的应用层解释</li>
+<li>全双工服务：每一端都可以同时发送和接受</li>
+</ul>
+</blockquote>
+<h3 id="TCP头部"><a href="#TCP头部" class="headerlink" title="TCP头部"></a>TCP头部</h3><blockquote>
+<p><img src="/images/TCP报头.png" alt=""></p>
+</blockquote>
+<h3 id="TCP连接建立与断开"><a href="#TCP连接建立与断开" class="headerlink" title="TCP连接建立与断开"></a>TCP连接建立与断开</h3><p>TCP三次握手（序号同步）</p>
+<blockquote>
+<ol>
+<li>TCP连接建立初始，客户端发送SYN报文段，通知服务器端即将建立TCP连接，该TCP报文段仅包含TCP首部，不包含数据。首部包含客户端要建立TCP连接的端口号，当前ISN（初始序号）。32位确认序号为空。</li>
+<li>服务器接收到客户端的连接请求后获得了当前客户端的序号，然后发送包含服务器端初始序号的SYN报文段作为应答，此时首部32位确认序号设置为客户端序号+1表示确认， <strong>注意 ： SYN报文将占用一个序号。</strong></li>
+<li>客户端收到服务器应答后确定了此后发送报文段的序号，然后向服务器发送ack应答，设置32位确认序号为服务器ISN+1，表示自己已收到服务器初始序号，若此ACK丢失则造成服务器端超时重发SYN+ACK，而此时若客户端发送数据，怎造成半打开状态，触发服务器返回复位RST字段。<strong>注意 ：此时的确认报文段ACK不占用序号。</strong></li>
+</ol>
+</blockquote>
+<p>TCP四次挥手（全双工机制导致四次挥手）</p>
+<blockquote>
+<p><img src="/images/TCP断开.png" alt=""></p>
+<ol>
+<li>请求端应用层程序关闭导致TCP向服务器发送FIN报文段，包含当前序号以及确认序号， <strong>注意： FIN报文段将占用一个序号。</strong></li>
+<li>服务器收到客户端的FIN报文段后发送ACK确认此信号，32位确认序号设置为上一个FIN的0序号+1.一旦ACK丢失，发送FIN的发送端就会在一个MSL时间后超时重传FIN，接收端会重发ACK，（除了FIN之外的其他迟到报文都丢弃，因为可能是此端口上一个连接的迟到报文）。而发送通道仍处于打开阶段， 即此时服务器端仍可以发送数据。</li>
+<li>客户端收到服务器返回的ACK确认报文后关闭发送通道（是一种软关闭，仍可以发送ACK响应报文，但不能发送其他报文，即应用程序进程关闭，发送ACK是系统内核进程）。但仍可接受数据。此时若客户端未收到ACK确认报文（超时），客户端将重传FIN报文。服务器端通常此时会发送一个FIN报文段过来，客户端将发送ACK确认此报文已送达并关闭接收通道。</li>
+<li>服务器收到FIN确认ACK后等待2MSL，然后断开发送通道，否则将超时重传，当发送接收全部关闭（软关闭）时本次TCP连接将全部断开。</li>
+</ol>
+</blockquote>
+<h3 id="TCP连续报文段ACK延迟"><a href="#TCP连续报文段ACK延迟" class="headerlink" title="TCP连续报文段ACK延迟"></a>TCP连续报文段ACK延迟</h3><p>由于接收端能够根据序号进行排序，确认序号会返回当前已接收的最大报文序号。</p>
+<blockquote>
+<p><img src="/images/连续ACK延迟.png" alt=""></p>
+</blockquote>
+<h3 id="累计确认避免重传"><a href="#累计确认避免重传" class="headerlink" title="累计确认避免重传"></a>累计确认避免重传</h3><p>在超时发生之前后面的报文段确认到达，即使当前报文段确认丢失也不重传</p>
+<blockquote>
+<p><img src="/images/累积重传.png" alt=""></p>
+</blockquote>
+<h3 id="快速重传"><a href="#快速重传" class="headerlink" title="快速重传"></a>快速重传</h3><p>超时重传存在延迟高的问题，通过冗余ACK可以执行快速重传</p>
+<blockquote>
+<p><img src="/images/快速重传.png" alt=""></p>
+</blockquote>
+<h3 id="2MSL等待"><a href="#2MSL等待" class="headerlink" title="2MSL等待"></a>2MSL等待</h3><p>当TCP执行一个主动关闭后，并发回最后一个ACK，该连接必须在TIME_WAIT状态等待2倍的MSL时间，以防止最后的ACK丢失。在此期间收到的其他迟到报文均丢弃掉。</p>
+<h3 id="TCP半关闭，半打开"><a href="#TCP半关闭，半打开" class="headerlink" title="TCP半关闭，半打开"></a>TCP半关闭，半打开</h3><blockquote>
+<ul>
+<li>半关闭：一端结束它的发送之后还能接收来自另一端的能力，属于正常状态。</li>
+<li>半打开：一端结束了连接，而另一端不知道，一个常见的例子就是一端突然断电</li>
+</ul>
+</blockquote>
+<h3 id="平静时间"><a href="#平静时间" class="headerlink" title="平静时间"></a>平静时间</h3><blockquote>
+<p>平静时间是指TCP复位后MSL时间内不允许建立任何连接，这是为了防止主机在上一个2MSL等待时间内重启，导致上一个替身报文到达。但实际中由于TCP重启都会超过MSL，所以基本没有遵守这一规定的实现。</p>
+</blockquote>
+<h3 id="复位报文段-RST"><a href="#复位报文段-RST" class="headerlink" title="复位报文段 RST"></a>复位报文段 RST</h3><blockquote>
+<ul>
+<li>正常关闭：四次挥手发送FIN关闭连接。</li>
+<li>异常关闭：发送端发送RST报文到服务器端，服务器端不返回任何响应直接关闭连接并通知应用层连接被对方复位。RST报文包含一个序号和一个确认序号。</li>
+</ul>
+</blockquote>
+<h2 id="TCP流量控制、拥塞控制、慢启动"><a href="#TCP流量控制、拥塞控制、慢启动" class="headerlink" title="TCP流量控制、拥塞控制、慢启动"></a>TCP流量控制、拥塞控制、慢启动</h2><ul>
+<li><h4 id="TCP接收端使用滑动通告窗口控制发送端发送数据快慢"><a href="#TCP接收端使用滑动通告窗口控制发送端发送数据快慢" class="headerlink" title="TCP接收端使用滑动通告窗口控制发送端发送数据快慢"></a>TCP接收端使用滑动通告窗口控制发送端发送数据快慢</h4><blockquote>
+<p>滑动窗口的大小由接收端可用缓冲区大小决定，发送方通过接收方发送的ACK来获得窗口大小。</p>
+</blockquote>
+</li>
+<li><h4 id="TCP发送端使用拥塞窗口控制一次发送多少报文段。"><a href="#TCP发送端使用拥塞窗口控制一次发送多少报文段。" class="headerlink" title="TCP发送端使用拥塞窗口控制一次发送多少报文段。"></a>TCP发送端使用拥塞窗口控制一次发送多少报文段。</h4><blockquote>
+<p>通常TCP连接的两端处于不同的子网，连接传输的数据可能要经过多个路由转发以及速率较慢的链路，此时同时发送多个报文段（即使没有超过接收端通告窗口大小）是不合适的，中间路由器可能因缓存溢出而丢弃分组。</p>
+<ul>
+<li>慢启动： TCP连接之后发送端初始化拥塞窗口为一个报文段，当收到一个ACK时拥塞窗口扩大为两倍。直到ACK超时拥塞窗口重置，发送端取拥塞窗口和通告窗口的最小值作为发送上限。</li>
+</ul>
+</blockquote>
+</li>
+<li><h4 id="TCP拥塞避免算法"><a href="#TCP拥塞避免算法" class="headerlink" title="TCP拥塞避免算法"></a>TCP拥塞避免算法</h4><blockquote>
+<p>慢启动算法是在一个连接上发起数据流的方法，拥塞避免算法是一种处理分组丢失的方法。</p>
+<ul>
+<li>分组丢失有两种指示： 1. 发生超时  2. 收到重复的确认</li>
+<li>拥塞避免和拥塞窗口是发送端使用的流量控制，通告窗口是接收端使用的流量控制，前者是发送端对网络拥塞的估计，后者与接收方可用缓存大小有关。</li>
+</ul>
+<ol>
+<li>初始化拥塞窗口为1个报文段，拥塞避免上限ssthresh为65525字节。</li>
+<li>启动慢启动，拥塞窗口指数增长，直到发生拥塞（超时或收到重复ACK）设置ssthresh为拥塞窗口的一半，拥塞窗口设置为1个报文段。</li>
+<li>此后拥塞窗口的增长方式取决于是否超过拥塞避免上限ssthresh，当小于ssthresh时使用慢启动指数增长，当等于ssthresh时之后变为线性增长，每次加一。</li>
+</ol>
+</blockquote>
+</li>
+</ul>
+<p>拥塞避免算法其实就是在发生拥塞时设定一个慢启动增长上限。</p>
+<h2 id="常见面试题"><a href="#常见面试题" class="headerlink" title="常见面试题"></a>常见面试题</h2><h3 id="为什么TCP握手需要三次，两次和四次为什么不行（去掉最后一次确认）"><a href="#为什么TCP握手需要三次，两次和四次为什么不行（去掉最后一次确认）" class="headerlink" title="为什么TCP握手需要三次，两次和四次为什么不行（去掉最后一次确认）"></a>为什么TCP握手需要三次，两次和四次为什么不行（去掉最后一次确认）</h3><ol>
+<li>发送方发送SYN延迟，造成两次连接。</li>
+<li>接收方SYN，ACK确认丢失，造成连接失败</li>
+<li>四次会造成冗余，根据报头</li>
+</ol>
+<h3 id="为什么要有TIME-WAIT状态，即2MSL等待有必要吗？"><a href="#为什么要有TIME-WAIT状态，即2MSL等待有必要吗？" class="headerlink" title="为什么要有TIME_WAIT状态，即2MSL等待有必要吗？"></a>为什么要有TIME_WAIT状态，即2MSL等待有必要吗？</h3><p>保证可靠的连接关闭，防止出现半打开状态。</p>
+<h3 id="为什么TCP挥手需要四次"><a href="#为什么TCP挥手需要四次" class="headerlink" title="为什么TCP挥手需要四次"></a>为什么TCP挥手需要四次</h3><p>因为全双工的机制，必须两端均关闭。</p>
+<h3 id="TCP和UDP的区别和优缺点"><a href="#TCP和UDP的区别和优缺点" class="headerlink" title="TCP和UDP的区别和优缺点"></a>TCP和UDP的区别和优缺点</h3><ul>
+<li>TCP是面向连接的，UDP是无连接的</li>
+<li>TCP是可靠的，UDP是不可靠的</li>
+<li>TCP是点到点的， UDP可以多播和广播</li>
+<li>TCP有拥塞控制，UDP没有</li>
+<li>TCP耗费资源大，启动慢，UDP效率高，耗费资源小。</li>
+</ul>
+<h3 id="TCP拥塞控制"><a href="#TCP拥塞控制" class="headerlink" title="TCP拥塞控制"></a>TCP拥塞控制</h3><p>慢启动和拥塞避免机制</p>
+<h1 id="IP协议、ARP协议、ICMP协议以及Ping程序-基本知识"><a href="#IP协议、ARP协议、ICMP协议以及Ping程序-基本知识" class="headerlink" title="IP协议、ARP协议、ICMP协议以及Ping程序 基本知识"></a>IP协议、ARP协议、ICMP协议以及Ping程序 基本知识</h1><h4 id="不可靠"><a href="#不可靠" class="headerlink" title="不可靠"></a>不可靠</h4><blockquote>
+<p>IP协议是尽力而为的协议，可靠性由上层协议保证</p>
+</blockquote>
+<h4 id="无连接"><a href="#无连接" class="headerlink" title="无连接"></a>无连接</h4><blockquote>
+<p>IP协议不会维持连接，发送数据报可以是无序的</p>
+</blockquote>
+<h4 id="IP协议首部"><a href="#IP协议首部" class="headerlink" title="IP协议首部"></a>IP协议首部</h4><blockquote>
+<p>总长度字段16 bit限制IP数据报最大长度为65535字节。但实际上数据报都会被分片。<br>TTL生存周期： 一般为32或64， 是指经过多少跳之后数据报将会被丢弃，并向源主机发送ICMP通知。<br>TOS服务类型字段： 表明当前IP数据报应以什么样的服务发送，例如最小时延，最大吞吐，最高可靠，最小费用。</p>
+</blockquote>
+<h4 id="ARP"><a href="#ARP" class="headerlink" title="ARP"></a>ARP</h4><blockquote>
+<p>以广播方式请求目的IP的物理地址。</p>
+</blockquote>
+<h4 id="ICMP"><a href="#ICMP" class="headerlink" title="ICMP"></a>ICMP</h4><blockquote>
+<p>Internet控制报文协议，一般被IP协议或更高层使用，被封装在IP数据报内部。用于在IP主机、路由器之间传递控制消息。控制消息是指网络通不通、主机是否可达、路由器是否可用等网络本身的消息。这些控制消息虽然并不传输用户数据，但是对于用户数据的传递起着重要的作用。ICMP报文有两种：差错报告报文和询问报文。</p>
+</blockquote>
+<h4 id="Ping"><a href="#Ping" class="headerlink" title="Ping"></a>Ping</h4><blockquote>
+<p>用来测试网络中主机是否可达。该程序发送ICMP回显请求报文给目的主机，并等待返回ICMP回显应答。</p>
+<ul>
+<li>注意：  Ping程序不是一个用户级进程，它是由内核完成的。</li>
+</ul>
+<p>Ping程序会在ICMP报文中写入发送时间，当接收到回显报文时计算时间差来表示往返时间。<br>一般第一个往返时间值会比其他的大，这是由于目标IP没有在告诉ARP缓存中。</p>
+</blockquote>
+<h4 id="MTU"><a href="#MTU" class="headerlink" title="MTU"></a>MTU</h4><blockquote>
+<p>MTU: 链路层最大传输单元。它是指由于网络特性以及环境限制，每个网络都有自己的MTU限制。当IP层传下来的数据报大小超过这个限制，那么IP层就要进行分片。</p>
+<p>路径MTU: 当不同网络之间通信时，由于MTU的不同，在传输时数据报的分片情况也不同。</p>
+<ul>
+<li>路由选路不对称: A到B的路由和B到A的路由不同。</li>
+</ul>
+<p>由于路由可能是不对称的，所以发送和接受的分片情况也不一定相同，在发送前路径MTU会通过发现机制确定。</p>
+</blockquote>
+<h4 id="UDP协议"><a href="#UDP协议" class="headerlink" title="UDP协议"></a>UDP协议</h4><blockquote>
+<p>UDP首部包含源端口号和目的端口号，UDP端口号和TCP端口号是相互独立的。</p>
+<p>UDP首部包含覆盖首部和数据的校验字段，而IP首部校验字段只覆盖IP首部。UDP校验字段是可选的，TCP是必需的。</p>
+</blockquote>
+<h4 id="DNS系统"><a href="#DNS系统" class="headerlink" title="DNS系统"></a>DNS系统</h4><blockquote>
+<p>DNS查询大多数情况下使用UDP， 当数据报长度过大时使用TCP传输。响应端口号：53</p>
+</blockquote>
+<h1 id="HTTP基本知识点"><a href="#HTTP基本知识点" class="headerlink" title="HTTP基本知识点"></a>HTTP基本知识点</h1><h4 id="知识点1-无状态和持久化连接"><a href="#知识点1-无状态和持久化连接" class="headerlink" title="知识点1  无状态和持久化连接"></a>知识点1  无状态和持久化连接</h4><blockquote>
+<ul>
+<li>HTTP是无状态连接:不保留上一次传输的内容，即不对上一次的请求和响应做持久化处理</li>
+<li>HTTP1.1之后连接默认是持久化连接：即任意一端没有明确表明断开就一直保持TCP的连接状态</li>
+</ul>
+<p>* 持久化连接是指TCP的持久化连接，无状态连接是指请求和响应不做持久化处理</p>
+</blockquote>
+<h4 id="知识点2-报文和实体"><a href="#知识点2-报文和实体" class="headerlink" title="知识点2 报文和实体"></a>知识点2 报文和实体</h4><blockquote>
+<p>报文和实体，报文在传输时会被切割，切割之后的部分为一个实体，合在一起是报文</p>
+</blockquote>
+<h4 id="知识点3-HTTP报文首部"><a href="#知识点3-HTTP报文首部" class="headerlink" title="知识点3 HTTP报文首部"></a>知识点3 HTTP报文首部</h4><blockquote>
+<ul>
+<li>报文首部包含请求行或响应行 包含请求方法+http版本或者响应状态码+http版本，之后是各种首部字段，包括方法，地址等等。</li>
+</ul>
+</blockquote>
+<h4 id="知识点4-HTTP状态码"><a href="#知识点4-HTTP状态码" class="headerlink" title="知识点4 HTTP状态码"></a>知识点4 HTTP状态码</h4><blockquote>
+<h6 id="2XX-表示请求被正确处理"><a href="#2XX-表示请求被正确处理" class="headerlink" title="2XX 表示请求被正确处理"></a>2XX 表示请求被正确处理</h6><blockquote>
+<ul>
+<li>200: OK</li>
+<li>204: 无资源返回</li>
+<li>206: 返回一部分资源</li>
+</ul>
+</blockquote>
+<h6 id="3XX-表示重定向"><a href="#3XX-表示重定向" class="headerlink" title="3XX 表示重定向"></a>3XX 表示重定向</h6><blockquote>
+<ul>
+<li>301: 资源永久性重定向</li>
+<li>302: 资源临时性重定向</li>
+<li>303: 请以get方法临时重定向</li>
+<li>304: 资源没有改变，可以继续使用缓存</li>
+<li>307: 临时重定向，基本和302相同</li>
+</ul>
+</blockquote>
+<h6 id="4XX-客户端错误"><a href="#4XX-客户端错误" class="headerlink" title="4XX 客户端错误"></a>4XX 客户端错误</h6><blockquote>
+<ul>
+<li>400: 请求存在错误，服务器无法理解</li>
+<li>401: 需要身份认证，或认证失败</li>
+<li>403: 服务器拒绝访问，可能是无权限</li>
+<li>404: 服务器找不到该资源</li>
+</ul>
+</blockquote>
+<h6 id="5XX-服务器错误"><a href="#5XX-服务器错误" class="headerlink" title="5XX 服务器错误"></a>5XX 服务器错误</h6><blockquote>
+<ul>
+<li>500: 服务器执行请求时发生错误</li>
+<li>503: 服务器超负荷或停机维护，稍后访问</li>
+</ul>
+</blockquote>
+</blockquote>
+<h3 id="知识点5-代理，网关，隧道"><a href="#知识点5-代理，网关，隧道" class="headerlink" title="#知识点5 代理，网关，隧道"></a>#知识点5 代理，网关，隧道</h3><blockquote>
+<ul>
+<li>代理分为缓存代理（静态资源）和 非缓存代理</li>
+<li>网关可以转换http协议，例如访问数据库或者信用卡系统</li>
+<li>隧道的目的是建立一条安全的连接</li>
+</ul>
+</blockquote>
+<h4 id="知识点6-HTTPs"><a href="#知识点6-HTTPs" class="headerlink" title="知识点6 HTTPs"></a>知识点6 HTTPs</h4><blockquote>
+<p>安全的的http连接，信息加密（SSL或TSL），用户身份验证（SSL证书），确保报文完整<br>SSL采用公钥私钥加密，采用证书确认公钥安全</p>
+</blockquote>
+<h4 id="知识点7-Websocket"><a href="#知识点7-Websocket" class="headerlink" title="知识点7 Websocket"></a>知识点7 Websocket</h4><blockquote>
+<p>这是一种基于http协议的协议，旨在提高传输速度和质量，在http请求中发送协议转换请求切换协议为websocket，客户端请求连接后若服务器建立连接则之后将一直保留连接状态，报文首部也将压缩，服务器和客户端之间可随意传输信息，包括推送。</p>
+</blockquote>
+<h1 id="HTTP连接管理"><a href="#HTTP连接管理" class="headerlink" title="HTTP连接管理"></a>HTTP连接管理</h1><h2 id="HTTP连接"><a href="#HTTP连接" class="headerlink" title="HTTP连接"></a>HTTP连接</h2><blockquote>
+<p>HTTP默认使用TCP 80端口连接。</p>
+</blockquote>
+<h2 id="HTTP事务的时延"><a href="#HTTP事务的时延" class="headerlink" title="HTTP事务的时延"></a>HTTP事务的时延</h2><blockquote>
+<ol>
+<li><strong>TCP延迟确认</strong>造成的时延： 由于TCP发送数据需要接收端返回ACK确认报文，而ACK确认报文往往会很小，TCP延迟确认就会将ACK放到缓冲区，寻找能够捎带这个ACK的同方向数据报文，如果没找到则单独发送这个ACK，而这个过程会造成时延。尤其是HTTP具有双峰特征的请求应答行为更降低了捎带信息的可能。</li>
+<li><strong>Nagle算法： 鼓励TCP发送全尺寸的报文段。</strong> 为了提高网络利用率，Nagle算法会等待足够多的数据加载到缓冲区，将足够的TCP数据绑定到一起发送出去，除非所有发送的分组都被确认了才允许发送非全尺寸的分组。<strong>这会和TCP延迟确认造成冲突，延迟确认想要找到同方向的数据捎带ACK确认报文，而捎带ACK的报文在其他分组的ACK报文没有全部收到或者缓冲区尺寸不够之前不会发送出去。</strong></li>
+<li><strong>2MSL等待</strong>造成时延：TCP关闭一条连接时会进行2MSL等待，在2MSL时间内不允许建立相同ip相同端口的连接，这是为了防止迟到的报文影响新的连接。</li>
+</ol>
+</blockquote>
+<h2 id="HTTP解决时延的办法"><a href="#HTTP解决时延的办法" class="headerlink" title="HTTP解决时延的办法"></a>HTTP解决时延的办法</h2><blockquote>
+<ol>
+<li>并行连接： 串行化的连接可能会很慢，当一个页面中存在多个HTTP事务时需要建立多条连接同时加载资源。</li>
+<li>持久化连接： HTTP1.1之后所有的连接默认都是持久化的，当然服务器并不一定一直保持连接。持久化连接可以消除TCP连接时延和慢启动时延。</li>
+<li>管道化连接： 管道化连接必须保证连接是持久化的。它是指在发送一个事务时不必等待ACK确认即可发送下一个事务分组，这样可以减少网络环回延迟。<br><img src="/images/pipeline_persistent_lining.png" alt=""></li>
+</ol>
+</blockquote>
+<h1 id="HTTP识别、认证、安全"><a href="#HTTP识别、认证、安全" class="headerlink" title="HTTP识别、认证、安全"></a>HTTP识别、认证、安全</h1><h2 id="cookie机制"><a href="#cookie机制" class="headerlink" title="cookie机制"></a>cookie机制</h2><blockquote>
+<p>cookie是服务器识别用户的一种方式，分为会话cookie和持久cookie，区别在于会话cookie是临时的，关闭浏览器会删除cookie。</p>
+</blockquote>
+<blockquote>
+<p>cookie的不可跨域名性： 浏览器在访问一个网站时只会携带该网站的cookie，并且其他网站也不允许修改这个网站的cookie</p>
+</blockquote>
+<blockquote>
+<p>他人获得本机cookie会造成cookie欺骗，所以cookie不太安全。</p>
+</blockquote>
+<h2 id="session机制"><a href="#session机制" class="headerlink" title="session机制"></a>session机制</h2><blockquote>
+<p>session是服务器端保存客户端状态的机制。维持登录状态，更新用户是否活跃，对不活跃的用户删除其session。</p>
+</blockquote>
+<h1 id="HTTP常见面试题"><a href="#HTTP常见面试题" class="headerlink" title="HTTP常见面试题"></a>HTTP常见面试题</h1><h3 id="http常用方法"><a href="#http常用方法" class="headerlink" title="http常用方法"></a>http常用方法</h3><ul>
+<li>get</li>
+<li>post</li>
+<li>put</li>
+<li>head</li>
+<li>delete</li>
+<li>option</li>
+</ul>
+<h3 id="get-和-post-区别"><a href="#get-和-post-区别" class="headerlink" title="get 和 post 区别"></a>get 和 post 区别</h3><ul>
+<li>区别一：<br>get重点在从服务器上获取资源，post重点在向服务器发送数据；</li>
+<li>区别二：<br>get传输数据是通过URL请求，以field（字段）= value的形式，置于URL后，并用”?”连接，多个请求数据间用”\&amp;”连接，如<a href="http://127.0.0.1/Test/login.action?name=admin&amp;password=admin，这个过程用户是可见的；" target="_blank" rel="noopener">http://127.0.0.1/Test/login.action?name=admin&amp;password=admin，这个过程用户是可见的；</a><br>post传输数据通过Http的post机制，将字段与对应值封存在请求实体中发送给服务器，这个过程对用户是不可见的；</li>
+<li>区别三：<br>Get传输的数据量小，因为受URL长度限制，但效率较高；1024k<br>Post可以传输大量数据，所以上传文件时只能用Post方式；</li>
+<li>区别四：<br>get是不安全的，因为URL是可见的，可能会泄露私密信息，如密码等；<br>post较get安全性较高；</li>
+<li>区别五：<br>get方式只能支持ASCII字符，向服务器传的中文字符可能会乱码。<br>post支持标准字符集，可以正确传递中文字符。</li>
+</ul>
+<h3 id="HTTP请求报文与响应报文格式"><a href="#HTTP请求报文与响应报文格式" class="headerlink" title="HTTP请求报文与响应报文格式"></a>HTTP请求报文与响应报文格式</h3><ul>
+<li>请求报文包含三部分：</li>
+</ul>
+<ol>
+<li>请求行：包含请求方法、URI、HTTP版本信息</li>
+<li>请求首部字段</li>
+<li>请求内容实体</li>
+</ol>
+<ul>
+<li>响应报文包含三部分：</li>
+</ul>
+<ol>
+<li>状态行：包含HTTP版本、状态码、状态码的原因短语</li>
+<li>响应首部字段</li>
+<li>响应内容实体</li>
+</ol>
+<h3 id="HTTP1-1版本新特性"><a href="#HTTP1-1版本新特性" class="headerlink" title="HTTP1.1版本新特性"></a>HTTP1.1版本新特性</h3><p>a、默认持久连接节省通信量，只要客户端服务端任意一端没有明确提出断开TCP连接，就一直保持连接，可以发送多次HTTP请求</p>
+<p>b、管线化，客户端可以同时发出多个HTTP请求，而不用一个个等待响应</p>
+<p>c、断点续传原理</p>
+<h3 id="http优化"><a href="#http优化" class="headerlink" title="http优化"></a>http优化</h3><p>负载均衡和缓存代理</p>
+<h3 id="访问网址的过程"><a href="#访问网址的过程" class="headerlink" title="访问网址的过程"></a>访问网址的过程</h3><p>DNS-&gt; ip-&gt; 应答</p>
+<h3 id="http-keep-alive-超时与最大请求数"><a href="#http-keep-alive-超时与最大请求数" class="headerlink" title="http keep-alive 超时与最大请求数"></a>http keep-alive 超时与最大请求数</h3><h3 id="http请求报文和响应报文格式"><a href="#http请求报文和响应报文格式" class="headerlink" title="http请求报文和响应报文格式"></a>http请求报文和响应报文格式</h3><h3 id="ARP工作原理"><a href="#ARP工作原理" class="headerlink" title="ARP工作原理"></a>ARP工作原理</h3><h3 id="TTL-最大生存时间，经过一个路由器减一。"><a href="#TTL-最大生存时间，经过一个路由器减一。" class="headerlink" title="TTL 最大生存时间，经过一个路由器减一。"></a>TTL 最大生存时间，经过一个路由器减一。</h3>
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    <div>
+        
+    </div>
+    
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/16/算法总结-链表问题/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -2598,191 +3023,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/20/MySQL性能改善/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Want Young">
-      <meta itemprop="description" content="Change World, Change Life">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Young">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/12/20/MySQL性能改善/" class="post-title-link" itemprop="http://yoursite.com/page/2/index.html">MySQL性能改善</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-12-20 15:10:19" itemprop="dateCreated datePublished" datetime="2018-12-20T15:10:19+08:00">2018-12-20</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-12-31 21:38:36" itemprop="dateModified" datetime="2018-12-31T21:38:36+08:00">2018-12-31</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/数据库/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="性能分析"><a href="#性能分析" class="headerlink" title="性能分析"></a>性能分析</h1><ul>
-<li><p>总有多种方法实现一个SELECT语句，应当多试验联结，并，子查询来找出性能最好的一种方式。</p>
-</li>
-<li><p>使用EXPLAIN 子句让MySQL解释如何执行一条SELECT语句。</p>
-</li>
-<li>一般来说存储过程会比一条一条的执行SELECT要快。</li>
-<li>对于经常查询的表来说必须设置索引以加快检索速度。确定需要检索的列是有必要的。</li>
-<li>对于不经常被搜索的表不应该设置索引，索引能加快查询速度，但会损害插入、删除和更新数据的性能。</li>
-<li>LIKE很慢，一般来说使用FULLTEXT而不是LIKE。</li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    <div>
-        
-    </div>
-    
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2830,7 +3070,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">29</span>
+                    <span class="site-state-item-count">30</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2910,7 +3150,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">19</span>
+                      
+                    
+                    <span class="site-state-item-count">20</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>

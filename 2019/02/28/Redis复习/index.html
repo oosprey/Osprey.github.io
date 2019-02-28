@@ -127,25 +127,27 @@
 
 
 
-  <meta name="description" content="Redis简介Redis是一个远程内存数据库，它是一个速度非常快的非关系型数据库。它可以存储键与5种不同类型的值之间的映射，也可以将内存中的键值对持久化到硬盘上，可以使用复制特性来扩展读性能，还可以使用客户端分片来扩展写性能。 Redis和memcached两者性能上相差无几，但功能上存在不同之处：   Redis能自动以两种不同的方式将数据写入硬盘 Redis除了能存储普通的字符串键之外，还可以">
-<meta name="keywords" content="Redis">
+  <meta name="description" content="基础知识简介Redis是一个远程内存数据库，是速度非常快的非关系型数据库。它可以存储键与5种不同类型的值之间的映射，并提供两种将数据持久化的方法，利用复制特性扩展读性能，利用客户端分片扩展写性能。 和memcached的对比 redis能自动以两种不同的方式将数据持久化到硬盘 redis能够存储5中不同类型的数据结构作为键，而memcached只能保存字符串键 Redis的速度比memcached">
+<meta name="keywords" content="Redis复习">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Redis入门">
-<meta property="og:url" content="http://yoursite.com/2018/12/21/Redis入门/index.html">
+<meta property="og:title" content="Redis复习">
+<meta property="og:url" content="http://yoursite.com/2019/02/28/Redis复习/index.html">
 <meta property="og:site_name" content="Young">
-<meta property="og:description" content="Redis简介Redis是一个远程内存数据库，它是一个速度非常快的非关系型数据库。它可以存储键与5种不同类型的值之间的映射，也可以将内存中的键值对持久化到硬盘上，可以使用复制特性来扩展读性能，还可以使用客户端分片来扩展写性能。 Redis和memcached两者性能上相差无几，但功能上存在不同之处：   Redis能自动以两种不同的方式将数据写入硬盘 Redis除了能存储普通的字符串键之外，还可以">
+<meta property="og:description" content="基础知识简介Redis是一个远程内存数据库，是速度非常快的非关系型数据库。它可以存储键与5种不同类型的值之间的映射，并提供两种将数据持久化的方法，利用复制特性扩展读性能，利用客户端分片扩展写性能。 和memcached的对比 redis能自动以两种不同的方式将数据持久化到硬盘 redis能够存储5中不同类型的数据结构作为键，而memcached只能保存字符串键 Redis的速度比memcached">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-12-26T06:49:16.297Z">
+<meta property="og:image" content="http://yoursite.com/images/redis_copy.png">
+<meta property="og:updated_time" content="2019-02-28T09:41:53.707Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Redis入门">
-<meta name="twitter:description" content="Redis简介Redis是一个远程内存数据库，它是一个速度非常快的非关系型数据库。它可以存储键与5种不同类型的值之间的映射，也可以将内存中的键值对持久化到硬盘上，可以使用复制特性来扩展读性能，还可以使用客户端分片来扩展写性能。 Redis和memcached两者性能上相差无几，但功能上存在不同之处：   Redis能自动以两种不同的方式将数据写入硬盘 Redis除了能存储普通的字符串键之外，还可以">
+<meta name="twitter:title" content="Redis复习">
+<meta name="twitter:description" content="基础知识简介Redis是一个远程内存数据库，是速度非常快的非关系型数据库。它可以存储键与5种不同类型的值之间的映射，并提供两种将数据持久化的方法，利用复制特性扩展读性能，利用客户端分片扩展写性能。 和memcached的对比 redis能自动以两种不同的方式将数据持久化到硬盘 redis能够存储5中不同类型的数据结构作为键，而memcached只能保存字符串键 Redis的速度比memcached">
+<meta name="twitter:image" content="http://yoursite.com/images/redis_copy.png">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/12/21/Redis入门/">
+  <link rel="canonical" href="http://yoursite.com/2019/02/28/Redis复习/">
 
 
 
@@ -155,7 +157,7 @@
   };
 </script>
 
-  <title>Redis入门 | Young</title>
+  <title>Redis复习 | Young</title>
   
 
 
@@ -382,7 +384,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/21/Redis入门/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/28/Redis复习/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Want Young">
@@ -399,7 +401,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Redis入门
+          <h1 class="post-title" itemprop="name headline">Redis复习
               
             
           </h1>
@@ -424,24 +426,12 @@
                 
               
 
-              <time title="创建时间：2018-12-21 15:21:43" itemprop="dateCreated datePublished" datetime="2018-12-21T15:21:43+08:00">2018-12-21</time>
+              <time title="创建时间：2019-02-28 14:13:42 / 修改时间：17:41:53" itemprop="dateCreated datePublished" datetime="2019-02-28T14:13:42+08:00">2019-02-28</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-12-26 14:49:16" itemprop="dateModified" datetime="2018-12-26T14:49:16+08:00">2018-12-26</time>
               
             
           </span>
@@ -492,67 +482,76 @@
       
 
       
-        <h1 id="Redis简介"><a href="#Redis简介" class="headerlink" title="Redis简介"></a>Redis简介</h1><p>Redis是一个远程内存数据库，它是一个速度非常快的非关系型数据库。它可以存储键与5种不同类型的值之间的映射，也可以将内存中的键值对持久化到硬盘上，可以使用复制特性来扩展读性能，还可以使用客户端分片来扩展写性能。</p>
-<h2 id="Redis和memcached"><a href="#Redis和memcached" class="headerlink" title="Redis和memcached"></a>Redis和memcached</h2><p>两者性能上相差无几，但功能上存在不同之处：</p>
-<blockquote>
-<ol>
-<li>Redis能自动以两种不同的方式将数据写入硬盘</li>
-<li>Redis除了能存储普通的字符串键之外，还可以存储其他四种数据结构，而memcached只能存储普通的字符串键。</li>
+        <h1 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>Redis是一个远程内存数据库，是速度非常快的非关系型数据库。它可以存储键与5种不同类型的值之间的映射，并提供两种将数据持久化的方法，利用复制特性扩展读性能，利用客户端分片扩展写性能。</p>
+<h2 id="和memcached的对比"><a href="#和memcached的对比" class="headerlink" title="和memcached的对比"></a>和memcached的对比</h2><ol>
+<li>redis能自动以两种不同的方式将数据持久化到硬盘</li>
+<li>redis能够存储5中不同类型的数据结构作为键，而memcached只能保存字符串键</li>
+<li>Redis的速度比memcached快很多</li>
+<li>Redis支持事务，操作原子性</li>
+<li>Redis支持主从复制（master-slave）数据备份</li>
+<li>Redis是单线程IO复用，memcached是多进程非阻塞IO复用</li>
 </ol>
-</blockquote>
-<h2 id="Redis既可以被用作主数据库，也可以备用作其他数据库的辅助数据库（二级存储）"><a href="#Redis既可以被用作主数据库，也可以备用作其他数据库的辅助数据库（二级存储）" class="headerlink" title="Redis既可以被用作主数据库，也可以备用作其他数据库的辅助数据库（二级存储）"></a>Redis既可以被用作主数据库，也可以备用作其他数据库的辅助数据库（二级存储）</h2><p>Redis由于把数据存储在内存中，所以随机写的速度非常快，并且避免了写入不必要的临时数据。</p>
 <h2 id="Redis的5种数据结构"><a href="#Redis的5种数据结构" class="headerlink" title="Redis的5种数据结构"></a>Redis的5种数据结构</h2><ol>
-<li>String 字符串：字符串、整数或者浮点数 get set del</li>
-<li>List 链表：每个节点包含一个字符串 rpush lrange lindex lpop</li>
-<li>Set 集合：无序存储，使用散列表保证值单一  sadd sismember smembers srem</li>
-<li>hash 散列表：无序键值对 hset hget hgetall hdel</li>
-<li>zset 有序集合：散列表键值对，值为分值，按照分值排序 zadd zrange zrangebyscore zrem</li>
+<li>String 字符串： 值类型可以是string、整型、浮点型。 常用操作：get set del</li>
+<li>List链表： 双向链表，可用于排行、列表的存储，每个节点包含一个字符串。 常用操作： rpush lrange lindex lpop</li>
+<li>Set集合： 无序存储，使用散列表保证元素唯一，只用散列表的键。常用操作： sadd sismember smembers srem</li>
+<li>ZSet有序集合： 和集合不同的是，有序集合中的元素会关联一个double类型的得分，根据得分对元素排序。使用散列表保证元素唯一，键值对的值为元素得分。 常用操作： zadd zrange zrangebyscore zrem</li>
+<li>hash表： 无序键值对 常用操作： hset hget hgetall hdel</li>
 </ol>
-<h1 id="Redis-命令"><a href="#Redis-命令" class="headerlink" title="Redis 命令"></a>Redis 命令</h1><h2 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h2><ul>
-<li>incr : 自增1</li>
-<li>dect : 自减1</li>
-<li>incrby : 自增一个数</li>
-<li>decrby : 自减一个数</li>
-<li>incrbyfloat : 自增一个浮点数</li>
-<li>append : 追加到值末尾</li>
-<li>getrange : 获取子串 [start, end]</li>
-<li>setrange : setrange key-name offset value 修改key-name这个键对应的值offset之后的子串为value</li>
-<li>getbit : 获取指定位置的二进制值</li>
-<li>setbit : 设定指定位置的二进制值</li>
-<li>bitcount : bitcount key-name [start , end] 统计二进制位为1的个数</li>
-<li>bitop : bitop operation base-key key-name [key-name2 …] 对多个键值进行按位运算，并将结果保存在base-key对应的值内。</li>
+<h2 id="Redis命令"><a href="#Redis命令" class="headerlink" title="Redis命令"></a>Redis命令</h2><h3 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h3><ul>
+<li>incr：自增1</li>
+<li>dect：自减1</li>
+<li>incrby：自增一个数 +=</li>
+<li>decrby：自减一个数 -=</li>
+<li>incrbyfloat：自增一个浮点数</li>
+<li>append：追加值到末尾</li>
+<li>getrange：获取子串 [start end]</li>
+<li>setrange：setrange key-name offset value 设置key-name对应的字符串偏移量offset之后的字符为value，设置方法为覆盖。</li>
+<li>getbit：获取指定位置的二进制值</li>
+<li>setbit：设置指定位置的二进制值</li>
+<li>bitcount：统计指定范围内二进制位为1的个数</li>
+<li>bitop：位运算，bitop operation base-key key-name [key-name2 …] 对多个键对应的值进行按位运算，运算结果保存在base-key对应的值中。</li>
 </ul>
-<p>注意： setbit 和 setrange在写入时若原本字符串长度不够，Redis会使用null进行拓展，直到长度达到要求。</p>
-<p>注意：getrange超出范围的部分视为空串，getbit超出位置视为二进制0。</p>
-<p>区别： 很多键值数据库只允许将字节追加到字符串末尾，而Redis支持位和子串操作，这是非常方便的。</p>
-<h2 id="list链表"><a href="#list链表" class="headerlink" title="list链表"></a>list链表</h2><ul>
-<li>Rpush、Lpush：压入链表</li>
-<li>Rpop、Lpop：弹出链表</li>
-<li>Lindex、Lrange：返回指定元素</li>
-<li>Ltrim：修建链表，只保留指定范围内的节点。</li>
+<p><strong>注意</strong>：setbit setrange操作若所给偏移参数超过所给定字符串长度，则中间以null拓展<br><strong>注意</strong>：getrange超出范围视为空串，getbit超出范围视为二进制0</p>
+<p><strong>Redis和其他的区别</strong>：对字符串的操作多样，支持位和子串操作，其他例如memcached只支持将字节追加到末尾。</p>
+<h3 id="list链表"><a href="#list链表" class="headerlink" title="list链表"></a>list链表</h3><ul>
+<li>rpush、lpush：压入链表</li>
+<li>rpop、lpop：弹出链表</li>
+<li>lindex、lrange：返回指定元素</li>
+<li>ltrim：修剪链表，保留指定范围元素</li>
 </ul>
-<h2 id="set集合"><a href="#set集合" class="headerlink" title="set集合"></a>set集合</h2><ul>
-<li>sadd：加入元素</li>
-<li>srem：移除元素</li>
+<h3 id="set集合"><a href="#set集合" class="headerlink" title="set集合"></a>set集合</h3><ul>
+<li>sadd：添加元素</li>
+<li>srem：删除元素</li>
 <li>sismember：检查元素</li>
 <li>smembers：返回所有元素</li>
-<li>scard：返回集合元素数量</li>
-<li>srandmember：随机返回多个或一个元素，count为负数时返回元素可能会重复</li>
+<li>scard：返回元素数量</li>
+<li>srandmember：随机返回一个元素</li>
 <li>spop：随机弹出一个元素，并返回</li>
-<li>smove：从一个集合中将元素移动到另一个集合，成功返回1，否则返回0.</li>
+<li>smove：从一个集合将元素移动到另一个集合，成功返回1，失败返回0.</li>
 </ul>
-<h2 id="redis多集合操作"><a href="#redis多集合操作" class="headerlink" title="redis多集合操作"></a>redis多集合操作</h2><ul>
-<li>sdiff：差集运算</li>
-<li>sdiffstore： 差集运算并将结果存到另一个目标中</li>
+<h3 id="zset有序集合"><a href="#zset有序集合" class="headerlink" title="zset有序集合"></a>zset有序集合</h3><ul>
+<li>zadd：添加元素并指定得分</li>
+<li>zrem：删除元素</li>
+<li>zcard：返回元素数量</li>
+<li>zincrby：指定元素分值自增指定分值</li>
+<li>zcount：返回分值在指定区间的元素的数量</li>
+<li>zrank：返回指定成员的排名</li>
+<li>zscore：返回指定成员的分值</li>
+<li>zrange：返回指定排名区间的成员</li>
+</ul>
+<h3 id="Redis集合操作"><a href="#Redis集合操作" class="headerlink" title="Redis集合操作"></a>Redis集合操作</h3><ul>
+<li>sdiff：两集合求差集</li>
+<li>sdiffstore：差集结果保存在另一个目标</li>
 <li>sinter：交集运算</li>
 <li>sunion：并集运算</li>
-<li>sunionstore：并集运算并将结果存储到另一个目标</li>
+<li>sunionstore：并集运算并将结果存储到指定目标</li>
 </ul>
-<h2 id="hash散列表"><a href="#hash散列表" class="headerlink" title="hash散列表"></a>hash散列表</h2><h4 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h4><ul>
+<h3 id="hash散列表"><a href="#hash散列表" class="headerlink" title="hash散列表"></a>hash散列表</h3><ul>
 <li>hmget：获取一个或多个键值</li>
 <li>hmset：添加一个或多个键值</li>
 <li>hdel：删除一个或多个键值对</li>
-<li>hlen：返回键值对数量<h4 id="高级操作"><a href="#高级操作" class="headerlink" title="高级操作"></a>高级操作</h4></li>
+<li>hlen：返回键值对数量</li>
 <li>hexists：检查键是否存在</li>
 <li>hkeys：返回所有键</li>
 <li>hvals：返回所有值</li>
@@ -560,28 +559,49 @@
 <li>hincrby：指定键对应的值自增指定的数</li>
 <li>hincrbyfloat：自增指定浮点数</li>
 </ul>
-<h2 id="zset有序集合"><a href="#zset有序集合" class="headerlink" title="zset有序集合"></a>zset有序集合</h2><ul>
-<li>zadd：添加成员并指定分值</li>
-<li>zrem：移除元素</li>
-<li>zcard：返回集合数量</li>
-<li>zincrby：指定成员分值自增指定数量</li>
-<li>zcount：返回分值在指定区间的元素的数量</li>
-<li>zrank: 返回指定成员的排名</li>
-<li>zscore：返回指定成员的分值</li>
-<li>zrange：返回指定排名区间的成员，withscores选项可选，表示是否返回分值</li>
-</ul>
-<h2 id="其他Redis命令"><a href="#其他Redis命令" class="headerlink" title="其他Redis命令"></a>其他Redis命令</h2><h4 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h4><p>sort：可对list，set，zset排序</p>
-<h1 id="Redis基本事务"><a href="#Redis基本事务" class="headerlink" title="Redis基本事务"></a>Redis基本事务</h1><p>Redis事务命令： watch， multi， exec， unwatch， discard。</p>
-<h2 id="基本事务命令-multi-exec"><a href="#基本事务命令-multi-exec" class="headerlink" title="基本事务命令 multi exec"></a>基本事务命令 multi exec</h2><p>Redis中被multi和exec命令包围的所有命令会被一个接一个执行，在这个过程中不会被客户端其他命令打断。<br>Python客户端使用pipeline流水线操作实现自动添加multi和exec。</p>
-<h4 id="用于处理过期时间的Redis命令"><a href="#用于处理过期时间的Redis命令" class="headerlink" title="用于处理过期时间的Redis命令"></a>用于处理过期时间的Redis命令</h4><ul>
+<h3 id="Redis基本事务命令-multi-exec"><a href="#Redis基本事务命令-multi-exec" class="headerlink" title="Redis基本事务命令 multi exec"></a>Redis基本事务命令 multi exec</h3><p>Redis中被multi和exec命令包围的所有命令会被一个接一个执行，在执行过程中不会被其他命令打断。</p>
+<h3 id="用于处理过期时间的命令"><a href="#用于处理过期时间的命令" class="headerlink" title="用于处理过期时间的命令"></a>用于处理过期时间的命令</h3><ul>
 <li>persist：移除键的过期时间</li>
-<li>ttl： 查看给定键距离过期时间还有多少秒</li>
-<li>expire：让指定键在指定时间后过期</li>
-<li>expireat：让给定键在给定时间点过期</li>
-<li>pttl：查看还有多少毫秒过期</li>
+<li>ttl：查看给定键距离过期时间还有多少秒</li>
+<li>pttl：查看给定键距离过期时间还有多少毫秒</li>
+<li>expire：设定指定键在指定时间后过期</li>
+<li>expireat：设定指定键在指定时间点过期</li>
 <li>pexpire：指定毫秒后过期</li>
-<li>pexpireat：指定毫秒级Unix时间戳时间点过期。</li>
+<li>pexpireat：指定毫秒级Unix时间点过期</li>
 </ul>
+<h2 id="Redis数据安全和性能保障"><a href="#Redis数据安全和性能保障" class="headerlink" title="Redis数据安全和性能保障"></a>Redis数据安全和性能保障</h2><h3 id="Redis持久化选项"><a href="#Redis持久化选项" class="headerlink" title="Redis持久化选项"></a>Redis持久化选项</h3><ul>
+<li>快照：时间点存储，Redis在某一时间点创建快照，并将快照数据写入硬盘，在下一个快照创建之前所有写入操作使用AOF转储。</li>
+<li>AOF转储：将所有写命令追加到硬盘中的只追加文件中，类似于binlog日志</li>
+</ul>
+<h3 id="AOF转储会造成AOF文件过大的问题"><a href="#AOF转储会造成AOF文件过大的问题" class="headerlink" title="AOF转储会造成AOF文件过大的问题"></a>AOF转储会造成AOF文件过大的问题</h3><p>AOF文件过大可能会耗尽所有硬盘空间，并且Redis重启之后重新执行的时间也会变长。</p>
+<ul>
+<li>解决办法： 通过发送bgrewriteAOF命令移除AOF文件中的冗余命令来重写AOF，这个过程由Redis创建子进程完成。</li>
+</ul>
+<h3 id="Redis-master-slave（主从复制）"><a href="#Redis-master-slave（主从复制）" class="headerlink" title="Redis master-slave（主从复制）"></a>Redis master-slave（主从复制）</h3><p>实现负载均衡和高可用，Redis通过创建数据副本来分摊客户端的读请求。<br><img src="/images/redis_copy.png" alt=""></p>
+<h4 id="全量同步"><a href="#全量同步" class="headerlink" title="全量同步"></a>全量同步</h4><p>从服务器连接时，向主服务器发送同步请求开始全量同步：</p>
+<ol>
+<li>从服务器向主服务器发送Sync同步命令</li>
+<li>主服务器接受同步命令之后执行BGSAVE命令开始生成RDB快照，并在缓冲区记录在此期间的所有写命令</li>
+<li>BGSAVE执行完毕后主服务器向所有从服务器发送RDB快照</li>
+<li>从服务器接受快照后，丢弃所有旧数据，载入收到的快照</li>
+<li>主服务器发送完快照后开始向从服务器缓冲区中写入命令</li>
+<li>从服务器完成快照载入后开始接受命令请求，并执行缓冲区中的写命令。</li>
+</ol>
+<h3 id="增量同步"><a href="#增量同步" class="headerlink" title="增量同步"></a>增量同步</h3><p>增量同步发生在从服务器初始化之后，主服务器每个执行的写命令都同步到从服务器。</p>
+<h3 id="Redis主从同步策略"><a href="#Redis主从同步策略" class="headerlink" title="Redis主从同步策略"></a>Redis主从同步策略</h3><p>主从刚刚连接的时候，进行全量同步，全量同步结束后进行增量同步。当然，如果有需要，slave可以在任何时候发起全量同步。Redis策略是，无论如何首先尝试增量同步，不成功后要求全量同步。</p>
+<h3 id="快照验证和AOF检查"><a href="#快照验证和AOF检查" class="headerlink" title="快照验证和AOF检查"></a>快照验证和AOF检查</h3><p>Redis可以检查AOF文件中的错误命令，并去除该命令和之后的所有命令。Redis不能修复快照，因为快照是压缩的。</p>
+<h3 id="更换故障主服务器"><a href="#更换故障主服务器" class="headerlink" title="更换故障主服务器"></a>更换故障主服务器</h3><p>两种方法：</p>
+<ol>
+<li>B执行SAVE命令生成快照，发送给C，设置C为主服务器，B为C的从服务器。</li>
+<li>升级B为主服务器。</li>
+</ol>
+<h3 id="Redis有哪些数据淘汰策略"><a href="#Redis有哪些数据淘汰策略" class="headerlink" title="Redis有哪些数据淘汰策略"></a>Redis有哪些数据淘汰策略</h3><ol>
+<li>volatile-lru：从已设置过期时间的数据集中挑选最近最少使用的数据</li>
+<li>volatile-ttl：从已设置过期时间的数据中选取即将过期的数据淘汰</li>
+<li>allkeys-lru：从数据集中挑选最近最少使用的数据淘汰</li>
+<li>allkeys-random：从数据集中随机挑选数据淘汰</li>
+<li>no-enviction：禁止驱逐数据</li>
+</ol>
 
       
     </div>
@@ -616,7 +636,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Redis/" rel="tag"># Redis</a>
+            <a href="/tags/Redis复习/" rel="tag"># Redis复习</a>
           
         </div>
       
@@ -629,8 +649,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/12/21/SQL-SERVER索引/" rel="next" title="SQL SERVER索引">
-                <i class="fa fa-chevron-left"></i> SQL SERVER索引
+              <a href="/2019/02/25/MySQL事务并发控制和索引/" rel="next" title="MySQL事务并发控制和索引">
+                <i class="fa fa-chevron-left"></i> MySQL事务并发控制和索引
               </a>
             
           </div>
@@ -638,10 +658,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/12/26/Redis数据安全和性能保障/" rel="prev" title="Redis数据安全和性能保障">
-                Redis数据安全和性能保障 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -832,7 +848,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Redis简介"><span class="nav-number">1.</span> <span class="nav-text">Redis简介</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis和memcached"><span class="nav-number">1.1.</span> <span class="nav-text">Redis和memcached</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis既可以被用作主数据库，也可以备用作其他数据库的辅助数据库（二级存储）"><span class="nav-number">1.2.</span> <span class="nav-text">Redis既可以被用作主数据库，也可以备用作其他数据库的辅助数据库（二级存储）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis的5种数据结构"><span class="nav-number">1.3.</span> <span class="nav-text">Redis的5种数据结构</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Redis-命令"><span class="nav-number">2.</span> <span class="nav-text">Redis 命令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#字符串"><span class="nav-number">2.1.</span> <span class="nav-text">字符串</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#list链表"><span class="nav-number">2.2.</span> <span class="nav-text">list链表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#set集合"><span class="nav-number">2.3.</span> <span class="nav-text">set集合</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#redis多集合操作"><span class="nav-number">2.4.</span> <span class="nav-text">redis多集合操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hash散列表"><span class="nav-number">2.5.</span> <span class="nav-text">hash散列表</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#基本操作"><span class="nav-number">2.5.0.1.</span> <span class="nav-text">基本操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#高级操作"><span class="nav-number">2.5.0.2.</span> <span class="nav-text">高级操作</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#zset有序集合"><span class="nav-number">2.6.</span> <span class="nav-text">zset有序集合</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他Redis命令"><span class="nav-number">2.7.</span> <span class="nav-text">其他Redis命令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#排序"><span class="nav-number">2.7.0.1.</span> <span class="nav-text">排序</span></a></li></ol></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#Redis基本事务"><span class="nav-number">3.</span> <span class="nav-text">Redis基本事务</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本事务命令-multi-exec"><span class="nav-number">3.1.</span> <span class="nav-text">基本事务命令 multi exec</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#用于处理过期时间的Redis命令"><span class="nav-number">3.1.0.1.</span> <span class="nav-text">用于处理过期时间的Redis命令</span></a></li></ol></li></ol></li></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#基础知识"><span class="nav-number">1.</span> <span class="nav-text">基础知识</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">1.1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#和memcached的对比"><span class="nav-number">1.2.</span> <span class="nav-text">和memcached的对比</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis的5种数据结构"><span class="nav-number">1.3.</span> <span class="nav-text">Redis的5种数据结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis命令"><span class="nav-number">1.4.</span> <span class="nav-text">Redis命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#字符串"><span class="nav-number">1.4.1.</span> <span class="nav-text">字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#list链表"><span class="nav-number">1.4.2.</span> <span class="nav-text">list链表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#set集合"><span class="nav-number">1.4.3.</span> <span class="nav-text">set集合</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#zset有序集合"><span class="nav-number">1.4.4.</span> <span class="nav-text">zset有序集合</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Redis集合操作"><span class="nav-number">1.4.5.</span> <span class="nav-text">Redis集合操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#hash散列表"><span class="nav-number">1.4.6.</span> <span class="nav-text">hash散列表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Redis基本事务命令-multi-exec"><span class="nav-number">1.4.7.</span> <span class="nav-text">Redis基本事务命令 multi exec</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#用于处理过期时间的命令"><span class="nav-number">1.4.8.</span> <span class="nav-text">用于处理过期时间的命令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis数据安全和性能保障"><span class="nav-number">1.5.</span> <span class="nav-text">Redis数据安全和性能保障</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Redis持久化选项"><span class="nav-number">1.5.1.</span> <span class="nav-text">Redis持久化选项</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AOF转储会造成AOF文件过大的问题"><span class="nav-number">1.5.2.</span> <span class="nav-text">AOF转储会造成AOF文件过大的问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Redis-master-slave（主从复制）"><span class="nav-number">1.5.3.</span> <span class="nav-text">Redis master-slave（主从复制）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#全量同步"><span class="nav-number">1.5.3.1.</span> <span class="nav-text">全量同步</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#增量同步"><span class="nav-number">1.5.4.</span> <span class="nav-text">增量同步</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Redis主从同步策略"><span class="nav-number">1.5.5.</span> <span class="nav-text">Redis主从同步策略</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#快照验证和AOF检查"><span class="nav-number">1.5.6.</span> <span class="nav-text">快照验证和AOF检查</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#更换故障主服务器"><span class="nav-number">1.5.7.</span> <span class="nav-text">更换故障主服务器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Redis有哪些数据淘汰策略"><span class="nav-number">1.5.8.</span> <span class="nav-text">Redis有哪些数据淘汰策略</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
