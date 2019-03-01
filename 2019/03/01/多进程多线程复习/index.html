@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+  <script>
+  (function(i,s,o,g,r,a,m){i["DaoVoiceObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;a.charset="utf-8";m.parentNode.insertBefore(a,m)})(window,document,"script",('https:' == document.location.protocol ? 'https:' : 'http:') + "//widget.daovoice.io/widget/0f81ff2f.js","daovoice")
+  daovoice('init', {
+      app_id: "7075d67b"
+    });
+  daovoice('update');
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.5.0" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.5.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.5.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.5.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.5.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.5.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="进程进程是资源分配的基本单位。进程通常是一个程序的运行实例。通常进程可以包含多个线程执行任务。 进程的状态 创建 就绪 阻塞 运行 终止  进程的终止过程 读取进程PCB，检查进程状态 若进程正在执行，立即停止执行，标志状态位为停止 检查所有子进程状态，停止所有子进程 回收所有子进程资源，返回所有资源给操作系统或父进程 移出队列  特殊进程 僵尸进程：子进程已结束，父进程没有调用wait()函数回">
+<meta name="keywords" content="多进程线程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="多进程多线程复习">
+<meta property="og:url" content="http://yoursite.com/2019/03/01/多进程多线程复习/index.html">
+<meta property="og:site_name" content="Young">
+<meta property="og:description" content="进程进程是资源分配的基本单位。进程通常是一个程序的运行实例。通常进程可以包含多个线程执行任务。 进程的状态 创建 就绪 阻塞 运行 终止  进程的终止过程 读取进程PCB，检查进程状态 若进程正在执行，立即停止执行，标志状态位为停止 检查所有子进程状态，停止所有子进程 回收所有子进程资源，返回所有资源给操作系统或父进程 移出队列  特殊进程 僵尸进程：子进程已结束，父进程没有调用wait()函数回">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-03-01T10:58:14.675Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="多进程多线程复习">
+<meta name="twitter:description" content="进程进程是资源分配的基本单位。进程通常是一个程序的运行实例。通常进程可以包含多个线程执行任务。 进程的状态 创建 就绪 阻塞 运行 终止  进程的终止过程 读取进程PCB，检查进程状态 若进程正在执行，立即停止执行，标志状态位为停止 检查所有子进程状态，停止所有子进程 回收所有子进程资源，返回所有资源给操作系统或父进程 移出队列  特殊进程 僵尸进程：子进程已结束，父进程没有调用wait()函数回">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/03/01/多进程多线程复习/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>多进程多线程复习 | Young</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+
+    <div class="bg_content">
+      <canvas id="canvas"></canvas>
+    </div>
+
+
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Young</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">Change World, Change Life</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/01/多进程多线程复习/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Want Young">
+      <meta itemprop="description" content="Change World, Change Life">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Young">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">多进程多线程复习
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-03-01 11:18:59 / 修改时间：18:58:14" itemprop="dateCreated datePublished" datetime="2019-03-01T11:18:59+08:00">2019-03-01</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/操作系统/" itemprop="url" rel="index"><span itemprop="name">操作系统</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h1><p>进程是资源分配的基本单位。进程通常是一个程序的运行实例。通常进程可以包含多个线程执行任务。</p>
+<h2 id="进程的状态"><a href="#进程的状态" class="headerlink" title="进程的状态"></a>进程的状态</h2><ol>
+<li>创建</li>
+<li>就绪</li>
+<li>阻塞</li>
+<li>运行</li>
+<li>终止</li>
+</ol>
+<h2 id="进程的终止过程"><a href="#进程的终止过程" class="headerlink" title="进程的终止过程"></a>进程的终止过程</h2><ol>
+<li>读取进程PCB，检查进程状态</li>
+<li>若进程正在执行，立即停止执行，标志状态位为停止</li>
+<li>检查所有子进程状态，停止所有子进程</li>
+<li>回收所有子进程资源，返回所有资源给操作系统或父进程</li>
+<li>移出队列</li>
+</ol>
+<h2 id="特殊进程"><a href="#特殊进程" class="headerlink" title="特殊进程"></a>特殊进程</h2><ol>
+<li>僵尸进程：子进程已结束，父进程没有调用wait()函数回收子进程状态资源（通常包括pid，退出状态，运行时间等），导致子进程PCB仍存在，此时子进程称为僵尸进程。Linux对僵尸进程的解决策略是如果父进程结束了就让init进程作为所有僵尸进程的父进程，init进程定期回收僵尸进程。 <strong>危害：僵尸进程过多会导致过多pid被占用，pid资源是有限的，这可能会导致操作系统不能创建新的进程。</strong></li>
+<li>孤儿进程：父进程退出，子进程仍在执行。孤儿进程将被init进程收养，并由init完成状态收集工作。</li>
+<li>守护进程：也称作daemon进程，守护进程脱离控制终端在后台周期性的执行某种任务或者处理某种事件的进程。</li>
+</ol>
+<h2 id="守护进程创建"><a href="#守护进程创建" class="headerlink" title="守护进程创建"></a>守护进程创建</h2><ol>
+<li>父进程创建子进程</li>
+<li>父进程退出</li>
+<li>在子进程中调用setid创建新的会话，重设子进程会话ID、进程组ID，摆脱控制终端。</li>
+<li>改变当前目录为根目录</li>
+<li>重置所有文件权限</li>
+<li>关闭所有文件描述符</li>
+</ol>
+<h2 id="进程通信"><a href="#进程通信" class="headerlink" title="进程通信"></a>进程通信</h2><ol>
+<li>管道：半双工共享文件，同一时刻只允许一个进程写。通常用于父子进程或兄弟进程通信，因为管道是匿名的。</li>
+<li>具名管道：使用路径名描述的共享文件，允许不相关进程通信，遵循先入先出(FIFO)规则</li>
+<li>共享内存：最快的通信方法，但是没有提供同步互斥方法，可以使用管道的思想：两块共享内存，每个内存执行一个进程的读和另一个进程的写</li>
+<li>信号量：进程同步，配合锁实现进程访问或操作共享资源</li>
+<li>消息队列：内核维护的消息列表</li>
+<li>socket：不同主机进程通信</li>
+</ol>
+<h2 id="进程调度"><a href="#进程调度" class="headerlink" title="进程调度"></a>进程调度</h2><ol>
+<li>FCFS：先来先服务</li>
+<li>短作业优先</li>
+<li>优先级调度</li>
+<li>高响应比优先</li>
+<li>时间片轮转</li>
+<li>多级队列反馈调度</li>
+</ol>
+<h2 id="进程的同步和互斥"><a href="#进程的同步和互斥" class="headerlink" title="进程的同步和互斥"></a>进程的同步和互斥</h2><ul>
+<li>同步：进程需要按照一定的顺序执行</li>
+<li>互斥：进程不能同时访问临界区</li>
+</ul>
+<h2 id="信号量解决经典同步互斥问题"><a href="#信号量解决经典同步互斥问题" class="headerlink" title="信号量解决经典同步互斥问题"></a>信号量解决经典同步互斥问题</h2><ol>
+<li>生产者消费者问题 mutex = 1， full = 0， empty = 10；</li>
+<li>读者写者问题 mutex = 1，write = 1，count = 0；</li>
+<li>哲学家进餐 mutex = 1, mutex_left = {1,1,1,1,1};</li>
+</ol>
+<h2 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h2><h3 id="死锁的条件"><a href="#死锁的条件" class="headerlink" title="死锁的条件"></a>死锁的条件</h3><ol>
+<li>资源稀缺</li>
+<li>不可剥夺</li>
+<li>占有等待</li>
+<li>循环等待</li>
+</ol>
+<h3 id="死锁预防"><a href="#死锁预防" class="headerlink" title="死锁预防"></a>死锁预防</h3><p>破坏四个条件</p>
+<h3 id="死锁避免"><a href="#死锁避免" class="headerlink" title="死锁避免"></a>死锁避免</h3><p>银行家算法：可用资源向量，最大需求矩阵，已分配矩阵，需求矩阵，通过验证分配资源后系统是否处于安全状态来决定是否分配资源</p>
+<h1 id="线程"><a href="#线程" class="headerlink" title="线程"></a>线程</h1><p>线程是处理机调度的基本单位。线程只包含很少的运行时必要的资源。</p>
+<h2 id="多进程和多线程的区别"><a href="#多进程和多线程的区别" class="headerlink" title="多进程和多线程的区别"></a>多进程和多线程的区别</h2><p>进程它是具有独立地址空间的，优点就是隔离度好,稳定，因为它是操作系统管理的，进程和进程之间是逻辑隔离的，只要操作系统不出问题的话，一个进程的错误一般不会影响到其它进程，缺点就是信息资源共享麻烦。而线程只是进程启动的执行单元，它是共享进程资源的，创建销毁、切换简单，速度很快，占用内存少，CPU利用率高。但是需要程序员管控的东西也比较多，相互影响出问题的机率较大，一个线程挂掉将导致整个进程挂掉，所以从程序员的角度来讲，我们只能看到某种代码是线程安全的，而没有说进程安全的。</p>
+<h2 id="在进程和线程上，应该怎么选择"><a href="#在进程和线程上，应该怎么选择" class="headerlink" title="在进程和线程上，应该怎么选择"></a>在进程和线程上，应该怎么选择</h2><p>我们平时在写代码的时候一般使用线程会比较多，像需要频繁创建销毁的，要处理大量运算、数据，又要能很好的显示界面和及时响应消息的优先选择多线程，因为像这些运算会消耗大量的CPU，常见的有算法处理和图像处理。还有一些操作允许并发而且有可能阻塞的, 也推荐使用多线程. 例如SOCKET, 磁盘操作等等。进程一般来说更稳定，而且它是内存隔离的，单个进程的异常不会导致整个应用的崩溃，方便调试，像很多服务器默认是使用进程模式的。</p>
+<h2 id="线程之间是如何通信的"><a href="#线程之间是如何通信的" class="headerlink" title="线程之间是如何通信的"></a>线程之间是如何通信的</h2><p>一个是使用全局变量进行通信，还有就是可以使用自定义的消息机制传递信息。其实因为各个线程之间它是共享进程的资源的，所以它没有像进程通信中的用于数据交换的通信方式，它通信的主要目的是用于线程同步，所以像一些互斥锁啊临界区啊CEvent事件对象和信号量对象都可以实现线程的通信和同步。</p>
+<h2 id="进程之间是如何通信的"><a href="#进程之间是如何通信的" class="headerlink" title="进程之间是如何通信的"></a>进程之间是如何通信的</h2><p>进程间的通信方式有PIPE管道，信号量，消息队列，共享内存，还可以通过 socket套接字进行通信。根据信息量大小的不同可以分为低级通信和高级通信，在选择上，如果用户传递的信息较少．或是需要通过信号来触发某些行为的，一般用信号机制就能解决，如果进程间要求传递的信息量比较大或者有交换数据的要求，那么就要使用共享内存和套接字这些通信方式。</p>
+<p>名词解释：</p>
+<p>管道其实是存在于内存中的一种特殊文件，它不属于文件系统，有自己的数据结构，根据使用范围还可分为无名管道和命名管道。</p>
+<p>共享内存是通过将共享的内存缓冲区直接附加到进程的虚拟地址空间中来实现的，它是利用内存缓冲区直接交换信息，不需要复制，很快捷、信息量大。</p>
+<p>消息队列缓冲是由系统调用函数来实现消息发送和接收之间的同步，它允许任意进程通过共享消息队列来实现进程间通信．但是信息的复制需要耗费大量CPU，所以不适用于信息量大或操作频繁的场合。</p>
+<h2 id="线程同步和线程异步"><a href="#线程同步和线程异步" class="headerlink" title="线程同步和线程异步"></a>线程同步和线程异步</h2><p>同步是指一个线程要等待另一个线程执行完之后才开始执行当前的线程。</p>
+<p>异步是指一个线程去执行，它的下一个线程不必等待它执行完就开始执行。</p>
+<p>一般一个进程启动的多个不相干线程，它们之间的相互关系就为异步，比如游戏有图像和背景音乐，图像是由玩家操作的 而背景音乐是系统循环播放，它们两个线程之间没什么关系各干各的，这就是线程异步。至于同步的话指的是多线程同时操作一个数据，这个时候需要对数据添加保护，这个保护就是线程的同步</p>
+<p>同步使用场景：对于多个线程同时访问一块数据的时候，必须使用同步，否则可能会出现不安全的情况，有一种情况不需要同步技术，那就是原子操作，也就是说操作系统在底层保证了操作要么全部做完，要么不做。</p>
+<p>异步的使用场景：当只有一个线程访问当前数据的时候。比如观察者模式，它没有共享区，主题发生变化后通知观察者更新，主题继续做自己的事情，不需要等待观察者更新完成后再工作。</p>
+<h2 id="多线程同步和互斥有几种实现方法，分别适用什么情况"><a href="#多线程同步和互斥有几种实现方法，分别适用什么情况" class="headerlink" title="多线程同步和互斥有几种实现方法，分别适用什么情况"></a>多线程同步和互斥有几种实现方法，分别适用什么情况</h2><p>线程同步的话有临界区，互斥量，信号量，事件。</p>
+<p>临界区适合一个进程内的多线程访问公共区域或代码段时使用。</p>
+<p>互斥量是可以命名的，也就是说它可以适用不同进程内多线程访问公共资源时使用。所以在选择上如果是在进程内部使用的话，用临界区会带来速度上的优势并且能够减少资源占用量。</p>
+<p>信号量与临界区和互斥量不同，它是允许多个线程同时访问公共资源的，它相当于操作系统的PV操作，它会事先设定一个最大线程数，如果线程占用数达到最大，那么其它线程就不能再进来，如果有部分线程释放资源了，那么其它线程才能进来访问资源。</p>
+<p>事件是通过通知操作的方式来保持线程同步。</p>
+<p>注意：互斥量，事件，信号量都是内核对象，可以跨进程使用。</p>
+<h2 id="C-多线程有几种实现方法"><a href="#C-多线程有几种实现方法" class="headerlink" title="C++多线程有几种实现方法"></a>C++多线程有几种实现方法</h2><p>直接使用WIN32 API CreateThread，或者用C运行库_beginthread创建线程,MFC的话用AfxBeginThread. 还有就是运用第三方线程库，比如boost的thread等等。</p>
+<p>_beginthread和CreateThread的区别：_beginthread内部调用了CreateThread.</p>
+<p>如果你的程序只调用 Win32 API/SDK ，就放心用 CreateThread，如果要用到C++运行时库，那么就要使用_beginthreadex，因为C++运行库有一些函数里面使用了全局变量，beginthreadex 为这些全局变量做了处理，使得每个线程都有一份独立的“全局”量，在这种情况下使用CreateThread的话就会出现不安全的问题</p>
+<h2 id="多线程中栈与堆是公有的还是私有的"><a href="#多线程中栈与堆是公有的还是私有的" class="headerlink" title="多线程中栈与堆是公有的还是私有的"></a>多线程中栈与堆是公有的还是私有的</h2><p>因为线程是共享进程的资源的，所以栈是私有的，堆是公有的。</p>
+<h2 id="线程池的概念"><a href="#线程池的概念" class="headerlink" title="线程池的概念"></a>线程池的概念</h2><p>线程池就是一堆已经创建好的线程，最大数目一定，然后初始后都处于空闲状态，当有新任务进来时就从线程池中取出空闲线程处理任务，任务完成之后又重新放回去，当线程池中的所有线程都在任务时，只能等待有线程结束任务才能继续执行。</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    <div>
+        
+            <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+        
+    </div>
+    
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/多进程线程/" rel="tag"># 多进程线程</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/02/28/Redis复习/" rel="next" title="Redis复习">
+                <i class="fa fa-chevron-left"></i> Redis复习
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div id="gitalk-container">
+    </div>
+    
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Want Young</p>
+              <p class="site-description motion-element" itemprop="description">Change World, Change Life</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">31</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">21</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#进程"><span class="nav-number">1.</span> <span class="nav-text">进程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#进程的状态"><span class="nav-number">1.1.</span> <span class="nav-text">进程的状态</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程的终止过程"><span class="nav-number">1.2.</span> <span class="nav-text">进程的终止过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#特殊进程"><span class="nav-number">1.3.</span> <span class="nav-text">特殊进程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#守护进程创建"><span class="nav-number">1.4.</span> <span class="nav-text">守护进程创建</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程通信"><span class="nav-number">1.5.</span> <span class="nav-text">进程通信</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程调度"><span class="nav-number">1.6.</span> <span class="nav-text">进程调度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程的同步和互斥"><span class="nav-number">1.7.</span> <span class="nav-text">进程的同步和互斥</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#信号量解决经典同步互斥问题"><span class="nav-number">1.8.</span> <span class="nav-text">信号量解决经典同步互斥问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#死锁"><span class="nav-number">1.9.</span> <span class="nav-text">死锁</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#死锁的条件"><span class="nav-number">1.9.1.</span> <span class="nav-text">死锁的条件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#死锁预防"><span class="nav-number">1.9.2.</span> <span class="nav-text">死锁预防</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#死锁避免"><span class="nav-number">1.9.3.</span> <span class="nav-text">死锁避免</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#线程"><span class="nav-number">2.</span> <span class="nav-text">线程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#多进程和多线程的区别"><span class="nav-number">2.1.</span> <span class="nav-text">多进程和多线程的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在进程和线程上，应该怎么选择"><span class="nav-number">2.2.</span> <span class="nav-text">在进程和线程上，应该怎么选择</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程之间是如何通信的"><span class="nav-number">2.3.</span> <span class="nav-text">线程之间是如何通信的</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程之间是如何通信的"><span class="nav-number">2.4.</span> <span class="nav-text">进程之间是如何通信的</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程同步和线程异步"><span class="nav-number">2.5.</span> <span class="nav-text">线程同步和线程异步</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多线程同步和互斥有几种实现方法，分别适用什么情况"><span class="nav-number">2.6.</span> <span class="nav-text">多线程同步和互斥有几种实现方法，分别适用什么情况</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-多线程有几种实现方法"><span class="nav-number">2.7.</span> <span class="nav-text">C++多线程有几种实现方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多线程中栈与堆是公有的还是私有的"><span class="nav-number">2.8.</span> <span class="nav-text">多线程中栈与堆是公有的还是私有的</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程池的概念"><span class="nav-number">2.9.</span> <span class="nav-text">线程池的概念</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Want Young</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_sphere.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.5.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.5.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.5.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.5.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.5.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.js"></script>
+
+  
+  
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.css">
+
+  
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/npm/js-md5@0.7.3/src/md5.min.js"></script>
+
+   <script type="text/javascript">
+        var gitalk = new Gitalk({
+          clientID: '997de8bdb3bee4797c9f',
+          clientSecret: 'b98b0660d5251c1b96f333c09eef0d0e4762a3c2',
+          repo: 'oosprey.github.io',
+          owner: 'oosprey',
+          admin: ['oosprey'],
+          id: md5(location.pathname),
+          distractionFreeMode: 'true'
+        })
+        gitalk.render('gitalk-container')
+       </script>
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
+<!--崩溃欺骗-->
+<script type="text/javascript" src="/js/src/crash_cheat.js"></script>
+<!--动态背景-->
+<script type="text/javascript" src="/js/src/dynamic_bg.js"></script>
