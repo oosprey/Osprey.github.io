@@ -382,6 +382,984 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/22/MySQL事务及面试相关复习/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Want Young">
+      <meta itemprop="description" content="Change World, Change Life">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Young">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/02/22/MySQL事务及面试相关复习/" class="post-title-link" itemprop="http://yoursite.com/page/2/index.html">MySQL事务及面试相关复习</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-02-22 14:01:13 / 修改时间：18:55:11" itemprop="dateCreated datePublished" datetime="2019-02-22T14:01:13+08:00">2019-02-22</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/数据库/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="MySQL触发器和存储过程"><a href="#MySQL触发器和存储过程" class="headerlink" title="MySQL触发器和存储过程"></a>MySQL触发器和存储过程</h1><h2 id="触发器"><a href="#触发器" class="headerlink" title="触发器"></a>触发器</h2><p>触发器被用于某个表被更改时自动处理一组sql语句，触发器被用于DELETE， INSERT， UPDTAE语句，其他语句不支持触发器。</p>
+<h3 id="创建"><a href="#创建" class="headerlink" title="创建"></a>创建</h3><p>创建触发器需要给出四条信息：</p>
+<blockquote>
+<ol>
+<li>唯一触发器名</li>
+<li>触发器关联的表</li>
+<li>触发器应该响应的活动（DELETE, INSERT, UPDATE）</li>
+<li>触发器应在何时执行（操作前还是操作后）</li>
+</ol>
+</blockquote>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TRIGGER</span> newproduct <span class="keyword">AFTER</span> <span class="keyword">INSERT</span> <span class="keyword">ON</span> products</span><br><span class="line"><span class="keyword">FOR</span> <span class="keyword">EACH</span> <span class="keyword">ROW</span> <span class="keyword">SELECT</span> <span class="string">'Product added'</span>;</span><br><span class="line"></span><br><span class="line">多行执行语句：</span><br><span class="line">DELIMITER&amp;&amp;</span><br><span class="line"><span class="keyword">CREATE</span>  <span class="keyword">TRIGGER</span> 触发器名  <span class="keyword">BEFORE</span> | <span class="keyword">AFTER</span>  触发事件</span><br><span class="line"><span class="keyword">ON</span>  表名 <span class="keyword">FOR</span>  <span class="keyword">EACH</span>  <span class="keyword">ROW</span></span><br><span class="line"><span class="keyword">BEGIN</span></span><br><span class="line">执行语句列表</span><br><span class="line"><span class="keyword">END</span></span><br><span class="line">&amp;&amp;</span><br><span class="line">DELEMITER;</span><br></pre></td></tr></table></figure>
+<p>只有表能创建触发器，视图和临时表都不可以。每张表可以创建6个触发器，INSERT, UPDATE, DELETE (前后)</p>
+<h3 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DROP</span> <span class="keyword">TRIGGER</span> newproduct;</span><br></pre></td></tr></table></figure>
+<h3 id="查看触发器"><a href="#查看触发器" class="headerlink" title="查看触发器"></a>查看触发器</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SHOW</span> <span class="keyword">TRIGGERS</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> information_schema.triggers;</span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> information_schema.triggers <span class="keyword">WHERE</span> TRIGGER_NAME=<span class="string">'触发器名'</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="存储过程"><a href="#存储过程" class="headerlink" title="存储过程"></a>存储过程</h2><p>存储过程(Stored Procedure),是一组为了完成特定功能的SQL 语句，集经编译后存储在数据库中，用户通过指定存储过程的名字并给出参数，如果该存储过程带有参数来执行。</p>
+<h3 id="MySQL存储过程的创建"><a href="#MySQL存储过程的创建" class="headerlink" title="MySQL存储过程的创建"></a>MySQL存储过程的创建</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">PROCEDURE</span> 过程名 ([过程参数[,...]])</span><br><span class="line">[特性 ...] 过程体</span><br></pre></td></tr></table></figure>
+<p>举例：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">DELIMITER //  </span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">PROCEDURE</span> proc1(<span class="keyword">OUT</span> s <span class="built_in">int</span>)  </span><br><span class="line"><span class="keyword">BEGIN</span> </span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">COUNT</span>(*) <span class="keyword">INTO</span> s <span class="keyword">FROM</span> <span class="keyword">user</span>;  </span><br><span class="line"><span class="keyword">END</span> </span><br><span class="line">//  </span><br><span class="line">DELIMITER ;</span><br></pre></td></tr></table></figure>
+<p>参数说明：</p>
+<ul>
+<li>IN 输入参数:表示该参数的值必须在调用存储过程时指定，在存储过程中修改该参数的值不能被返回，为默认值</li>
+<li>OUT 输出参数:该值可在存储过程内部被改变，并可返回</li>
+<li>INOUT 输入输出参数:调用时指定，并且可被改变和返回</li>
+</ul>
+<p>IN 参数举例：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">mysql &gt; DELIMITER //  </span><br><span class="line">mysql &gt; CREATE PROCEDURE demo_in_parameter(IN p_in int)  </span><br><span class="line">-&gt; BEGIN   </span><br><span class="line">-&gt; SELECT p_in;   </span><br><span class="line">-&gt; SET p_in=2;   </span><br><span class="line">-&gt; SELECT p_in;   </span><br><span class="line">-&gt; END;   </span><br><span class="line">-&gt; //  </span><br><span class="line">mysql &gt; DELIMITER ; </span><br><span class="line"></span><br><span class="line">执行结果：</span><br><span class="line">mysql &gt; SET @p_in=1;  </span><br><span class="line">mysql &gt; CALL demo_in_parameter(@p_in);  </span><br><span class="line">+<span class="comment">------+  </span></span><br><span class="line">| p_in |  </span><br><span class="line">+<span class="comment">------+  </span></span><br><span class="line">|   1  |   </span><br><span class="line">+<span class="comment">------+  </span></span><br><span class="line"> </span><br><span class="line">+<span class="comment">------+  </span></span><br><span class="line">| p_in |  </span><br><span class="line">+<span class="comment">------+  </span></span><br><span class="line">|   2  |   </span><br><span class="line">+<span class="comment">------+  </span></span><br><span class="line"> </span><br><span class="line">mysql&gt; SELECT @p_in;  </span><br><span class="line">+<span class="comment">-------+  </span></span><br><span class="line">| @p_in |  </span><br><span class="line">+<span class="comment">-------+  </span></span><br><span class="line">|  1    |  </span><br><span class="line">+<span class="comment">-------+</span></span><br></pre></td></tr></table></figure>
+<p>OUT参数举例：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">mysql &gt; DELIMITER //  </span><br><span class="line">mysql &gt; CREATE PROCEDURE demo_out_parameter(OUT p_out int)  </span><br><span class="line">-&gt; BEGIN </span><br><span class="line">-&gt; SELECT p_out;  </span><br><span class="line">-&gt; SET p_out=2;  </span><br><span class="line">-&gt; SELECT p_out;  </span><br><span class="line">-&gt; END;  </span><br><span class="line">-&gt; //  </span><br><span class="line">mysql &gt; DELIMITER ; </span><br><span class="line"></span><br><span class="line">执行结果：</span><br><span class="line"></span><br><span class="line">mysql &gt; SET @p_out=1;  </span><br><span class="line">mysql &gt; CALL sp_demo_out_parameter(@p_out);  </span><br><span class="line">+<span class="comment">-------+  </span></span><br><span class="line">| p_out |   </span><br><span class="line">+<span class="comment">-------+  </span></span><br><span class="line">| NULL  |   </span><br><span class="line">+<span class="comment">-------+  </span></span><br><span class="line"> </span><br><span class="line">+<span class="comment">-------+  </span></span><br><span class="line">| p_out |  </span><br><span class="line">+<span class="comment">-------+  </span></span><br><span class="line">|   2   |   </span><br><span class="line">+<span class="comment">-------+  </span></span><br><span class="line"> </span><br><span class="line">mysql&gt; SELECT @p_out;  </span><br><span class="line">+<span class="comment">-------+  </span></span><br><span class="line">| p_out |  </span><br><span class="line">+<span class="comment">-------+  </span></span><br><span class="line">|   2   |  </span><br><span class="line">+<span class="comment">-------+</span></span><br></pre></td></tr></table></figure>
+<p>INOUT参数举例：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">mysql &gt; DELIMITER //   </span><br><span class="line">mysql &gt; CREATE PROCEDURE demo_inout_parameter(INOUT p_inout int)   </span><br><span class="line">-&gt; BEGIN </span><br><span class="line">-&gt; SELECT p_inout;  </span><br><span class="line">-&gt; SET p_inout=2;  </span><br><span class="line">-&gt; SELECT p_inout;   </span><br><span class="line">-&gt; END;  </span><br><span class="line">-&gt; //   </span><br><span class="line">mysql &gt; DELIMITER ; </span><br><span class="line"></span><br><span class="line">执行结果：</span><br><span class="line"></span><br><span class="line">mysql &gt; SET @p_inout=1;  </span><br><span class="line">mysql &gt; CALL demo_inout_parameter(@p_inout) ;  </span><br><span class="line">+<span class="comment">---------+  </span></span><br><span class="line">| p_inout |  </span><br><span class="line">+<span class="comment">---------+  </span></span><br><span class="line">|    1    |  </span><br><span class="line">+<span class="comment">---------+  </span></span><br><span class="line"> </span><br><span class="line">+<span class="comment">---------+  </span></span><br><span class="line">| p_inout |   </span><br><span class="line">+<span class="comment">---------+  </span></span><br><span class="line">|    2    |  </span><br><span class="line">+<span class="comment">---------+  </span></span><br><span class="line"> </span><br><span class="line">mysql &gt; SELECT @p_inout;  </span><br><span class="line">+<span class="comment">----------+  </span></span><br><span class="line">| @p_inout |   </span><br><span class="line">+<span class="comment">----------+  </span></span><br><span class="line">|    2     |  </span><br><span class="line">+<span class="comment">----------+</span></span><br></pre></td></tr></table></figure>
+<h2 id="存储函数"><a href="#存储函数" class="headerlink" title="存储函数"></a>存储函数</h2><p>存储函数只支持输入参数，并且输入参数前没有IN或INOUT，返回参数是在函数体中使用return返回要返回的数据变量的形式来表示的。</p>
+<p>一般形式：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">function</span> 函数([函数参数[,….]]) <span class="keyword">Returns</span> 返回类型</span><br><span class="line">　　<span class="keyword">Begin</span></span><br><span class="line">　　　　<span class="keyword">If</span>(</span><br><span class="line">　　　　　　<span class="keyword">Return</span> (返回的数据)</span><br><span class="line">　　　　<span class="keyword">Else</span></span><br><span class="line">　　　　　　<span class="keyword">Return</span> (返回的数据)</span><br><span class="line">　　　　<span class="keyword">end</span> <span class="keyword">if</span>;</span><br><span class="line">　　<span class="keyword">end</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="存储过程和函数的调用"><a href="#存储过程和函数的调用" class="headerlink" title="存储过程和函数的调用"></a>存储过程和函数的调用</h2><ul>
+<li>存储过程是通过CALL语句来调用的。调用存储过程：<pre><code>CALL  sp_name([parameter[,…]]) ;
+</code></pre></li>
+<li><p>存储函数的使用方法与MySQL内部函数的使用方法是一样的，直接调用。</p>
+</li>
+<li><p>执行存储过程和存储函数需要拥有EXECUTE权限。EXECUTE权限的信息存储在information_schema数据库下面的USER_PRIVILEGES表中</p>
+</li>
+</ul>
+<h2 id="存储过程和函数的区别"><a href="#存储过程和函数的区别" class="headerlink" title="存储过程和函数的区别"></a>存储过程和函数的区别</h2><ol>
+<li>存储函数有且只有一个返回值，而存储过程不能有返回值。</li>
+<li>函数只能有输入参数，而且不能带in, 而存储过程可以有多个in,out,inout参数。</li>
+<li>存储过程中的语句功能更强大，存储过程可以实现很复杂的业务逻辑，而函数有很多限制，如不能在函数中使用insert,update,delete,create等语句；存储函数只完成查询的工作，可接受输入参数并返回一个结果，也就是函数实现的功能针对性比较强。</li>
+<li>存储过程可以调用存储函数。但函数不能调用存储过程。</li>
+<li>存储过程一般是作为一个独立的部分来执行(call调用)。而函数可以作为查询语句的一个部分来调用。</li>
+</ol>
+<h1 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h1><p>不是所有的数据库引擎都支持事务管理，INNODB支持而MyISAM就不支持。</p>
+<h2 id="事务的特点（ACID特性）"><a href="#事务的特点（ACID特性）" class="headerlink" title="事务的特点（ACID特性）"></a>事务的特点（ACID特性）</h2><ul>
+<li>原子性：要么全做要么不做。</li>
+<li>一致性：事务必须从一个一致性状态转变到另一个一致性状态。</li>
+<li>隔离性： 多个事务之间保持隔离，互相不能影响。</li>
+<li>持久性：事务一旦提交，那么改变就是永久性的。</li>
+</ul>
+<h2 id="开始事务"><a href="#开始事务" class="headerlink" title="开始事务"></a>开始事务</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">START</span> <span class="keyword">TRANSACTION</span></span><br></pre></td></tr></table></figure>
+<h2 id="使用回滚"><a href="#使用回滚" class="headerlink" title="使用回滚"></a>使用回滚</h2><p>使用 ROLLBACK 进行显示的回滚</p>
+<h2 id="使用提交"><a href="#使用提交" class="headerlink" title="使用提交"></a>使用提交</h2><p>使用 COMMIT 进行显示的提交。当然也可以部分提交。</p>
+<h2 id="创建保留点"><a href="#创建保留点" class="headerlink" title="创建保留点"></a>创建保留点</h2><p>尽可能多的创建保留点，以保证能够随意回滚<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SAVEPOINT</span> delete1;</span><br><span class="line"><span class="keyword">ROLLBACK</span> <span class="keyword">TO</span> delete1</span><br></pre></td></tr></table></figure></p>
+<h2 id="手动释放保留点"><a href="#手动释放保留点" class="headerlink" title="手动释放保留点"></a>手动释放保留点</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">RELEASE</span> <span class="keyword">SAVEPOINT</span> delete1;</span><br></pre></td></tr></table></figure>
+<h1 id="MySQL引擎"><a href="#MySQL引擎" class="headerlink" title="MySQL引擎"></a>MySQL引擎</h1><h2 id="MySQL中myisam与innodb的区别，至少5点"><a href="#MySQL中myisam与innodb的区别，至少5点" class="headerlink" title="MySQL中myisam与innodb的区别，至少5点"></a>MySQL中myisam与innodb的区别，至少5点</h2><ol>
+<li>InnoDB支持事物，而MyISAM不支持事物</li>
+<li>InnoDB支持行级锁，而MyISAM支持表级锁</li>
+<li>InnoDB支持MVCC, 而MyISAM不支持</li>
+<li>InnoDB支持外键，而MyISAM不支持</li>
+<li>InnoDB不支持全文索引，而MyISAM支持。</li>
+<li>InnoDB不能通过直接拷贝表文件的方法拷贝表到另外一台机器， myisam 支持</li>
+<li>InnoDB表支持多种行格式， myisam 不支持</li>
+<li>InnoDB是索引组织表， myisam 是堆表</li>
+</ol>
+<h2 id="myisam与innodb索引的实现方式"><a href="#myisam与innodb索引的实现方式" class="headerlink" title="myisam与innodb索引的实现方式"></a>myisam与innodb索引的实现方式</h2><p>都是 B+树索引， Innodb 是索引组织表， myisam 是堆表， 索引组织表和堆表的区别要熟悉</p>
+<h2 id="innodb的事务与日志的实现方式"><a href="#innodb的事务与日志的实现方式" class="headerlink" title="innodb的事务与日志的实现方式"></a>innodb的事务与日志的实现方式</h2><h3 id="有多少种日志-（事务相关）"><a href="#有多少种日志-（事务相关）" class="headerlink" title="有多少种日志 （事务相关）"></a>有多少种日志 （事务相关）</h3><p>redo和undo</p>
+<h3 id="日志的存放形式"><a href="#日志的存放形式" class="headerlink" title="日志的存放形式"></a>日志的存放形式</h3><ul>
+<li>redo：在页修改的时候，先写到 redo log buffer 里面， 然后写到 redo log 的文件系统缓存里面(fwrite)，然后再同步到磁盘文件（ fsync）。</li>
+<li>Undo：在 MySQL5.5 之前， undo 只能存放在 ibdata*文件里面， 5.6 之后，可以通过设置 innodb_undo_tablespaces 参数把 undo log 存放在 ibdata*之外。</li>
+</ul>
+<h3 id="事务是如何通过日志来实现的，说得越深入越好"><a href="#事务是如何通过日志来实现的，说得越深入越好" class="headerlink" title="事务是如何通过日志来实现的，说得越深入越好"></a>事务是如何通过日志来实现的，说得越深入越好</h3><p>基本流程如下：</p>
+<p>因为事务在修改页时，要先记 undo，在记 undo 之前要记 undo 的 redo， 然后修改数据页，再记数据页修改的 redo。 Redo（里面包括 undo 的修改） 一定要比数据页先持久化到磁盘。 当事务需要回滚时，因为有 undo，可以把数据页回滚到前镜像的<br>状态，崩溃恢复时，如果 redo log 中事务没有对应的 commit 记录，那么需要用 undo把该事务的修改回滚到事务开始之前。 如果有 commit 记录，就用 redo 前滚到该事务完成时并提交掉。</p>
+<h2 id="MySQL-binlog的几种日志录入格式以及区别"><a href="#MySQL-binlog的几种日志录入格式以及区别" class="headerlink" title="MySQL binlog的几种日志录入格式以及区别"></a>MySQL binlog的几种日志录入格式以及区别</h2><ol>
+<li>Statement：每一条会修改数据的sql都会记录在binlog中。</li>
+</ol>
+<ul>
+<li>优点：不需要记录每一行的变化，减少了binlog日志量，节约了IO，提高性能。</li>
+<li>缺点：由于记录的只是执行语句，为了这些语句能在slave上正确运行，因此还必须记录每条语句在执行的时候的 一些相关信息，以保证所有语句能在slave得到和在master端执行时候相同 的结果。</li>
+</ul>
+<ol start="2">
+<li>Row:不记录sql语句上下文相关信息，仅保存哪条记录被修改。</li>
+</ol>
+<ul>
+<li>优点： binlog中可以不记录执行的sql语句的上下文相关的信息，仅需要记录那一条记录被修改成什么了。所以rowlevel的日志内容会非常清楚的记录下 每一行数据修改的细节。而且不会出现某些特定情况下的存储过程，或function，以及trigger的调用和触发无法被正确复制的问题</li>
+<li>缺点:所有的执行的语句当记录到日志中的时候，都将以每行记录的修改来记录，这样可能会产生大量的日志内容,比 如一条update语句，修改多条记录，则binlog中每一条修改都会有记录，这样造成binlog日志量会很大，特别是当执行alter table之类的语句的时候，<br>由于表结构修改，每条记录都发生改变，那么该表每一条记录都会记录到日志中。</li>
+</ul>
+<ol start="3">
+<li>Mixedlevel: 是以上两种level的混合使用，一般的语句修改使用statment格式保存binlog，如一些函数，statement无法完成主从复制的操作，则 采用row格式保存binlog,MySQL会根据执行的每一条具体的sql语句来区分对待记录的日志形式，<br>也就是在Statement和Row之间选择 一种.新版本的MySQL中队row level模式也被做了优化，并不是所有的修改都会以row level来记录，像遇到表结构变更的时候就会以statement模式来记录。至于update或者delete等修改数据的语句，还是会记录所有行的变更。</li>
+</ol>
+<p>适用场景：</p>
+<blockquote>
+<p>在一条 SQL 操作了多行数据时， statement 更节省空间， row 更占用空间。但是 row模式更可靠。</p>
+</blockquote>
+<h2 id="SQL优化"><a href="#SQL优化" class="headerlink" title="SQL优化"></a>SQL优化</h2><ol>
+<li>explain出来的各种item的意义</li>
+</ol>
+<ul>
+<li>id:每个被独立执行的操作的标志，表示对象被操作的顺序。一般来说， id 值大，先被执行；如果 id 值相同，则顺序从上到下。</li>
+<li>select_type：查询中每个 select 子句的类型。</li>
+<li>table:名字，被操作的对象名称，通常的表名(或者别名)，但是也有其他格式。</li>
+<li>partitions:匹配的分区信息。</li>
+<li>type:join 类型。</li>
+<li>possible_keys：列出可能会用到的索引。</li>
+<li>key:实际用到的索引。</li>
+<li>key_len:用到的索引键的平均长度，单位为字节。</li>
+<li>ref:表示本行被操作的对象的参照对象，可能是一个常量用 const 表示，也可能是其他表的</li>
+<li>key 指向的对象，比如说驱动表的连接列。</li>
+<li>rows:估计每次需要扫描的行数。</li>
+<li>filtered:rows*filtered/100 表示该步骤最后得到的行数(估计值)。</li>
+<li>extra:重要的补充信息。</li>
+</ul>
+<h1 id="常见面试题"><a href="#常见面试题" class="headerlink" title="常见面试题"></a>常见面试题</h1><h2 id="drop-delete与truncate的区别"><a href="#drop-delete与truncate的区别" class="headerlink" title="drop,delete与truncate的区别"></a>drop,delete与truncate的区别</h2><p>drop直接删掉表 truncate删除表中数据，再插入时自增长id又从1开始 delete删除表中数据，可以加where字句。  </p>
+<p>（1） DELETE语句执行删除的过程是每次从表中删除一行，并且同时将该行的删除操作作为事务记录在日志中保存以便进行进行回滚操作。TRUNCATE TABLE 则一次性地从表中删除所有的数据并不把单独的删除操作记录记入日志保存，删除行是不能恢复的。并且在删除的过程中不会激活与表有关的删除触发器。执行速度快。</p>
+<p>（2） 表和索引所占空间。当表被TRUNCATE 后，这个表和索引所占用的空间会恢复到初始大小，而DELETE操作不会减少表或索引所占用的空间。drop语句将表所占用的空间全释放掉。</p>
+<p>（3） 一般而言，drop &gt; truncate &gt; delete</p>
+<p>（4） 应用范围。TRUNCATE 只能对TABLE；DELETE可以是table和view</p>
+<p>（5） DELETE只删除数据，TRUNCATE 删除整个表后又创建了一个表，而DROP则删除整个表（结构和数据）。</p>
+<p>（6） truncate与不带where的delete ：只删除数据，而不删除表的结构（定义）drop语句将删除表的结构被依赖的约束（constrain),触发器（trigger)索引（index);依赖于该表的存储过程/函数将被保留，但其状态会变为：invalid。</p>
+<p>（7） delete语句为DML（data maintain Language),这个操作会被放到 rollback segment中,事务提交后才生效。如果有相应的 tigger,执行的时候将被触发。</p>
+<p>（8） truncate、drop是DLL（data define language),操作立即生效，原数据不放到 rollback segment中，不能回滚</p>
+<p>（9） 在没有备份情况下，谨慎使用 drop 与 truncate。要删除部分数据行采用delete且注意结合where来约束影响范围。回滚段要足够大。要删除表用drop;若想保留表而将表中数据删除，如果于事务无关，用truncate即可实现。如果和事务有关，或老师想触发trigger,还是用delete。</p>
+<p>（10） Truncate table 表名 速度快,而且效率高,因为:<br>truncate table 在功能上与不带 WHERE 子句的 DELETE 语句相同：二者均删除表中的全部行。但 TRUNCATE TABLE 比 DELETE 速度快，且使用的系统和事务日志资源少。DELETE 语句每次删除一行，并在事务日志中为所删除的每行记录一项。TRUNCATE TABLE 通过释放存储表数据所用的数据页来删除数据，并且只在事务日志中记录页的释放。</p>
+<p>（11） TRUNCATE TABLE 删除表中的所有行，但表结构及其列、约束、索引等保持不变。新行标识所用的计数值重置为该列的种子。如果想保留标识计数值，请改用 DELETE。如果要删除表定义及其数据，请使用 DROP TABLE 语句。</p>
+<p>（12） 对于由 FOREIGN KEY 约束引用的表，不能使用 TRUNCATE TABLE，而应使用不带 WHERE 子句的 DELETE 语句。由于 TRUNCATE TABLE 不记录在日志中，所以它不能激活触发器。</p>
+<h2 id="索引的工作原理及其种类"><a href="#索引的工作原理及其种类" class="headerlink" title="索引的工作原理及其种类"></a>索引的工作原理及其种类</h2>
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    <div>
+        
+    </div>
+    
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/21/MySQL语句复习/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Want Young">
+      <meta itemprop="description" content="Change World, Change Life">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Young">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/02/21/MySQL语句复习/" class="post-title-link" itemprop="http://yoursite.com/page/2/index.html">MySQL语句复习</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-02-21 10:46:27 / 修改时间：16:59:16" itemprop="dateCreated datePublished" datetime="2019-02-21T10:46:27+08:00">2019-02-21</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/数据库/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="MySQL语句"><a href="#MySQL语句" class="headerlink" title="MySQL语句"></a>MySQL语句</h1><h2 id="关系型数据库"><a href="#关系型数据库" class="headerlink" title="关系型数据库"></a>关系型数据库</h2><p>DB2、MySQL、PostgreSQL<br>MongoDB：文档型非关系数据库<br>Redis：KV键值数据库<br>HBase：列数据库<br>Hadoop：分布式数据库</p>
+<h2 id="SQL语句的分类"><a href="#SQL语句的分类" class="headerlink" title="SQL语句的分类"></a>SQL语句的分类</h2><ul>
+<li>DDL（Data Definition Languages）数据定义语言。用来定义数据库，数据表，列，索引等数据库对象。关键字主要是：create、drop、alter  </li>
+<li>DML（Data Manipulation Language）数据操纵语句。用于添加、删除、更新和查询数据库记录，并检查数据完整性。关键字主要是：insert、delete、update和select等  </li>
+<li>DCL（Data Control Language）数据控制语句。用于控制不同数据段直接的许可和访问级别。这些语句定义了数据库、表、字段、用户的访问权限和安全级别。关键字主要是：grant、revoke（收回权限）  </li>
+</ul>
+<h2 id="DDL语句"><a href="#DDL语句" class="headerlink" title="DDL语句"></a>DDL语句</h2><ol>
+<li><p>创建数据库</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">DATABASE</span> dbname;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>显示所有数据库</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SHOW</span> <span class="keyword">DATABASES</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>选择使用数据库</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">USE</span> dbname;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查看所有表</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SHOW</span> <span class="keyword">TABLES</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>删除数据库</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DROP</span> <span class="keyword">DATABASE</span> dbname;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建表</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="keyword">IF</span> <span class="keyword">NOT</span> <span class="keyword">EXISTS</span> <span class="string">`runoob_tbl`</span>(</span><br><span class="line">   <span class="string">`runoob_id`</span> <span class="built_in">INT</span> <span class="keyword">UNSIGNED</span> AUTO_INCREMENT,</span><br><span class="line">   <span class="string">`runoob_title`</span> <span class="built_in">VARCHAR</span>(<span class="number">100</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">   <span class="string">`runoob_author`</span> <span class="built_in">VARCHAR</span>(<span class="number">40</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">   <span class="string">`submission_date`</span> <span class="built_in">DATE</span>,</span><br><span class="line">   PRIMARY <span class="keyword">KEY</span> ( <span class="string">`runoob_id`</span> )</span><br><span class="line">)<span class="keyword">ENGINE</span>=<span class="keyword">InnoDB</span> <span class="keyword">DEFAULT</span> <span class="keyword">CHARSET</span>=utf8;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>实例解析：</p>
+<ul>
+<li>如果你不想字段为 NULL 可以设置字段的属性为 NOT NULL， 在操作数据库时如果输入该字段的数据为NULL ，就会报错。</li>
+<li>AUTO_INCREMENT定义列为自增的属性，一般用于主键，数值会自动加1。</li>
+<li>PRIMARY KEY关键字用于定义列为主键。 您可以使用多列来定义主键，列间以逗号分隔。</li>
+<li>ENGINE 设置存储引擎，CHARSET 设置编码。</li>
+</ul>
+<ol start="7">
+<li><p>查看表</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SHOW</span> <span class="keyword">CREATE</span> <span class="keyword">TABLE</span> table_name;  查看表的创建信息</span><br><span class="line">desc table_name;   查看表结构</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修改表</p>
+</li>
+</ol>
+<p>ALTER TABLE tablename MODIFY [column] column_definition [FIRST\AFTER col_name]<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">Eg. 修改表student的sname字段定义，将varchar（10）改为varchar（20）：</span><br><span class="line">	<span class="keyword">ALTER</span> <span class="keyword">TABLE</span> student <span class="keyword">MODIFY</span> sname <span class="built_in">varchar</span>(<span class="number">20</span>);</span><br><span class="line">Eg. 在student表中增加一个age字段</span><br><span class="line">	<span class="keyword">ALTER</span> <span class="keyword">TABLE</span> student <span class="keyword">ADD</span> [<span class="keyword">column</span>] age <span class="built_in">int</span>(<span class="number">3</span>);</span><br><span class="line">(一般情况下，增加一个字段，该字段被加入到表的最后一个位置，如果想要自定义位置可以用first和after两个关键字)</span><br><span class="line">Eg. 将sname字段加在sno之后</span><br><span class="line">	<span class="keyword">ALTER</span> <span class="keyword">TABLE</span> student <span class="keyword">ADD</span> [<span class="keyword">COLUMN</span>] sname <span class="built_in">varchar</span>(<span class="number">10</span>) <span class="keyword">AFTER</span> sno;</span><br><span class="line">Eg. 将sname字段放在最前面</span><br><span class="line">	<span class="keyword">ALTER</span> <span class="keyword">TABLE</span> student <span class="keyword">MODIFY</span> <span class="keyword">COLUMN</span> sname <span class="built_in">varchar</span>(<span class="number">10</span>) <span class="keyword">FIRST</span>;</span><br><span class="line">Eg. 将age字段从表中删除</span><br><span class="line">	<span class="keyword">ALTER</span> <span class="keyword">TABLE</span> student <span class="keyword">DROP</span> <span class="keyword">COLUMN</span> age;</span><br><span class="line">Eg. 将age改名为age1，同时修改字段类型为int(4)</span><br><span class="line">	<span class="keyword">ALTER</span> <span class="keyword">TABLE</span> student <span class="keyword">CHANGE</span> age age1 <span class="built_in">int</span>(<span class="number">4</span>);</span><br><span class="line">(<span class="keyword">change</span>和<span class="keyword">modify</span>都可以修改表的定义，<span class="keyword">change</span>后面需要写两次列名，不方便。但是<span class="keyword">change</span>可以修改列的名称，<span class="keyword">modify</span>则不能)</span><br><span class="line">Eg. 将表student改名为mystudent</span><br><span class="line">	<span class="keyword">ALTER</span> <span class="keyword">TABLE</span> student <span class="keyword">RENAME</span> mystudent;</span><br></pre></td></tr></table></figure></p>
+<h2 id="DML语句"><a href="#DML语句" class="headerlink" title="DML语句"></a>DML语句</h2><h3 id="1-插入记录"><a href="#1-插入记录" class="headerlink" title="1. 插入记录"></a>1. 插入记录</h3><p>一般形式：</p>
+<blockquote>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; INSERT INTO tablename (field1, field2, … , fieldn) VALUES (value1, value2, … , valuen);</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p>也可以不指定字段名称，但是values后面的顺序应该和数据表中的顺序排列一致，且每一个都要写.  </p>
+</blockquote>
+<p>一次插入多条记录：</p>
+<blockquote>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt; INSERT INTO tablename (field1, field2, … , fieldn) </span><br><span class="line">&gt; VALUES </span><br><span class="line">&gt; (record1_value1, record1_value2, … , record1_valuen),</span><br><span class="line">&gt; (record2_value1, record2_value2, … , record2_valuen),</span><br><span class="line">&gt; …</span><br><span class="line">&gt; (recordn_value1, recordn_value2, … , recordn_valuen);</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h3 id="2-更改记录"><a href="#2-更改记录" class="headerlink" title="2. 更改记录"></a>2. 更改记录</h3><p>一般形式：</p>
+<blockquote>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; UPDATE tablename SET field1=value1, field2=value2, … , fieldn=valuen [WHERE &gt; CONDITION];</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>同时更新多个表中的字段：</p>
+<blockquote>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; UPDATE t1, t2, … , tn SET t1.field1=value1, …, tn.fieldn=valuen [WHERE CONDITION];</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>举例：</p>
+<p><img src="&#39;/images/同时修改两表记录.png&#39;" alt=""><br>同时更新表emp中的字段sal和表dept中的字段deptname：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">UPDATE</span> emp a, dept b <span class="keyword">SET</span> a.sal=a.sal*b.deptno, b.deptname=a.ename <span class="keyword">where</span> a.deptno=b.deptno;</span><br></pre></td></tr></table></figure></p>
+<h3 id="3-删除记录"><a href="#3-删除记录" class="headerlink" title="3. 删除记录"></a>3. 删除记录</h3><p>一般形式：</p>
+<blockquote>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; DELETE FROM table_name [WHERE CONDITION];</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>缺少where条件将会删除表中所有记录</p>
+<p>一次删除多个表中的记录：</p>
+<blockquote>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; DELETE t1, t2, ..., tn FROM t1, t2, ..., tn [WHERE CONDITION];</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h3 id="4-查询记录"><a href="#4-查询记录" class="headerlink" title="4. 查询记录"></a>4. 查询记录</h3><p>一般形式:</p>
+<blockquote>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; SELECT * FROM tablename [WHERE CONDITION];</span><br><span class="line">&gt; SELECT col1,col2,… FROM tablename [WHERE CONDITION];</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>去除重复记录：</p>
+<blockquote>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; Select distinct deptno from staff;</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>条件查询：</p>
+<blockquote>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; Select * from staff where deptno=1; </span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p>!= 和 &lt;&gt; 都表示不等于<br>BETWEEN 查询间隔 ： <code>SELECT * FROM TABLE WHERE COLUMN BETWEEN a AND b;</code><br>空值检查NULL： IS NULL 判断NULL<br>AMD 和 OR 多条件查询， 注意查询次序<br>IN 表示范围匹配<br>使用 NOT 对IN、BETWEEN、EXECTS取反  </p>
+</blockquote>
+<p>排序和限制：</p>
+<blockquote>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; SELECT * FROM tableName [WHERE CONDITION] [ORDER BY field1 [DESC/ASC]，field2[DESC/ASC]];</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p>desc是降序排列，asc是升序排列，如果不写，则默认为是升序排列。<br>（如果排序的字段的值一样，则值相同的字段按照第二个排序字段进行排序；如果只有一个排序字段，那么这些相同的值将会无序排列）。</p>
+</blockquote>
+<blockquote>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; select * from staff order by salary limit 3;   显示前三条记录</span><br><span class="line">&gt; select * from staff order by salary limit 1,3;  显示从第二条开始的3条记录。</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>通配符检索</p>
+<blockquote>
+<p>% :表示任意字符出现任意多次<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> <span class="keyword">TABLE</span> <span class="keyword">WHERE</span> <span class="keyword">name</span> <span class="keyword">LIKE</span> <span class="string">'wang%'</span>;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>_ :表示任意字符出现一次<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> <span class="keyword">TABLE</span> <span class="keyword">WHERE</span> <span class="keyword">name</span> <span class="keyword">LIKE</span> <span class="string">'wan_%'</span>;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p>REGEXP 表示使用正则表达式检索 . *<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> <span class="keyword">TABLE</span> <span class="keyword">WHERE</span> <span class="keyword">name</span> REGEXP <span class="string">'.000'</span>;</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>使用 \\ 进行特殊字符的转义<br>定位符 ^ 字符串开头 $ 字符串结尾<br>. 匹配一个<br>* 匹配0个或多个<br>+ 匹配1个或多个<br>? 匹配0个或1个  </p>
+</blockquote>
+<p>聚集函数：<br>MySQL 提供五种聚集函数 AVG( )、 COUNT( )、 MIN( )、 MAX( )、 SUM( )</p>
+<blockquote>
+<p>DISTINCT 字段可用于 AVG 和 COUNT 函数</p>
+</blockquote>
+<p>检索条件语句 WHERE 和 HAVING：<br>几乎所有的WHERE语句都能用HAVING语句代替，他们所不同的是WHERE过滤行， 而HAVING过滤分组。</p>
+<blockquote>
+<p>HAVING 和 GROUP BY 配合使用， HAVING 出现在 GROUP BY 之后， 而 WHERE 必须出现在 GROUP BY之前。</p>
+</blockquote>
+<p>SELECT子句顺序：  </p>
+<blockquote>
+<p><img src="/images/SELECT子句顺序.png" alt=""></p>
+</blockquote>
+<h3 id="5-级联查询（表连接）"><a href="#5-级联查询（表连接）" class="headerlink" title="5. 级联查询（表连接）"></a>5. 级联查询（表连接）</h3><h4 id="级联查询（子查询）"><a href="#级联查询（子查询）" class="headerlink" title="级联查询（子查询）"></a>级联查询（子查询）</h4><p>WHERE通常可以包含另一个查询子句，例如：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> *</span><br><span class="line"><span class="keyword">FROM</span> student</span><br><span class="line"><span class="keyword">WHERE</span> <span class="keyword">id</span> <span class="keyword">IN</span> (<span class="keyword">SELECT</span> <span class="keyword">id</span> <span class="keyword">FROM</span> <span class="keyword">users</span> <span class="keyword">WHERE</span> sex = <span class="string">'female'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> cust_name, cust_state, (<span class="keyword">SELECT</span> <span class="keyword">count</span>(*) <span class="keyword">FROM</span> orders <span class="keyword">WHERE</span> orders.cust_id = customers.cust_id) <span class="keyword">AS</span> orders</span><br><span class="line"><span class="keyword">FROM</span> customers</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> cust_name;</span><br></pre></td></tr></table></figure></p>
+<p>级联查询并不是最有效的查询。</p>
+<h4 id="联结表（join）"><a href="#联结表（join）" class="headerlink" title="联结表（join）"></a>联结表（join）</h4><p>外键：</p>
+<blockquote>
+<p>外键是指一个表中的列属性包含另一个表的主键</p>
+</blockquote>
+<p>可伸缩性好：</p>
+<blockquote>
+<p>能够适应不断增加的工作量</p>
+</blockquote>
+<p>连接（联结）例子：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">name</span>, price</span><br><span class="line"><span class="keyword">FROM</span> factory, products</span><br><span class="line"><span class="keyword">WHERE</span> factory.id = products.id</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> price</span><br></pre></td></tr></table></figure></p>
+<p>笛卡尔积连接</p>
+<blockquote>
+<p>没有联结条件限制的表连接会将表A中的每一行和表B中的每一行配对，这样的连接称为笛卡尔积</p>
+</blockquote>
+<h4 id="内连接、外连接、左连接、右连接、全连接、自然连接"><a href="#内连接、外连接、左连接、右连接、全连接、自然连接" class="headerlink" title="内连接、外连接、左连接、右连接、全连接、自然连接"></a>内连接、外连接、左连接、右连接、全连接、自然连接</h4><p>内左右全连接的划分是因为下图的叫法：</p>
+<blockquote>
+<p><img src="/images/inner_outer_join.jpg" alt=""></p>
+</blockquote>
+<p>内连接（对应C区域）：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">name</span>, price</span><br><span class="line"><span class="keyword">FROM</span> factory <span class="keyword">INNER</span> <span class="keyword">JOIN</span> products</span><br><span class="line"><span class="keyword">ON</span> factory.id = products.id</span><br><span class="line">// 等价于</span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">name</span>, price</span><br><span class="line"><span class="keyword">FROM</span> factory, products</span><br><span class="line"><span class="keyword">WHERE</span> factory.id = products.id</span><br></pre></td></tr></table></figure></p>
+<p>左连接（A1区域）：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">name</span>, price</span><br><span class="line"><span class="keyword">FROM</span> factory <span class="keyword">LEFT</span> <span class="keyword">JOIN</span> products</span><br><span class="line"><span class="keyword">ON</span> factory.id = products.id</span><br></pre></td></tr></table></figure></p>
+<p>右连接（B1区域）：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">name</span>, price</span><br><span class="line"><span class="keyword">FROM</span> factory <span class="keyword">RIGHT</span> <span class="keyword">JOIN</span> products</span><br><span class="line"><span class="keyword">ON</span> factory.id = products.id</span><br></pre></td></tr></table></figure></p>
+<p>全连接(所有区域) 加表别名:<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">name</span>, price</span><br><span class="line"><span class="keyword">FROM</span> factory <span class="keyword">AS</span> a <span class="keyword">FULL</span> <span class="keyword">JOIN</span> products <span class="keyword">AS</span> b</span><br><span class="line"><span class="keyword">ON</span> a.id = b.id</span><br></pre></td></tr></table></figure></p>
+<p>自然连接基本用不到。</p>
+<h4 id="使用组合查询-UNION"><a href="#使用组合查询-UNION" class="headerlink" title="使用组合查询 UNION"></a>使用组合查询 UNION</h4><p>使用UNION对多个SELECT进行并操作，这和一条SELECT使用多个WHERE是相同的结果，但有时效率不同，语句复杂情况也不一样。</p>
+<blockquote>
+<ul>
+<li>UNION会自动去除重复的行</li>
+<li>使用UNION时只能使用一次ORDER BY在最后一个SELECT中。</li>
+</ul>
+</blockquote>
+<h2 id="DCL语句"><a href="#DCL语句" class="headerlink" title="DCL语句"></a>DCL语句</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">grant</span> 权限<span class="number">1</span>,权限<span class="number">2</span>,…权限n <span class="keyword">on</span> 数据库名称.表名称 <span class="keyword">to</span> 用户名@用户地址 <span class="keyword">identified</span> <span class="keyword">by</span> ‘连接口令’;</span><br><span class="line"><span class="keyword">grant</span> <span class="keyword">select</span>, <span class="keyword">insert</span> <span class="keyword">on</span> databaseName.* <span class="keyword">to</span> ‘user1’@’localhost’ <span class="keyword">identified</span> <span class="keyword">by</span> ‘dorothy’;</span><br><span class="line"><span class="keyword">revoke</span> <span class="keyword">insert</span> <span class="keyword">on</span> databaseName.* <span class="keyword">from</span> ‘user1’@’localhost’.</span><br></pre></td></tr></table></figure>
+<h2 id="视图"><a href="#视图" class="headerlink" title="视图"></a>视图</h2><p>是从一个或多个基本表导出的表，它是虚表。数据库中只存放视图的定义，而不是实际的数据，数据仍然保存在基本表中。如果基本表的数据变化，视图中的数据也随之变化。<br>视图一经定义，可以像基本表一样被查询和删除，也可以在视图上在定义一个新的视图，但对视图的更新存在一定的限制。</p>
+<h3 id="建立视图："><a href="#建立视图：" class="headerlink" title="建立视图："></a>建立视图：</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">VIEW</span> IS_STUDENT</span><br><span class="line"><span class="keyword">AS</span> </span><br><span class="line"><span class="keyword">SELECT</span> Sno,Sname,Sage</span><br><span class="line"><span class="keyword">FROM</span> Student</span><br><span class="line"><span class="keyword">WHERE</span> Sdept=’<span class="keyword">IS</span>’;</span><br></pre></td></tr></table></figure>
+<p>更新时进行检查：WITH CHECK OPTION：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">VIEW</span> IS_STUDENT</span><br><span class="line"><span class="keyword">AS</span> </span><br><span class="line"><span class="keyword">SELECT</span> Sno,Sname,Sage</span><br><span class="line"><span class="keyword">FROM</span> Student</span><br><span class="line"><span class="keyword">WHERE</span> Sdept=’<span class="keyword">IS</span>’</span><br><span class="line"><span class="keyword">WITH</span> <span class="keyword">CHECK</span> <span class="keyword">OPTION</span>；</span><br></pre></td></tr></table></figure></p>
+<p>插入和修改视图时，数据库系统会自动加上Sdept=’IS’的条件。  </p>
+<h3 id="在视图上建立视图："><a href="#在视图上建立视图：" class="headerlink" title="在视图上建立视图："></a>在视图上建立视图：</h3><p>建立一个IS_S1视图，显示选修了课程号为1的学生信息：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">VIEW</span> IS_S1（Sno，Sname，Grade）</span><br><span class="line"><span class="keyword">AS</span> </span><br><span class="line"><span class="keyword">SELECT</span> Student.Sno,Sname,Sage</span><br><span class="line"><span class="keyword">FROM</span> Student，SC</span><br><span class="line"><span class="keyword">WHERE</span> Sdept=’<span class="keyword">IS</span>’ <span class="keyword">AND</span> Student.Sno=SC.Sno <span class="keyword">AND</span> SC.Cno=‘<span class="number">1</span>’；</span><br></pre></td></tr></table></figure></p>
+<p>建立信息系选修了1号课程且成绩为90分以上的学生的视图：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">VIEW</span> IS_S2</span><br><span class="line"><span class="keyword">AS</span> </span><br><span class="line"><span class="keyword">SELECT</span> Sno,Sname,Sage</span><br><span class="line"><span class="keyword">FROM</span> IS_S1</span><br><span class="line"><span class="keyword">WHERE</span> Grade&gt;<span class="number">90</span>;</span><br></pre></td></tr></table></figure></p>
+<p>删除视图：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Drop</span> <span class="keyword">view</span> viewName [<span class="keyword">cascade</span>]</span><br></pre></td></tr></table></figure></p>
+<p>加上cascade就会将由该视图导出的所有视图全部删除</p>
+<h2 id="范式"><a href="#范式" class="headerlink" title="范式"></a>范式</h2><ul>
+<li>第一范式： 如果数据库表中的所有字段值都是不可分解的原子值，就说明该数据库表满足了第一范式。</li>
+<li>第二范式： 满足第一范式，并且每一个非主属性完全函数依赖于码。也就是说要确保每一列都与主键相关，而不能只与主键部分相关（主要针对联合主键）。</li>
+<li>第三范式： 满足2NF，并且消除传递依赖。数据库表中的每一列都要和主键直接相关，而不是间接相关。</li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    <div>
+        
+    </div>
+    
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/21/MySQL逻辑架构和查询优化复习/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Want Young">
+      <meta itemprop="description" content="Change World, Change Life">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Young">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/02/21/MySQL逻辑架构和查询优化复习/" class="post-title-link" itemprop="http://yoursite.com/page/2/index.html">MySQL逻辑架构与查询优化复习</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-02-21 09:44:27 / 修改时间：10:46:09" itemprop="dateCreated datePublished" datetime="2019-02-21T09:44:27+08:00">2019-02-21</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/数据库/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="MySQL逻辑架构与查询优化复习"><a href="#MySQL逻辑架构与查询优化复习" class="headerlink" title="MySQL逻辑架构与查询优化复习"></a>MySQL逻辑架构与查询优化复习</h1><h2 id="MySQL逻辑架构"><a href="#MySQL逻辑架构" class="headerlink" title="MySQL逻辑架构"></a>MySQL逻辑架构</h2><blockquote>
+<p><img src="/images/Mysql逻辑架构.png" alt=""></p>
+</blockquote>
+<ul>
+<li><p>MySQL逻辑架构整体分为三层，最上层为客户端层，并非MySQL所独有，诸如：连接处理、授权认证、安全等功能均在这一层处理。</p>
+</li>
+<li><p>MySQL大多数核心服务均在中间这一层，包括查询解析、分析、优化、缓存、内置函数(比如：时间、数学、加密等函数)。所有的跨存储引擎的功能也在这一层实现：存储过程、触发器、视图等。</p>
+</li>
+<li><p>最下层为存储引擎，其负责MySQL中的数据存储和提取。和Linux下的文件系统类似，每种存储引擎都有其优势和劣势。中间的服务层通过API与存储引擎通信，这些API接口屏蔽了不同存储引擎间的差异。</p>
+</li>
+</ul>
+<h2 id="MySQL查询过程"><a href="#MySQL查询过程" class="headerlink" title="MySQL查询过程"></a>MySQL查询过程</h2><blockquote>
+<p><img src="/images/MySQL查询过程.png" alt=""></p>
+</blockquote>
+<h3 id="客户端-服务端通信协议"><a href="#客户端-服务端通信协议" class="headerlink" title="客户端/服务端通信协议"></a>客户端/服务端通信协议</h3><ul>
+<li><p>MySQL客户端/服务端通信协议是“半双工”的：在任一时刻，要么是服务器向客户端发送数据，要么是客户端向服务器发送数据，这两个动作不能同时发生。一旦一端开始发送消息，另一端要接收完整个消息才能响应它，所以我们无法也无须将一个消息切成小块独立发送，也没有办法进行流量控制。</p>
+</li>
+<li><p>客户端用一个单独的数据包将查询请求发送给服务器，所以当查询语句很长的时候，需要设置max_allowed_packet参数。但是需要注意的是，如果查询实在是太大，服务端会拒绝接收更多数据并抛出异常。</p>
+</li>
+<li><p>与之相反的是，服务器响应给用户的数据通常会很多，由多个数据包组成。但是当服务器响应客户端请求时，客户端必须完整的接收整个返回结果，而不能简单的只取前面几条结果，然后让服务器停止发送。因而在实际开发中，尽量保持查询简单且只返回必需的数据，减小通信间数据 包的大小和数量是一个非常好的习惯，这也是查询中尽量避免使用SELECT *以及加上LIMIT限制的原因之一。</p>
+</li>
+</ul>
+<h3 id="查询缓存"><a href="#查询缓存" class="headerlink" title="查询缓存"></a>查询缓存</h3>
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    <div>
+        
+    </div>
+    
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/20/京东2019校招笔试C-开发工程师笔试题总结/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Want Young">
+      <meta itemprop="description" content="Change World, Change Life">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Young">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/02/20/京东2019校招笔试C-开发工程师笔试题总结/" class="post-title-link" itemprop="http://yoursite.com/page/2/index.html">京东2019校招笔试C++开发工程师笔试题总结</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-02-20 19:48:43 / 修改时间：21:55:15" itemprop="dateCreated datePublished" datetime="2019-02-20T19:48:43+08:00">2019-02-20</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/实习准备/" itemprop="url" rel="index"><span itemprop="name">实习准备</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="多选题总结"><a href="#多选题总结" class="headerlink" title="多选题总结"></a>多选题总结</h1><h2 id="内存存放方式存在大端小端之分"><a href="#内存存放方式存在大端小端之分" class="headerlink" title="内存存放方式存在大端小端之分"></a>内存存放方式存在大端小端之分</h2><p>X定义如下，若存在X a; a.x=0x11223344;则a.y[1]的值可能为（）<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">union</span> X&#123;</span><br><span class="line">    <span class="keyword">int</span> x;</span><br><span class="line">    <span class="keyword">char</span> y[<span class="number">4</span>];</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>A. 11<br>B. 22<br>C. 33<br>D. 44  </p>
+<p>答案：BC</p>
+<h2 id="唯一确定一颗二叉树必须包含的两种遍历方法中要有中序遍历"><a href="#唯一确定一颗二叉树必须包含的两种遍历方法中要有中序遍历" class="headerlink" title="唯一确定一颗二叉树必须包含的两种遍历方法中要有中序遍历"></a>唯一确定一颗二叉树必须包含的两种遍历方法中要有中序遍历</h2><p>采用哪种遍历方法可唯一确定一棵二叉树？（  ）<br>B： 给定一棵二叉树的后序和中序遍历序列<br>D： 给定一棵二叉树的先序和中序遍历序列  </p>
+<h2 id="TCP拥塞控制的四种方法"><a href="#TCP拥塞控制的四种方法" class="headerlink" title="TCP拥塞控制的四种方法"></a>TCP拥塞控制的四种方法</h2><ul>
+<li>慢启动</li>
+<li>拥塞控制</li>
+<li>快重传</li>
+<li>快恢复</li>
+</ul>
+<h2 id="引用和指针都能实现多态"><a href="#引用和指针都能实现多态" class="headerlink" title="引用和指针都能实现多态"></a>引用和指针都能实现多态</h2><h2 id="类静态数据成员的初始化必须在全局区域进行，除非类型为const"><a href="#类静态数据成员的初始化必须在全局区域进行，除非类型为const" class="headerlink" title="类静态数据成员的初始化必须在全局区域进行，除非类型为const"></a>类静态数据成员的初始化必须在全局区域进行，除非类型为const</h2><h2 id="友元函数和友元类破坏了类的封装性，友元不具有传递性，继承性，双向性"><a href="#友元函数和友元类破坏了类的封装性，友元不具有传递性，继承性，双向性" class="headerlink" title="友元函数和友元类破坏了类的封装性，友元不具有传递性，继承性，双向性"></a>友元函数和友元类破坏了类的封装性，友元不具有传递性，继承性，双向性</h2>
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    <div>
+        
+    </div>
+    
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/19/C++面试复习/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -427,12 +1405,24 @@
                 
               
 
-              <time title="创建时间：2019-02-19 11:47:13 / 修改时间：18:44:26" itemprop="dateCreated datePublished" datetime="2019-02-19T11:47:13+08:00">2019-02-19</time>
+              <time title="创建时间：2019-02-19 11:47:13" itemprop="dateCreated datePublished" datetime="2019-02-19T11:47:13+08:00">2019-02-19</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-03-02 14:28:57" itemprop="dateModified" datetime="2019-03-02T14:28:57+08:00">2019-03-02</time>
               
             
           </span>
@@ -495,7 +1485,7 @@
 <h2 id="lambda表达式-c-11引入-目的是更加方便的创建匿名函数"><a href="#lambda表达式-c-11引入-目的是更加方便的创建匿名函数" class="headerlink" title="lambda表达式 c++11引入 目的是更加方便的创建匿名函数"></a>lambda表达式 c++11引入 目的是更加方便的创建匿名函数</h2><p>形式：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[capture <span class="built_in">list</span>] (params <span class="built_in">list</span>) <span class="keyword">mutable</span> exception-&gt; <span class="keyword">return</span> type &#123; function body &#125;</span><br><span class="line"><span class="keyword">auto</span> f = [](<span class="keyword">int</span> a)&#123;<span class="keyword">return</span> a;&#125;;<span class="comment">//[]是捕获列表，里面写局部变量名, 省略返回类型表示返回类型由return决定</span></span><br><span class="line"><span class="keyword">auto</span> f = [](<span class="keyword">int</span> a)-&gt;<span class="keyword">int</span>&#123;<span class="keyword">return</span> a;&#125;;<span class="comment">//省略mutable，表示函数不允许修改捕获的变量，显示的返回类型和return不匹配会发生强制类型转换</span></span><br><span class="line"><span class="keyword">int</span> c = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">auto</span> f = [c](<span class="keyword">int</span> a)<span class="keyword">mutable</span>&#123;c = <span class="number">2</span>;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">auto</span> f = [c](<span class="keyword">int</span> a)&#123;<span class="built_in">cout</span>&lt;&lt;c&lt;&lt;<span class="built_in">endl</span>;&#125;;</span><br><span class="line"><span class="keyword">auto</span> f = [&amp;c](<span class="keyword">int</span> a)&#123;c = <span class="number">2</span>;&#125;;</span><br><span class="line"><span class="keyword">auto</span> f = [=](<span class="keyword">int</span> a)&#123;&#125;;</span><br><span class="line"><span class="keyword">auto</span> f = [&amp;, c](<span class="keyword">int</span> a)&#123;&#125;;</span><br><span class="line"><span class="keyword">auto</span> f = []&#123;<span class="built_in">cout</span>&lt;&lt;<span class="string">"aaa"</span>&lt;&lt;<span class="built_in">endl</span>;&#125;;</span><br></pre></td></tr></table></figure></p>
 <h2 id="变量声明和定义的区别"><a href="#变量声明和定义的区别" class="headerlink" title="变量声明和定义的区别"></a>变量声明和定义的区别</h2><ul>
 <li>变量声明仅仅是告诉编译器变量的类型，位置，名称等，并不分配空间。变量的定义要在定义的地方分配空间</li>
-<li>变量可以多次声明，如extend引入外部变量，但定义只能有一次。<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">extend <span class="keyword">int</span> A;</span><br></pre></td></tr></table></figure>
+<li>变量可以多次声明，如extend引入外部变量，但定义只能有一次。<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">extern</span> <span class="keyword">int</span> A;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <h2 id="“零值”的比较"><a href="#“零值”的比较" class="headerlink" title="“零值”的比较"></a>“零值”的比较</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">bool</span>类型:  <span class="keyword">if</span>(flag)</span><br><span class="line"><span class="keyword">int</span> 类型:  <span class="keyword">if</span>(flag == <span class="number">0</span>)</span><br><span class="line"><span class="keyword">float</span>类型: <span class="keyword">if</span>(flag &gt;= <span class="number">-0.000001</span> &amp;&amp; flag &lt;= <span class="number">0.000001</span>)</span><br><span class="line">指针类型:  <span class="keyword">if</span>(flag == <span class="literal">NULL</span>)</span><br></pre></td></tr></table></figure>
@@ -2438,811 +3428,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/26/机器学习-模型评估与选择/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Want Young">
-      <meta itemprop="description" content="Change World, Change Life">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Young">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/12/26/机器学习-模型评估与选择/" class="post-title-link" itemprop="http://yoursite.com/page/2/index.html">机器学习-模型评估与选择</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-12-26 22:00:01" itemprop="dateCreated datePublished" datetime="2018-12-26T22:00:01+08:00">2018-12-26</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-12-29 10:53:49" itemprop="dateModified" datetime="2018-12-29T10:53:49+08:00">2018-12-29</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/机器学习/" itemprop="url" rel="index"><span itemprop="name">机器学习</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="模型评估与选择"><a href="#模型评估与选择" class="headerlink" title="模型评估与选择"></a>模型评估与选择</h1><h2 id="过拟合和欠拟合"><a href="#过拟合和欠拟合" class="headerlink" title="过拟合和欠拟合"></a>过拟合和欠拟合</h2><p><strong>过拟合</strong>：学习器把训练样本自身的一些特点当做所有潜在样本的都会具有的一般性质，导致泛化性能下降。典型的表现就是训练集样本误差在降低，而测试集样本误差却在升高。</p>
-<p><strong>欠拟合</strong>：学习器对训练样本的一般性质没有学好，典型表现就是训练误差仍然很高。</p>
-<p>有多种因素可以导致过拟合，常见的情况就是学习器的学习能力太强大（模型过于复杂），学习到了很多训练集所包含的不太一般的特性。<br>而欠拟合通常是因为学习能力低下造成的。</p>
-<p>过拟合是无法彻底避免的，我们所能做的就是缓解，或者说减小其风险。</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    <div>
-        
-    </div>
-    
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/26/Redis数据安全和性能保障/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Want Young">
-      <meta itemprop="description" content="Change World, Change Life">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Young">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/12/26/Redis数据安全和性能保障/" class="post-title-link" itemprop="http://yoursite.com/page/2/index.html">Redis数据安全和性能保障</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-12-26 14:50:43 / 修改时间：19:23:53" itemprop="dateCreated datePublished" datetime="2018-12-26T14:50:43+08:00">2018-12-26</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/数据库/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Redis的数据安全和性能保障"><a href="#Redis的数据安全和性能保障" class="headerlink" title="Redis的数据安全和性能保障"></a>Redis的数据安全和性能保障</h1><h2 id="Redis持久化选项"><a href="#Redis持久化选项" class="headerlink" title="Redis持久化选项"></a>Redis持久化选项</h2><p>Redis提供两种持久化方式：</p>
-<ol>
-<li>快照：也叫时间点存储（point-in-time）,redis会将存在于某一时间点的所有数据全部写入到硬盘中。</li>
-<li>只追加文件（AOF转储）：将所有的写命令追加到硬盘中的只追加文件中。</li>
-</ol>
-<h4 id="快照转储"><a href="#快照转储" class="headerlink" title="快照转储"></a>快照转储</h4><p>redis客户端会在指定时间或指定规则被满足时自动或手动创建快照。在下一次快照创建完毕之前所有上一次创建快照之后的写操作都不会被记录，对于这部分数据敏感的应用程序影使用AOF只追加文件方式做持久化。</p>
-<h4 id="AOF转储"><a href="#AOF转储" class="headerlink" title="AOF转储"></a>AOF转储</h4><p>根据设置决定同步频率，每秒同步一次AOF文件时的性能和不使用持久化特性时的性能相差无几。这个性能很大程度取决于硬盘的性能。</p>
-<h4 id="解决AOF文件过大的问题"><a href="#解决AOF文件过大的问题" class="headerlink" title="解决AOF文件过大的问题"></a>解决AOF文件过大的问题</h4><p>AOF文件由于不断追加会变得越来越大，这有可能耗尽所有硬盘空间，而且redis重启之后重新执行的操作时间也会变得非常长。所以减小AOF文件的大小很有必要。</p>
-<ul>
-<li>通过发送bgrewriteAOF命令来移除AOF文件中的冗余命令来重写AOF文件： Redis会创建子进程重写AOF文件，这和快照更新的方式一样，也会产生同样的性能问题和内存占用问题。</li>
-</ul>
-<h2 id="Redis复制"><a href="#Redis复制" class="headerlink" title="Redis复制"></a>Redis复制</h2><p>Redis通过创建数据副本来分摊客户端的读请求。<br><img src="/images/redis_copy.png" alt=""></p>
-<h4 id="全量同步"><a href="#全量同步" class="headerlink" title="全量同步"></a>全量同步</h4><p>通常发生在从服务器初始化时，具体步骤如下：</p>
-<ul>
-<li>从服务器连接主服务器，发送SYNC命令；</li>
-<li>主服务器接收到SYNC命名后，开始执行BGSAVE命令生成RDB文件并使用缓冲区记录此后执行的所有写命令；</li>
-<li>主服务器BGSAVE执行完后，向所有从服务器发送快照文件，并在发送期间继续记录被执行的写命令；</li>
-<li>从服务器收到快照文件后丢弃所有旧数据，载入收到的快照；</li>
-<li>主服务器快照发送完毕后开始向从服务器发送缓冲区中的写命令；</li>
-<li>从服务器完成对快照的载入，开始接收命令请求，并执行来自主服务器缓冲区的写命令；</li>
-</ul>
-<h4 id="增量同步"><a href="#增量同步" class="headerlink" title="增量同步"></a>增量同步</h4><p>Redis增量复制是指Slave初始化后开始正常工作时主服务器发生的写操作同步到从服务器的过程。<br>增量复制的过程主要是主服务器每执行一个写命令就会向从服务器发送相同的写命令，从服务器接收并执行收到的写命令。</p>
-<h4 id="Redis主从同步策略"><a href="#Redis主从同步策略" class="headerlink" title="Redis主从同步策略"></a>Redis主从同步策略</h4><p>主从刚刚连接的时候，进行全量同步；全同步结束后，进行增量同步。当然，如果有需要，slave 在任何时候都可以发起全量同步。redis 策略是，无论如何，首先会尝试进行增量同步，如不成功，要求从机进行全量同步。</p>
-<h4 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h4><p>如果多个Slave断线了，需要重启的时候，因为只要Slave启动，就会发送sync请求和主机全量同步，当多个同时出现的时候，可能会导致Master IO剧增宕机。</p>
-<h4 id="验证快照和AOF文件"><a href="#验证快照和AOF文件" class="headerlink" title="验证快照和AOF文件"></a>验证快照和AOF文件</h4><p>Redis可以检查AOF中的错误命令，并去除该命令和之后的所有命令，但遗憾的是Redis并不能修复快照的错误，因为快照是压缩的。</p>
-<h4 id="更换故障主服务器"><a href="#更换故障主服务器" class="headerlink" title="更换故障主服务器"></a>更换故障主服务器</h4><p>A是主服务器，B为A的从服务器，A发生故障时有两种方法：</p>
-<ul>
-<li>向B发送Save命令生成快照，将快照发送给C，设置C为主服务器，B为C的从服务器。</li>
-<li>升级B为主服务器</li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    <div>
-        
-    </div>
-    
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/21/Redis入门/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Want Young">
-      <meta itemprop="description" content="Change World, Change Life">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Young">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/12/21/Redis入门/" class="post-title-link" itemprop="http://yoursite.com/page/2/index.html">Redis入门</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-12-21 15:21:43" itemprop="dateCreated datePublished" datetime="2018-12-21T15:21:43+08:00">2018-12-21</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-12-26 14:49:16" itemprop="dateModified" datetime="2018-12-26T14:49:16+08:00">2018-12-26</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/数据库/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Redis简介"><a href="#Redis简介" class="headerlink" title="Redis简介"></a>Redis简介</h1><p>Redis是一个远程内存数据库，它是一个速度非常快的非关系型数据库。它可以存储键与5种不同类型的值之间的映射，也可以将内存中的键值对持久化到硬盘上，可以使用复制特性来扩展读性能，还可以使用客户端分片来扩展写性能。</p>
-<h2 id="Redis和memcached"><a href="#Redis和memcached" class="headerlink" title="Redis和memcached"></a>Redis和memcached</h2><p>两者性能上相差无几，但功能上存在不同之处：</p>
-<blockquote>
-<ol>
-<li>Redis能自动以两种不同的方式将数据写入硬盘</li>
-<li>Redis除了能存储普通的字符串键之外，还可以存储其他四种数据结构，而memcached只能存储普通的字符串键。</li>
-</ol>
-</blockquote>
-<h2 id="Redis既可以被用作主数据库，也可以备用作其他数据库的辅助数据库（二级存储）"><a href="#Redis既可以被用作主数据库，也可以备用作其他数据库的辅助数据库（二级存储）" class="headerlink" title="Redis既可以被用作主数据库，也可以备用作其他数据库的辅助数据库（二级存储）"></a>Redis既可以被用作主数据库，也可以备用作其他数据库的辅助数据库（二级存储）</h2><p>Redis由于把数据存储在内存中，所以随机写的速度非常快，并且避免了写入不必要的临时数据。</p>
-<h2 id="Redis的5种数据结构"><a href="#Redis的5种数据结构" class="headerlink" title="Redis的5种数据结构"></a>Redis的5种数据结构</h2><ol>
-<li>String 字符串：字符串、整数或者浮点数 get set del</li>
-<li>List 链表：每个节点包含一个字符串 rpush lrange lindex lpop</li>
-<li>Set 集合：无序存储，使用散列表保证值单一  sadd sismember smembers srem</li>
-<li>hash 散列表：无序键值对 hset hget hgetall hdel</li>
-<li>zset 有序集合：散列表键值对，值为分值，按照分值排序 zadd zrange zrangebyscore zrem</li>
-</ol>
-<h1 id="Redis-命令"><a href="#Redis-命令" class="headerlink" title="Redis 命令"></a>Redis 命令</h1><h2 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h2><ul>
-<li>incr : 自增1</li>
-<li>dect : 自减1</li>
-<li>incrby : 自增一个数</li>
-<li>decrby : 自减一个数</li>
-<li>incrbyfloat : 自增一个浮点数</li>
-<li>append : 追加到值末尾</li>
-<li>getrange : 获取子串 [start, end]</li>
-<li>setrange : setrange key-name offset value 修改key-name这个键对应的值offset之后的子串为value</li>
-<li>getbit : 获取指定位置的二进制值</li>
-<li>setbit : 设定指定位置的二进制值</li>
-<li>bitcount : bitcount key-name [start , end] 统计二进制位为1的个数</li>
-<li>bitop : bitop operation base-key key-name [key-name2 …] 对多个键值进行按位运算，并将结果保存在base-key对应的值内。</li>
-</ul>
-<p>注意： setbit 和 setrange在写入时若原本字符串长度不够，Redis会使用null进行拓展，直到长度达到要求。</p>
-<p>注意：getrange超出范围的部分视为空串，getbit超出位置视为二进制0。</p>
-<p>区别： 很多键值数据库只允许将字节追加到字符串末尾，而Redis支持位和子串操作，这是非常方便的。</p>
-<h2 id="list链表"><a href="#list链表" class="headerlink" title="list链表"></a>list链表</h2><ul>
-<li>Rpush、Lpush：压入链表</li>
-<li>Rpop、Lpop：弹出链表</li>
-<li>Lindex、Lrange：返回指定元素</li>
-<li>Ltrim：修建链表，只保留指定范围内的节点。</li>
-</ul>
-<h2 id="set集合"><a href="#set集合" class="headerlink" title="set集合"></a>set集合</h2><ul>
-<li>sadd：加入元素</li>
-<li>srem：移除元素</li>
-<li>sismember：检查元素</li>
-<li>smembers：返回所有元素</li>
-<li>scard：返回集合元素数量</li>
-<li>srandmember：随机返回多个或一个元素，count为负数时返回元素可能会重复</li>
-<li>spop：随机弹出一个元素，并返回</li>
-<li>smove：从一个集合中将元素移动到另一个集合，成功返回1，否则返回0.</li>
-</ul>
-<h2 id="redis多集合操作"><a href="#redis多集合操作" class="headerlink" title="redis多集合操作"></a>redis多集合操作</h2><ul>
-<li>sdiff：差集运算</li>
-<li>sdiffstore： 差集运算并将结果存到另一个目标中</li>
-<li>sinter：交集运算</li>
-<li>sunion：并集运算</li>
-<li>sunionstore：并集运算并将结果存储到另一个目标</li>
-</ul>
-<h2 id="hash散列表"><a href="#hash散列表" class="headerlink" title="hash散列表"></a>hash散列表</h2><h4 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h4><ul>
-<li>hmget：获取一个或多个键值</li>
-<li>hmset：添加一个或多个键值</li>
-<li>hdel：删除一个或多个键值对</li>
-<li>hlen：返回键值对数量<h4 id="高级操作"><a href="#高级操作" class="headerlink" title="高级操作"></a>高级操作</h4></li>
-<li>hexists：检查键是否存在</li>
-<li>hkeys：返回所有键</li>
-<li>hvals：返回所有值</li>
-<li>hgetall：返回所有键值对</li>
-<li>hincrby：指定键对应的值自增指定的数</li>
-<li>hincrbyfloat：自增指定浮点数</li>
-</ul>
-<h2 id="zset有序集合"><a href="#zset有序集合" class="headerlink" title="zset有序集合"></a>zset有序集合</h2><ul>
-<li>zadd：添加成员并指定分值</li>
-<li>zrem：移除元素</li>
-<li>zcard：返回集合数量</li>
-<li>zincrby：指定成员分值自增指定数量</li>
-<li>zcount：返回分值在指定区间的元素的数量</li>
-<li>zrank: 返回指定成员的排名</li>
-<li>zscore：返回指定成员的分值</li>
-<li>zrange：返回指定排名区间的成员，withscores选项可选，表示是否返回分值</li>
-</ul>
-<h2 id="其他Redis命令"><a href="#其他Redis命令" class="headerlink" title="其他Redis命令"></a>其他Redis命令</h2><h4 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h4><p>sort：可对list，set，zset排序</p>
-<h1 id="Redis基本事务"><a href="#Redis基本事务" class="headerlink" title="Redis基本事务"></a>Redis基本事务</h1><p>Redis事务命令： watch， multi， exec， unwatch， discard。</p>
-<h2 id="基本事务命令-multi-exec"><a href="#基本事务命令-multi-exec" class="headerlink" title="基本事务命令 multi exec"></a>基本事务命令 multi exec</h2><p>Redis中被multi和exec命令包围的所有命令会被一个接一个执行，在这个过程中不会被客户端其他命令打断。<br>Python客户端使用pipeline流水线操作实现自动添加multi和exec。</p>
-<h4 id="用于处理过期时间的Redis命令"><a href="#用于处理过期时间的Redis命令" class="headerlink" title="用于处理过期时间的Redis命令"></a>用于处理过期时间的Redis命令</h4><ul>
-<li>persist：移除键的过期时间</li>
-<li>ttl： 查看给定键距离过期时间还有多少秒</li>
-<li>expire：让指定键在指定时间后过期</li>
-<li>expireat：让给定键在给定时间点过期</li>
-<li>pttl：查看还有多少毫秒过期</li>
-<li>pexpire：指定毫秒后过期</li>
-<li>pexpireat：指定毫秒级Unix时间戳时间点过期。</li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    <div>
-        
-    </div>
-    
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/21/SQL-SERVER索引/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Want Young">
-      <meta itemprop="description" content="Change World, Change Life">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Young">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/12/21/SQL-SERVER索引/" class="post-title-link" itemprop="http://yoursite.com/page/2/index.html">SQL SERVER索引</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-12-21 14:50:40 / 修改时间：15:22:42" itemprop="dateCreated datePublished" datetime="2018-12-21T14:50:40+08:00">2018-12-21</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/数据库/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="SQL-SERVER的两种索引：聚集索引和非聚集索引"><a href="#SQL-SERVER的两种索引：聚集索引和非聚集索引" class="headerlink" title="SQL SERVER的两种索引：聚集索引和非聚集索引"></a>SQL SERVER的两种索引：聚集索引和非聚集索引</h1><h2 id="聚集索引"><a href="#聚集索引" class="headerlink" title="聚集索引"></a>聚集索引</h2><p>正文本身按照某种排序方式进行排列，这种正文内容本身就是一种按照一定规则排列的目录称为“聚集索引”</p>
-<blockquote>
-<p>每张表只能有一种排序方式，索引每张表只能有一个聚集索引。<br>SQL SERVER默认使用主键作为聚集索引</p>
-</blockquote>
-<h2 id="非聚集索引"><a href="#非聚集索引" class="headerlink" title="非聚集索引"></a>非聚集索引</h2><p>正文排序是正文排序，目录排序是目录排序，目录只是正文的映射。这种目录纯粹是目录，正文纯粹是正文的排序方式称为“非聚集索引”。</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    <div>
-        
-    </div>
-    
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -3290,7 +3475,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">31</span>
+                    <span class="site-state-item-count">35</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -3319,7 +3504,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">8</span>
+                      
+                    
+                    <span class="site-state-item-count">9</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -3374,7 +3561,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">21</span>
+                      
+                    
+                    <span class="site-state-item-count">22</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>

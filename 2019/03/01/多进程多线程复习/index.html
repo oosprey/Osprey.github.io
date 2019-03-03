@@ -135,7 +135,7 @@
 <meta property="og:site_name" content="Young">
 <meta property="og:description" content="进程进程是资源分配的基本单位。进程通常是一个程序的运行实例。通常进程可以包含多个线程执行任务。 进程的状态 创建 就绪 阻塞 运行 终止  进程的终止过程 读取进程PCB，检查进程状态 若进程正在执行，立即停止执行，标志状态位为停止 检查所有子进程状态，停止所有子进程 回收所有子进程资源，返回所有资源给操作系统或父进程 移出队列  特殊进程 僵尸进程：子进程已结束，父进程没有调用wait()函数回">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-03-01T10:59:59.107Z">
+<meta property="og:updated_time" content="2019-03-02T11:35:07.680Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="多进程多线程复习">
 <meta name="twitter:description" content="进程进程是资源分配的基本单位。进程通常是一个程序的运行实例。通常进程可以包含多个线程执行任务。 进程的状态 创建 就绪 阻塞 运行 终止  进程的终止过程 读取进程PCB，检查进程状态 若进程正在执行，立即停止执行，标志状态位为停止 检查所有子进程状态，停止所有子进程 回收所有子进程资源，返回所有资源给操作系统或父进程 移出队列  特殊进程 僵尸进程：子进程已结束，父进程没有调用wait()函数回">
@@ -424,12 +424,24 @@
                 
               
 
-              <time title="创建时间：2019-03-01 11:18:59 / 修改时间：18:59:59" itemprop="dateCreated datePublished" datetime="2019-03-01T11:18:59+08:00">2019-03-01</time>
+              <time title="创建时间：2019-03-01 11:18:59" itemprop="dateCreated datePublished" datetime="2019-03-01T11:18:59+08:00">2019-03-01</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-03-02 19:35:07" itemprop="dateModified" datetime="2019-03-02T19:35:07+08:00">2019-03-02</time>
               
             
           </span>
@@ -572,6 +584,8 @@
 <li>使线程睡眠的意思就是你主动对雇工说：“你睡觉去吧，某时某刻过来报到，然后接着干活”。</li>
 <li>线程阻塞的意思就是，你突然发现，你的雇工不知道在什么时候没经过你允许，自己睡觉呢，但是你不能怪雇工，肯定你这个雇主没注意，本来你让雇工扫地，结果扫帚被偷了或被邻居家借去了，你又没让雇工继续干别的活，他就只好睡觉了。至于扫帚回来后，雇工会不会知道，会不会继续干活，你不用担心，雇工一旦发现扫帚回来了，他就会自己去干活的。因为雇工受过良好的培训。这个培训机构就是操作系统。</li>
 </ul>
+<h2 id="线程理解"><a href="#线程理解" class="headerlink" title="线程理解"></a>线程理解</h2><p>操作系统根据线程的优先级来安排CPU的时间，优先级高的线程优先运行，优先级低的线程则继续等待。</p>
+<p>线程被分为两种：用户界面线程和worker线程</p>
 
       
     </div>
@@ -628,6 +642,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/02/项目经历/" rel="prev" title="项目经历">
+                项目经历 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -701,7 +719,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">31</span>
+                    <span class="site-state-item-count">35</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -730,7 +748,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">8</span>
+                      
+                    
+                    <span class="site-state-item-count">9</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -785,7 +805,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">21</span>
+                      
+                    
+                    <span class="site-state-item-count">22</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -820,7 +842,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#进程"><span class="nav-number">1.</span> <span class="nav-text">进程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#进程的状态"><span class="nav-number">1.1.</span> <span class="nav-text">进程的状态</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程的终止过程"><span class="nav-number">1.2.</span> <span class="nav-text">进程的终止过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#特殊进程"><span class="nav-number">1.3.</span> <span class="nav-text">特殊进程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#守护进程创建"><span class="nav-number">1.4.</span> <span class="nav-text">守护进程创建</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程通信"><span class="nav-number">1.5.</span> <span class="nav-text">进程通信</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程调度"><span class="nav-number">1.6.</span> <span class="nav-text">进程调度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程的同步和互斥"><span class="nav-number">1.7.</span> <span class="nav-text">进程的同步和互斥</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#信号量解决经典同步互斥问题"><span class="nav-number">1.8.</span> <span class="nav-text">信号量解决经典同步互斥问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#死锁"><span class="nav-number">1.9.</span> <span class="nav-text">死锁</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#死锁的条件"><span class="nav-number">1.9.1.</span> <span class="nav-text">死锁的条件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#死锁预防"><span class="nav-number">1.9.2.</span> <span class="nav-text">死锁预防</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#死锁避免"><span class="nav-number">1.9.3.</span> <span class="nav-text">死锁避免</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#线程"><span class="nav-number">2.</span> <span class="nav-text">线程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#多进程和多线程的区别"><span class="nav-number">2.1.</span> <span class="nav-text">多进程和多线程的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在进程和线程上，应该怎么选择"><span class="nav-number">2.2.</span> <span class="nav-text">在进程和线程上，应该怎么选择</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程之间是如何通信的"><span class="nav-number">2.3.</span> <span class="nav-text">线程之间是如何通信的</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程之间是如何通信的"><span class="nav-number">2.4.</span> <span class="nav-text">进程之间是如何通信的</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程同步和线程异步"><span class="nav-number">2.5.</span> <span class="nav-text">线程同步和线程异步</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多线程同步和互斥有几种实现方法，分别适用什么情况"><span class="nav-number">2.6.</span> <span class="nav-text">多线程同步和互斥有几种实现方法，分别适用什么情况</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-多线程有几种实现方法"><span class="nav-number">2.7.</span> <span class="nav-text">C++多线程有几种实现方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多线程中栈与堆是公有的还是私有的"><span class="nav-number">2.8.</span> <span class="nav-text">多线程中栈与堆是公有的还是私有的</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程池的概念"><span class="nav-number">2.9.</span> <span class="nav-text">线程池的概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#操作系统中睡眠、阻塞、挂起的区别形象解释："><span class="nav-number">2.10.</span> <span class="nav-text">操作系统中睡眠、阻塞、挂起的区别形象解释：</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#进程"><span class="nav-number">1.</span> <span class="nav-text">进程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#进程的状态"><span class="nav-number">1.1.</span> <span class="nav-text">进程的状态</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程的终止过程"><span class="nav-number">1.2.</span> <span class="nav-text">进程的终止过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#特殊进程"><span class="nav-number">1.3.</span> <span class="nav-text">特殊进程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#守护进程创建"><span class="nav-number">1.4.</span> <span class="nav-text">守护进程创建</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程通信"><span class="nav-number">1.5.</span> <span class="nav-text">进程通信</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程调度"><span class="nav-number">1.6.</span> <span class="nav-text">进程调度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程的同步和互斥"><span class="nav-number">1.7.</span> <span class="nav-text">进程的同步和互斥</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#信号量解决经典同步互斥问题"><span class="nav-number">1.8.</span> <span class="nav-text">信号量解决经典同步互斥问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#死锁"><span class="nav-number">1.9.</span> <span class="nav-text">死锁</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#死锁的条件"><span class="nav-number">1.9.1.</span> <span class="nav-text">死锁的条件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#死锁预防"><span class="nav-number">1.9.2.</span> <span class="nav-text">死锁预防</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#死锁避免"><span class="nav-number">1.9.3.</span> <span class="nav-text">死锁避免</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#线程"><span class="nav-number">2.</span> <span class="nav-text">线程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#多进程和多线程的区别"><span class="nav-number">2.1.</span> <span class="nav-text">多进程和多线程的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在进程和线程上，应该怎么选择"><span class="nav-number">2.2.</span> <span class="nav-text">在进程和线程上，应该怎么选择</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程之间是如何通信的"><span class="nav-number">2.3.</span> <span class="nav-text">线程之间是如何通信的</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程之间是如何通信的"><span class="nav-number">2.4.</span> <span class="nav-text">进程之间是如何通信的</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程同步和线程异步"><span class="nav-number">2.5.</span> <span class="nav-text">线程同步和线程异步</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多线程同步和互斥有几种实现方法，分别适用什么情况"><span class="nav-number">2.6.</span> <span class="nav-text">多线程同步和互斥有几种实现方法，分别适用什么情况</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-多线程有几种实现方法"><span class="nav-number">2.7.</span> <span class="nav-text">C++多线程有几种实现方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多线程中栈与堆是公有的还是私有的"><span class="nav-number">2.8.</span> <span class="nav-text">多线程中栈与堆是公有的还是私有的</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程池的概念"><span class="nav-number">2.9.</span> <span class="nav-text">线程池的概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#操作系统中睡眠、阻塞、挂起的区别形象解释："><span class="nav-number">2.10.</span> <span class="nav-text">操作系统中睡眠、阻塞、挂起的区别形象解释：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程理解"><span class="nav-number">2.11.</span> <span class="nav-text">线程理解</span></a></li></ol></li></ol></div>
             
 
           </div>

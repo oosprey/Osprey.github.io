@@ -143,7 +143,7 @@
 <meta property="og:image" content="http://yoursite.com/images/one_level_diamond_virtual_inherit_memory.png">
 <meta property="og:image" content="http://yoursite.com/images/diamond_virtual_inherit_memory.png">
 <meta property="og:image" content="http://yoursite.com/images/one_level_diamond_virtual_inherit_include_virtual_function_memory.png">
-<meta property="og:updated_time" content="2019-02-19T10:44:26.661Z">
+<meta property="og:updated_time" content="2019-03-02T06:28:57.962Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C++ 面试复习">
 <meta name="twitter:description" content="C++基础省略符参数形式：1234int def(int a, ...)&amp;#123;    return 0;&amp;#125; 知识点：  含有省略号参数的函数可以接受任意数量的参数，并且函数调用不会对实参类型进行检查。 含有省略号参数的函数仍然可以被重载，但是由于省略号的优先级很低，所以只有当所有重载函数都不符合调用时才会调用省略号参数。 省略号参数后面不允许存在其他参数。  lambda表达式 c">
@@ -433,12 +433,24 @@
                 
               
 
-              <time title="创建时间：2019-02-19 11:47:13 / 修改时间：18:44:26" itemprop="dateCreated datePublished" datetime="2019-02-19T11:47:13+08:00">2019-02-19</time>
+              <time title="创建时间：2019-02-19 11:47:13" itemprop="dateCreated datePublished" datetime="2019-02-19T11:47:13+08:00">2019-02-19</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-03-02 14:28:57" itemprop="dateModified" datetime="2019-03-02T14:28:57+08:00">2019-03-02</time>
               
             
           </span>
@@ -499,7 +511,7 @@
 <h2 id="lambda表达式-c-11引入-目的是更加方便的创建匿名函数"><a href="#lambda表达式-c-11引入-目的是更加方便的创建匿名函数" class="headerlink" title="lambda表达式 c++11引入 目的是更加方便的创建匿名函数"></a>lambda表达式 c++11引入 目的是更加方便的创建匿名函数</h2><p>形式：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[capture <span class="built_in">list</span>] (params <span class="built_in">list</span>) <span class="keyword">mutable</span> exception-&gt; <span class="keyword">return</span> type &#123; function body &#125;</span><br><span class="line"><span class="keyword">auto</span> f = [](<span class="keyword">int</span> a)&#123;<span class="keyword">return</span> a;&#125;;<span class="comment">//[]是捕获列表，里面写局部变量名, 省略返回类型表示返回类型由return决定</span></span><br><span class="line"><span class="keyword">auto</span> f = [](<span class="keyword">int</span> a)-&gt;<span class="keyword">int</span>&#123;<span class="keyword">return</span> a;&#125;;<span class="comment">//省略mutable，表示函数不允许修改捕获的变量，显示的返回类型和return不匹配会发生强制类型转换</span></span><br><span class="line"><span class="keyword">int</span> c = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">auto</span> f = [c](<span class="keyword">int</span> a)<span class="keyword">mutable</span>&#123;c = <span class="number">2</span>;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">auto</span> f = [c](<span class="keyword">int</span> a)&#123;<span class="built_in">cout</span>&lt;&lt;c&lt;&lt;<span class="built_in">endl</span>;&#125;;</span><br><span class="line"><span class="keyword">auto</span> f = [&amp;c](<span class="keyword">int</span> a)&#123;c = <span class="number">2</span>;&#125;;</span><br><span class="line"><span class="keyword">auto</span> f = [=](<span class="keyword">int</span> a)&#123;&#125;;</span><br><span class="line"><span class="keyword">auto</span> f = [&amp;, c](<span class="keyword">int</span> a)&#123;&#125;;</span><br><span class="line"><span class="keyword">auto</span> f = []&#123;<span class="built_in">cout</span>&lt;&lt;<span class="string">"aaa"</span>&lt;&lt;<span class="built_in">endl</span>;&#125;;</span><br></pre></td></tr></table></figure></p>
 <h2 id="变量声明和定义的区别"><a href="#变量声明和定义的区别" class="headerlink" title="变量声明和定义的区别"></a>变量声明和定义的区别</h2><ul>
 <li>变量声明仅仅是告诉编译器变量的类型，位置，名称等，并不分配空间。变量的定义要在定义的地方分配空间</li>
-<li>变量可以多次声明，如extend引入外部变量，但定义只能有一次。<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">extend <span class="keyword">int</span> A;</span><br></pre></td></tr></table></figure>
+<li>变量可以多次声明，如extend引入外部变量，但定义只能有一次。<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">extern</span> <span class="keyword">int</span> A;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <h2 id="“零值”的比较"><a href="#“零值”的比较" class="headerlink" title="“零值”的比较"></a>“零值”的比较</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">bool</span>类型:  <span class="keyword">if</span>(flag)</span><br><span class="line"><span class="keyword">int</span> 类型:  <span class="keyword">if</span>(flag == <span class="number">0</span>)</span><br><span class="line"><span class="keyword">float</span>类型: <span class="keyword">if</span>(flag &gt;= <span class="number">-0.000001</span> &amp;&amp; flag &lt;= <span class="number">0.000001</span>)</span><br><span class="line">指针类型:  <span class="keyword">if</span>(flag == <span class="literal">NULL</span>)</span><br></pre></td></tr></table></figure>
@@ -944,7 +956,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">31</span>
+                    <span class="site-state-item-count">35</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -973,7 +985,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">8</span>
+                      
+                    
+                    <span class="site-state-item-count">9</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -1028,7 +1042,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">21</span>
+                      
+                    
+                    <span class="site-state-item-count">22</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
