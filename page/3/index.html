@@ -382,6 +382,987 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/13/算法总结-栈和队列/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Want Young">
+      <meta itemprop="description" content="Change World, Change Life">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Young">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/01/13/算法总结-栈和队列/" class="post-title-link" itemprop="http://yoursite.com/page/3/index.html">算法总结-栈和队列</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-01-13 14:35:09" itemprop="dateCreated datePublished" datetime="2019-01-13T14:35:09+08:00">2019-01-13</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-01-16 21:44:15" itemprop="dateModified" datetime="2019-01-16T21:44:15+08:00">2019-01-16</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/算法/" itemprop="url" rel="index"><span itemprop="name">算法</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="栈和队列"><a href="#栈和队列" class="headerlink" title="栈和队列"></a>栈和队列</h1><h2 id="getMin功能栈"><a href="#getMin功能栈" class="headerlink" title="getMin功能栈"></a>getMin功能栈</h2><h3 id="要求"><a href="#要求" class="headerlink" title="要求"></a>要求</h3><ol>
+<li>pop, push, getMin时间复杂度都是O(1)</li>
+<li>可使用现有栈类型</li>
+</ol>
+<h3 id="解答"><a href="#解答" class="headerlink" title="解答"></a>解答</h3><p>两种实现：</p>
+<ol>
+<li>两个栈实现，一个栈stackData保存数据，另一个栈stackMin保存当前最小值，每次压入时判断压入数字num与当前最小值比较，小于等于则同步压入stackMin，弹出时相等弹出，大于则不弹出。</li>
+<li>同样的双栈实现，一个栈stackData保存数据，另一个栈stackMin保存当前最小值，每次压入num时若大于等于当前最小值，则重复压入stackMin中当前最小值，弹出时双栈同步弹出即可。</li>
+</ol>
+<h3 id="代码-1"><a href="#代码-1" class="headerlink" title="代码(1)"></a>代码(1)</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Mystack</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt; stackData, stackMin;</span><br><span class="line">    Mystack()&#123;stackData.clear();stackMin.clear();&#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">push</span><span class="params">(<span class="keyword">int</span> num)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        stackData.push(num);</span><br><span class="line">        <span class="keyword">if</span>(stackMin.empty())stackMin.push(num);</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(num &lt;= stackMin.top())stackMin.push(num);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">pop</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(stackData.empty())<span class="keyword">return</span>;</span><br><span class="line">        <span class="keyword">if</span>(stackData.top() == stackMin.top())stackMin.pop();</span><br><span class="line">        stackData.pop();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">getMin</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(stackMin.empty())<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">return</span> stackMin.top();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="双栈组成队列"><a href="#双栈组成队列" class="headerlink" title="双栈组成队列"></a>双栈组成队列</h2><h3 id="要求-1"><a href="#要求-1" class="headerlink" title="要求"></a>要求</h3><p>双栈实现一个队列，支持push，pop，front</p>
+<h3 id="解答-1"><a href="#解答-1" class="headerlink" title="解答"></a>解答</h3><p>一个栈压入元素，弹出元素时，将一个栈中的元素全部压入另一个栈，在弹出，弹完之后在将所有元素放回原栈。</p>
+<h3 id="代码（略）"><a href="#代码（略）" class="headerlink" title="代码（略）"></a>代码（略）</h3><h2 id="利用递归反转一个栈"><a href="#利用递归反转一个栈" class="headerlink" title="利用递归反转一个栈"></a>利用递归反转一个栈</h2><h3 id="要求-2"><a href="#要求-2" class="headerlink" title="要求"></a>要求</h3><p>只利用函数递归反转一个栈中的所有元素</p>
+<h3 id="解答-2"><a href="#解答-2" class="headerlink" title="解答"></a>解答</h3><p>函数递归本身就是一个栈，关键在<strong>每次递归时保存当前栈最底层元素</strong>，然后递归返回时依次压入即可。</p>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getAndRemoveLastElement</span><span class="params">(<span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt;&amp; s)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> result = s.pop();</span><br><span class="line">    <span class="keyword">if</span>(s.empty())<span class="keyword">return</span> result;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> last = getAndRemoveLastElement(s);</span><br><span class="line">        s.push(result);</span><br><span class="line">        <span class="keyword">return</span> last;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">reverse</span><span class="params">(<span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt;&amp; s)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(s.empty())<span class="keyword">return</span>;</span><br><span class="line">    <span class="keyword">int</span> num = getAndRemoveLastElement(s);</span><br><span class="line">    reverse(s);</span><br><span class="line">    s.push(num);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="双端队列维护窗口最大值"><a href="#双端队列维护窗口最大值" class="headerlink" title="双端队列维护窗口最大值"></a>双端队列维护窗口最大值</h2><h3 id="要求-3"><a href="#要求-3" class="headerlink" title="要求"></a>要求</h3><p>给定一个数组，和一个窗口大小，每次滑动窗口，返回对应窗口内的最大值</p>
+<h3 id="解答-3"><a href="#解答-3" class="headerlink" title="解答"></a>解答</h3><p>使用双端队列维护窗口内最大值的递减序列，双端队列中保存窗口内最大值递减的元素序号，最左端的序号为当前的最大值，当最左端序号过期时弹出即可。</p>
+<h3 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; maxInWindows(<span class="keyword">const</span> <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; num, <span class="keyword">unsigned</span> <span class="keyword">int</span> size)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;ans;</span><br><span class="line">        <span class="keyword">if</span>(!size)<span class="keyword">return</span> ans;</span><br><span class="line">        <span class="built_in">deque</span>&lt;<span class="keyword">int</span>&gt; q;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; num.size();i ++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(q.empty())q.push_back(i);</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span>(q.front() == i-size)q.pop_front();</span><br><span class="line">                <span class="keyword">while</span>(!q.empty()&amp;&amp;num[q.back()] &lt;= num[i])q.pop_back();</span><br><span class="line">                q.push_back(i);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(i &gt;= size<span class="number">-1</span>)ans.push_back(num[q.front()]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="构造数组的-MaxTree"><a href="#构造数组的-MaxTree" class="headerlink" title="构造数组的 MaxTree"></a>构造数组的 MaxTree</h2><h3 id="MaxTree定义"><a href="#MaxTree定义" class="headerlink" title="MaxTree定义"></a>MaxTree定义</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Node</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">int</span> value;</span><br><span class="line">    Node* left;</span><br><span class="line">    Node* right;</span><br><span class="line">    Node(<span class="keyword">int</span> a):value(a), left(<span class="literal">NULL</span>), right(<span class="literal">NULL</span>)&#123;&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>一个数组的MaxTree定义如下：</p>
+<ul>
+<li>数组必须没有重复元素。</li>
+<li>MaxTree是一颗二叉树，数组的每一个数值对应一个二叉树节点。</li>
+<li>包括MaxTree树在内且在其中的每一颗子树上，值最大的节点都是树的头。</li>
+</ul>
+<h3 id="解答-4"><a href="#解答-4" class="headerlink" title="解答"></a>解答</h3><ul>
+<li>数组中每一个数的父节点是它左边第一个比它大的数和右边第一个比它大的数中较小的那个。</li>
+<li>如果一个数左边没有比它大的数，右边也没有比它大的数，那么它就是整个树的头结点。</li>
+</ul>
+<h3 id="代码-2"><a href="#代码-2" class="headerlink" title="代码"></a>代码</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MaxTree</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; buildMaxTree(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; A, <span class="keyword">int</span> n) &#123;</span><br><span class="line">        <span class="keyword">if</span>(!n)<span class="keyword">return</span> <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;();</span><br><span class="line">        <span class="built_in">stack</span>&lt;pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;&gt; s;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;ans(n, <span class="number">-1</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; n;i ++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(s.empty())s.push(make_pair(A[i], i));</span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="keyword">while</span>(!s.empty()&amp;&amp;s.top().first &lt; A[i])s.pop();</span><br><span class="line">                <span class="keyword">if</span>(!s.empty())ans[i] = s.top().second;</span><br><span class="line">                s.push(make_pair(A[i], i));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span>(!s.empty())s.pop();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = n<span class="number">-1</span>;i &gt;= <span class="number">0</span>;i --)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(s.empty())s.push(make_pair(A[i], i));</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">while</span>(!s.empty() &amp;&amp; s.top().first &lt; A[i])s.pop();</span><br><span class="line">                <span class="keyword">if</span>(!s.empty())</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="keyword">if</span>(ans[i] == <span class="number">-1</span>)ans[i] = s.top().second;</span><br><span class="line">                    <span class="keyword">else</span> ans[i] = A[ans[i]] &lt; A[s.top().second] ? ans[i] : s.top().second;</span><br><span class="line">                &#125;</span><br><span class="line">                s.push(make_pair(A[i], i));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="最大值减去最小值小于或等于num的子数组数量"><a href="#最大值减去最小值小于或等于num的子数组数量" class="headerlink" title="最大值减去最小值小于或等于num的子数组数量"></a>最大值减去最小值小于或等于num的子数组数量</h2><h3 id="要求-4"><a href="#要求-4" class="headerlink" title="要求"></a>要求</h3><p>给定一个数组和一个值num，计算有多少个子数组满足最大值减最小值小于给定值num。</p>
+<h3 id="解答-5"><a href="#解答-5" class="headerlink" title="解答"></a>解答</h3><p>需要使用两个双端队列维护每个区间的最大值和最小值，设定两个指针i,j。j不断向右移动，当i，j之间不满足条件时停止前进，此时i，j之间含有j-i个子数组满足要求。之后i向右移动一个位置，然后重复j移动的步骤，直到i移动到整个数组最后一个位置为止。</p>
+<h3 id="代码-3"><a href="#代码-3" class="headerlink" title="代码"></a>代码</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getNum</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; arr, <span class="keyword">int</span> num)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(arr.empty())<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">deque</span>&lt;<span class="keyword">int</span>&gt; deqmax,deqmin;</span><br><span class="line">    deqmax.push_back(<span class="number">0</span>);</span><br><span class="line">    deqmin.push_back(<span class="number">0</span>);</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">0</span>, j = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(i &lt; arr.size())</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">while</span>(arr[deqmax.front()]-arr[deqmin.front()] &lt;= num)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(j == arr.size())<span class="keyword">break</span>;</span><br><span class="line">            j++;</span><br><span class="line">            <span class="keyword">while</span>(arr[j] &gt;= deqmax.back())deqmax.pop_back();</span><br><span class="line">            deqmax.push_back(j);</span><br><span class="line">            <span class="keyword">while</span>(arr[j] &lt;= deqmin.back())deqmin.pop_back();</span><br><span class="line">            deqmin.push_back(j);</span><br><span class="line">        &#125;</span><br><span class="line">        res += (j-i);</span><br><span class="line">        i++;</span><br><span class="line">        <span class="keyword">if</span>(deqmax.front() &lt; i)deqmax.pop_front();</span><br><span class="line">        <span class="keyword">if</span>(deqmin.front() &lt; i)deqmin.pop_front();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    <div>
+        
+    </div>
+    
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/31/C++_STL及编译与调试复习/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Want Young">
+      <meta itemprop="description" content="Change World, Change Life">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Young">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2018/12/31/C++_STL及编译与调试复习/" class="post-title-link" itemprop="http://yoursite.com/page/3/index.html">C++ STL及编译与调试复习</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-12-31 20:48:18" itemprop="dateCreated datePublished" datetime="2018-12-31T20:48:18+08:00">2018-12-31</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-01-01 11:17:36" itemprop="dateModified" datetime="2019-01-01T11:17:36+08:00">2019-01-01</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/语言知识/" itemprop="url" rel="index"><span itemprop="name">语言知识</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="C-C-基础"><a href="#C-C-基础" class="headerlink" title="C/C++ 基础"></a>C/C++ 基础</h1><h2 id="STL标准模板库"><a href="#STL标准模板库" class="headerlink" title="STL标准模板库"></a>STL标准模板库</h2><p>STL模板库内容很多，但根据实际使用只要知道一下几点即可：</p>
+<ul>
+<li>怎么用？<blockquote>
+<p>知道各种STL基本的增删改查怎么使用。把精力放在对需求的了解并选择合适的数据结构上，这很重要！</p>
+</blockquote>
+</li>
+<li>怎么实现的？<blockquote>
+<p>了解怎么实现的是为了了解每种STL数据结构的特性，这样在选择上更加准确，使用上也更加高效。</p>
+</blockquote>
+</li>
+<li>如何避免错误？<blockquote>
+<p>了解了实现细节之后我们就应该懂得如何避免一些错误，比如迭代器失效的问题。</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="string和vector"><a href="#string和vector" class="headerlink" title="string和vector"></a>string和vector</h3><h4 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">定义：</span><br><span class="line">    <span class="built_in">vector</span>&lt;T&gt; vec;</span><br><span class="line"></span><br><span class="line">插入元素:</span><br><span class="line">    vec.push_back(element);</span><br><span class="line">    vec.insert(iterator, element);</span><br><span class="line"></span><br><span class="line">删除元素:</span><br><span class="line">    vec.pop_back();</span><br><span class="line">    vec.erase(iterator);</span><br><span class="line"></span><br><span class="line">遍历容器:</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">auto</span> it = vec.begin();it != vec.end();++it)&#123;......&#125;</span><br><span class="line"></span><br><span class="line">其他:</span><br><span class="line">    vec.empty(); <span class="comment">//判断是否为空</span></span><br><span class="line">    vec.size(); <span class="comment">//实际元素个数</span></span><br><span class="line">    vec.capacity(); <span class="comment">//容器的容量</span></span><br><span class="line">    vec.begin(); <span class="comment">//获得首迭代器</span></span><br><span class="line">    vec.end(); <span class="comment">//获得尾迭代器</span></span><br><span class="line">    vec.clear(); <span class="comment">//容器清空</span></span><br></pre></td></tr></table></figure>
+<h4 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h4><p>模拟Vector实现</p>
+<ul>
+<li>线性表，数组实现<ul>
+<li>要支持随机访问</li>
+<li>插入删除操作需要大量移动数据</li>
+</ul>
+</li>
+<li>需要连续的物理存储空间</li>
+<li>每当大小不够时，重新分配内存（*2），并复制原内容。</li>
+</ul>
+<h4 id="错误避免"><a href="#错误避免" class="headerlink" title="错误避免"></a>错误避免</h4><p>迭代器失效：</p>
+<ul>
+<li>插入元素<ul>
+<li>尾后插入：size \&lt; capacity时， 首迭代器不失效，尾迭代器失效（未重新分配空间）， size == capacity时， 所有迭代器均失效（需要重新分配空间）。</li>
+<li>中间插入： size \&lt; capacity时，首迭代器不失效，插入元素之后所有迭代器均失效， size == capacity时， 所有迭代器均失效。</li>
+</ul>
+</li>
+<li>删除元素：<ul>
+<li>尾后删除：只有尾迭代器失效。</li>
+<li>中间删除：删除位置之后所有迭代器均失效。</li>
+</ul>
+</li>
+</ul>
+<h3 id="map"><a href="#map" class="headerlink" title="map"></a>map</h3><h4 id="用法："><a href="#用法：" class="headerlink" title="用法："></a>用法：</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">定义：</span><br><span class="line">    <span class="built_in">map</span>&lt;T_key, T_value&gt; mymap;</span><br><span class="line"></span><br><span class="line">插入元素：</span><br><span class="line">    mymap.insert(pair&lt;T_key, T_value&gt;(key, value));  <span class="comment">//同key不插入</span></span><br><span class="line">    mymap.insert(<span class="built_in">map</span>&lt;T_key, T_value&gt;::value_type(key, value)); <span class="comment">//同key不插入</span></span><br><span class="line">    mymap[key] = value; <span class="comment">//同key覆盖</span></span><br><span class="line"></span><br><span class="line">删除元素：</span><br><span class="line">    mymap.erase(key); <span class="comment">//按值删</span></span><br><span class="line">    mymap.erase(iterator); <span class="comment">//按迭代器删</span></span><br><span class="line"></span><br><span class="line">修改元素：</span><br><span class="line">    mymap[key] = new_value;</span><br><span class="line"></span><br><span class="line">遍历容器：</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">auto</span> it = mymap.begin(); it != mymap.end(); ++it)&#123;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt; it-&gt;first &lt;&lt; <span class="string">" =&gt; "</span> &lt;&lt; it-&gt;second &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h4 id="实现-1"><a href="#实现-1" class="headerlink" title="实现"></a>实现</h4><p>RBTree实现</p>
+<ul>
+<li><p>树状结构， RBTree实现。</p>
+<ul>
+<li>插入删除不需要数据复制。</li>
+<li>操作复杂度仅跟树高有关。</li>
+</ul>
+</li>
+<li><p>RBTree本身也是二叉排序树的一种， key值有序，且唯一。</p>
+<ul>
+<li>必须保证key可排序。</li>
+</ul>
+</li>
+</ul>
+<p>基于红黑树实现的map结构（实际上是map, set, multimap，multiset底层均是红黑树），不仅增删数据时不需要移动数据，其所有操作都可以在O(logn)时间范围内完成。另外，基于红黑树的map在通过迭代器遍历时，得到的是key按序排列后的结果，这点特性在很多操作中非常方便。</p>
+<h4 id="RBTree的特性"><a href="#RBTree的特性" class="headerlink" title="RBTree的特性"></a>RBTree的特性</h4><ol>
+<li>它是二叉排序树（继承二叉排序树特点）：<ul>
+<li>若左子树不空，则左子树上所有结点的值均小于或等于它的根结点的值。</li>
+<li>若右子树不空，则右子树上所有结点的值均大于或等于它的根结点的值。</li>
+<li>左、右子树也分别为二叉排序树。</li>
+</ul>
+</li>
+<li>红黑树的要求：<ul>
+<li>树中所有节点非红即黑。</li>
+<li>根节点必为黑节点。</li>
+<li>红节点的子节点必为黑（黑节点子节点可为黑）。</li>
+<li>从根到NULL的任何路径上黑结点数相同。</li>
+</ul>
+</li>
+<li>查找时间一定可以控制在O(logn)。</li>
+<li>红黑树节点定义如下：<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">enum</span> Color &#123;</span><br><span class="line">    RED = <span class="number">0</span>,</span><br><span class="line">    BLACK = <span class="number">1</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">RBTreeNode</span> &#123;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">RBTreeNode</span>*<span class="title">left</span>, *<span class="title">right</span>, *<span class="title">parent</span>;</span></span><br><span class="line">    <span class="keyword">int</span> key;</span><br><span class="line">    <span class="keyword">int</span> data;</span><br><span class="line">    Color color;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>所以对红黑树的操作需要满足两点：1.满足二叉排序树的要求；2.满足红黑树自身要求。通常在找到节点通过和根节点比较找到插入位置之后，还需要结合红黑树自身限制条件对子树进行左旋和右旋。</p>
+<p>相比于AVL树，红黑树平衡性要稍微差一些，不过创建红黑树时所需的旋转操作也会少很多。相比于最简单的BST，BST最差情况下查找的时间复杂度会上升至O(n)，而红黑树最坏情况下查找效率依旧是O(logn)。所以说红黑树之所以能够在STL及Linux内核中被广泛应用就是因为其折中了两种方案，既减少了树高，又减少了建树时旋转的次数。</p>
+<p>从红黑树的定义来看，红黑树从根到NULL的每条路径拥有相同的黑节点数（假设为n），所以最短的路径长度为n（全为黑节点情况）。因为红节点不能连续出现，所以路径最长的情况就是插入最多的红色节点，在黑节点数一致的情况下，最可观的情况就是黑红黑红排列……最长路径不会大于2n，这里路径长就是树高。</p>
+<h3 id="unordered-map、unordered-set"><a href="#unordered-map、unordered-set" class="headerlink" title="unordered_map、unordered_set"></a>unordered_map、unordered_set</h3><h4 id="实现-2"><a href="#实现-2" class="headerlink" title="实现"></a>实现</h4><p>内部实现是hash table，增删改查的时间复杂度为O(1)。</p>
+<h2 id="编译与调试"><a href="#编译与调试" class="headerlink" title="编译与调试"></a>编译与调试</h2><h3 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h3><h4 id="预处理"><a href="#预处理" class="headerlink" title="预处理"></a>预处理</h4><ul>
+<li>展开所有宏定义，完成所有字符替换</li>
+<li>处理条件编译语句，通过是否具有某个宏定义决定过滤掉哪些代码。</li>
+<li>处理#include指令， 将被包含的文件插入到该指令所在位置。</li>
+<li>过滤掉所有注释语句</li>
+<li>添加行号和文件名标识</li>
+<li>保留所有#pragma 编译器指令</li>
+</ul>
+<h4 id="编译-1"><a href="#编译-1" class="headerlink" title="编译"></a>编译</h4><ul>
+<li>词法分析</li>
+<li>语法分析</li>
+<li>语义分析</li>
+<li>中间语言生成</li>
+<li>目标代码生成与优化</li>
+</ul>
+<h4 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h4><p>各个源代码模块单独的被编译，然后将他们组装成一个整体，这个过程称为链接。被链接的各个部分本身就是二进制文件，链接时需要修正所有对符号地址的引用。</p>
+<ul>
+<li><p>静态链接</p>
+<ul>
+<li>静态链接最简单的情况就是在编译时和静态库链接在一起成为完整的可执行程序。这里所说的静态库就是对多个目标文件（.o）文件的打包，通常静态链接的包名为lib<em>**</em>.a，静态链接所有被用到的目标文件都会复制到最终生成的可执行目标文件中。这种方式的好处是在运行时，可执行目标文件已经完全装载完毕，只要按指令序执行即可，速度比较快，但缺点也有很多，在讲动态链接时会比较一下。</li>
+<li><p>既然静态链接是对目标文件的打包，这里介绍些打包命令。</p>
+  <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">gcc -c test1.c    // 生成test1.o</span><br><span class="line">gcc -c test2.c    // 生成test2.c</span><br><span class="line">ar cr libtest.a test1.o test2.o</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>首先编译得到test1.o和test2.o两个目标文件，之后通过ar命令将这两个文件打包为.a文件，文件名格式为lib + 静态库名 + .a后缀。在生成可执行文件需要使用到它的时候只需要在编译时加上即可。需要注意的是，使用静态库时加在最后的名字不是libtest.a，而是l + 静态库名。</p>
+  <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc -o main main.c -ltest</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>动态链接</p>
+<ul>
+<li><p>静态链接发生于编译阶段，加载至内存前已经完整，但缺点是如果多个程序都需要使用某个静态库，则该静态库会在每个程序中都拷贝一份，非常浪费内存资源，所以出现了动态链接的方式来解决这个问题。动态链接分为<strong>载入时动态链接</strong>和<strong>运行时动态链接</strong>。</p>
+</li>
+<li><p>动态链接在形式上倒是和静态链接非常相似，首先也是需要打包，打包成动态库，不过文件名格式为lib + 动态库名 + .so后缀。不过动态库的打包不需要使用ar命令，gcc就可以完成，但要注意在编译时要加上-fPIC选项，打包时加上-shared选项。</p>
+  <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">gcc -fPIC -c test1.c</span><br><span class="line">gcc -fPIC -c test2.c</span><br><span class="line">gcc -shared test1.o test2.o -o libtest.so</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用动态链接的用法也和静态链接相同。</p>
+  <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc -o main main.c -ltest</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>如果仅仅像上面的步骤是没有办法正常使用库的，我们可以通过加-Lpath指定搜索库文件的目录（-L.表示当前目录），默认情况下会到环境变量LD_LIBRARY_PATH指定的目录下搜索库文件，默认情况是/usr/lib，我们可以将库文件拷贝到那个目录下再链接。</p>
+</li>
+</ul>
+</li>
+<li><p>比较静态连接个动态链接的优缺点：</p>
+<ul>
+<li>动态库运行时会先检查内存中是否已经有该库的拷贝，若有则共享拷贝，否则重新加载动态库（C语言的标准库就是动态库）。静态库则是每次在编译阶段都将静态库文件打包进去，当某个库被多次引用到时，内存中会有多份副本，浪费资源。</li>
+<li>动态库另一个有点就是更新很容易，当库发生变化时，如果接口没变只需要用新的动态库替换掉就可以了。但是如果是静态库的话就需要重新被编译。</li>
+<li>不过静态库也有优点，主要就是静态库一次性完成了所有内容的绑定，运行时就不必再去考虑链接的问题了，执行效率会稍微高一些。</li>
+</ul>
+</li>
+</ul>
+<h3 id="链接过程"><a href="#链接过程" class="headerlink" title="链接过程"></a>链接过程</h3><h4 id="符号解析"><a href="#符号解析" class="headerlink" title="符号解析"></a>符号解析</h4><ul>
+<li>可重定位目标文件<blockquote>
+<p>对于独立编译的可重定位目标文件，其ELF文件格式包括ELF头（指定文件大小及字节序）、.text（代码段）、.rodata（只读数据区）、.data（已初始化数据区）、.bss（未初始化全局变量）、.symtab（符号表）等，其中链接时最需要关注的就是符号表。每个可重定位目标文件都有一张符号表，它包含该模块定义和引用的符号的信息，简而言之就是我们在每个模块中定义和引用的全局变量（包括定义在本模块的全局变量、静态全局变量和引用自定义在其他模块的全局变量）需要通过一张表来记录，在链接时通过查表将各个独立的目标文件合并成一个完整的可执行文件。</p>
+</blockquote>
+</li>
+<li>解析符号表<blockquote>
+<p>解析符号引用的目的是将每个引用与可重定位目标文件的符号表中的一个符号定义联系起来。</p>
+</blockquote>
+</li>
+</ul>
+<h4 id="重定位"><a href="#重定位" class="headerlink" title="重定位"></a>重定位</h4><ul>
+<li>合并节<blockquote>
+<p>多个可重定位目标文件中相同的节合并成一个完整的聚合节，比如多个目标文件的.data节合并成可执行文件的.data节。链接器将运行时存储地址赋予每个节，完成这步每条指令和全局变量都有运行时地址了。</p>
+</blockquote>
+</li>
+<li>重定位符号引用<blockquote>
+<p>这步修改全部代码节和数据节对每个符号的符号引用，使其指向正确的运行时地址。局部变量可以通过进栈、出栈临时分配，但全局变量（”符号”）的位置则是在各个可重定位目标文件中预留好的。通过上一步合并节操作后，指令中所有涉及符号的引用都会通过一定的寻址方式来定位该符号，比如相对寻址、绝对寻址等。</p>
+</blockquote>
+</li>
+</ul>
+<h4 id="可执行目标文件"><a href="#可执行目标文件" class="headerlink" title="可执行目标文件"></a>可执行目标文件</h4><ul>
+<li>ELF头部<blockquote>
+<p>描述文件总体格式，并且包括程序的入口点（entry point），也就是程序运行时执行的第一条指令地址。</p>
+</blockquote>
+</li>
+<li>段头部表<blockquote>
+<p>描述了可执行文件数据段、代码段等各段的大小、虚拟地址、段对齐、执行权限等。实际上通过段头部表描绘了虚拟存储器运行时存储映像，比如每个UNIX程序的代码段总是从虚拟地址Ox0804800开始的。</p>
+</blockquote>
+</li>
+<li>其他段<blockquote>
+<p>和可重定位目标文件各段基本相同，但完成了多个节的合并和重定位工作。</p>
+</blockquote>
+<h4 id="加载"><a href="#加载" class="headerlink" title="加载"></a>加载</h4></li>
+<li>克隆<blockquote>
+<p>新程序的执行首先需要通过父进程外壳通过fork得到一个子进程，该子进程除了pid等标识和父进程不同外其他基本均与父进程相同。</p>
+</blockquote>
+</li>
+<li>重新映射<blockquote>
+<p>当子进程执行execve系统调用时会先清空子进程现有的虚拟存储器段（简而言之就是不再映射到父进程的各个段），之后重新创建子进程虚拟存储器各段和可执行目标文件各段的映射。这个阶段我们可以理解为对复制来的父进程页表进程重写，映射到外存中可执行文件的各个段。</p>
+</blockquote>
+</li>
+<li>虚页调入<blockquote>
+<p>加载过程并没有实际将磁盘中可执行文件调入内存，所做的工作紧紧是复制父进程页表、清空旧页表、建立新页表映射工作。之后加载器跳转到入口地址_start开始执行程序，接下来的过程需要配合虚拟存储器来完成。CPU获得指令的虚拟地址后，若包含该指令或数据的页尚未调入内存则将其从外存中调入，调入内存后修改页表得到虚拟页号和物理页号的对应关系。之后重新取同一条指令或数据时因该页已经被调入内存，所以通过虚拟地址得到虚拟页号，虚拟页号通过查页表可以得到物理页号，通过物理页号 + 页内偏移得到具体的物理地址，此时可以通过物理地址取得想要的数据。</p>
+</blockquote>
+</li>
+</ul>
+<h1 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h1><p><a href="https://github.com/linw7/Skill-Tree/blob/master/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80C++.md#other" target="_blank" rel="noopener">https://github.com/linw7/Skill-Tree/blob/master/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80C++.md#other</a></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    <div>
+        
+    </div>
+    
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/29/C、C++基础知识复习/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Want Young">
+      <meta itemprop="description" content="Change World, Change Life">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Young">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2018/12/29/C、C++基础知识复习/" class="post-title-link" itemprop="http://yoursite.com/page/3/index.html">C/C++基础知识复习</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-12-29 10:53:44" itemprop="dateCreated datePublished" datetime="2018-12-29T10:53:44+08:00">2018-12-29</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-01-11 21:53:04" itemprop="dateModified" datetime="2019-01-11T21:53:04+08:00">2019-01-11</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/语言知识/" itemprop="url" rel="index"><span itemprop="name">语言知识</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="C-C-基础"><a href="#C-C-基础" class="headerlink" title="C/C++基础"></a>C/C++基础</h1><h2 id="编程基础"><a href="#编程基础" class="headerlink" title="编程基础"></a>编程基础</h2><h4 id="省略符参数"><a href="#省略符参数" class="headerlink" title="省略符参数"></a>省略符参数</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">def</span><span class="params">(<span class="keyword">int</span> a, ...)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="lambda表达式"><a href="#lambda表达式" class="headerlink" title="lambda表达式"></a>lambda表达式</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> f = [](<span class="keyword">int</span> a)&#123;<span class="keyword">return</span> a;&#125;;<span class="comment">//[]是捕获列表，里面写局部变量名</span></span><br></pre></td></tr></table></figure>
+<h4 id="变量声明和定义的区别"><a href="#变量声明和定义的区别" class="headerlink" title="变量声明和定义的区别"></a>变量声明和定义的区别</h4><ul>
+<li>变量声明仅仅是告诉编译器变量的类型，位置，名称等，并不分配空间。变量的定义要在定义的地方分配空间</li>
+<li>变量可以多次声明，如extend引入外部变量，但定义只能有一次。</li>
+</ul>
+<h4 id="“零值”的比较"><a href="#“零值”的比较" class="headerlink" title="“零值”的比较"></a>“零值”的比较</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">bool</span>类型:  <span class="keyword">if</span>(flag)</span><br><span class="line"><span class="keyword">int</span> 类型:  <span class="keyword">if</span>(flag == <span class="number">0</span>)</span><br><span class="line"><span class="keyword">float</span>类型: <span class="keyword">if</span>(flag &gt;= <span class="number">-0.000001</span> &amp;&amp; flag &lt;= <span class="number">0.000001</span>)</span><br><span class="line">指针类型:  <span class="keyword">if</span>(flag == <span class="literal">NULL</span>)</span><br></pre></td></tr></table></figure>
+<h4 id="strlen-和-sizeof-的区别"><a href="#strlen-和-sizeof-的区别" class="headerlink" title="strlen 和 sizeof 的区别"></a>strlen 和 sizeof 的区别</h4><ul>
+<li>strlen是字符串处理的库函数，接受参数为字符指针且以‘\0’结尾的字符串。结果在运行时确定。</li>
+<li>sizeof是运算符，不是函数，可接受任何数据的类型和数据，参数不退化，结果在编译时确定。</li>
+<li>sizeof值在编译时确定，所以不能用来得到动态分配（运行时分配）存储空间的大小。</li>
+</ul>
+<h4 id="同一类的不同对象可以互相赋值吗？"><a href="#同一类的不同对象可以互相赋值吗？" class="headerlink" title="同一类的不同对象可以互相赋值吗？"></a>同一类的不同对象可以互相赋值吗？</h4><ul>
+<li>可以，但是含有指针成员时要注意。</li>
+<li>对比类的对象的赋值时深拷贝和浅拷贝</li>
+</ul>
+<h4 id="引用和指针"><a href="#引用和指针" class="headerlink" title="引用和指针"></a>引用和指针</h4><ul>
+<li>引用只是别名，内存中不存在单独实体，编译阶段绑定后不允许更改，只有声明没有定义。指针是具体的变量，占有内存空间，定义后可以更改指向。</li>
+<li>引用在声明时必须初始化为另一变量，而指针声明和定义可以分开。</li>
+<li>不存在指向空值的引用，但存在指向空值的指针。</li>
+</ul>
+<h4 id="结构体内存对齐问题"><a href="#结构体内存对齐问题" class="headerlink" title="结构体内存对齐问题"></a>结构体内存对齐问题</h4><ul>
+<li>结构体内成员按照声明顺序存储，第一个成员的地址和整个结构体地址相同</li>
+<li>若无特殊说明，按照结构体中size最大的成员对齐。</li>
+</ul>
+<h4 id="C-中可执行文件在内存中的存放方式"><a href="#C-中可执行文件在内存中的存放方式" class="headerlink" title="C++中可执行文件在内存中的存放方式"></a>C++中可执行文件在内存中的存放方式</h4><ul>
+<li>分为堆区、栈区、未初始化全局变量区、已初始化全局变量，静态变量，常量数据区、代码区</li>
+</ul>
+<h4 id="static作用是什么？在C和C-中有什么区别？"><a href="#static作用是什么？在C和C-中有什么区别？" class="headerlink" title="static作用是什么？在C和C++中有什么区别？"></a>static作用是什么？在C和C++中有什么区别？</h4><ul>
+<li>static用于修饰局部变量、全局变量、函数。被修饰的变量存储在静态区。静态局部变量生存周期相比普通局部变量变长了，直到程序运行结束而非函数调用结束，且只在第一次被调用时定义。</li>
+<li>静态全局变量相比普通全局变量作用域变为只限于本文件，修饰函数时和全局变量一样，都是为了限定访问域。</li>
+<li>C++中的static还可以修饰类成员，被修饰的类成员不属于任何对象，是所有类实例所共有。</li>
+<li>static的数据记忆性可以满足函数在不同调用期的通信，也可以满足同一个类的多个实例间的通信</li>
+<li>static变量未初始化时，默认为0。</li>
+</ul>
+<h4 id="结构体和类的区别"><a href="#结构体和类的区别" class="headerlink" title="结构体和类的区别"></a>结构体和类的区别</h4><ul>
+<li>结构体的默认限定符是public,类的默认访问控制是private。（就这一个区别！！！）</li>
+<li>C语言中的结构体不能定义函数，只能描述状态，不能描述行为。</li>
+</ul>
+<h4 id="malloc和new的区别"><a href="#malloc和new的区别" class="headerlink" title="malloc和new的区别"></a>malloc和new的区别</h4><ul>
+<li>malloc和free是标准库函数，支持覆盖；new和delete是运算符，支持重载。</li>
+<li>malloc仅仅分配内存空间，free仅仅释放内存空间，并不具备调用构造函数和析构函数的功能，用malloc分配内存给类对象存在风险。new和delete除了分配回收功能之外，还会调用构造函数和析构函数。</li>
+<li>malloc和free返回的是void类型的指针（必须进行类型转换），new和delete返回的是具体类型的指针。</li>
+</ul>
+<h4 id="宏定义和函数的区别"><a href="#宏定义和函数的区别" class="headerlink" title="宏定义和函数的区别"></a>宏定义和函数的区别</h4><ul>
+<li>宏在编译阶段完成替换，之后被替换的文本参与编译，相当于插入代码，运行时不存在函数调用，执行起来更快速；函数调用需要在运行时跳转到具体调用的函数。</li>
+<li>宏函数属于在结构中插入代码，没有返回值，函数调用有返回值。</li>
+<li>宏函数参数没有类型，不进行类型检查；函数参数具有类型，需要检查类型。</li>
+<li>宏函数不加分号</li>
+</ul>
+<h4 id="宏定义和const的区别"><a href="#宏定义和const的区别" class="headerlink" title="宏定义和const的区别"></a>宏定义和const的区别</h4><ul>
+<li>宏定义在编译阶段之前替换完成，属于文本插入；const发生在编译过程之中。</li>
+<li>宏不检查类型；const会检查类型。</li>
+<li>const需要占有内存空间，宏定义不需要内存分配。</li>
+</ul>
+<h4 id="宏定义和typedef的区别"><a href="#宏定义和typedef的区别" class="headerlink" title="宏定义和typedef的区别"></a>宏定义和typedef的区别</h4><ul>
+<li>宏主要用于定义常量和书写复杂的内容，typedef主要用于定义类型别名</li>
+<li>宏替换在编译之前完成，typedef是编译的一部分</li>
+<li>宏不检查类型，typedef检查类型</li>
+<li>宏不是语句，后面没有分号，typedef语句后面要加分号标识结束</li>
+<li>注意对指针的操作，typedef char <em> p_char 和 #define p_char char</em> 区别巨大。<strong>(p_char a,b时对于typedef来说ab都是指针，而对于宏替换来说只有a是指针，b为字符变量。)</strong></li>
+</ul>
+<h4 id="内联函数（inline）的作用"><a href="#内联函数（inline）的作用" class="headerlink" title="内联函数（inline）的作用"></a>内联函数（inline）的作用</h4><p>内联函数的作用是为了减少系统调用函数的时间开销，在内联函数调用的地方直接将代码嵌入到函数调用点，这个过程发生在编译阶段。所以一般规模较小但调用频繁的函数一般定义或声明为内联函数。</p>
+<h4 id="类中成员函数的定义和声明"><a href="#类中成员函数的定义和声明" class="headerlink" title="类中成员函数的定义和声明"></a>类中成员函数的定义和声明</h4><ul>
+<li>类的成员函数声明和定义可以分开，但声明一定要在定义之前。</li>
+<li>成员函数的定义可以放在类外，加以作用域限定符进行定义。</li>
+<li>类内定义的成员函数默认为内联函数，函数入口在类内。</li>
+<li>类外定义的成员函数可以使用inline关键字显示定义为内联函数，也可以定义为普通成员函数。普通成员函数在调用时发生函数调用，而内联函数不需要。类外定义的内联函数要与类定义在同一文件中，否则无法将代码拷贝嵌入到函数调用点。</li>
+</ul>
+<h4 id="宏和内联函数（inline）的区别"><a href="#宏和内联函数（inline）的区别" class="headerlink" title="宏和内联函数（inline）的区别"></a>宏和内联函数（inline）的区别</h4><ul>
+<li>宏发生在编译前，且不做类型检查，而内联函数在编译时做类型检查，并且有返回值</li>
+<li>内联函数强调函数特性，能重载</li>
+<li>访问类保护成员或私有成员时只能使用内联函数。</li>
+</ul>
+<h4 id="条件编译-ifdef，-else，-endif的作用"><a href="#条件编译-ifdef，-else，-endif的作用" class="headerlink" title="条件编译#ifdef， #else， #endif的作用"></a>条件编译#ifdef， #else， #endif的作用</h4><ul>
+<li>减少被编译语句，从而减小目标程序的大小</li>
+<li>可以通过加#define，并通过#ifdef来判断，将某些具体模块包括进要编译的内容。</li>
+</ul>
+<h4 id="指针常量和常量指针"><a href="#指针常量和常量指针" class="headerlink" title="指针常量和常量指针"></a>指针常量和常量指针</h4><p>区分一下几种变量：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> a;</span><br><span class="line"><span class="keyword">int</span> <span class="keyword">const</span> a;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> *a;</span><br><span class="line"><span class="keyword">int</span> *<span class="keyword">const</span> a;</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>前两种都表示定义整型常量a，a的值不允许改变。</li>
+<li>const int *a 表示定义了一个常量指针a，a是一个指向常量的指针，即*a不允许被赋值。</li>
+<li>int *const a 表示定义了一个指针常量a，a是一个指针的常量，即a的指向不允许改变。</li>
+</ul>
+<h4 id="volatile有什么作用？"><a href="#volatile有什么作用？" class="headerlink" title="volatile有什么作用？"></a>volatile有什么作用？</h4><ul>
+<li>volatile定义的变量值是易变的，每次用到这个变量的值都要重新读取，而不是读寄存器内的备份。</li>
+<li>多线程中被几个任务共享的变量需要定义为volatile。</li>
+</ul>
+<h4 id="什么是常引用"><a href="#什么是常引用" class="headerlink" title="什么是常引用"></a>什么是常引用</h4><ul>
+<li>常引用可以理解为常量指针，形式为const typename &amp; refname = varname。</li>
+<li>常引用下，原变量值不会被别名所修改</li>
+<li>原变量的值可以通过原名修改</li>
+<li>常引用通常用作<strong>只读变量别名</strong>或是<strong>形参传递</strong>（减小内存开销）,最常见的就是类的赋值运算符重载时不允许对右值修改。</li>
+<li>常引用允许不同类型变量之间绑定，但此时存在一个中间变量作转化，所以原变量值改变不会影响引用的值</li>
+</ul>
+<h4 id="区别以下指针类型"><a href="#区别以下指针类型" class="headerlink" title="区别以下指针类型"></a>区别以下指针类型</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> *p[<span class="number">10</span>];</span><br><span class="line"><span class="keyword">int</span> (*p)[<span class="number">10</span>];</span><br><span class="line"><span class="function"><span class="keyword">int</span> *<span class="title">p</span><span class="params">(<span class="keyword">int</span>)</span></span>;</span><br><span class="line"><span class="keyword">int</span> (*p)(<span class="keyword">int</span>);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>int *p[10] 为指针数组，p一个长度为10的一维指针数组。</li>
+<li>int (*p)[10] 为数组指针，p指向一个长度为10的一维整型数组。</li>
+<li>int *p(int) 表示一个函数p的声明，返回值是整型指针，参数列表为一个int型变量。</li>
+<li>int (*p)(int) 表示指向函数的指针p指向一个返回值类型是int，参数类型是int的函数。</li>
+</ul>
+<h4 id="a和-amp-a有什么区别"><a href="#a和-amp-a有什么区别" class="headerlink" title="a和&amp;a有什么区别"></a>a和&amp;a有什么区别</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a[<span class="number">10</span>];</span><br></pre></td></tr></table></figure>
+<ul>
+<li>a是数组名，是数组首元素的地址，+1表示地址值加上一个int类型的大小，*（a+1） = a[1]</li>
+<li>&amp;a是数组的指针，其类型是 int (*)[10] ,其值+1时，系统会认为是数组首地址加上整个数组的偏移（10个int型变量），*(\&amp;a + 1) = *(a+11)</li>
+</ul>
+<h4 id="数组名和指针（指向数组首元素的指针）区别？"><a href="#数组名和指针（指向数组首元素的指针）区别？" class="headerlink" title="数组名和指针（指向数组首元素的指针）区别？"></a>数组名和指针（指向数组首元素的指针）区别？</h4><ul>
+<li>二者均可通过增减偏移量来访问数组中的元素。</li>
+<li>数组名不是真正意义上的指针，可以理解为常指针，所以数组名没有自增、自减等操作。</li>
+<li>当数组名当做形参传递给调用函数后，就失去了原有特性，退化成一般指针，多了自增、自减操作，但sizeof运算符不能再得到原数组的大小了。</li>
+</ul>
+<h4 id="野指针是什么？"><a href="#野指针是什么？" class="headerlink" title="野指针是什么？"></a>野指针是什么？</h4><ul>
+<li>野指针是指指向垃圾内存的指针，也叫空悬指针，不是指向null。</li>
+<li>产生的原因及解决办法<blockquote>
+<ul>
+<li>指针变量没有及时初始化 -&gt; 及时初始化指针，要么置空。</li>
+<li>指针free或delete之后没有及时置空 -&gt; 释放内存后立即置空</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+<h4 id="堆栈的区别"><a href="#堆栈的区别" class="headerlink" title="堆栈的区别"></a>堆栈的区别</h4><ul>
+<li>申请方式不同<blockquote>
+<p>栈由系统自动分配<br>堆由程序员手动分配</p>
+</blockquote>
+</li>
+<li>申请大小限制不同<blockquote>
+<p>栈顶和栈底是预先设置好的，大小固定，可以通过ulimit -a查看，通过ulimit -s修改。<br>堆向高地址扩展，是不连续的内存区域，大小可以灵活调整</p>
+</blockquote>
+</li>
+<li>申请效率不同<blockquote>
+<p>栈由系统自动分配，速度快，不会有碎片<br>堆由程序员分配，速度慢，且会有碎片</p>
+</blockquote>
+</li>
+</ul>
+<h4 id="delete-和-delete-的区别？"><a href="#delete-和-delete-的区别？" class="headerlink" title="delete 和 delete[ ] 的区别？"></a>delete 和 delete[ ] 的区别？</h4><ul>
+<li>delete只会调用一次析构函数</li>
+<li>delete [ ]会调用数组中每个元素的析构函数</li>
+</ul>
+<h4 id="C-11中允许函数的嵌套定义-lambda表达式"><a href="#C-11中允许函数的嵌套定义-lambda表达式" class="headerlink" title="C++11中允许函数的嵌套定义 lambda表达式"></a>C++11中允许函数的嵌套定义 lambda表达式</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">func</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">std</span>::function&lt;<span class="keyword">void</span>(<span class="keyword">int</span>)&gt; func_in = [](<span class="keyword">int</span> a)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;a&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    &#125;; <span class="comment">//注意这个分号</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="智能指针的使用"><a href="#智能指针的使用" class="headerlink" title="智能指针的使用"></a>智能指针的使用</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> p = make_shared&lt;<span class="keyword">int</span>&gt;(<span class="number">42</span>);</span><br><span class="line"><span class="built_in">shared_ptr</span>&lt;<span class="keyword">int</span>&gt; p = make_shared&lt;<span class="keyword">int</span>&gt;(<span class="number">42</span>);</span><br><span class="line"><span class="built_in">shared_ptr</span>&lt;<span class="keyword">int</span>&gt; p(<span class="keyword">new</span> <span class="keyword">int</span>(<span class="number">42</span>));</span><br><span class="line">```  </span><br><span class="line">c++使用引用计数管理智能指针指向对象的释放</span><br><span class="line"></span><br><span class="line">weak_ptr&lt;<span class="keyword">int</span>&gt; q(p);</span><br><span class="line">weak_ptr指针所指向的对象的引用计数不会增加。</span><br><span class="line"></span><br><span class="line">## 面向对象基础</span><br><span class="line"></span><br><span class="line">#### 面向对象三大特性</span><br><span class="line">* 继承：让某一类型的对象获得另一个类型对象的属性和方法</span><br><span class="line">* 封装：将数据和代码捆绑在一起，避免外界的干扰和不确定性访问</span><br><span class="line">* 多态：同一事物表现出不同事物的能力，即向不同对象发送同一条消息，不同的对象在接受时会产生不同的行为（重载是静态多态（编译时绑定），虚函数实现动态多态（运行时绑定））。</span><br><span class="line"></span><br><span class="line">###<span class="meta"># public/protected/private的区别</span></span><br><span class="line">* <span class="keyword">public</span>的成员在类的内部外部都能访问和修改</span><br><span class="line">* <span class="keyword">protected</span>的成员只能在类内或者派生类中访问和修改</span><br><span class="line">* <span class="keyword">private</span>的成员只能在类内访问和修改(不能使用对象访问的说法是错误的，类内的对象是可以访问的)</span><br><span class="line"></span><br><span class="line">#### 对象的存储空间</span><br><span class="line">* 非静态成员的数据类型大小之和</span><br><span class="line">* 编译器加入的虚表指针</span><br><span class="line">* 为了对齐优化加入的panding</span><br><span class="line"></span><br><span class="line">#### C++空类有哪些成员函数</span><br><span class="line">空类大小为<span class="number">1</span>字节</span><br><span class="line">* 构造函数</span><br><span class="line">* 析构函数</span><br><span class="line">* 拷贝构造函数</span><br><span class="line">* 赋值重载函数</span><br><span class="line"></span><br><span class="line">#### 构造函数能否是虚函数，析构函数呢？</span><br><span class="line">* 析构函数：</span><br><span class="line">    - 析构函数可以为虚函数，并且一般情况下基类的析构函数要定义为虚函数。</span><br><span class="line">    - 只有基类的析构函数定义为虚函数时，调用操作符<span class="keyword">delete</span>销毁指向对象的基类指针时才能准确的调用派生类的析构函数（从该级向上按序调用虚函数），才能准确的销毁数据。</span><br><span class="line">    - 析构函数可以是纯虚函数，含有纯虚函数的类是抽象类，此时不能被实例化。但派生类中可以根据自身需求重新改写基类中的纯虚函数。</span><br><span class="line">* 构造函数：</span><br><span class="line">    - 构造函数不能定义为虚函数，不仅如此构造函数中还不能调用虚函数。因为那样实际执行的是父类对应的函数，原因是自己还没有构造好（构造顺序先基类后派生类）。</span><br><span class="line"></span><br><span class="line">#### 成员函数的入口问题</span><br><span class="line">* 类的成员函数对于所有对象来说具有统一的入口地址，和静态成员函数不同的是参数列表中**隐含**了一个看不见的<span class="keyword">this</span>指针参数，每次调用时需要传入一个类对象指针（可以是null，所以声明一个类指针就可以访问成员函数而不用管它是否指向一个存在的对象）。对于作用域式的调用，由于无法传入一个指针而发生调用失败。</span><br><span class="line">* 静态成员函数由于没有隐含的<span class="keyword">this</span>指针参数，所以可以由类本身调用，并且静态成员函数不能访问<span class="keyword">this</span>指针，因为局部作用域中没有<span class="keyword">this</span>。</span><br><span class="line"></span><br><span class="line">#### 函数重载、重写和重定义</span><br><span class="line"></span><br><span class="line">重载的要求：</span><br><span class="line">* 函数名必须相同</span><br><span class="line">* 参数列表必须不同（参数个数，类型，顺序）</span><br><span class="line">* 返回值无所谓，可以相同也可以不同</span><br><span class="line">* 仅仅返回类型不同不是函数的重载</span><br><span class="line"></span><br><span class="line">函数重载是一种静态多态，多态分为静态多态（编译时绑定）和动态多态（运行时绑定）</span><br><span class="line"></span><br><span class="line">重写：函数名和参数列表和**返回类型**完全相同，C++中的虚函数重写就是虚函数的多态（动态绑定），普通成员函数重写则根据调用函数的对象类型判断。</span><br><span class="line"></span><br><span class="line">重定义（隐藏）：派生类中重定义了基类中相同函数名的非虚函数。此时无论参数列表和返回类型是否相同都将覆盖基类函数。</span><br><span class="line"></span><br><span class="line">#### 构造函数调用顺序，析构函数？</span><br><span class="line"><span class="number">1.</span> 基类的构造函数：如果有多个基类，调用顺序为从上到下从左到右。</span><br><span class="line"><span class="number">2.</span> 成员类对象的构造函数：如果类的变量中包含其他类（类的组合），需要在本类构造函数调用前调用成员类对象的构造函数，调用顺序遵照在类中被声明的顺序。</span><br><span class="line"><span class="number">3.</span> 派生类的构造函数</span><br><span class="line"><span class="number">4.</span> 析构函数与之相反</span><br><span class="line"></span><br><span class="line">#### 拷贝构造函数中的深拷贝和浅拷贝区别？</span><br><span class="line">* 深拷贝时，当拷贝对象存在动态分配的存储空间时，需要先动态申请一块存储空间，然后逐字节拷贝内容。</span><br><span class="line">* 浅拷贝仅仅拷贝指针的值</span><br><span class="line">* 当使用浅拷贝时，如果原来的对象调用析构函数释放掉指针所指向的数据，则会产生野指针。因为所指向的内存空间已经被释放了。</span><br><span class="line"></span><br><span class="line">#### 拷贝构造函数和赋值运算符重载的区别？</span><br><span class="line">* 拷贝构造函数是函数，赋值运算符是运算符重载</span><br><span class="line">* 拷贝构造函数还会生成新的类对象，赋值运算符不能。</span><br><span class="line">* 拷贝构造函数是直接构造一个新的类对象，所以在初始化对象前不需要检查源对象和新建对象是否相同；赋值运算符需要上述操作并提供两套不同的复制策略，另外赋值运算符中如果原来的对象有内存分配则需要先把内存释放掉。</span><br><span class="line">* 形参传递时调用拷贝构造函数（调用的被赋值对象的拷贝构造函数），但并不是所有出现‘=’的地方都是使用赋值运算符，例如：</span><br><span class="line">```c++</span><br><span class="line">Student s;</span><br><span class="line">Student s1 = s; <span class="comment">//调用拷贝构造函数</span></span><br><span class="line">Student s2;</span><br><span class="line">s2 = s; <span class="comment">//赋值运算符操作</span></span><br></pre></td></tr></table></figure>
+<p><strong>注</strong>：类中存在指针变量时要重写析构函数、拷贝构造函数和赋值运算符。</p>
+<h4 id="虚函数和纯虚函数的区别-普通成员函数和虚函数的声明和定义问题？"><a href="#虚函数和纯虚函数的区别-普通成员函数和虚函数的声明和定义问题？" class="headerlink" title="虚函数和纯虚函数的区别, 普通成员函数和虚函数的声明和定义问题？"></a>虚函数和纯虚函数的区别, 普通成员函数和虚函数的声明和定义问题？</h4><ul>
+<li>虚函数： 虚函数的作用是实现了动态绑定，目的是通过基类类型的指针指向不同对象时产生相应不同的行为。派生类继承时隐式继承了虚函数属性，派生类中继承的虚函数属于函数重写，要求函数名，参数列表，返回值完全相同。</li>
+<li>纯虚函数：只相当于声明了一个接口名，含有纯虚函数的类不能被实例化。纯虚函数就是没有定义只有声明的虚函数。</li>
+<li>虚函数可以没有定义只有声明，此时为纯虚函数，不能实例化。能实例化的类必须定义已声明的虚函数，但普通成员函数可以只声明不定义，此时不能调用，否则编译链接时会报错（好像声明了也并没有什么卵用）。</li>
+</ul>
+<h4 id="覆盖（重写-重构）、重载、隐藏的区别？"><a href="#覆盖（重写-重构）、重载、隐藏的区别？" class="headerlink" title="覆盖（重写/重构）、重载、隐藏的区别？"></a>覆盖（重写/重构）、重载、隐藏的区别？</h4><ul>
+<li>覆盖是派生类中重新定义的函数，其函数名、参数列表、返回值类型和父类完全相同。派生类对象调用该函数时会根据对象类型调用相应的函数。<ul>
+<li>虚函数重写：动态绑定，根据绑定对象的类型调用。</li>
+<li>普通成员函数重写：根据调用该函数的对象或指针类型调用。</li>
+</ul>
+</li>
+<li>重载：具有相同函数名，不同参数列表，不关心返回值类型。</li>
+<li>隐藏：当父类函数不是虚函数时，继承过程中重新定义了和父类函数名相同的函数，不关心返回值和参数列表，此时父类同名函数被隐藏，无法调用， 即重载和覆盖之后，原父类函数不能调用。</li>
+</ul>
+<h4 id="在main函数之前执行的代码可能是什么？"><a href="#在main函数之前执行的代码可能是什么？" class="headerlink" title="在main函数之前执行的代码可能是什么？"></a>在main函数之前执行的代码可能是什么？</h4><ul>
+<li>全局对象的构造函数。</li>
+</ul>
+<h4 id="哪几种情况必须用到初始化成员列表？"><a href="#哪几种情况必须用到初始化成员列表？" class="headerlink" title="哪几种情况必须用到初始化成员列表？"></a>哪几种情况必须用到初始化成员列表？</h4><p>编译时就要确定值的情况要用到初始化列表</p>
+<ul>
+<li>const类型成员</li>
+<li>reference类型成员</li>
+<li>调用一个基类的构造函数，而该函数有一组参数</li>
+<li>调用成员对象的构造函数，而该函数有一组参数</li>
+</ul>
+<h4 id="什么是虚指针"><a href="#什么是虚指针" class="headerlink" title="什么是虚指针"></a>什么是虚指针</h4><ul>
+<li>虚指针或虚函数指针是虚函数的实现细节</li>
+<li>虚指针指向虚表结构（vtable）</li>
+</ul>
+<h4 id="重载和函数模板的区别"><a href="#重载和函数模板的区别" class="headerlink" title="重载和函数模板的区别"></a>重载和函数模板的区别</h4><ul>
+<li>重载需要多个函数，多个可能不同的函数体，区分重载函数时只关心参数列表和函数名，不关心函数体。</li>
+<li>模板函数是一个通用函数，函数的类型和形参不直接指定而用虚拟类型代表，只适用于参数个数相同而类型不同的函数。</li>
+</ul>
+<h4 id="this指针是什么？"><a href="#this指针是什么？" class="headerlink" title="this指针是什么？"></a>this指针是什么？</h4><ul>
+<li>this是类的指针，指向对象的首地址</li>
+<li>this只能在成员函数中使用，在全局函数。静态成员函数中都不能使用this。</li>
+<li>this指针只在成员函数中才有定义。不同编译器存储位置不同。</li>
+</ul>
+<h4 id="类模板是什么？"><a href="#类模板是什么？" class="headerlink" title="类模板是什么？"></a>类模板是什么？</h4><ul>
+<li>用于解决多个功能相同，数据类型不同的类需要重复定义的问题。</li>
+<li>类模板是对一批仅数据类型不同的类的抽象。</li>
+</ul>
+<h4 id="构造函数和析构函数的调用时机"><a href="#构造函数和析构函数的调用时机" class="headerlink" title="构造函数和析构函数的调用时机"></a>构造函数和析构函数的调用时机</h4><ul>
+<li>全局对象：构造函数在所有函数调用前执行，在主函数执行完毕时调用析构函数</li>
+<li>局部自动对象：建立对象时调用构造函数，函数结束时调用析构函数</li>
+<li>动态分配的对象：建立对象时调用构造函数，调用释放时调用析构函数</li>
+<li>静态局部变量对象： 建立时调用一次构造函数，主函数结束时调用析构函数</li>
+</ul>
+<h4 id="类静态成员函数对数据区的访问限制"><a href="#类静态成员函数对数据区的访问限制" class="headerlink" title="类静态成员函数对数据区的访问限制"></a>类静态成员函数对数据区的访问限制</h4><ul>
+<li>由于静态成员函数参数列表中没有this指针，也不允许使用this指针，所以从这个角度来讲静态成员函数只能访问静态数据成员无法使用非静态数据成员也无法调用非静态函数。</li>
+<li>如果静态成员函数显示定义了指向对象的指针参数或函数内存在该类对象则可以由参数指针和函数内对象访问非静态成员。</li>
+</ul>
+<h4 id="C-会根据定义的单实参构造函数定义隐式的类类型转换"><a href="#C-会根据定义的单实参构造函数定义隐式的类类型转换" class="headerlink" title="C++会根据定义的单实参构造函数定义隐式的类类型转换"></a>C++会根据定义的单实参构造函数定义隐式的类类型转换</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">int</span> a;</span><br><span class="line">    C()&#123;<span class="built_in">cout</span>&lt;&lt;<span class="string">"this is class C."</span>&lt;&lt;<span class="built_in">endl</span>;&#125;</span><br><span class="line">    C(<span class="keyword">int</span> i):a(i)&#123;&#125;<span class="comment">// 隐式定义从int -&gt; C的类型转换</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    C c;</span><br><span class="line">    c = <span class="number">1</span>;<span class="comment">//隐式转换1为C类型，在调用默认赋值重载</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>通过使用<strong>explicit</strong>声明构造函数能够抑制这种隐式转换,<strong>注意</strong>：explicit关键字只能用于类成员函数的声明处，类外不允许使用。</p>
+<h4 id="数据成员的初始化顺序与初始化列表无关，只与声明顺序有关。"><a href="#数据成员的初始化顺序与初始化列表无关，只与声明顺序有关。" class="headerlink" title="数据成员的初始化顺序与初始化列表无关，只与声明顺序有关。"></a>数据成员的初始化顺序与初始化列表无关，只与声明顺序有关。</h4><p>典型的错误示例：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    <span class="keyword">int</span> j;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    A(<span class="keyword">int</span> val):j(val),i(j)&#123;&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>看起来是先初始化j，在将j赋给i，但实际上是先用未初始化的j初始化了i，造成错误。</p>
+<h4 id="赋值运算符’-’重载通常使用常引用来防止右值被修改"><a href="#赋值运算符’-’重载通常使用常引用来防止右值被修改" class="headerlink" title="赋值运算符’=’重载通常使用常引用来防止右值被修改"></a>赋值运算符’=’重载通常使用常引用来防止右值被修改</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">class <span class="title">A</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    A&amp; <span class="keyword">operator</span>=(<span class="keyword">const</span> A&amp; a)</span><br><span class="line">    &#123;</span><br><span class="line">        i = a.i;</span><br><span class="line">        <span class="comment">//a.i = 10 不允许常引用修改原变量值，因为它是只读的。</span></span><br><span class="line">        <span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h4 id="类的类型转换运算符"><a href="#类的类型转换运算符" class="headerlink" title="类的类型转换运算符"></a>类的类型转换运算符</h4><p>形式如下：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">operator</span> <span class="title">type</span><span class="params">()</span> <span class="keyword">const</span></span>;</span><br></pre></td></tr></table></figure></p>
+<p>注意：</p>
+<ul>
+<li>类型转换运算符必须为类的成员函数</li>
+<li>不能声明返回类型</li>
+<li>形参列表必须为空</li>
+<li>类型转换函数通常是 const</li>
+</ul>
+<h4 id="静态类型、动态类型、静态绑定、动态绑定"><a href="#静态类型、动态类型、静态绑定、动态绑定" class="headerlink" title="静态类型、动态类型、静态绑定、动态绑定"></a>静态类型、动态类型、静态绑定、动态绑定</h4><ul>
+<li>静态类型： 对象声明时采用的类型，编译期确定</li>
+<li>动态类型： 通常是指一个指针或引用目前所指的对象的类型，运行期间决定</li>
+<li>静态绑定： 绑定的是静态类型，所对应的函数或属性依赖于对象的静态类型，发生在编译期</li>
+<li>动态绑定： 绑定的是动态类型，所对应的函数或属性依赖于对象的动态类型，发生在运行期</li>
+</ul>
+<p>从上面的定义也可以看出，非虚函数一般都是静态绑定，而虚函数都是动态绑定</p>
+<h4 id="私有构造函数的作用"><a href="#私有构造函数的作用" class="headerlink" title="私有构造函数的作用"></a>私有构造函数的作用</h4><ul>
+<li>私有构造函数是单例的实现，通过公有静态函数创建对象，并保证对象的唯一性。通常返回引用和指针，因为构造函数是私有的，外部不能创建临时对象。</li>
+<li>私有构造函数的类不能被继承（无法调用基类构造函数）</li>
+</ul>
+<h4 id="私有析构函数的作用"><a href="#私有析构函数的作用" class="headerlink" title="私有析构函数的作用"></a>私有析构函数的作用</h4><ul>
+<li>控制只能在堆上创建对象，因为在栈上创建对象会自动调用析构函数，而私有析构导致不可访问而失败，编译过程会失败。</li>
+<li>delete外部不能调用析构函数，所以要额外定义成员函数来使用delete。</li>
+</ul>
+<h4 id="对象的内存分布"><a href="#对象的内存分布" class="headerlink" title="对象的内存分布"></a>对象的内存分布</h4><ul>
+<li>有继承关系的类对象内存布局：<ul>
+<li>如果类中有虚函数，那么在类对象最开始的内存中会有一个虚表指针_vfptr,指向虚函数表。</li>
+<li>之后是类中的成员变量内存数据</li>
+<li>对于子类，最开始的内存记录着父类对象的拷贝（包括父类对象的虚表指针和成员变量）。之后是子类自己的成员变量数据。</li>
+<li>对于子类的子类，也是同样的道理。但是无论有多少个子类，对象中始终只有一个虚表指针。</li>
+<li><img src="/images/virtual_object_memory.png" alt=""></li>
+</ul>
+</li>
+<li>不继承任何基类虚函数的子类对象内存存储<br><img src="/images/not_inherit_virtual_child_object_memory.png" alt=""></li>
+<li>只继承一个虚函数：<br><img src="/images/only_inherit_one_virtual_child_object_memory.png" alt=""></li>
+<li>多继承：<br><img src="/images/multi_inherit_virtual_child_object_memory.png" alt=""></li>
+<li>菱形继承中存在二义性和数据冗余<br>B,C继承自A，D继承B和C，则D拷贝了两份A对象的数据，当D类对象访问A的数据时存在二义性。此时需要用到虚拟继承。</li>
+</ul>
+<h4 id="虚继承"><a href="#虚继承" class="headerlink" title="虚继承"></a>虚继承</h4><p>新增虚基类指针，指向虚基类表，虚基类表中首项存储虚基类指针的偏移量，接下来依次存储虚基类的偏移量（偏移量是相对于虚基类表指针的存储地址）</p>
+<ul>
+<li>虚拟继承的子类的内存结构，和普通继承完全不同。虚拟继承的子类，有单独的虚函数表， 另外也单独保存一份父类的虚函数表，两部分之间用一个四个字节的0x00000000来作为分界。子类的内存中，首先是自己的虚函数表，然后是子类的数据成员，然后是0x0，之后就是父类的虚函数表，之后是父类的数据成员。<br><img src="/images/single_virtual_inherit_memory.png" alt=""></li>
+<li>虚继承将基类置于内存末尾，但是置于末尾的顺序也有一定的次序。首先Base先放到末尾，然后Base1放到末尾，最后Base2放到末尾。<br><img src="/images/one_level_diamond_virtual_inherit_memory.png" alt=""><br><img src="/images/diamond_virtual_inherit_memory.png" alt=""><br><img src="/images/one_level_diamond_virtual_inherit_include_virtual_function_memory.png" alt=""></li>
+</ul>
+<p><strong>注</strong>:上述虚函数中，如果派生类重写了基类的虚函数，则对应虚函数表中的虚函数应该修改成重新后的虚函数，即:<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Base::fun()-&gt;Derive::fun()</span><br></pre></td></tr></table></figure></p>
+<h4 id="const-修饰成员函数"><a href="#const-修饰成员函数" class="headerlink" title="const 修饰成员函数"></a>const 修饰成员函数</h4><ul>
+<li>作用是使成员函数无法修改成员数据</li>
+<li>const修饰的成员函数无法调用非const成员函数，因为非const成员函数可能会修改成员数据。</li>
+</ul>
+<h1 id="本文主要参考的链接"><a href="#本文主要参考的链接" class="headerlink" title="本文主要参考的链接"></a>本文主要参考的链接</h1><p><a href="https://github.com/linw7/Skill-Tree/blob/master/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80C++.md" target="_blank" rel="noopener">https://github.com/linw7/Skill-Tree/blob/master/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80C++.md</a></p>
+<p><a href="https://www.cnblogs.com/longcnblogs/archive/2017/10/09/7642951.html" target="_blank" rel="noopener">https://www.cnblogs.com/longcnblogs/archive/2017/10/09/7642951.html</a></p>
+<p><a href="https://www.cnblogs.com/xudong-bupt/p/3509567.html" target="_blank" rel="noopener">https://www.cnblogs.com/xudong-bupt/p/3509567.html</a></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    <div>
+        
+    </div>
+    
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/26/机器学习-模型评估与选择/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1822,617 +2803,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/17/MySQL必知必会2——高级检索/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Want Young">
-      <meta itemprop="description" content="Change World, Change Life">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Young">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/12/17/MySQL必知必会2——高级检索/" class="post-title-link" itemprop="http://yoursite.com/page/3/index.html">MySQL必知必会2</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-12-17 21:26:20" itemprop="dateCreated datePublished" datetime="2018-12-17T21:26:20+08:00">2018-12-17</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-12-21 15:24:25" itemprop="dateModified" datetime="2018-12-21T15:24:25+08:00">2018-12-21</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/数据库/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="SQL复杂检索"><a href="#SQL复杂检索" class="headerlink" title="SQL复杂检索"></a>SQL复杂检索</h1><h2 id="级联查询（子查询）"><a href="#级联查询（子查询）" class="headerlink" title="级联查询（子查询）"></a>级联查询（子查询）</h2><p>WHERE通常可以包含另一个查询子句，例如：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> *</span><br><span class="line"><span class="keyword">FROM</span> student</span><br><span class="line"><span class="keyword">WHERE</span> <span class="keyword">id</span> <span class="keyword">IN</span> (<span class="keyword">SELECT</span> <span class="keyword">id</span> <span class="keyword">FROM</span> <span class="keyword">users</span> <span class="keyword">WHERE</span> sex = <span class="string">'female'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> cust_name, cust_state, (<span class="keyword">SELECT</span> <span class="keyword">count</span>(*) <span class="keyword">FROM</span> orders <span class="keyword">WHERE</span> orders.cust_id = customers.cust_id) <span class="keyword">AS</span> orders</span><br><span class="line"><span class="keyword">FROM</span> customers</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> cust_name;</span><br></pre></td></tr></table></figure></p>
-<p>级联查询并不是最有效的查询。</p>
-<h2 id="联结表（join）"><a href="#联结表（join）" class="headerlink" title="联结表（join）"></a>联结表（join）</h2><p>外键：</p>
-<blockquote>
-<p>外键是指一个表中的列属性包含另一个表的主键</p>
-</blockquote>
-<p>可伸缩性好：</p>
-<blockquote>
-<p>能够适应不断增加的工作量</p>
-</blockquote>
-<p>连接（联结）例子：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">name</span>, price</span><br><span class="line"><span class="keyword">FROM</span> factory, products</span><br><span class="line"><span class="keyword">WHERE</span> factory.id = products.id</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> price</span><br></pre></td></tr></table></figure></p>
-<p>笛卡尔积连接</p>
-<blockquote>
-<p>没有联结条件限制的表连接会将表A中的每一行和表B中的每一行配对，这样的连接称为笛卡尔积</p>
-</blockquote>
-<h4 id="内连接、外连接、左连接、右连接、全连接、自然连接"><a href="#内连接、外连接、左连接、右连接、全连接、自然连接" class="headerlink" title="内连接、外连接、左连接、右连接、全连接、自然连接"></a>内连接、外连接、左连接、右连接、全连接、自然连接</h4><p>内左右全连接的划分是因为下图的叫法：</p>
-<blockquote>
-<p><img src="/images/inner_outer_join.jpg" alt=""></p>
-</blockquote>
-<p>内连接（对应C区域）：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">name</span>, price</span><br><span class="line"><span class="keyword">FROM</span> factory <span class="keyword">INNER</span> <span class="keyword">JOIN</span> products</span><br><span class="line"><span class="keyword">ON</span> factory.id = products.id</span><br><span class="line">// 等价于</span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">name</span>, price</span><br><span class="line"><span class="keyword">FROM</span> factory, products</span><br><span class="line"><span class="keyword">WHERE</span> factory.id = products.id</span><br></pre></td></tr></table></figure></p>
-<p>左连接（A1区域）：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">name</span>, price</span><br><span class="line"><span class="keyword">FROM</span> factory <span class="keyword">LEFT</span> <span class="keyword">JOIN</span> products</span><br><span class="line"><span class="keyword">ON</span> factory.id = products.id</span><br></pre></td></tr></table></figure></p>
-<p>右连接（B1区域）：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">name</span>, price</span><br><span class="line"><span class="keyword">FROM</span> factory <span class="keyword">RIGHT</span> <span class="keyword">JOIN</span> products</span><br><span class="line"><span class="keyword">ON</span> factory.id = products.id</span><br></pre></td></tr></table></figure></p>
-<p>全连接(所有区域) 加表别名:<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">name</span>, price</span><br><span class="line"><span class="keyword">FROM</span> factory <span class="keyword">AS</span> a <span class="keyword">FULL</span> <span class="keyword">JOIN</span> products <span class="keyword">AS</span> b</span><br><span class="line"><span class="keyword">ON</span> a.id = b.id</span><br></pre></td></tr></table></figure></p>
-<p>自然连接基本用不到。</p>
-<h2 id="使用组合查询-UNION"><a href="#使用组合查询-UNION" class="headerlink" title="使用组合查询 UNION"></a>使用组合查询 UNION</h2><p>使用UNION对多个SELECT进行并操作，这和一条SELECT使用多个WHERE是相同的结果，但有时效率不同，语句复杂情况也不一样。</p>
-<blockquote>
-<ul>
-<li>UNION会自动去除重复的行</li>
-<li>使用UNION时只能使用一次ORDER BY在最后一个SELECT中。</li>
-</ul>
-</blockquote>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    <div>
-        
-    </div>
-    
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/17/MySQL必知必会/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Want Young">
-      <meta itemprop="description" content="Change World, Change Life">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Young">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/12/17/MySQL必知必会/" class="post-title-link" itemprop="http://yoursite.com/page/3/index.html">MySQL必知必会</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-12-17 12:11:19" itemprop="dateCreated datePublished" datetime="2018-12-17T12:11:19+08:00">2018-12-17</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-12-21 15:25:07" itemprop="dateModified" datetime="2018-12-21T15:25:07+08:00">2018-12-21</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/数据库/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="SQL语句"><a href="#SQL语句" class="headerlink" title="SQL语句"></a>SQL语句</h1><h2 id="查看数据库和表信息"><a href="#查看数据库和表信息" class="headerlink" title="查看数据库和表信息"></a>查看数据库和表信息</h2><h4 id="gt-SHOW-DATABASES-查看所有数据库"><a href="#gt-SHOW-DATABASES-查看所有数据库" class="headerlink" title="&gt; SHOW DATABASES; //查看所有数据库"></a>&gt; SHOW DATABASES; //查看所有数据库</h4><h4 id="gt-SHOW-CREATE-DATABASE-查看特定数据库创建语句。"><a href="#gt-SHOW-CREATE-DATABASE-查看特定数据库创建语句。" class="headerlink" title="&gt; SHOW CREATE DATABASE; //查看特定数据库创建语句。"></a>&gt; SHOW CREATE DATABASE; //查看特定数据库创建语句。</h4><h2 id="检索"><a href="#检索" class="headerlink" title="检索"></a>检索</h2><p>查询所有字段<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> <span class="keyword">TABLE</span>;</span><br></pre></td></tr></table></figure></p>
-<p>查询不重复行的特定字段<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> <span class="keyword">id</span> <span class="keyword">FROM</span> <span class="keyword">TABLE</span>;</span><br></pre></td></tr></table></figure></p>
-<p>LIMIT限制返回数量<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> <span class="keyword">TABLE</span> <span class="keyword">LIMIT</span> <span class="number">5</span>;</span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> <span class="keyword">TABLE</span> <span class="keyword">LIMIT</span> <span class="number">5</span>,<span class="number">5</span>; //从第5行开始的5行。</span><br></pre></td></tr></table></figure></p>
-<p>ORDER BY排序<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> <span class="keyword">TABLE</span> <span class="keyword">ORDER</span> <span class="keyword">BY</span> <span class="keyword">COLUMNS</span>;</span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> <span class="keyword">TABLE</span> <span class="keyword">ORDER</span> <span class="keyword">BY</span> COLUMN1, COLUMN2;</span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> <span class="keyword">TABLE</span> <span class="keyword">ORDER</span> <span class="keyword">BY</span> COLUMN1 <span class="keyword">DESC</span>, COLUMN2 <span class="keyword">DESC</span>;</span><br></pre></td></tr></table></figure></p>
-<p>WHERE 条件查询</p>
-<blockquote>
-<p>!= 和 &lt;&gt; 都表示不等于<br>BETWEEN 查询间隔 ： <code>SELECT * FROM TABLE WHERE COLUMN BETWEEN a AND b;</code><br>空值检查NULL： IS NULL 判断NULL<br>AMD 和 OR 多条件查询， 注意查询次序<br>IN 表示范围匹配<br>使用 NOT 对IN、BETWEEN、EXECTS取反</p>
-</blockquote>
-<p>通配符检索</p>
-<blockquote>
-<p>% :表示任意字符出现任意多次<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> <span class="keyword">TABLE</span> <span class="keyword">WHERE</span> <span class="keyword">name</span> <span class="keyword">LIKE</span> <span class="string">'wang%'</span>;</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<blockquote>
-<p>_ :表示任意字符出现一次<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> <span class="keyword">TABLE</span> <span class="keyword">WHERE</span> <span class="keyword">name</span> <span class="keyword">LIKE</span> <span class="string">'wan_%'</span>;</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<p>REGEXP 表示使用正则表达式检索 . *<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> <span class="keyword">TABLE</span> <span class="keyword">WHERE</span> <span class="keyword">name</span> REGEXP <span class="string">'.000'</span>;</span><br></pre></td></tr></table></figure></p>
-<blockquote>
-<p>使用 \\ 进行特殊字符的转义<br>定位符 ^ 字符串开头 $ 字符串结尾<br>. 匹配一个<br>* 匹配0个或多个<br>+ 匹配1个或多个<br>? 匹配0个或1个</p>
-</blockquote>
-<h2 id="表操作"><a href="#表操作" class="headerlink" title="表操作"></a>表操作</h2><p>构建计算字段</p>
-<blockquote>
-<p>Concat()函数： 将表中的两个属性联结在一起，通常是字符串连接。<br>SELECT Concat(name, ‘(‘, country, ‘)’) FROM TABLE ORDER BY name;</p>
-</blockquote>
-<p>别名</p>
-<blockquote>
-<p>使用AS关键字来创建别名</p>
-</blockquote>
-<p>去掉串多余的空格</p>
-<blockquote>
-<p>RTrim( ) : 去除串右侧多余空格<br>LTrim( ) : 去除串左侧多余空格<br>Trim( ) : 去除串两侧多余空格</p>
-</blockquote>
-<h2 id="聚集函数"><a href="#聚集函数" class="headerlink" title="聚集函数"></a>聚集函数</h2><p>MySQL 提供五种聚集函数 AVG( )、 COUNT( )、 MIN( )、 MAX( )、 SUM( )</p>
-<blockquote>
-<p>DISTINCT 字段可用于 AVG 和 COUNT 函数</p>
-</blockquote>
-<h2 id="分组-GROUP-BY"><a href="#分组-GROUP-BY" class="headerlink" title="分组 GROUP BY"></a>分组 GROUP BY</h2><p>GROUP BY 必须使用在WHERE之后 ORDER BY 之前</p>
-<h2 id="检索条件语句-WHERE-和-HAVING"><a href="#检索条件语句-WHERE-和-HAVING" class="headerlink" title="检索条件语句 WHERE 和 HAVING"></a>检索条件语句 WHERE 和 HAVING</h2><p>几乎所有的WHERE语句都能用HAVING语句代替，他们所不同的是WHERE过滤行， 而HAVING过滤分组。</p>
-<blockquote>
-<p>HAVING 和 GROUP BY 配合使用， HAVING 出现在 GROUP BY 之后， 而 WHERE 必须出现在 GROUP BY之前。</p>
-</blockquote>
-<h2 id="SELECT子句顺序"><a href="#SELECT子句顺序" class="headerlink" title="SELECT子句顺序"></a>SELECT子句顺序</h2><blockquote>
-<p><img src="/images/SELECT子句顺序.png" alt=""></p>
-</blockquote>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    <div>
-        
-    </div>
-    
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/16/HTTP识别、认证、安全/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Want Young">
-      <meta itemprop="description" content="Change World, Change Life">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Young">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/12/16/HTTP识别、认证、安全/" class="post-title-link" itemprop="http://yoursite.com/page/3/index.html">HTTP识别、认证、安全</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-12-16 21:12:34" itemprop="dateCreated datePublished" datetime="2018-12-16T21:12:34+08:00">2018-12-16</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-12-21 15:25:43" itemprop="dateModified" datetime="2018-12-21T15:25:43+08:00">2018-12-21</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/网络/" itemprop="url" rel="index"><span itemprop="name">网络</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="HTTP识别、认证、安全"><a href="#HTTP识别、认证、安全" class="headerlink" title="HTTP识别、认证、安全"></a>HTTP识别、认证、安全</h1><h2 id="cookie机制"><a href="#cookie机制" class="headerlink" title="cookie机制"></a>cookie机制</h2><blockquote>
-<p>cookie是服务器识别用户的一种方式，分为会话cookie和持久cookie，区别在于会话cookie是临时的，关闭浏览器会删除cookie。</p>
-</blockquote>
-<blockquote>
-<p>cookie的不可跨域名性： 浏览器在访问一个网站时只会携带该网站的cookie，并且其他网站也不允许修改这个网站的cookie</p>
-</blockquote>
-<blockquote>
-<p>他人获得本机cookie会造成cookie欺骗，所以cookie不太安全。</p>
-</blockquote>
-<h2 id="session机制"><a href="#session机制" class="headerlink" title="session机制"></a>session机制</h2><blockquote>
-<p>session是服务器端保存客户端状态的机制。维持登录状态，更新用户是否活跃，对不活跃的用户删除其session。</p>
-</blockquote>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    <div>
-        
-    </div>
-    
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2480,7 +2850,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">35</span>
+                    <span class="site-state-item-count">38</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2511,7 +2881,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">9</span>
+                      
+                    
+                    <span class="site-state-item-count">10</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -2568,7 +2940,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">22</span>
+                      
+                    
+                    <span class="site-state-item-count">23</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>

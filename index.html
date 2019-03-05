@@ -382,6 +382,544 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/05/百度之星开发者大赛总结/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Want Young">
+      <meta itemprop="description" content="Change World, Change Life">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Young">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/03/05/百度之星开发者大赛总结/" class="post-title-link" itemprop="http://yoursite.com/index.html">百度之星开发者大赛总结</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-03-05 14:32:35 / 修改时间：19:38:49" itemprop="dateCreated datePublished" datetime="2019-03-05T14:32:35+08:00">2019-03-05</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/竞赛/" itemprop="url" rel="index"><span itemprop="name">竞赛</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="百度之星开发者大赛"><a href="#百度之星开发者大赛" class="headerlink" title="百度之星开发者大赛"></a>百度之星开发者大赛</h1><h2 id="比赛介绍"><a href="#比赛介绍" class="headerlink" title="比赛介绍"></a>比赛介绍</h2><p>使用百度提供的paddle paddle深度学习框架开发一个人流密度检测的模型，百度每轮提供三千多张不同监控视角的图片数据集以及对应的标注。</p>
+<h2 id="模型选择"><a href="#模型选择" class="headerlink" title="模型选择"></a>模型选择</h2><p>本次比赛我们在VGG16模型的基础上进行修改，在前面卷积层中间添加了Max Pooling，Max Pooling的作用是减少参数数量，过多的参数容易造成过拟合，还有就是减小图像尺寸。后面去掉了全连接层，添加了6层通道数递减的卷积层，最后通过kernel_size为1的卷积层得出单通道人流密度图像。</p>
+<h2 id="损失函数"><a href="#损失函数" class="headerlink" title="损失函数"></a>损失函数</h2><p>MSELOSS，均方误差。对标签密度图和计算得到的密度图做均方误差计算得出loss。</p>
+<h2 id="优化函数"><a href="#优化函数" class="headerlink" title="优化函数"></a>优化函数</h2><p>Adam优化，Adam 算法根据损失函数对每个参数的梯度的一阶矩估计和二阶矩估计动态调整针对于每个参数的学习速率。</p>
+<h2 id="密度图"><a href="#密度图" class="headerlink" title="密度图"></a>密度图</h2><p>根据数据标注，生成密度图标签。整个模型中没有全连接层。</p>
+<h2 id="负责工作"><a href="#负责工作" class="headerlink" title="负责工作"></a>负责工作</h2><ul>
+<li>模型优化：包括设置batch norm ，根据结果调节dropout减少过拟合， 设置动态的学习率使收敛更快。</li>
+<li>数据处理：包括数据归一化和数据增强，将所有图像调整到统一尺寸，对图像翻转与旋转做数据增强。</li>
+</ul>
+<h2 id="最大的难点"><a href="#最大的难点" class="headerlink" title="最大的难点"></a>最大的难点</h2><p>对数据的理解才是这个比赛最大的难点：由于大家都参考了CVPR最新发表的人流密度检测论文，其实基本方法上都是大同小异，能将队伍区分开来的最多的在于细节的调整和数据的理解，在后期的比赛中，能用到的优化策略都用到了，要想在提升光靠优化很难，这个时候就应该从数据出发。我们从数据中发现，整个数据集呈现两极分化，任务数量特别多的很多，人物数量特别少的也很多。而这两者用同一个模型训练的话必然会造成混乱，导致模型学习不到什么feature使得准确率下降。</p>
+<p>我本来做过一段时间图像检索的研究，我就应用图像检索的技术将数据集分开，对两组数据进行不同的训练，得到两个不同的模型，准确率最后的确能上升一截。现实情况中也恰好适用于这样的方式，不会有一种算法适用于所有的情况，视频监控本身就是固定视角的，根据视野大小采用不同的检测模型是可行的。</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    <div>
+        
+    </div>
+    
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/05/kinect项目总结/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Want Young">
+      <meta itemprop="description" content="Change World, Change Life">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Young">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/03/05/kinect项目总结/" class="post-title-link" itemprop="http://yoursite.com/index.html">kinect项目总结</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-03-05 14:03:19 / 修改时间：14:28:22" itemprop="dateCreated datePublished" datetime="2019-03-05T14:03:19+08:00">2019-03-05</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/实习/" itemprop="url" rel="index"><span itemprop="name">实习</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="人体运动采集项目"><a href="#人体运动采集项目" class="headerlink" title="人体运动采集项目"></a>人体运动采集项目</h1><h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>这是一个大四时期导师的项目，该项目使用多台kinect从不同角度同时采集人体运动的骨骼点运动信息，使用了微软提供的SDK配合OpenCV开发。</p>
+<h2 id="项目流程"><a href="#项目流程" class="headerlink" title="项目流程"></a>项目流程</h2><ol>
+<li>控制kinect获取视频和深度流</li>
+<li>保存骨骼点空间信息</li>
+<li>将骨骼点逐帧描绘在采集到的图像上</li>
+<li>实时保存骨骼点信息</li>
+</ol>
+<h2 id="技术亮点"><a href="#技术亮点" class="headerlink" title="技术亮点"></a>技术亮点</h2><p>kinect获取的视频流太快了，IO速度跟不上，单线程会导致视频帧数骤降，画面就会很卡。不得不采用多线程并发的方式，采用读者写者的并行模式，使用了信号量控制线程同步。</p>
+<p>使用WIN32API 创建线程CreateThread， ResumeThread运行， 创建信号量CreateSemaphore, WaitForSingleObject等待信号量</p>
+<h2 id="最大的困难"><a href="#最大的困难" class="headerlink" title="最大的困难"></a>最大的困难</h2><p>背景切割是最大的难点，kinect红外相机噪点很多，这源于现实中红外干扰比较多，另一方面红外相机的分辨率也不高。为了将深度图像中的人体抠出来，必须利用彩色相机的对齐，由于彩色相机和深度相机比例和分辨率都不同，对齐也很难，并且彩色相机想把人抠出来也不容易，最后的方案是买绿布，后期来抠图，然后设置物理空间的锚点，通过识别锚点对齐深度和彩色的相机。</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    <div>
+        
+    </div>
+    
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/04/大创项目总结/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Want Young">
+      <meta itemprop="description" content="Change World, Change Life">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Young">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/03/04/大创项目总结/" class="post-title-link" itemprop="http://yoursite.com/index.html">大创项目总结</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-03-04 20:53:59" itemprop="dateCreated datePublished" datetime="2019-03-04T20:53:59+08:00">2019-03-04</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-03-05 14:03:58" itemprop="dateModified" datetime="2019-03-05T14:03:58+08:00">2019-03-05</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/实习/" itemprop="url" rel="index"><span itemprop="name">实习</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="大连理工大学创新创业管理平台项目经历"><a href="#大连理工大学创新创业管理平台项目经历" class="headerlink" title="大连理工大学创新创业管理平台项目经历"></a>大连理工大学创新创业管理平台项目经历</h1><h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>大创管理平台是为学校提供一个大学生创新创业项目管理的web项目，主要记录大学生大创项目的流转，主要包括保存文件，更新状态，新闻发布等。主要使用技术包括Django Django-CAS等。</p>
+<h2 id="主要工作"><a href="#主要工作" class="headerlink" title="主要工作"></a>主要工作</h2><p>负责和学校统一身份认证CAS对接，账号绑定切换等模块的设计与开发。</p>
+<h2 id="Django-CAS的逻辑"><a href="#Django-CAS的逻辑" class="headerlink" title="Django-CAS的逻辑"></a>Django-CAS的逻辑</h2><h3 id="统一登录"><a href="#统一登录" class="headerlink" title="统一登录"></a>统一登录</h3><ol>
+<li>用户访问大创平台A的受限资源，检查cookie中的session_id，发现服务器缓存中没有这个id，需要登录。</li>
+<li>平台A重定向请求到统一认证中心cas-server</li>
+<li>cas-server发现请求中未携带cas-ticket，跳转到登录界面认证</li>
+<li>认证成功后，cas服务器随机生成server-ticket，并缓存该ticket</li>
+<li>cas服务器重定向到平台A，平台A验证是否登录，发现没有登录</li>
+<li>平台A重定向到cas-server，并携带刚刚的server-ticket，服务器验证该ticket，验证通过后创建全局会话id，并向平台A发送用户的登录信息</li>
+<li>平台A收到登录信息后创建局部会话session_id，记录到用户cookie中表示已登录</li>
+<li>用户访问统一认证系统下其他平台B，平台B发现用户未登录，重定向到cas-server</li>
+<li>cas-server验证用户cookie中全局会话id是否存在，存在则表示已登录，附带ticket重定向到B</li>
+</ol>
+<h3 id="统一登出"><a href="#统一登出" class="headerlink" title="统一登出"></a>统一登出</h3><p>在任意平台登出，重定向到CAS登出，CAS清楚全局会话id,同时清除掉cookie中的全局会话id和所有局部会话id，登出完毕</p>
+<h2 id="账号绑定工作"><a href="#账号绑定工作" class="headerlink" title="账号绑定工作"></a>账号绑定工作</h2><p>旧版本的平台账户用邮箱作为账户名，通过发送注册邮件方式激活账户，旧版本使用邮箱作为用户名是因为本来这个平台还要给辽宁省大创使用，后来演变成校级版本之后邮箱作为用户名显然是不合适，在学校中学号或职工号唯一确定一个用户，所以使用身份代码+工号的形式修改用户名是可以的。</p>
+<h2 id="遇到的最大的困难"><a href="#遇到的最大的困难" class="headerlink" title="遇到的最大的困难"></a>遇到的最大的困难</h2><p>注册账号的时候，没有考虑前后空格问题，导致很多账号尾部存在多余空格，这个在设计中存在逻辑漏洞，编写时没有考虑，导致后续出现了很多问题，例如账号无法切换，关键这个问题还不容易发现。debug了很久，不断追踪数据才找到这个问题。从这件事情我明白了有很多漏洞在设计之初就应该避免，在完成编码之后debug会很困难。</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    <div>
+        
+    </div>
+    
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/03/算法总结-数组第K大的数/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -960,7 +1498,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/02/项目经历/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/02/ERP项目总结/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Want Young">
@@ -980,7 +1518,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2019/03/02/项目经历/" class="post-title-link" itemprop="http://yoursite.com/index.html">项目经历</a>
+                <a href="/2019/03/02/ERP项目总结/" class="post-title-link" itemprop="http://yoursite.com/index.html">ERP项目总结</a>
               
             
           </h1>
@@ -1022,7 +1560,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-03-03 15:35:45" itemprop="dateModified" datetime="2019-03-03T15:35:45+08:00">2019-03-03</time>
+                <time title="修改时间：2019-03-05 14:03:35" itemprop="dateModified" datetime="2019-03-05T14:03:35+08:00">2019-03-05</time>
               
             
           </span>
@@ -1075,7 +1613,30 @@
       
         
           
-            <h1 id="ERP企业资源管理系统"><a href="#ERP企业资源管理系统" class="headerlink" title="ERP企业资源管理系统"></a>ERP企业资源管理系统</h1><h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>ERP项目是一个和煤化工企业合作的项目，目的是开发一个管理企业资源报表的web服务。网站包含 </p>
+            <h1 id="ERP企业资源管理系统"><a href="#ERP企业资源管理系统" class="headerlink" title="ERP企业资源管理系统"></a>ERP企业资源管理系统</h1><h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>ERP项目是开发一个企业资源管理系统，主要分为核心、经销、库存、工艺、生产这几个模块。我负责生产模块的设计和开发，包括模型、接口、序列化器、过滤器的设计和开发，编写文档和测试等等。主要技术包括使用Django框架开发后台，使用Django REST Framework设计API，采用前后端分离的模式。</p>
+<h2 id="前后端分离的优点（为什么要采用前后端分离的模式）："><a href="#前后端分离的优点（为什么要采用前后端分离的模式）：" class="headerlink" title="前后端分离的优点（为什么要采用前后端分离的模式）："></a>前后端分离的优点（为什么要采用前后端分离的模式）：</h2><p>普通的前后端不分离的模式中，前端页面所展示的内容需要后端渲染之后返回或重定向给前端，也就是说后端控制着前端的展示，前后端耦合度很高，这种模式在普通的纯网页应用中是没问题的，但是后端在对接APP时，APP并不需要后端返回一个HTML网页，仅仅返回数据即可，对于之前适用于纯网页应用的后台来说就要在开发一套适应APP的接口，显然这很愚蠢，而前后端分离的模式就不用烦恼这些问题，后端只需返回前端所需要的数据，前端用户想要看到什么效果都由前端自己决定。这样前后端的耦合度相对较低。</p>
+<h2 id="Django-REST-framework的特点"><a href="#Django-REST-framework的特点" class="headerlink" title="Django REST framework的特点"></a>Django REST framework的特点</h2><ol>
+<li>简洁直观的API形式，围绕数据的增删改查定义API</li>
+<li>提供定义序列化器的方法，实现自动的序列化和反序列化：Django REST framework 能够快速根据Django ORM自动在json和类对象之间实现序列化和反序列化</li>
+</ol>
+<h2 id="View的核心功能"><a href="#View的核心功能" class="headerlink" title="View的核心功能"></a>View的核心功能</h2><ol>
+<li>将数据库数据序列化为前端需要的格式并返回</li>
+<li>将前端发送过来的数据反序列化为模型类对象，并保存到数据库中</li>
+</ol>
+<h2 id="生产模块的模型"><a href="#生产模块的模型" class="headerlink" title="生产模块的模型"></a>生产模块的模型</h2><ol>
+<li>子工作票：外键 -&gt; 子工作令</li>
+<li>生产工作组：外键 -&gt; 工序</li>
+<li>生产人员：外键 -&gt; 生产工作组</li>
+<li>工序信息：外键 -&gt; 子工作票</li>
+<li>生产计划：外键 -&gt; 工作令</li>
+</ol>
+<h2 id="外键怎么设计的"><a href="#外键怎么设计的" class="headerlink" title="外键怎么设计的"></a>外键怎么设计的</h2><ol>
+<li>根据业务逻辑：子工作票 多对一 子工作令，一个工序可以包含多个订单</li>
+<li>根据数据库范式规则：消除非原子属性、部分依赖和传递依赖</li>
+</ol>
+<h2 id="单元测试"><a href="#单元测试" class="headerlink" title="单元测试"></a>单元测试</h2><p>使用Django REST framework 自带的测试工具对资源操作和HTTP响应做测试</p>
+<h2 id="文档"><a href="#文档" class="headerlink" title="文档"></a>文档</h2><p>详细描述API的名称，使用方法，应该返回的数据形式等等。</p>
+<h2 id="遇到的最大的困难"><a href="#遇到的最大的困难" class="headerlink" title="遇到的最大的困难"></a>遇到的最大的困难</h2><p>由于采用了前后端分离的开发模式，沟通应该是最大的困难吧，编码之前要跟前端商量好想要什么数据，什么样的形式，动作应该怎么响应，贸然动手的结果就是出现偏差就得重来</p>
 
           
         
@@ -1885,629 +2446,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/24/进程复习/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Want Young">
-      <meta itemprop="description" content="Change World, Change Life">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Young">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/02/24/进程复习/" class="post-title-link" itemprop="http://yoursite.com/index.html">进程复习</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-02-24 14:48:50 / 修改时间：15:49:11" itemprop="dateCreated datePublished" datetime="2019-02-24T14:48:50+08:00">2019-02-24</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/操作系统/" itemprop="url" rel="index"><span itemprop="name">操作系统</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="进程复习"><a href="#进程复习" class="headerlink" title="进程复习"></a>进程复习</h1><h2 id="进程状态"><a href="#进程状态" class="headerlink" title="进程状态"></a>进程状态</h2><ol>
-<li>创建</li>
-<li>就绪</li>
-<li>运行</li>
-<li>阻塞</li>
-<li>终止</li>
-</ol>
-<h2 id="进程终止过程"><a href="#进程终止过程" class="headerlink" title="进程终止过程"></a>进程终止过程</h2><ol>
-<li>标志该进程未结束，等待资源回收</li>
-<li>读取进程PCB，检查进程状态</li>
-<li>若为运行状态，立即停止运行，并标志结束为真</li>
-<li>检查是否有子孙进程，停止所有子孙进程</li>
-<li>将资源全部释放给系统或父进程</li>
-<li>移除队列</li>
-</ol>
-<h2 id="特殊进程"><a href="#特殊进程" class="headerlink" title="特殊进程"></a>特殊进程</h2><h3 id="僵尸进程"><a href="#僵尸进程" class="headerlink" title="僵尸进程"></a>僵尸进程</h3><p>是指子进程结束，父进程没有回收子进程的PCB，导致子进程仍存在系统中，该子进程称为僵尸进程</p>
-<h3 id="孤儿进程"><a href="#孤儿进程" class="headerlink" title="孤儿进程"></a>孤儿进程</h3><p>父进程退出，子进程仍在运行，子进程失去管理者，称为孤儿进程。</p>
-<h3 id="守护进程"><a href="#守护进程" class="headerlink" title="守护进程"></a>守护进程</h3><p>由用户终端创建，脱离该控制终端后运行于系统后台，运行周期较长，控制权交由系统管理的用户进程。</p>
-<h4 id="守护进程创建"><a href="#守护进程创建" class="headerlink" title="守护进程创建"></a>守护进程创建</h4><ol>
-<li>创建子进程，父进程手动退出。</li>
-<li>子进程中调用setid创建会话，目的是防止1号进程将该进程当做孤儿进程回收掉。每个进程都有一个进程组ID并被一个会话管理，通常一个会话开始于用户登录，终止于用户退出。setid有三个作用：<ul>
-<li>让进程摆脱原会话控制</li>
-<li>让进程摆脱原进程组控制</li>
-<li>让进程摆脱原控制终端的控制</li>
-</ul>
-</li>
-<li>改变当前目录为根目录</li>
-<li>重设文件权限</li>
-<li>关闭原父进程打开的文件描述符</li>
-</ol>
-<h2 id="进程通信"><a href="#进程通信" class="headerlink" title="进程通信"></a>进程通信</h2><h3 id="管道"><a href="#管道" class="headerlink" title="管道"></a>管道</h3><ol>
-<li>半双工共享内存</li>
-<li>只能用于父子进程或兄弟进程（由于匿名性）</li>
-</ol>
-<h3 id="具名管道"><a href="#具名管道" class="headerlink" title="具名管道"></a>具名管道</h3><p>使用路径名确定的管道，摆脱了匿名限制</p>
-<ol>
-<li>可以使互不相关的两个进程通信</li>
-<li>使用路径访问管道，通信的进程可以像读写文件一样访问管道</li>
-<li>遵循FIFO原则，摆脱半双工限制</li>
-</ol>
-<h3 id="消息队列"><a href="#消息队列" class="headerlink" title="消息队列"></a>消息队列</h3><p>由系统管理的消息链表</p>
-<ol>
-<li>独立于收发进程存在</li>
-<li>消除了同步的困难</li>
-<li>接收端可以有选择的接受数据</li>
-</ol>
-<h3 id="共享内存"><a href="#共享内存" class="headerlink" title="共享内存"></a>共享内存</h3><ol>
-<li>通信快速，而且效率高</li>
-<li>没有提供同步机制</li>
-</ol>
-<h3 id="信号量"><a href="#信号量" class="headerlink" title="信号量"></a>信号量</h3><p>结合共享内存可以解决同步问题</p>
-<h2 id="进程调度"><a href="#进程调度" class="headerlink" title="进程调度"></a>进程调度</h2><ol>
-<li>FCFS先来先服务</li>
-<li>短作业优先</li>
-<li>优先级调度</li>
-<li>高响应比优先</li>
-<li>时间片轮转</li>
-<li>多级队列调度（多优先级队列+时间片轮转）</li>
-</ol>
-<h2 id="进程的同步和互斥"><a href="#进程的同步和互斥" class="headerlink" title="进程的同步和互斥"></a>进程的同步和互斥</h2><ul>
-<li>同步：进程之间需要按照一定的次序进行</li>
-<li>互斥：进程不能同时访问临界区</li>
-</ul>
-<h2 id="信号量解决的问题"><a href="#信号量解决的问题" class="headerlink" title="信号量解决的问题"></a>信号量解决的问题</h2><h3 id="生产者消费者问题（全部互斥）"><a href="#生产者消费者问题（全部互斥）" class="headerlink" title="生产者消费者问题（全部互斥）"></a>生产者消费者问题（全部互斥）</h3><h3 id="读者写者问题（允许读读）"><a href="#读者写者问题（允许读读）" class="headerlink" title="读者写者问题（允许读读）"></a>读者写者问题（允许读读）</h3><h3 id="哲学家进餐问题"><a href="#哲学家进餐问题" class="headerlink" title="哲学家进餐问题"></a>哲学家进餐问题</h3><h2 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h2><h3 id="死锁条件"><a href="#死锁条件" class="headerlink" title="死锁条件"></a>死锁条件</h3><ol>
-<li>非抢占</li>
-<li>不可剥夺</li>
-<li>链式等待，循环等待</li>
-<li>互斥条件，资源唯一</li>
-</ol>
-<h3 id="死锁预防"><a href="#死锁预防" class="headerlink" title="死锁预防"></a>死锁预防</h3><p>破坏四个条件</p>
-<h3 id="解决死锁的算法（死锁避免）"><a href="#解决死锁的算法（死锁避免）" class="headerlink" title="解决死锁的算法（死锁避免）"></a>解决死锁的算法（死锁避免）</h3><p>银行家算法，判断贷款后是否是安全状态，以此作为发放贷款的准则</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    <div>
-        
-    </div>
-    
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/24/网络IO模型复习/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Want Young">
-      <meta itemprop="description" content="Change World, Change Life">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Young">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/02/24/网络IO模型复习/" class="post-title-link" itemprop="http://yoursite.com/index.html">网络IO模型复习</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-02-24 13:54:34 / 修改时间：14:45:29" itemprop="dateCreated datePublished" datetime="2019-02-24T13:54:34+08:00">2019-02-24</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/网络/" itemprop="url" rel="index"><span itemprop="name">网络</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="网络IO模型"><a href="#网络IO模型" class="headerlink" title="网络IO模型"></a>网络IO模型</h1><h2 id="什么是同步IO，什么是异步IO"><a href="#什么是同步IO，什么是异步IO" class="headerlink" title="什么是同步IO，什么是异步IO"></a>什么是同步IO，什么是异步IO</h2><ul>
-<li>同步IO： 用户进程必须要等待IO操作完成之后才能继续执行。</li>
-<li>异步IO： 用户进程无需等待IO操作完成，提交IO请求之后可以继续执行。</li>
-</ul>
-<h2 id="阻塞IO、非阻塞IO、多路IO复用、异步IO"><a href="#阻塞IO、非阻塞IO、多路IO复用、异步IO" class="headerlink" title="阻塞IO、非阻塞IO、多路IO复用、异步IO"></a>阻塞IO、非阻塞IO、多路IO复用、异步IO</h2><p>网络IO请求分为两阶段，分别为（1）数据准备阶段和（2）数据拷贝阶段，用户进程提出IO请求后调用内核进程准备数据，数据准备完毕后内核进程将数据拷贝到用户进程指定位置，到此完成IO操作。</p>
-<h3 id="阻塞IO"><a href="#阻塞IO" class="headerlink" title="阻塞IO"></a>阻塞IO</h3><ol>
-<li>数据准备阶段和数据拷贝阶段用户进程都阻塞，直到数据拷贝完成用户进程才能继续进行。</li>
-<li>阻塞发生在内核函数调用。</li>
-</ol>
-<h3 id="非阻塞IO"><a href="#非阻塞IO" class="headerlink" title="非阻塞IO"></a>非阻塞IO</h3><ol>
-<li>数据准备阶段用户进程调用内核函数后内核进程立即返回一个值，通知用户进程数据没有准备好或者发生错误</li>
-<li>用户进程在数据准备阶段需要不停的调用内核函数询问数据是否准备好。</li>
-<li>直到内核进程返回数据已准备完成，可以开始数据拷贝时，用户进程阻塞，内核进程开始数据拷贝。</li>
-<li>拷贝结束，用户进程继续执行。</li>
-</ol>
-<h3 id="多路IO复用"><a href="#多路IO复用" class="headerlink" title="多路IO复用"></a>多路IO复用</h3><ol>
-<li>大多数操作系统都是用这一方式。</li>
-<li>阻塞IO中用户进程阻塞在系统内核函数调用，当多个用户进程同时阻塞时会耗费大量系统资源，为了解决这一问题，多路IO复用在数据准备阶段提供select函数管理这些阻塞进程。即多路IO复用在数据准备阶段阻塞与select函数，一个select函数管理多个阻塞进程，并不断轮询，一旦一个用户进程的数据准备完成select即刻唤醒该进程进行数据拷贝。</li>
-<li>select函数管理的用户进程数有默认上限，一般为1024或2048，不同操作系统一般会提供另外的两个函数代替它，poll和epoll函数。</li>
-</ol>
-<h3 id="异步IO"><a href="#异步IO" class="headerlink" title="异步IO"></a>异步IO</h3><ol>
-<li>数据准备阶段和数据拷贝阶段均不发生阻塞，内核进程将数据准备好并主动将数据拷贝到用户数据缓冲区后向用户进程发送IO完毕信号，用户进程主动处理数据，在此期间用户进程可以干别的事情而不发生阻塞。</li>
-</ol>
-<h2 id="select函数、poll函数、epoll函数区别"><a href="#select函数、poll函数、epoll函数区别" class="headerlink" title="select函数、poll函数、epoll函数区别"></a>select函数、poll函数、epoll函数区别</h2><h3 id="select函数"><a href="#select函数" class="headerlink" title="select函数"></a>select函数</h3><ol>
-<li>select函数使用整型变量保存当前管理的用户进程数，使用句柄指针指向可读进程集合、可写进程集合以及错误进程集合，使用毫秒级定时器结构体进行轮询计时。</li>
-</ol>
-<h3 id="poll函数"><a href="#poll函数" class="headerlink" title="poll函数"></a>poll函数</h3><ol>
-<li>使用事件代码代替select可读可写错误指针，能够监听更多种事件，将输入输出事件分开，下次进入时不必重新初始化。</li>
-<li>计时器采用整形变量，计时器精度变低，只能执行秒级计时。</li>
-<li>可监控的数据量远大于select</li>
-</ol>
-<h3 id="epoll函数"><a href="#epoll函数" class="headerlink" title="epoll函数"></a>epoll函数</h3><ol>
-<li>定时器超时后不必全局扫描管理的进程，epoll函数只对活跃的socket进行操作，每个socket的数据准备好后会调用回调函数使socket变为活跃。</li>
-<li>使用mmap共享内存加速内核和用户空间消息传递</li>
-</ol>
-<h2 id="水平触发和边缘触发"><a href="#水平触发和边缘触发" class="headerlink" title="水平触发和边缘触发"></a>水平触发和边缘触发</h2><h3 id="水平触发"><a href="#水平触发" class="headerlink" title="水平触发"></a>水平触发</h3><p>只要缓冲区有数据准备好就传递就绪信号</p>
-<h3 id="边缘触发"><a href="#边缘触发" class="headerlink" title="边缘触发"></a>边缘触发</h3><p>只有新数据到来才会传递就绪信号，没有新数据到来时尽管有旧数据没有被读取也不通知</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    <div>
-        
-    </div>
-    
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/23/实习海投升级记录/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Want Young">
-      <meta itemprop="description" content="Change World, Change Life">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Young">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/02/23/实习海投升级记录/" class="post-title-link" itemprop="http://yoursite.com/index.html">实习海投升级记录</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-02-23 16:37:08" itemprop="dateCreated datePublished" datetime="2019-02-23T16:37:08+08:00">2019-02-23</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-02-28 17:57:12" itemprop="dateModified" datetime="2019-02-28T17:57:12+08:00">2019-02-28</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/求职/" itemprop="url" rel="index"><span itemprop="name">求职</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="海投列表"><a href="#海投列表" class="headerlink" title="海投列表"></a>海投列表</h1><ul>
-<li>科大讯飞：杭州  3.2 周六 下午2点 笔试</li>
-<li>虎牙直播：广州 音视频传输开发</li>
-<li>商汤科技：北京</li>
-<li>完美世界：北京</li>
-<li>旷世科技：北京 Python  面试待安排</li>
-<li>酷狗： 广州  笔试待安排</li>
-<li>京东： 北京 京锐实习夏令营</li>
-<li>iHandy: 北京</li>
-<li>巨人游戏：上海 游戏开发实习</li>
-<li>依图：北京  面试待安排</li>
-<li>拼多多：上海  笔试待安排</li>
-<li>网易互娱： 杭州 2.27投</li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    <div>
-        
-    </div>
-    
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2555,7 +2493,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">35</span>
+                    <span class="site-state-item-count">38</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2586,7 +2524,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">9</span>
+                      
+                    
+                    <span class="site-state-item-count">10</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -2643,7 +2583,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">22</span>
+                      
+                    
+                    <span class="site-state-item-count">23</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
